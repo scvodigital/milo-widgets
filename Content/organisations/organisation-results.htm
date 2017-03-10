@@ -1,0 +1,105 @@
+﻿{{#xif TotalResults '>' 0}}
+<div class="alert alert-info">
+	<a href="#" class="pull-right" id="mw-expand-collapse-all">
+		Expand/Collapse All
+	</a>
+	<p>Number of results: {{TotalResults}} | Page {{inc CurrentPage}} of {{inc NumberOfPages}}</p>
+</div>
+{{else}}
+<div class="alert alert-warning">
+	<p>No Results</p>
+</div>
+{{/xif}}
+
+{{#each Results}}
+{{#with Document}}
+<div class="panel panel-default mw-result">
+	<div class="panel-heading" data-toggle="collapse" data-target="#mw-result-{{Id}}" title="Show/Hide Result Details">
+		<h3 class="panel-title">
+			<i class="fa fa-fw fa-chevron-down fa-pull-right"></i>
+			<strong>{{Name}}</strong>
+		</h3>
+	</div>
+
+	<div class="panel-collapse hide" id="mw-result-{{Id}}">
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-sm-8">
+					<div class="row">
+						<div class="col-sm-6">
+							<h3>Primary Address</h3>
+							{{#if Locations}}
+							{{#each Locations}}
+							{{#validpa this}}
+							{{pa this}}
+							{{else}}
+							<p>No primary address</p>
+							{{/validpa}}
+							{{else}}
+							<p>No primary address</p>
+							{{/each}}
+							{{else}}
+							<p>No primary address</p>
+							{{/if}}
+						</div>
+						<div class="col-sm-6">
+							<h3>Contact Information</h3>
+							<ul class="list-unstyled">
+								{{#if Phone}}
+								<li>
+									<strong>Phone:</strong>
+									<a href="tel:{{Phone}}">{{Phone}}</a>
+								</li>
+								{{/if}}
+								{{#if Email}}
+								<li>
+									<strong>Email:</strong>
+									<a href="mailto:{{Email}}">Send Email</a>
+								</li>
+								{{/if}}
+								{{#if Website}}
+								<li>
+									<strong>Website:</strong>
+									<a href="{{Website}}">Visit Website</a>
+								</li>
+								{{/if}}
+							</ul>
+						</div>
+					</div>
+					<h3>Aims and Objectives</h3>
+					{{#if AimsAndObjectives}}
+					{{ps AimsAndObjectives}}
+					{{else}}
+					No Aims or Objectives given.
+					{{/if}}
+				</div>
+				<div class="col-sm-4">
+					<h3>Activities</h3>
+					{{picklist MainActivitiesGlobal}}
+				</div>
+			</div>
+			<hr />
+		</div>
+	</div>
+</div>
+{{/with}}
+{{/each}}
+<hr />
+<nav>
+	<ul class="pager">
+		{{#if PreviousPageUrl}}
+		<li class="previous">
+			<a href="#" data-search="{{PreviousPageUrl}}">
+				Previous
+			</a>
+		</li>
+		{{/if}}
+		{{#if NextPageUrl}}
+		<li class="next">
+			<a href="#" data-search="{{NextPageUrl}}">
+				Next
+			</a>
+		</li>
+		{{/if}}
+	</ul>
+</nav>

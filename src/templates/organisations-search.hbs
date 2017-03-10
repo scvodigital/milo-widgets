@@ -1,0 +1,42 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			Voluntary Organisations Search
+		</h3>
+	</div>
+	<div class="panel-body">
+		<div class="form-group">
+			<label for="mw-query-string" class="control-label">Query/Organisation: </label>
+			<input type="text" id="mw-query-string" class="form-control" data-bind="QueryString" />
+		</div>
+
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="mw-location" class="control-label">Location: </label>
+					<input type="text" id="mw-Location" class="form-control" data-bind="Location" />
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<label for="mw-activity" class="control-label">Activities</label>
+				<select id="mw-activity" class="form-control" data-bind="Activity">
+					<option value="">-- Select Activity --</option>
+					{{#each MainActivitiesGlobal}}
+						<option value="{{Value}}">{{Text}}</option>
+					{{/each}}
+				</select>
+			</div>
+		</div>
+		<hr />
+		<div class="form-group text-right">
+			<button type="button" class="btn btn-warning" id="mw-reset-search">
+				Reset Search
+			</button>
+			<button type="button" class="btn btn-primary" id="mw-search" data-submit="true">
+				Search
+			</button>
+		</div>
+	</div>
+</div>
+<div class="mw-results"></div>
+<div class="clearfix"></div>
