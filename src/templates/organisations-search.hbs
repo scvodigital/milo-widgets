@@ -5,34 +5,29 @@
 		</h3>
 	</div>
 	<div class="panel-body">
-		<div class="form-group">
-			<label for="mw-query-string" class="control-label">Query/Organisation: </label>
-			<input type="text" id="mw-query-string" class="form-control" data-bind="QueryString" />
-		</div>
-
 		<div class="row">
-			<div class="col-sm-6">
+			<div class="col-sm-8">
 				<div class="form-group">
-					<label for="mw-location" class="control-label">Location: </label>
-					<input type="text" id="mw-Location" class="form-control" data-bind="Location" />
+					<label for="mw-organisations-query" class="control-label">Query or Organisation name: </label>
+					<input type="text" id="mw-organisations-query" class="form-control" data-bind="QueryString" />
 				</div>
 			</div>
-			<div class="col-sm-6">
-				<label for="mw-activity" class="control-label">Activities</label>
-				<select id="mw-activity" class="form-control" data-bind="Activity">
+			<div class="col-sm-4">
+				<label for="mw-organisations-activity" class="control-label">Activities</label>
+				<select id="mw-organisations-activity" class="form-control" data-bind="Activity">
 					<option value="">-- Select Activity --</option>
-					{{#each MainActivitiesGlobal}}
-						<option value="{{Value}}">{{Text}}</option>
+					{{#each terms.mainActivitiesGlobal}}
+						<option value="{{slug}}">{{term}}</option>
 					{{/each}}
 				</select>
 			</div>
 		</div>
 		<hr />
 		<div class="form-group text-right">
-			<button type="button" class="btn btn-warning" id="mw-reset-search">
+			<button type="button" class="btn btn-warning" id="mw-organisations-reset-search">
 				Reset Search
 			</button>
-			<button type="button" class="btn btn-primary" id="mw-search" data-submit="true">
+			<button type="button" class="btn btn-primary" id="mw-organisations-search" data-submit="true">
 				Search
 			</button>
 		</div>

@@ -1,4 +1,6 @@
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var WriteFilePlugin = require('write-file-webpack-plugin');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var path = require('path');
 
 module.exports = {
@@ -7,8 +9,8 @@ module.exports = {
         opportunities: './src/js/opportunities-widget.ts',
     },
     output: {
-        filename: 'js/[name].bundle.js',
-        path: path.join(__dirname, "dist"),
+        path: path.join(__dirname, "./dist"),
+        filename: '[name].bundle.js',
     },
     module: {
         rules: [
@@ -25,21 +27,38 @@ module.exports = {
             {
                 test: /\.hbs$/,
                 loader: "handlebars-loader"
-            }
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            includePaths: [path.resolve(__dirname, 'node_modules')],
+                        },
+                    },
+                ],
+            },
         ],
     },
     plugins: [
+        new WriteFilePlugin(),
         new CopyWebpackPlugin([
             { from: './src/index.html' }
         ]),
     ],
     resolve: {
-        extensions: [".tsx", ".ts", ".js", ".html", ".hbs"]
+        extensions: [".tsx", ".ts", ".js", ".html", ".hbs", ".scss"]
     },
     devtool: 'inline-source-map',
     devServer: {
-        contentBase: path.join(__dirname, 'dist'),
+        contentBase: path.join(__dirname, './dist'),
         compress: true,
         port: 9000
     },
+    node: {
+        fs: 'empty'
+    }
 };
