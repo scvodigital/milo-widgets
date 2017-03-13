@@ -1,9 +1,9 @@
 {{#xif total '>' 0}}
 <div class="alert alert-info">
-	<a href="#" class="pull-right" id="mw-expand-collapse-all">
+	<a href="#" class="pull-right" id="mw-organisations-expand-collapse-all">
 		Expand/Collapse All
 	</a>
-	<p>Number of results: {{total}} | Page {{inc CurrentPage}} of {{inc NumberOfPages}}</p>
+	<p>Number of results: {{total}} | Page {{currentPage}} of {{totalPages}}</p>
 </div>
 {{else}}
 <div class="alert alert-warning">
@@ -12,72 +12,66 @@
 {{/xif}}
 
 {{#each results}}
-<div class="panel panel-default mw-result">
-	<div class="panel-heading" data-toggle="collapse" data-target="#mw-result-{{Id}}" title="Show/Hide Result Details">
+<div class="panel panel-default mw-organisations-result">
+	<div class="panel-heading" title="Show/Hide Result Details">
 		<h3 class="panel-title">
 			<i class="fa fa-fw fa-chevron-down fa-pull-right"></i>
 			<strong>{{name}}</strong>
+			{{#if registeredCharityNo}}
+			<small>({{registeredCharityNo}})</small>
+			{{/if}}
 		</h3>
 	</div>
 
-	<div class="panel-collapse hide" id="mw-result-{{Id}}">
+	<div class="panel-collapse hide" id="mw-organisations-result-{{Id}}">
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-sm-8">
 					<div class="row">
 						<div class="col-sm-6">
 							<h3>Primary Address</h3>
-							{{#if Locations}}
-							{{#each Locations}}
-							{{#validpa this}}
 							{{pa this}}
-							{{else}}
-							<p>No primary address</p>
-							{{/validpa}}
-							{{else}}
-							<p>No primary address</p>
-							{{/each}}
-							{{else}}
-							<p>No primary address</p>
-							{{/if}}
 						</div>
 						<div class="col-sm-6">
 							<h3>Contact Information</h3>
 							<ul class="list-unstyled">
-								{{#if Phone}}
+								{{#if phone}}
 								<li>
 									<strong>Phone:</strong>
-									<a href="tel:{{Phone}}">{{Phone}}</a>
+									<a href="tel:{{phone}}">{{phone}}</a>
 								</li>
 								{{/if}}
-								{{#if Email}}
+								{{#if email}}
 								<li>
 									<strong>Email:</strong>
-									<a href="mailto:{{Email}}">Send Email</a>
+									<a href="mailto:{{email}}">Send Email</a>
 								</li>
 								{{/if}}
-								{{#if Website}}
+								{{#if website}}
 								<li>
 									<strong>Website:</strong>
-									<a href="{{Website}}">Visit Website</a>
+									<a href="{{uri website}}">Visit Website</a>
 								</li>
 								{{/if}}
 							</ul>
 						</div>
 					</div>
 					<h3>Aims and Objectives</h3>
-					{{#if AimsAndObjectives}}
-					{{ps AimsAndObjectives}}
+					{{#if aimsAndObjectives}}
+					{{ps aimsAndObjectives}}
 					{{else}}
 					No Aims or Objectives given.
 					{{/if}}
 				</div>
 				<div class="col-sm-4">
 					<h3>Activities</h3>
-					{{picklist MainActivitiesGlobal}}
+					<ul class="">
+					{{#each mainActivitiesGlobal}}
+						<li>{{this}}</li>
+					{{/each}}
+					</ul>
 				</div>
 			</div>
-			<hr />
 		</div>
 	</div>
 </div>
@@ -85,19 +79,15 @@
 <hr />
 <nav>
 	<ul class="pager">
-		{{#if PreviousPageUrl}}
 		<li class="previous">
-			<a href="#" data-search="{{PreviousPageUrl}}">
+			<button class="btn" type="button" data-search="{{previousPage}}" {{#unless previousPage}}disabled{{/unless}}>
 				Previous
-			</a>
+			</button>
 		</li>
-		{{/if}}
-		{{#if NextPageUrl}}
 		<li class="next">
-			<a href="#" data-search="{{NextPageUrl}}">
+			<button class="btn" type="button" data-search="{{nextPage}}" {{#unless nextPage}}disabled{{/unless}}>
 				Next
-			</a>
+			</button>
 		</li>
-		{{/if}}
 	</ul>
 </nav>

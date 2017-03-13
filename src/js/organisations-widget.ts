@@ -12,12 +12,36 @@ class OrganisationWidget extends BaseWidget {
         jq('#mw-organisations-search').off('click').on('click', () => {
             this.doSearch();
         });
-        jq('#mw-organisations-search').off('click').on('click', () => {
-            this.doSearch();
+        jq('#mw-organisations-expand-collapse-all').off('click').on('click', () => {
+            var total = jq('.mw-organisations-result .panel-collapse').length;
+            var closed = jq('.mw-organisations-result .panel-collapse.hide').length;
+
+            var half = Math.floor(total / 2);
+
+            if(closed < half){
+                jq('.mw-organisations-result .panel-collapse').addClass('hide');
+            }else{
+                jq('.mw-organisations-result .panel-collapse').removeClass('hide');
+            }
+        });
+        jq('.mw-organisations-result .panel-heading').off('click').on('click', function(event) {
+            var $this = jq(this);
+            var body = $this.next('.panel-collapse');
+            body.toggleClass('hide');
+        });
+        jq('#mw-organisations-query').off('keypress').on('keypress', (event) => {
+            if(event.which === 13){
+                this.doSearch();
+            }
+        });
+        this.searchElement.find('.pager button').off('click').on('click', (event: JQueryEventObject) => {
+            var page = jq(event.currentTarget).data('search');
+            console.log(page);
+            this.doSearch(page);
         });
     }
 
-    doSearch(){
+    doSearch(page: number = 1){
         var query = jq('#mw-organisations-query').val();
         var activity = jq('#mw-organisations-activity').val();
 
@@ -47,7 +71,7 @@ class OrganisationWidget extends BaseWidget {
             }
         };
 
-        this.search(payload);
+        this.search(payload, page);
     }
 }
 
