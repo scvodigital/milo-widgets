@@ -1,7 +1,7 @@
 import * as jq from 'jquery';
 import { BaseWidget } from './base-widget';
 import * as SearchTemplate from '../templates/opportunities-search.hbs';
-import * as ResultsTemplate from '../templates/organisations-results.hbs';
+import * as ResultsTemplate from '../templates/opportunities-results.hbs';
 
 class OpportunitiesWidget extends BaseWidget {
     constructor() {
@@ -13,8 +13,28 @@ class OpportunitiesWidget extends BaseWidget {
             jq('.mw-opportunities-times').toggleClass('hide');
         });
 
+        jq('.mw-opportunities-result .panel-heading').off('click').on('click', function (event) {
+            var $this = jq(this);
+            var body = $this.next('.panel-collapse');
+            body.toggleClass('hide');
+        });
+
         jq('#mw-opportunities-search').off('click').on('click', () => {
             this.doSearch();
+        });
+
+        jq('.mw-opportunities-result [data-toggle="tab"]').off('click').on('click', function (e) {
+            var $this = jq(this);
+            $this.addClass('active').siblings('[data-toggle="tab"]').removeClass('active');
+            var target = jq($this.data('target'));
+            target.removeClass('hide').siblings('.tab').addClass('hide');
+            e.preventDefault();
+        });
+
+        this.searchElement.find('.pager button').off('click').on('click', (event: JQueryEventObject) => {
+            var page = jq(event.currentTarget).data('search');
+            console.log(page);
+            this.doSearch(page);
         });
     }
 
@@ -59,6 +79,7 @@ class OpportunitiesWidget extends BaseWidget {
             }
         };
 
+        console.log('Distance', distance, 'Postcode', postcode);
         if (distance && postcode) {
             postcode = postcode.toLowerCase().replace(/[^0-9a-z]/gi, '');
             jq.getJSON('http://api.postcodes.io/postcodes/' + postcode, (result) => {

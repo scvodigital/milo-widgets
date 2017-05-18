@@ -206,15 +206,15 @@ handlebars.registerHelper('validtel', function (tel, options) {
 });
 
 handlebars.registerHelper('validpa', function (pa, options) {
-	if (!pa || pa.HomeAddress) {
+	if (!pa || pa.organisationLocationsHomeAddress) {
 		return options.inverse(this);
 	}
 
 	var lines = [];
-	if (pa.Street) lines.push(pa.Street);
-	if (pa.AreaTown) lines.push(pa.AreaTown);
-	if (pa.CityCounty) lines.push(pa.CityCounty);
-	if (pa.Postcode) lines.push(pa.Postcode);
+	if (pa.organisationLocationsStreet) lines.push(pa.organisationLocationsStreet);
+	if (pa.organisationLocationsAreaTown) lines.push(pa.organisationLocationsAreaTown);
+	if (pa.organisationLocationsCityCounty) lines.push(pa.organisationLocationsCityCounty);
+	if (pa.organisationLocationsPostcode) lines.push(pa.organisationLocationsPostcode);
 
 	return lines.length == 0 ? options.inverse(this) : options.fn(this);
 });
@@ -226,10 +226,10 @@ handlebars.registerHelper('bootstrap', function (version, options) {
 
 handlebars.registerHelper('pa', function (pa) {
 	var lines = [];
-	if (pa.locationStreet) lines.push(pa.locationStreet);
-	if (pa.locationAreaTown) lines.push(pa.locationAreaTown);
-	if (pa.locationCityCounty) lines.push(pa.locationCityCounty);
-	if (pa.locationPostcode) lines.push(pa.locationPostcode);
+	if (pa.organisationLocationsStreet) lines.push(pa.organisationLocationsStreet);
+	if (pa.organisationLocationsAreaTown) lines.push(pa.organisationLocationsAreaTown);
+	if (pa.organisationLocationsCityCounty) lines.push(pa.organisationLocationsCityCounty);
+	if (pa.organisationLocationsPostcode) lines.push(pa.organisationLocationsPostcode);
 
 	if(lines.length > 0){
 		return new handlebars.SafeString(
@@ -241,6 +241,9 @@ handlebars.registerHelper('pa', function (pa) {
 });
 
 handlebars.registerHelper('ps', function (str) {
+	if(!str){
+		return new handlebars.SafeString('');
+	}
 	var lines = str.split(/\r\n|\r|\n/gm);
 	lines = lines.filter(function (v) { return !v.match(/^[\t\s]*$/) });
 
