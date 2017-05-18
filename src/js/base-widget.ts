@@ -93,7 +93,7 @@ export abstract class BaseWidget {
 
     protected search(query, page = 1){
 		var from = (page - 1) * 10;
-        var payload = {
+        var payload: any = {
             index: this.index,
             type: this.index,
             body: {
@@ -101,6 +101,11 @@ export abstract class BaseWidget {
 				from: from
             }
         };
+
+		if(payload.body.query.hasOwnProperty('sort')){
+			payload.body.sort = payload.body.query.sort;
+			delete payload.body.query.sort;
+		}
 
 		console.log(payload);
 
