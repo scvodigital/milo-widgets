@@ -7,7 +7,7 @@ import * as ResultsCountPartial from '../templates/results-count.hbs';
 import '../styles/main.scss';
 
 export abstract class BaseWidget {
-    private scriptTag;
+    protected scriptTag;
     protected searchElement;
     protected resultsElement;
     private terms: ITermCollection;
@@ -107,10 +107,7 @@ export abstract class BaseWidget {
 			delete payload.body.query.sort;
 		}
 
-		console.log(payload);
-
         this.runQuery(payload).then((response) => {
-			console.log(response);
 			var resultSet: ResultSet = new ResultSet(
 				response.hits.total,
 				response.hits.hits.map((hit) => hit._source),

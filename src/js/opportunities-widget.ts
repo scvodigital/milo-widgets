@@ -4,12 +4,16 @@ import * as SearchTemplate from '../templates/opportunities-search.hbs';
 import * as ResultsTemplate from '../templates/opportunities-results.hbs';
 
 class OpportunitiesWidget extends BaseWidget {
+    tsi: number;
+
     constructor() {
         super('opportunities', 'volunteering-opportunity', ['workType', 'clientGroup'], SearchTemplate, ResultsTemplate);
+        this.tsi = this.scriptTag.data('tsi');
     }
 
     bindControls() {
-        jq('#mw-opportunities-show-hide-opening-times').off('click').on('click', () => {
+        var __this = this;
+        jq('#mw-opportunities-show-hide-opening-times').off('click').on('click', function(){
             jq('.mw-opportunities-times').toggleClass('hide');
         });
 
@@ -19,22 +23,32 @@ class OpportunitiesWidget extends BaseWidget {
             body.toggleClass('hide');
         });
 
-        jq('#mw-opportunities-search').off('click').on('click', () => {
-            this.doSearch();
+        jq('#mw-opportunities-search').off('click').on('click', function(){
+            __this.doSearch();
         });
 
-        jq('.mw-opportunities-result [data-toggle="tab"]').off('click').on('click', function (e) {
-            var $this = jq(this);
-            $this.addClass('active').siblings('[data-toggle="tab"]').removeClass('active');
-            var target = jq($this.data('target'));
-            target.removeClass('hide').siblings('.tab').addClass('hide');
-            e.preventDefault();
-        });
-
-        this.searchElement.find('.pager button').off('click').on('click', (event: JQueryEventObject) => {
+        this.searchElement.find('.pager button').off('click').on('click', function(event: JQueryEventObject){
             var page = jq(event.currentTarget).data('search');
-            console.log(page);
-            this.doSearch(page);
+            __this.doSearch(page);
+        });
+
+        jq('[data-toggle="print"]').off('click').on('click', function(){
+            var $this = jq(this);
+            var id = $this.data('id');
+            __this.print(id);
+        });
+
+        jq('#mw-opportunities-expand-collapse-all').off('click').on('click', function(){
+            var total = jq('.mw-opportunities-result .panel-collapse').length;
+            var closed = jq('.mw-opportunities-result .panel-collapse.hide').length;
+
+            var half = Math.floor(total / 2);
+
+            if(closed < half){
+                jq('.mw-opportunities-result .panel-collapse').addClass('hide');
+            }else{
+                jq('.mw-opportunities-result .panel-collapse').removeClass('hide');
+            }
         });
     }
 
@@ -44,23 +58,34 @@ class OpportunitiesWidget extends BaseWidget {
         var postcode = jq('#mw-opportunities-user-postcode').val();
         var activity = jq('#mw-opportunities-activity').val();
         var clientGroup = jq('#mw-opportunities-client-group').val();
+        var timesCheckboxes = jq('[data-bind="Times"]:checked');
+        var openingTimes = timesCheckboxes.toArray().map((time: any) => { return time.defaultValue });
 
         var must = [];
 
         if (activity !== '') {
-            must.push({
-                terms: {
-                    workType: [activity]
-                }
-            });
+            must.push({ term: { workType: activity } });
         }
 
         if (clientGroup !== '') {
-            must.push({
-                terms: {
-                    clientGroup: [clientGroup]
-                }
+            must.push({ term: { clientGroup: clientGroup } });
+        }
+
+        if(this.tsi){
+            must.push({ term: { tsiLegacyRef: this.tsi } });
+        }
+
+        if(openingTimes && openingTimes.length > 0){
+            var timesOr: { term: { [field: string]: boolean } }[] = [];
+            timesOr = openingTimes.map((time) => {
+                return { term: { [time]: true } }
             });
+            must.push({
+                bool: {
+                    should: timesOr,
+                    minimum_should_match: 1
+                }
+            })
         }
 
         if (query !== '') {
@@ -79,8 +104,7 @@ class OpportunitiesWidget extends BaseWidget {
             }
         };
 
-        console.log('Distance', distance, 'Postcode', postcode);
-        if (distance && postcode) {
+        if (distance && distance > 0 && postcode) {
             postcode = postcode.toLowerCase().replace(/[^0-9a-z]/gi, '');
             jq.getJSON('http://api.postcodes.io/postcodes/' + postcode, (result) => {
                 if (result.status === 200) {
@@ -117,7 +141,73 @@ class OpportunitiesWidget extends BaseWidget {
         } else {
             this.search(payload, page);
         }
+    }
 
+    print(id){
+        var container = jq('#mw-opportunities-result-panel-' + id);
+        var title = container.find('.panel-title').text();
+        var content = container.html();
+        var template = `
+            <html>
+                </head>
+                    <title>${title}</title>
+                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+                    <style>
+                        .mw-emoji{
+                            display: inline-block;
+                            font-size: 1.5em;
+                            width: 1.5em;
+                            line-height: 1.5em;
+                            text-align: center;
+                            font-weight: bold;
+                            vertical-align: middle;
+                        }
+
+                        .btn, .mw-emoji.pull-right{
+                            display: none;
+                        }
+
+                        .dl-horizontal dt, .dl-horizontal dd{
+                            line-height:1.5em;
+                            vertical-align:middle;
+                        }
+
+                        .dl-horizontal dt {
+                            text-align: left;
+                        }
+
+                        .dl-horizontal dd {
+                            padding-top: 0.25em;
+                        }
+
+                        h1 span.mw-emoji.pull-right, h2 span.mw-emoji.pull-right, h3 span.mw-emoji.pull-right, h4 span.mw-emoji.pull-right {
+                            margin-top: -0.5em;
+                        }
+                    </style>
+                </head>
+                <body>
+                    ${content}
+                    <script>
+                        window.print();
+                        var me = window.parent.document.getElementById('print-frame-${id}');
+                        me.parentNode.removeChild(window.parent.document.getElementById('print-frame-${id}'));
+                    </script>
+                </body>
+            </html>`;
+        console.log(container);
+        var frame = jq('<iframe />', {
+            src: 'about:blank',
+            border: 0,
+            id: 'print-frame-' + id
+        }).css({
+            width: 800,
+            height: 800,
+            visibility: 'hidden'
+        }).appendTo('body');
+
+        var iframe = (<any>frame.get(0)).contentWindow;
+        iframe.document.write(template);
+        iframe.focus();
     }
 }
 

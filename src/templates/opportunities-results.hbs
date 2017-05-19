@@ -1,6 +1,6 @@
 {{#xif total '>' 0}}
 <div class="alert alert-info">
-	<a href="#" class="pull-right" id="mw-opportunities-expand-collapse-all">
+	<a role="button" class="pull-right" id="mw-opportunities-expand-collapse-all">
 		Expand/Collapse All
 	</a>
 	<p>Number of results: {{total}} | Page {{currentPage}} of {{totalPages}}</p>
@@ -12,10 +12,10 @@
 {{/xif}}
 
 {{#each results}}
-<div class="panel panel-default mw-opportunities-result">
+<div class="panel panel-default mw-opportunities-result" id="mw-opportunities-result-panel-{{Id}}">
 	<div class="panel-heading" data-toggle="collapse" data-target="#mw-opportunities-result-{{Id}}" title="Show/Hide Result Details">
 		<h3 class="panel-title">
-			<i class="fa fa-fw fa-chevron-down fa-pull-right"></i>
+			<span class="mw-emoji pull-right">&#9207;</span>
 			<strong>{{title}}</strong>
 			{{#if organisationName}}
 			| {{organisationName}}
@@ -29,304 +29,275 @@
 	<div class="panel-collapse hide" id="mw-opportunities-result-{{Id}}">
 		<div class="panel-body">
 			<button type="button" class="btn btn-primary pull-right" data-toggle="print" data-id="{{Id}}">
-				<i class="fa fa-fw fa-print"></i>
+				<span class="mw-emoji left">&#128438;</span>
 				Print
 			</button>
 
 			<ul class="list-inline">
 				{{#if referenceCode}}
 				<li>
-					<i class="fa-fw fa fa-barcode" aria-hidden="true"></i> Ref: {{referenceCode}}
+					<span class="mw-emoji">&#127380;</span> Ref: {{referenceCode}}
 				</li>
 				{{/if}}
 				{{#if startData}}
 				<li>
-					<i class="fa-fw fa fa-calendar" aria-hidden="true"></i> Start Date: {{startDate}}
+					<span class="mw-emoji">&#128197;</span> Start Date: {{startDate}}
 				</li>
 				{{/if}}
 				{{#if workType}}
 				<li>
-					<i class="fa-fw fa fa-briefcase" aria-hidden="true"></i> Work Type: {{workType}}
+					<span class="mw-emoji">&#128188;</span> Work Type: {{workType}}
 				</li>
 				{{/if}}
 				{{#if clientGroup}}
 				<li>
-					<i class="fa-fw fa fa-thumbs-up" aria-hidden="true"></i> Client Group: {{clientGroup}}
+					<span class="mw-emoji">&#128077;</span> Client Group: {{clientGroup}}
 				</li>
 				{{/if}}
 				{{#if organisationCharityNo}}
 				<li>
-					<i class="fa fa-fw fa-hashtag" aria-hidden="true"></i> Charity Number: {{organisationCharityNo}}
+					<span class="mw-emoji">&#35;</span> Charity Number: {{organisationCharityNo}}
 				</li>
 				{{/if}}
 			</ul>
 
+			<h4>
+				Summary:
+			</h4>
 			{{ps summary}}
 
-			<hr />
+			<hr>
 
-			<em>Click on a section below to view more information</em>
+			{{#if fullDescription}}
+			<h4>
+				<span class="mw-emoji">&#128441;</span>
+				Opportunity Details:
+			</h4>
+			{{ps fullDescription}}
 
-			<ul class="nav nav-tabs">
-				<li>
-					<a href="#" data-toggle="tab" data-target="#mw-opportunities-result-{{Id}}-description">
-						<i class="fa fa-fw fa-info-circle"></i>
-						Description
-					</a>
-				</li>
-				<li>
-					<a href="#" data-toggle="tab" data-target="#mw-opportunities-result-{{Id}}-times">
-						<i class="fa fa-fw fa-clock-o"></i>
-						Opening Times
-					</a>
+			<hr>
+			{{/if}}
 
-				</li>
-				<li>
-					<a href="#" data-toggle="tab" data-target="#mw-opportunities-result-{{Id}}-restrictions">
-						<i class="fa fa-fw fa-flag"></i>
-						Restrictions
-					</a>
+			{{#if organisationAims_And_Objectives}}
+			<h4>
+				<span class="mw-emoji">&#128907;</span>
+				Organisation's Aims and Objectives:
+			</h4>
+			{{ps organisationAims_And_Objectives}}
+			{{/if}}
 
-				</li>
-				<li>
-					<a href="#" data-toggle="tab" data-target="#mw-opportunities-result-{{Id}}-support">
-						<i class="fa fa-fw fa-cog"></i>
-						Support
-					</a>
+			<hr>
 
-				</li>
-				<li>
-					<a href="#" data-toggle="tab" data-target="#mw-opportunities-result-{{Id}}-contact">
-						<i class="fa fa-fw fa-bullhorn"></i>
-						Contact
-					</a>
-				</li>
-			</ul>
-			<div style="margin-top:15px">
-				<div class="tab hide" id="mw-opportunities-result-{{Id}}-description">
-					{{#if fullDescription}}
-					<h4>
-						<i class="fa fa-fw fa-align-left"></i>
-						<strong>Opportunity Details</strong>:
-					</h4>
-					{{ps fullDescription}}
-					{{/if}}
-
-					{{#if organisationAims_And_Objectives}}
-					<h4>
-						<i class="fa fa-fw fa-bullseye"></i>
-						<strong>Organisation's Aims and Objectives</strong>:
-					</h4>
-					{{ps organisationAims_And_Objectives}}
-					{{/if}}
-				</div>
-				<div class="tab hide" id="mw-opportunities-result-{{Id}}-times">
-					<div class="table-responsive">
-						<table class="table table-condensed table-hover">
-							<thead>
-								<tr>
-									<th></th>
-									<th>Mon</th>
-									<th>Tue</th>
-									<th>Wed</th>
-									<th>Thu</th>
-									<th>Fri</th>
-									<th>Sat</th>
-									<th>Sun</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<th>Morning</th>
-									<td>{{#if mondayMorning}}<i class="fa fa-fw fa-check"></i>{{/if}}</td>
-									<td>{{#if tuesdayMorning}}<i class="fa fa-fw fa-check"></i>{{/if}}</td>
-									<td>{{#if wednesdayMorning}}<i class="fa fa-fw fa-check"></i>{{/if}}</td>
-									<td>{{#if thursdayMorning}}<i class="fa fa-fw fa-check"></i>{{/if}}</td>
-									<td>{{#if fridayMorning}}<i class="fa fa-fw fa-check"></i>{{/if}}</td>
-									<td>{{#if saturdayMorning}}<i class="fa fa-fw fa-check"></i>{{/if}}</td>
-									<td>{{#if sundayMorning}}<i class="fa fa-fw fa-check"></i>{{/if}}</td>
-								</tr>
-								<tr>
-									<th>Afternoon</th>
-									<td>{{#if mondayAfternoon}}<i class="fa fa-fw fa-check"></i>{{/if}}</td>
-									<td>{{#if tuesdayAfternoon}}<i class="fa fa-fw fa-check"></i>{{/if}}</td>
-									<td>{{#if wednesdayAfternoon}}<i class="fa fa-fw fa-check"></i>{{/if}}</td>
-									<td>{{#if thursdayAfternoon}}<i class="fa fa-fw fa-check"></i>{{/if}}</td>
-									<td>{{#if fridayAfternoon}}<i class="fa fa-fw fa-check"></i>{{/if}}</td>
-									<td>{{#if saturdayAfternoon}}<i class="fa fa-fw fa-check"></i>{{/if}}</td>
-									<td>{{#if sundayAfternoon}}<i class="fa fa-fw fa-check"></i>{{/if}}</td>
-								</tr>
-								<tr>
-									<th>Evening</th>
-									<td>{{#if mondayEvening}}<i class="fa fa-fw fa-check"></i>{{/if}}</td>
-									<td>{{#if tuesdayEvening}}<i class="fa fa-fw fa-check"></i>{{/if}}</td>
-									<td>{{#if wednesdayEvening}}<i class="fa fa-fw fa-check"></i>{{/if}}</td>
-									<td>{{#if thursdayEvening}}<i class="fa fa-fw fa-check"></i>{{/if}}</td>
-									<td>{{#if fridayEvening}}<i class="fa fa-fw fa-check"></i>{{/if}}</td>
-									<td>{{#if saturdayEvening}}<i class="fa fa-fw fa-check"></i>{{/if}}</td>
-									<td>{{#if sundayEvening}}<i class="fa fa-fw fa-check"></i>{{/if}}</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="tab hide" id="mw-opportunities-result-{{Id}}-restrictions">
-					<dl class="dl-horizontal">
-						<dt>
-							<i class="fa fa-fw fa-graduation-cap"></i>
-							Experience Required:
-						</dt>
-						<dd>{{ps experienceRequired}}</dd>
-
-						{{#if restrictionDetails}}
-						<dt>
-							<i class="fa fa-fw fa-flag"></i>
-							Restriction Details:
-						</dt>
-						<dd>{{ps restrictionDetails}}</dd>
-						{{/if}}
-
-						{{#if travelDetails}}
-						<dt>
-							<i class="fa fa-fw fa-plane"></i>
-							Travel Details
-						</dt>
-						<dd>{{travelDetails}}</dd>
-						{{/if}}
-
-						<dt>
-							<i class="fa fa-fw fa-child"></i>
-							Minimum Age:
-						</dt>
-						<dd>{{minimumAge}}</dd>
-					</dl>
-				</div>
-				<div class="tab hide" id="mw-opportunities-result-{{Id}}-support">
-					<dl class="dl-horizontal">
-						{{#if travelExpenses}}
-						<dt>
-							<i class="fa fa-fw fa-road"></i>
-							Travel Expenses:
-						</dt>
-						<dd>{{travelExpenses}}</dd>
-						{{/if}}
-						{{#if Frequency}}
-						<dt>
-							<i class="fa fa-fw fa-clock-o"></i>
-							frequency:
-						</dt>
-						<dd>{{frequency}}</dd>
-						{{/if}}
-
-						{{#if expensesPaid}}
-						<dt>
-							<i class="fa fa-fw fa-gbp"></i>
-							Expenses Paid:
-						</dt>
-						<dd>{{abx expensesPaid 'Yes' 'No'}}</dd>
-						{{/if}}
-
-						<dt>
-							<i class="fa fa-fw fa-th-list"></i>
-							Support Options:
-						</dt>
-						<dd>{{supportOptions}}</dd>
-					</dl>
-				</div>
-				<div class="tab hide" id="mw-opportunities-result-{{Id}}-contact">
-					{{#xif detailsToDisplayOnVS '==' 'TSI/VC'}}
-					<h4>TSI/VC</h4>
-					<dl class="dl-horizontal">
-						<dt>
-							<i class="fa fa-fw fa-user"></i>
-							Contact Name:
-						</dt>
-						<dd>{{tsiContactFirstName}} {{tsiContactLastName}}</dd>
-
-						{{#validpa this}}
-						<dt>
-							<i class="fa fa-fw fa-home"></i>
-							Address:
-						</dt>
-						<dd>{{pa this}}</dd>
-						{{/validpa}}
-
-						{{#validtel tsiContactPhone}}
-						<dt>
-							<i class="fa fa-fw fa-phone"></i>
-							Phone:
-						</dt>
-						<dd><a href="tel:{{tsiContactPhone}}">{{tsiContactPhone}}</a></dd>
-						{{/validtel}}
-
-						{{#if organisationWebsite}}
-						<dt>
-							<i class="fa fa-fw fa-globe"></i>
-							Website:
-						</dt>
-						<dd>
-							<a href="{{uri organisationWebsite 'http'}}" target="_blank">Visit Website</a>
-						</dd>
-						{{/if}}
-
-						{{#if tsiContactEmail}}
-						<dt>
-							<i class="fa fa-fw fa-envelope-o"></i>
-							Email:
-						</dt>
-						<dd>
-							<a href="mailto:{{uri tsiContactEmail 'mailto'}}">Send Email</a>
-						</dd>
-						{{/if}}
-					</dl>
-					{{else}}
-					<h4>Organisation</h4>
-					<dl class="dl-horizontal">
-						<dt>
-							<i class="fa fa-fw fa-user"></i>
-							Contact Name:
-						</dt>
-						<dd>{{organisationContactFirstName}} {{organisationContactLastName}}</dd>
-
-						{{#validpa this}}
-						<dt>
-							<i class="fa fa-fw fa-home"></i>
-							Address:
-						</dt>
-						<dd>{{pa this}}</dd>
-						{{/validpa}}
-
-						{{#validtel organisationContactPhone}}
-						<dt>
-							<i class="fa fa-fw fa-phone"></i>
-							Phone:
-						</dt>
-						<dd><a href="tel:{{organisationContactPhone}}">{{organisationContactPhone}}</a></dd>
-						{{/validtel}}
-
-						{{#if organisationWebsite}}
-						<dt>
-							<i class="fa fa-fw fa-globe"></i>
-							Website:
-						</dt>
-						<dd>
-							<a href="{{uri organisationWebsite 'http'}}" target="_blank">Visit Website</a>
-						</dd>
-						{{/if}}
-
-						{{#if organisationContactEmail}}
-						<dt>
-							<i class="fa fa-fw fa-envelope-o"></i>
-							Email:
-						</dt>
-						<dd>
-							<a href="{{uri organisationContactEmail 'mailto'}}">Send Email</a>
-						</dd>
-						{{/if}}
-					</dl>
-					{{/xif}}
-				</div>
+			<h4><span class="mw-emoji">&#8986;</span> Opening Times</h4>
+			<div class="table-responsive">
+				<table class="table table-condensed table-hover">
+					<thead>
+						<tr>
+							<th></th>
+							<th style="text-align:center;font-weight:bold;">Mon</th>
+							<th style="text-align:center;font-weight:bold;">Tue</th>
+							<th style="text-align:center;font-weight:bold;">Wed</th>
+							<th style="text-align:center;font-weight:bold;">Thu</th>
+							<th style="text-align:center;font-weight:bold;">Fri</th>
+							<th style="text-align:center;font-weight:bold;">Sat</th>
+							<th style="text-align:center;font-weight:bold;">Sun</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th>Morning</th>
+							<td style="text-align:center;font-weight:bold;">{{#if mondayMorning}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+							<td style="text-align:center;font-weight:bold;">{{#if tuesdayMorning}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+							<td style="text-align:center;font-weight:bold;">{{#if wednesdayMorning}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+							<td style="text-align:center;font-weight:bold;">{{#if thursdayMorning}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+							<td style="text-align:center;font-weight:bold;">{{#if fridayMorning}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+							<td style="text-align:center;font-weight:bold;">{{#if saturdayMorning}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+							<td style="text-align:center;font-weight:bold;">{{#if sundayMorning}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+						</tr>
+						<tr>
+							<th>Afternoon</th>
+							<td style="text-align:center;font-weight:bold;">{{#if mondayAfternoon}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+							<td style="text-align:center;font-weight:bold;">{{#if tuesdayAfternoon}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+							<td style="text-align:center;font-weight:bold;">{{#if wednesdayAfternoon}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+							<td style="text-align:center;font-weight:bold;">{{#if thursdayAfternoon}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+							<td style="text-align:center;font-weight:bold;">{{#if fridayAfternoon}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+							<td style="text-align:center;font-weight:bold;">{{#if saturdayAfternoon}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+							<td style="text-align:center;font-weight:bold;">{{#if sundayAfternoon}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+						</tr>
+						<tr>
+							<th>Evening</th>
+							<td style="text-align:center;font-weight:bold;">{{#if mondayEvening}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+							<td style="text-align:center;font-weight:bold;">{{#if tuesdayEvening}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+							<td style="text-align:center;font-weight:bold;">{{#if wednesdayEvening}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+							<td style="text-align:center;font-weight:bold;">{{#if thursdayEvening}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+							<td style="text-align:center;font-weight:bold;">{{#if fridayEvening}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+							<td style="text-align:center;font-weight:bold;">{{#if saturdayEvening}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+							<td style="text-align:center;font-weight:bold;">{{#if sundayEvening}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
+
+			<hr>
+
+			<h4><span class="mw-emoji">&#9873;</span> Restrictions</h4>
+			<dl class="dl-horizontal">
+				<dt>
+					<span class="mw-emoji">&#127891;</span>
+					Experience Required:
+				</dt>
+				<dd>{{ps experienceRequired}}</dd>
+
+				{{#if restrictionDetails}}
+				<dt>
+					<span class="mw-emoji">&#9873;</span>
+					Restriction Details:
+				</dt>
+				<dd>{{ps restrictionDetails}}</dd>
+				{{/if}}
+
+				{{#if travelDetails}}
+				<dt>
+					<span class="mw-emoji">&#9992;</span>
+					Travel Details
+				</dt>
+				<dd>{{travelDetails}}</dd>
+				{{/if}}
+
+				<dt>
+					<span class="mw-emoji">&#128286;</span>
+					Minimum Age:
+				</dt>
+				<dd>{{minimumAge}}</dd>
+			</dl>
+
+			<hr>
+
+			<h4><span class="mw-emoji">&#128129;</span> Support</h4>
+			<dl class="dl-horizontal">
+				{{#if travelExpenses}}
+				<dt>
+					<span class="mw-emoji">&#128183;</span>
+					Travel Expenses:
+				</dt>
+				<dd>{{travelExpenses}}</dd>
+				{{/if}}
+				{{#if Frequency}}
+				<dt>
+					<span class="mw-emoji">&#8986;</span>
+					Frequency:
+				</dt>
+				<dd>{{frequency}}</dd>
+				{{/if}}
+
+				{{#if expensesPaid}}
+				<dt>
+					<span class="mw-emoji">&#65505;</span>
+					Expenses Paid:
+				</dt>
+				<dd>{{abx expensesPaid 'Yes' 'No'}}</dd>
+				{{/if}}
+
+				<dt>
+					<span class="mw-emoji">&#45;</span>
+					Support Options:
+				</dt>
+				<dd>{{supportOptions}}</dd>
+			</dl>
+
+			<hr>
+
+			{{#xif detailsToDisplayOnVS '==' 'TSI/VC'}}
+			<h4><span class="mw-emoji">&#128363;</span> TSI/VC Contact</h4>
+			<dl class="dl-horizontal">
+				<dt>
+					<span class="mw-emoji">&#128129;</span>
+					Contact Name:
+				</dt>
+				<dd>{{tsiContactFirstName}} {{tsiContactLastName}}</dd>
+
+				{{#validpa this}}
+				<dt>
+					<span class="mw-emoji">&#8962;</span>
+					Address:
+				</dt>
+				<dd>{{pa this}}</dd>
+				{{/validpa}}
+
+				{{#validtel tsiContactPhone}}
+				<dt>
+					<span class="mw-emoji">&#128222;</span>
+					Phone:
+				</dt>
+				<dd><a href="tel:{{tsiContactPhone}}">{{tsiContactPhone}}</a></dd>
+				{{/validtel}}
+
+				{{#if organisationWebsite}}
+				<dt>
+					<span class="mw-emoji">&#128279;</span>
+					Website:
+				</dt>
+				<dd>
+					<a href="{{uri organisationWebsite 'http'}}" target="_blank">Visit Website</a>
+				</dd>
+				{{/if}}
+
+				{{#if tsiContactEmail}}
+				<dt>
+					<span class="mw-emoji">&#128386;</span>
+					Email:
+				</dt>
+				<dd>
+					<a href="mailto:{{uri tsiContactEmail 'mailto'}}">Send Email</a>
+				</dd>
+				{{/if}}
+			</dl>
+			{{else}}
+			<h4><span class="mw-emoji">&#128363;</span> Organisation Contact</h4>
+			<dl class="dl-horizontal">
+				<dt>
+					<span class="mw-emoji">&#128129;</span>
+					Contact Name:
+				</dt>
+				<dd>{{organisationContactFirstName}} {{organisationContactLastName}}</dd>
+
+				{{#validpa this}}
+				<dt>
+					<span class="mw-emoji">&#8962;</span>
+					Address:
+				</dt>
+				<dd>{{pa this}}</dd>
+				{{/validpa}}
+
+				{{#validtel organisationContactPhone}}
+				<dt>
+					<span class="mw-emoji">&#128222;</span>
+					Phone:
+				</dt>
+				<dd><a href="tel:{{organisationContactPhone}}">{{organisationContactPhone}}</a></dd>
+				{{/validtel}}
+
+				{{#if organisationWebsite}}
+				<dt>
+					<span class="mw-emoji">&#128279;</span>
+					Website:
+				</dt>
+				<dd>
+					<a href="{{uri organisationWebsite 'http'}}" target="_blank">Visit Website</a>
+				</dd>
+				{{/if}}
+
+				{{#if organisationContactEmail}}
+				<dt>
+					<span class="mw-emoji">&#128386;</span>
+					Email:
+				</dt>
+				<dd>
+					<a href="{{uri organisationContactEmail 'mailto'}}">Send Email</a>
+				</dd>
+				{{/if}}
+			</dl>
+			{{/xif}}
 		</div>
 	</div>
 </div>

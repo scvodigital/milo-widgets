@@ -4,8 +4,11 @@ import * as SearchTemplate from '../templates/organisations-search.hbs';
 import * as ResultsTemplate from '../templates/organisations-results.hbs';
 
 class OrganisationWidget extends BaseWidget {
+    tsi: number;
+
     constructor() {
         super('organisations', 'milo-organisation', ['mainActivitiesGlobal'], SearchTemplate, ResultsTemplate);
+        this.tsi = this.scriptTag.data('tsi');
     }
 
     bindControls(){
@@ -48,11 +51,11 @@ class OrganisationWidget extends BaseWidget {
         var must = [];
 
         if(activity !== ''){
-            must.push({
-                terms: {
-                    mainActivitiesGlobal_slugs: [activity]
-                }
-            });
+            must.push({ term: { mainActivitiesGlobal_slugs: activity } });
+        }
+
+        if(this.tsi){
+            must.push({ term: { tsiLegacyRef: this.tsi } });
         }
 
         if(query !== ''){
