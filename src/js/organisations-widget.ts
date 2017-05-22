@@ -54,7 +54,7 @@ class OrganisationWidget extends BaseWidget {
         });
 
         if(this.hideMap){
-            jq('#mw-opportunities-map').hide();
+            jq('#mw-organisations-map').hide();
         }
 
         this.setupMap();

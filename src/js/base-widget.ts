@@ -136,7 +136,7 @@ export interface IResultSet{
 export class ResultSet implements IResultSet{
 	get totalPages(): number {
 		var tp = Math.ceil(this.total / 10);
-		return Math.min(tp, 10);
+		return tp;
 	}
 	get previousPage(): number {
 		return this.currentPage > 1 ? this.currentPage - 1 : null;
