@@ -3,6 +3,7 @@ import * as elasticsearch from 'elasticsearch';
 import * as handlebars from 'handlebars';
 import * as s from 'string';
 import * as ResultsCountPartial from '../templates/results-count.hbs';
+import 'core-js';
 
 import '../styles/main.scss';
 
@@ -16,7 +17,7 @@ export abstract class BaseWidget {
     protected get client(): elasticsearch.Client {
         if (this._client === null) {
             this._client = new elasticsearch.Client({
-                host: 'https://readonly:onlyread@4c19757a0460c764d6e4712b0190cc21.eu-west-1.aws.found.io:9243',
+                host: 'https://readonly:onlyread@4c19757a0460c764d6e4712b0190cc21.eu-west-1.aws.found.io:443',
                 apiVersion: '2.4',
                 //log: 'trace'
             });
@@ -92,32 +93,36 @@ export abstract class BaseWidget {
     }
 
     protected search(query, page = 1){
-		var from = (page - 1) * 10;
-        var payload: any = {
-            index: this.index,
-            type: this.index,
-            body: {
-                query: query,
-				from: from
-            }
-        };
+		return new Promise((resolve, reject) => {
+			var from = (page - 1) * 10;
+			var payload: any = {
+				index: this.index,
+				type: this.index,
+				body: {
+					query: query,
+					from: from
+				}
+			};
 
-		if(payload.body.query.hasOwnProperty('sort')){
-			payload.body.sort = payload.body.query.sort;
-			delete payload.body.query.sort;
-		}
+			if(payload.body.query.hasOwnProperty('sort')){
+				payload.body.sort = payload.body.query.sort;
+				delete payload.body.query.sort;
+			}
 
-        this.runQuery(payload).then((response) => {
-			var resultSet: ResultSet = new ResultSet(
-				response.hits.total,
-				response.hits.hits.map((hit) => hit._source),
-				page);
-            var resultsHtml = this.resultsTemplate(resultSet, handlebars);
-            this.resultsElement.html(resultsHtml);
-            this.bindControls();
-        }).catch((err) => {
-            console.error('Failed to search', err);
-        });
+			this.runQuery(payload).then((response) => {
+				var resultSet: ResultSet = new ResultSet(
+					response.hits.total,
+					response.hits.hits.map((hit) => hit._source),
+					page);
+				var resultsHtml = this.resultsTemplate(resultSet, handlebars);
+				this.resultsElement.html(resultsHtml);
+				this.bindControls();
+				resolve(resultSet);
+			}).catch((err) => {
+				console.error('Failed to search', err);
+				reject(err);
+			});
+		});
     }
 }
 

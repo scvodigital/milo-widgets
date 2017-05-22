@@ -11,6 +11,21 @@
 </div>
 {{/xif}}
 
+<nav>
+	<ul class="pager">
+		<li class="previous">
+			<button class="btn" type="button" data-search="{{previousPage}}" {{#unless previousPage}}disabled{{/unless}}>
+				Previous
+			</button>
+		</li>
+		<li class="next">
+			<button class="btn" type="button" data-search="{{nextPage}}" {{#unless nextPage}}disabled{{/unless}}>
+				Next
+			</button>
+		</li>
+	</ul>
+</nav>
+
 {{#each results}}
 <div class="panel panel-default mw-opportunities-result" id="mw-opportunities-result-panel-{{Id}}">
 	<div class="panel-heading" data-toggle="collapse" data-target="#mw-opportunities-result-{{Id}}" title="Show/Hide Result Details">
@@ -302,7 +317,7 @@
 	</div>
 </div>
 {{/each}}
-<hr />
+
 <nav>
 	<ul class="pager">
 		<li class="previous">

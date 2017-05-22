@@ -1,19 +1,31 @@
 import * as jq from 'jquery';
-import { BaseWidget } from './base-widget';
+import { BaseWidget, ResultSet } from './base-widget';
 import * as SearchTemplate from '../templates/opportunities-search.hbs';
 import * as ResultsTemplate from '../templates/opportunities-results.hbs';
 
+import * as GoogleMapsLoader from 'google-maps'
+
 class OpportunitiesWidget extends BaseWidget {
     tsi: number;
+    hideMap: boolean = false;
+    map: google.maps.Map;
+    markers: google.maps.Marker[] = [];
+    scotland = { lat: 56.85132, lng: -4.1180987 };
 
     constructor() {
         super('opportunities', 'volunteering-opportunity', ['workType', 'clientGroup'], SearchTemplate, ResultsTemplate);
         this.tsi = this.scriptTag.data('tsi');
+        this.hideMap = this.scriptTag.data('hide-map') || false;
+
+        if (!this.hideMap) {
+            (<any>GoogleMapsLoader)['KEY'] = 'AIzaSyBGANoz_QO2iBbM-j1LIvkdaH6ZKnqgTfA';
+            (<any>GoogleMapsLoader)['LIBRARIES'] = ['geometry', 'places'];
+        }
     }
 
     bindControls() {
         var __this = this;
-        jq('#mw-opportunities-show-hide-opening-times').off('click').on('click', function(){
+        jq('#mw-opportunities-show-hide-opening-times').off('click').on('click', function () {
             jq('.mw-opportunities-times').toggleClass('hide');
         });
 
@@ -23,33 +35,38 @@ class OpportunitiesWidget extends BaseWidget {
             body.toggleClass('hide');
         });
 
-        jq('#mw-opportunities-search').off('click').on('click', function(){
+        jq('#mw-opportunities-search').off('click').on('click', function () {
             __this.doSearch();
         });
 
-        this.searchElement.find('.pager button').off('click').on('click', function(event: JQueryEventObject){
+        this.searchElement.find('.pager button').off('click').on('click', function (event: JQueryEventObject) {
             var page = jq(event.currentTarget).data('search');
             __this.doSearch(page);
         });
 
-        jq('[data-toggle="print"]').off('click').on('click', function(){
+        jq('[data-toggle="print"]').off('click').on('click', function () {
             var $this = jq(this);
             var id = $this.data('id');
             __this.print(id);
         });
 
-        jq('#mw-opportunities-expand-collapse-all').off('click').on('click', function(){
+        jq('#mw-opportunities-expand-collapse-all').off('click').on('click', function () {
             var total = jq('.mw-opportunities-result .panel-collapse').length;
             var closed = jq('.mw-opportunities-result .panel-collapse.hide').length;
 
             var half = Math.floor(total / 2);
 
-            if(closed < half){
+            if (closed < half) {
                 jq('.mw-opportunities-result .panel-collapse').addClass('hide');
-            }else{
+            } else {
                 jq('.mw-opportunities-result .panel-collapse').removeClass('hide');
             }
         });
+
+        if(this.hideMap){
+            jq('#mw-opportunities-map').hide();
+        }
+        this.setupMap();
     }
 
     doSearch(page: number = 1) {
@@ -71,11 +88,11 @@ class OpportunitiesWidget extends BaseWidget {
             must.push({ term: { clientGroup: clientGroup } });
         }
 
-        if(this.tsi){
+        if (this.tsi) {
             must.push({ term: { tsiLegacyRef: this.tsi } });
         }
 
-        if(openingTimes && openingTimes.length > 0){
+        if (openingTimes && openingTimes.length > 0) {
             var timesOr: { term: { [field: string]: boolean } }[] = [];
             timesOr = openingTimes.map((time) => {
                 return { term: { [time]: true } }
@@ -136,14 +153,14 @@ class OpportunitiesWidget extends BaseWidget {
                     ];
                     payload.sort = sort;
                 }
-                this.search(payload, page);
+                this.search(payload, page).then((resultSet: ResultSet) => { this.placeMarkers(resultSet); });
             });
         } else {
-            this.search(payload, page);
+            this.search(payload, page).then((resultSet: ResultSet) => { this.placeMarkers(resultSet); });
         }
     }
 
-    print(id){
+    print(id) {
         var container = jq('#mw-opportunities-result-panel-' + id);
         var title = container.find('.panel-title').text();
         var content = container.html();
@@ -208,6 +225,52 @@ class OpportunitiesWidget extends BaseWidget {
         var iframe = (<any>frame.get(0)).contentWindow;
         iframe.document.write(template);
         iframe.focus();
+    }
+
+    placeMarkers(resultSet: ResultSet) {
+        if (!this.hideMap) {
+            this.markers.forEach((marker: google.maps.Marker) => {
+                marker.setMap(null);
+            });
+            this.markers = [];
+            var bounds = new google.maps.LatLngBounds();
+            resultSet.results.forEach((result) => {
+                if (result.geo_coords) {
+                    var coords = { lat: result.geo_coords.lat, lng: result.geo_coords.lon };
+                    var marker = new google.maps.Marker({
+                        position: coords,
+                        map: this.map,
+                        title: result.name
+                    });
+                    marker.addListener('click', (event) => {
+                        var details = jq('#mw-opportunities-result-' + result.Id);
+                        details.removeClass('hide');
+                        window.scrollTo(0, details.offset().top - 50);
+                    });
+                    bounds.extend(coords);
+                    this.markers.push(marker);
+                }
+            });
+            if (this.markers.length === 0) {
+                this.map.setCenter(this.scotland);
+                this.map.setZoom(6);
+            } else {
+                this.map.fitBounds(bounds);
+            }
+        }
+    }
+
+    setupMap() {
+        if (!this.hideMap) {
+            if (!this.map) {
+                GoogleMapsLoader.load((google) => {
+                    this.map = new google.maps.Map(jq('#mw-opportunities-map')[0], {
+                        zoom: 6,
+                        center: this.scotland
+                    });
+                });
+            }
+        }
     }
 }
 

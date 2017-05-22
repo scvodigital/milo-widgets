@@ -1,8 +1,10 @@
 {{#xif total '>' 0}}
 <div class="alert alert-info">
-	<a role="button" class="pull-right" id="mw-organisations-expand-collapse-all">
-		Expand/Collapse All
-	</a>
+	<span class="pull-right">
+		<a role="button" id="mw-organisations-expand-collapse-all">
+			Expand/Collapse All
+		</a>
+	</span>
 	<p>Number of results: {{total}} | Page {{currentPage}} of {{totalPages}}</p>
 </div>
 {{else}}
@@ -10,6 +12,21 @@
 	<p>No Results</p>
 </div>
 {{/xif}}
+
+<nav>
+	<ul class="pager">
+		<li class="previous">
+			<button class="btn" type="button" data-search="{{previousPage}}" {{#unless previousPage}}disabled{{/unless}}>
+				Previous
+			</button>
+		</li>
+		<li class="next">
+			<button class="btn" type="button" data-search="{{nextPage}}" {{#unless nextPage}}disabled{{/unless}}>
+				Next
+			</button>
+		</li>
+	</ul>
+</nav>
 
 {{#each results}}
 <div class="panel panel-default mw-organisations-result">
@@ -65,7 +82,7 @@
 				</div>
 				<div class="col-sm-4">
 					<h3>Activities</h3>
-					<ul class="">
+					<ul class="list-unstyled">
 					{{#each mainActivitiesGlobal}}
 						<li>{{this}}</li>
 					{{/each}}
@@ -76,7 +93,6 @@
 	</div>
 </div>
 {{/each}}
-<hr />
 <nav>
 	<ul class="pager">
 		<li class="previous">
