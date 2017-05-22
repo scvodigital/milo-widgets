@@ -266,7 +266,8 @@ class OpportunitiesWidget extends BaseWidget {
                 GoogleMapsLoader.load((google) => {
                     this.map = new google.maps.Map(jq('#mw-opportunities-map')[0], {
                         zoom: 6,
-                        center: this.scotland
+                        center: this.scotland,
+                        draggable: !("ontouchend" in document)
                     });
                 });
             }
