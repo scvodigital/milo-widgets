@@ -6,13 +6,38 @@
 	</div>
 	<div class="panel-body">
 		<div class="row">
-			<div class="col-sm-8">
+			<div class="col-sm-12">
 				<div class="form-group">
 					<label for="mw-organisations-query" class="control-label">Query or Organisation name: </label>
 					<input type="text" id="mw-organisations-query" class="form-control" data-bind="QueryString" />
 				</div>
 			</div>
-			<div class="col-sm-4">
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="mw-organisations-distance" class="control-label">Distance from your postcode: </label>
+					<div class="input-group">
+						<select id="mw-organisations-distance" class="form-control" data-bind="Distance">
+							<option value="0">within ..</option>
+							<option value="1">1 mile</option>
+							<option value="3">3 miles</option>
+							<option value="5">5 miles</option>
+							<option value="10">10 miles</option>
+							<option value="15">15 miles</option>
+							<option value="30">30 miles</option>
+							<option value="50">50 miles</option>
+							<option value="75">75 miles</option>
+							<option value="100">100 miles</option>
+							<option value="1000">Nationwide</option>
+						</select>
+						<label for="mw-organisations-user-postcode" class="input-group-addon">of</label>
+						<input type="text" id="mw-organisations-user-postcode" class="form-control" data-bind="UserPostcode" placeholder="enter your home postcode"
+						/>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
 				<label for="mw-organisations-activity" class="control-label">Activities</label>
 				<select id="mw-organisations-activity" class="form-control" data-bind="Activity">
 					<option value="">-- Select Activity --</option>
