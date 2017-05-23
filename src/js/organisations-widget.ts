@@ -7,6 +7,7 @@ import * as GoogleMapsLoader from 'google-maps'
 
 class OrganisationWidget extends BaseWidget {
     tsi: number;
+    strive: boolean = false;
     hideMap: boolean = false;
     map: google.maps.Map;
     markers: google.maps.Marker[] = [];
@@ -15,6 +16,7 @@ class OrganisationWidget extends BaseWidget {
     constructor() {
         super('organisations', 'milo-organisation', ['mainActivitiesGlobal'], SearchTemplate, ResultsTemplate);
         this.tsi = this.scriptTag.data('tsi');
+        this.strive = this.scriptTag.data('strive');
         this.hideMap = this.scriptTag.data('hide-map') || false;
 
         (<any>GoogleMapsLoader)['KEY'] = 'AIzaSyBGANoz_QO2iBbM-j1LIvkdaH6ZKnqgTfA';
@@ -53,7 +55,7 @@ class OrganisationWidget extends BaseWidget {
             this.doSearch(page);
         });
 
-        if(this.hideMap){
+        if (this.hideMap) {
             jq('#mw-organisations-map').hide();
         }
 
@@ -74,6 +76,10 @@ class OrganisationWidget extends BaseWidget {
 
         if (this.tsi) {
             must.push({ term: { tsiLegacyRef: this.tsi } });
+        }
+
+        if (this.strive) {
+            must.push({ term: { publishToStriveDirectory: true } });
         }
 
         if (query !== '') {
