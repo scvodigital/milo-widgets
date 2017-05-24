@@ -203,6 +203,22 @@ handlebars.registerHelper('uri', function (uri) {
 	return uri;
 });
 
+handlebars.registerHelper('any', function(){
+	var options = arguments[arguments.length - 1];
+	var any = false;
+	for(var i = 0; i < arguments.length - 1; i++){
+		if(arguments[i]){
+			any = true;
+			break;
+		}
+	}
+	if(any){
+		return options.fn(this);
+	}else{
+		return options.inverse(this);
+	}
+})
+
 handlebars.registerHelper('validtel', function (tel, options) {
 	return !tel || tel.replace(/[^0-9]/igm, '') == '' ? options.inverse(this) : options.fn(this);
 });

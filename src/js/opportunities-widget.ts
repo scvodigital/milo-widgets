@@ -63,6 +63,16 @@ class OpportunitiesWidget extends BaseWidget {
             }
         });
 
+        jq('#mw-opportunities-query, #mw-opportunities-user-postcode').on('keyup', (event) => {
+          if(event.which === 13){
+              this.doSearch();
+          }
+        });
+
+        jq('#mw-opportunities-distance, #mw-opportunities-activity, #mw-opportunities-client-group, [data-bind="Times"]').on('change', () => {
+            this.doSearch();
+        });
+
         if(this.hideMap){
             jq('#mw-opportunities-map').hide();
         }
@@ -123,7 +133,7 @@ class OpportunitiesWidget extends BaseWidget {
 
         if (distance && distance > 0 && postcode) {
             postcode = postcode.toLowerCase().replace(/[^0-9a-z]/gi, '');
-            jq.getJSON('http://api.postcodes.io/postcodes/' + postcode, (result) => {
+            jq.getJSON(window.location.protocol + '//api.postcodes.io/postcodes/' + postcode, (result) => {
                 if (result.status === 200) {
                     var geo = {
                         geo_distance_range: {

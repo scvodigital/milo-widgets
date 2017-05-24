@@ -44,11 +44,17 @@ class OrganisationWidget extends BaseWidget {
             var body = $this.next('.panel-collapse');
             body.toggleClass('hide');
         });
-        jq('#mw-organisations-query').off('keypress').on('keypress', (event) => {
+
+        jq('#mw-organisations-query, #mw-organisations-user-postcode').off('keyup').on('keypress', (event) => {
             if (event.which === 13) {
                 this.doSearch();
             }
         });
+
+        jq('#mw-organisations-distance, #mw-organisations-activity').on('change', () => {
+            this.doSearch();
+        });
+
         this.searchElement.find('.pager button').off('click').on('click', (event: JQueryEventObject) => {
             var page = jq(event.currentTarget).data('search');
             console.log(page);
@@ -100,7 +106,7 @@ class OrganisationWidget extends BaseWidget {
 
         if (distance && distance > 0 && postcode) {
             postcode = postcode.toLowerCase().replace(/[^0-9a-z]/gi, '');
-            jq.getJSON('http://api.postcodes.io/postcodes/' + postcode, (result) => {
+            jq.getJSON(window.location.protocol + '//api.postcodes.io/postcodes/' + postcode, (result) => {
                 if (result.status === 200) {
                     var geo = {
                         geo_distance_range: {

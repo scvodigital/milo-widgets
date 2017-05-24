@@ -49,7 +49,8 @@ module.exports = {
     plugins: [
         new WriteFilePlugin(),
         new CopyWebpackPlugin([
-            { from: './src/index.html' }
+            { from: './src/index.html' },
+            { from: './src/js/require.js', to: './lib/require.js' }
         ]),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': '"production"'

@@ -101,129 +101,140 @@
 			{{ps organisationAims_And_Objectives}}
 			{{/if}}
 
-			<hr>
+			{{#any mondayMorning tuesdayMorning wednesdayMorning thursdayMorning fridayMorning saturdayMorning sundayMorning mondayAfternoon tuesdayAfternoon wednesdayAfternoon thursdayAfternoon fridayAfternoon saturdayAfternoon sundayAfternoon mondayEvening tuesdayEvening wednesdayEvening thursdayEvening fridayEvening saturdayEvening sundayEvening}}
+				<hr>
+				<h4><span class="mw-emoji">&#8986;</span> Opening Times</h4>
+				<div class="table-responsive">
+					<table class="table table-condensed table-hover">
+						<thead>
+							<tr>
+								<th></th>
+								<th style="text-align:center;font-weight:bold;">Mon</th>
+								<th style="text-align:center;font-weight:bold;">Tue</th>
+								<th style="text-align:center;font-weight:bold;">Wed</th>
+								<th style="text-align:center;font-weight:bold;">Thu</th>
+								<th style="text-align:center;font-weight:bold;">Fri</th>
+								<th style="text-align:center;font-weight:bold;">Sat</th>
+								<th style="text-align:center;font-weight:bold;">Sun</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>Morning</th>
+								<td style="text-align:center;font-weight:bold;">{{#if mondayMorning}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+								<td style="text-align:center;font-weight:bold;">{{#if tuesdayMorning}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+								<td style="text-align:center;font-weight:bold;">{{#if wednesdayMorning}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+								<td style="text-align:center;font-weight:bold;">{{#if thursdayMorning}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+								<td style="text-align:center;font-weight:bold;">{{#if fridayMorning}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+								<td style="text-align:center;font-weight:bold;">{{#if saturdayMorning}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+								<td style="text-align:center;font-weight:bold;">{{#if sundayMorning}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+							</tr>
+							<tr>
+								<th>Afternoon</th>
+								<td style="text-align:center;font-weight:bold;">{{#if mondayAfternoon}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+								<td style="text-align:center;font-weight:bold;">{{#if tuesdayAfternoon}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+								<td style="text-align:center;font-weight:bold;">{{#if wednesdayAfternoon}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+								<td style="text-align:center;font-weight:bold;">{{#if thursdayAfternoon}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+								<td style="text-align:center;font-weight:bold;">{{#if fridayAfternoon}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+								<td style="text-align:center;font-weight:bold;">{{#if saturdayAfternoon}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+								<td style="text-align:center;font-weight:bold;">{{#if sundayAfternoon}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+							</tr>
+							<tr>
+								<th>Evening</th>
+								<td style="text-align:center;font-weight:bold;">{{#if mondayEvening}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+								<td style="text-align:center;font-weight:bold;">{{#if tuesdayEvening}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+								<td style="text-align:center;font-weight:bold;">{{#if wednesdayEvening}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+								<td style="text-align:center;font-weight:bold;">{{#if thursdayEvening}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+								<td style="text-align:center;font-weight:bold;">{{#if fridayEvening}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+								<td style="text-align:center;font-weight:bold;">{{#if saturdayEvening}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+								<td style="text-align:center;font-weight:bold;">{{#if sundayEvening}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			{{/any}}
 
-			<h4><span class="mw-emoji">&#8986;</span> Opening Times</h4>
-			<div class="table-responsive">
-				<table class="table table-condensed table-hover">
-					<thead>
-						<tr>
-							<th></th>
-							<th style="text-align:center;font-weight:bold;">Mon</th>
-							<th style="text-align:center;font-weight:bold;">Tue</th>
-							<th style="text-align:center;font-weight:bold;">Wed</th>
-							<th style="text-align:center;font-weight:bold;">Thu</th>
-							<th style="text-align:center;font-weight:bold;">Fri</th>
-							<th style="text-align:center;font-weight:bold;">Sat</th>
-							<th style="text-align:center;font-weight:bold;">Sun</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th>Morning</th>
-							<td style="text-align:center;font-weight:bold;">{{#if mondayMorning}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
-							<td style="text-align:center;font-weight:bold;">{{#if tuesdayMorning}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
-							<td style="text-align:center;font-weight:bold;">{{#if wednesdayMorning}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
-							<td style="text-align:center;font-weight:bold;">{{#if thursdayMorning}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
-							<td style="text-align:center;font-weight:bold;">{{#if fridayMorning}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
-							<td style="text-align:center;font-weight:bold;">{{#if saturdayMorning}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
-							<td style="text-align:center;font-weight:bold;">{{#if sundayMorning}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
-						</tr>
-						<tr>
-							<th>Afternoon</th>
-							<td style="text-align:center;font-weight:bold;">{{#if mondayAfternoon}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
-							<td style="text-align:center;font-weight:bold;">{{#if tuesdayAfternoon}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
-							<td style="text-align:center;font-weight:bold;">{{#if wednesdayAfternoon}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
-							<td style="text-align:center;font-weight:bold;">{{#if thursdayAfternoon}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
-							<td style="text-align:center;font-weight:bold;">{{#if fridayAfternoon}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
-							<td style="text-align:center;font-weight:bold;">{{#if saturdayAfternoon}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
-							<td style="text-align:center;font-weight:bold;">{{#if sundayAfternoon}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
-						</tr>
-						<tr>
-							<th>Evening</th>
-							<td style="text-align:center;font-weight:bold;">{{#if mondayEvening}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
-							<td style="text-align:center;font-weight:bold;">{{#if tuesdayEvening}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
-							<td style="text-align:center;font-weight:bold;">{{#if wednesdayEvening}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
-							<td style="text-align:center;font-weight:bold;">{{#if thursdayEvening}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
-							<td style="text-align:center;font-weight:bold;">{{#if fridayEvening}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
-							<td style="text-align:center;font-weight:bold;">{{#if saturdayEvening}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
-							<td style="text-align:center;font-weight:bold;">{{#if sundayEvening}}<span class="mw-emoji">&#9745;</span>{{else}}<span class="mw-emoji">&#9744;</span>{{/if}}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
 
-			<hr>
+			{{#any experienceRequired restrictionDetails travelDetails minimumAge}}
+				<hr>
+				<h4><span class="mw-emoji">&#9873;</span> Restrictions</h4>
+				<dl class="dl-horizontal">
+					{{#if experienceRequired}}
+					<dt>
+						<span class="mw-emoji">&#127891;</span>
+						Experience Required:
+					</dt>
+					<dd>{{ps experienceRequired}}</dd>
+					{{/if}}
 
-			<h4><span class="mw-emoji">&#9873;</span> Restrictions</h4>
-			<dl class="dl-horizontal">
-				<dt>
-					<span class="mw-emoji">&#127891;</span>
-					Experience Required:
-				</dt>
-				<dd>{{ps experienceRequired}}</dd>
+					{{#if restrictionDetails}}
+					<dt>
+						<span class="mw-emoji">&#9873;</span>
+						Restriction Details:
+					</dt>
+					<dd>{{ps restrictionDetails}}</dd>
+					{{/if}}
 
-				{{#if restrictionDetails}}
-				<dt>
-					<span class="mw-emoji">&#9873;</span>
-					Restriction Details:
-				</dt>
-				<dd>{{ps restrictionDetails}}</dd>
-				{{/if}}
+					{{#if travelDetails}}
+					<dt>
+						<span class="mw-emoji">&#9992;</span>
+						Travel Details
+					</dt>
+					<dd>{{travelDetails}}</dd>
+					{{/if}}
 
-				{{#if travelDetails}}
-				<dt>
-					<span class="mw-emoji">&#9992;</span>
-					Travel Details
-				</dt>
-				<dd>{{travelDetails}}</dd>
-				{{/if}}
+					{{#if minimumAge}}
+					<dt>
+						<span class="mw-emoji">&#128286;</span>
+						Minimum Age:
+					</dt>
+					<dd>{{minimumAge}}</dd>
+					{{/if}}
+				</dl>
+			{{/any}}
 
-				<dt>
-					<span class="mw-emoji">&#128286;</span>
-					Minimum Age:
-				</dt>
-				<dd>{{minimumAge}}</dd>
-			</dl>
+			{{#any travelExpenses frequency expensesPaid supportOptions}}
+				<hr>
 
-			<hr>
+				<h4><span class="mw-emoji">&#128129;</span> Support</h4>
+				<dl class="dl-horizontal">
+					{{#if travelExpenses}}
+					<dt>
+						<span class="mw-emoji">&#128183;</span>
+						Travel Expenses:
+					</dt>
+					<dd>{{travelExpenses}}</dd>
+					{{/if}}
+					{{#if frequency}}
+					<dt>
+						<span class="mw-emoji">&#8986;</span>
+						Frequency:
+					</dt>
+					<dd>{{frequency}}</dd>
+					{{/if}}
 
-			<h4><span class="mw-emoji">&#128129;</span> Support</h4>
-			<dl class="dl-horizontal">
-				{{#if travelExpenses}}
-				<dt>
-					<span class="mw-emoji">&#128183;</span>
-					Travel Expenses:
-				</dt>
-				<dd>{{travelExpenses}}</dd>
-				{{/if}}
-				{{#if Frequency}}
-				<dt>
-					<span class="mw-emoji">&#8986;</span>
-					Frequency:
-				</dt>
-				<dd>{{frequency}}</dd>
-				{{/if}}
+					{{#if expensesPaid}}
+					<dt>
+						<span class="mw-emoji">&#65505;</span>
+						Expenses Paid:
+					</dt>
+					<dd>{{abx expensesPaid 'Yes' 'No'}}</dd>
+					{{/if}}
 
-				{{#if expensesPaid}}
-				<dt>
-					<span class="mw-emoji">&#65505;</span>
-					Expenses Paid:
-				</dt>
-				<dd>{{abx expensesPaid 'Yes' 'No'}}</dd>
-				{{/if}}
-
-				<dt>
-					<span class="mw-emoji">&#45;</span>
-					Support Options:
-				</dt>
-				<dd>{{supportOptions}}</dd>
-			</dl>
+					{{#if supportOptions}}
+					<dt>
+						<span class="mw-emoji">&#45;</span>
+						Support Options:
+					</dt>
+					<dd>{{supportOptions}}</dd>
+					{{/if}}
+				</dl>
+			{{/any}}
 
 			<hr>
 
 			{{#xif detailsToDisplayOnVS '==' 'TSI/VC'}}
-			<h4><span class="mw-emoji">&#128363;</span> TSI/VC Contact</h4>
+			<h4><span class="mw-emoji">&#128363;</span> Please contact {{tsiName}} Third Sector Interface about this opportunity</h4>
 			<dl class="dl-horizontal">
 				<dt>
 					<span class="mw-emoji">&#128129;</span>
@@ -263,12 +274,12 @@
 					Email:
 				</dt>
 				<dd>
-					<a href="mailto:{{uri tsiContactEmail 'mailto'}}">Send Email</a>
+					<a href="mailto:{{tsiContactEmail}}">Email us if you're interested in this opportunity</a>
 				</dd>
 				{{/if}}
 			</dl>
 			{{else}}
-			<h4><span class="mw-emoji">&#128363;</span> Organisation Contact</h4>
+			<h4><span class="mw-emoji">&#128363;</span> Please contact {{organisationName}} direct about this opportunity</h4>
 			<dl class="dl-horizontal">
 				<dt>
 					<span class="mw-emoji">&#128129;</span>
@@ -308,7 +319,7 @@
 					Email:
 				</dt>
 				<dd>
-					<a href="{{uri organisationContactEmail 'mailto'}}">Send Email</a>
+					<a href="mailto:{{organisationContactEmail}}">Email us if you're interested in this opportunity</a>
 				</dd>
 				{{/if}}
 			</dl>
