@@ -1,7 +1,12 @@
 # Milo Widgets
 Search widgets for Milo data
 
-## Build instructions
+## Instructions
+To install
+```
+npm i
+```
+
 To run locally
 ```
 webpack-dev-server
