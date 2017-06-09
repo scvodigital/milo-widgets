@@ -2,6 +2,7 @@ import * as jq from 'jquery';
 import { BaseWidget, ResultSet } from './base-widget';
 import * as SearchTemplate from '../templates/opportunities-search.hbs';
 import * as ResultsTemplate from '../templates/opportunities-results.hbs';
+import * as ViewTemplate from '../templates/opportunities-view.hbs';
 
 import * as GoogleMapsLoader from 'google-maps'
 
@@ -13,7 +14,7 @@ class OpportunitiesWidget extends BaseWidget {
     scotland = { lat: 56.85132, lng: -4.1180987 };
 
     constructor() {
-        super('opportunities', 'volunteering-opportunity', ['workType', 'clientGroup'], SearchTemplate, ResultsTemplate);
+        super('opportunities', 'volunteering-opportunity', ['workType', 'clientGroup'], SearchTemplate, ResultsTemplate, ViewTemplate);
         this.tsi = this.scriptTag.data('tsi');
         this.hideMap = this.scriptTag.data('hide-map') || false;
 

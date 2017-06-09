@@ -2,6 +2,7 @@ import * as jq from 'jquery';
 import { BaseWidget, ResultSet } from './base-widget';
 import * as SearchTemplate from '../templates/organisations-search.hbs';
 import * as ResultsTemplate from '../templates/organisations-results.hbs';
+import * as ViewTemplate from '../templates/organisations-view.hbs';
 
 import * as GoogleMapsLoader from 'google-maps'
 
@@ -14,7 +15,7 @@ class OrganisationWidget extends BaseWidget {
     scotland = { lat: 56.85132, lng: -4.1180987 };
 
     constructor() {
-        super('organisations', 'milo-organisation', ['mainActivitiesGlobal'], SearchTemplate, ResultsTemplate);
+        super('organisations', 'milo-organisation', ['mainActivitiesGlobal'], SearchTemplate, ResultsTemplate, ViewTemplate);
         this.tsi = this.scriptTag.data('tsi');
         this.strive = this.scriptTag.data('strive');
         this.hideMap = this.scriptTag.data('hide-map') || false;

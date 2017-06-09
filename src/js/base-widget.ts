@@ -11,91 +11,142 @@ import '../styles/main.scss';
 helpers({ handlebars: handlebars });
 
 export abstract class BaseWidget {
-    protected scriptTag;
-    protected searchElement;
-    protected resultsElement;
-    private terms: ITermCollection;
+	protected scriptTag;
+	protected searchElement;
+	protected resultsElement;
+	protected resultSet: any = null;
+	private terms: ITermCollection;
 
-    private _client: elasticsearch.Client = null;
-    protected get client(): elasticsearch.Client {
-        if (this._client === null) {
-            this._client = new elasticsearch.Client({
-                host: 'https://readonly:onlyread@4c19757a0460c764d6e4712b0190cc21.eu-west-1.aws.found.io:443',
-                apiVersion: '2.4',
-                //log: 'trace'
-            });
-        }
-        return this._client;
-    }
+	private _client: elasticsearch.Client = null;
+	protected get client(): elasticsearch.Client {
+		if (this._client === null) {
+			this._client = new elasticsearch.Client({
+				host: 'https://readonly:onlyread@4c19757a0460c764d6e4712b0190cc21.eu-west-1.aws.found.io:443',
+				apiVersion: '2.4',
+				//log: 'trace'
+			});
+		}
+		return this._client;
+	}
 
-    constructor(private type: string, private index: string, private termFields: string[], private searchTemplate, private resultsTemplate){
-        this.scriptTag = jq('script[src*="' + type + '.bundle.js"]');
-        this.setupControls();
-    }
+	constructor(private type: string, private index: string, private termFields: string[], private searchTemplate, private resultsTemplate, private viewTemplate) {
+		this.scriptTag = jq('script[src*="' + type + '.bundle.js"]');
+		this.setupControls();
+		window.addEventListener('hashchange', () => { this.hashChange(true); }, false);
+	}
 
-    setupControls(){
-        this.loadTerms().then(() => {
-            var searchHtml = this.searchTemplate({ terms: this.terms });
+	hashChange(jump: boolean = false) {
+		var hash = window.location.hash.replace(/\#/, '');
+		var prefix = 'mw-' + this.type + '-';
+		if (hash.indexOf(prefix) === 0) {
+			var id = hash.substr(prefix.length);
+			if (id !== 'results') {
+				this.one(id).then((doc) => {
+					if (jump) {
+						var anchor = jq('[name="' + hash + '"]');
+						console.log(anchor);
+						window.scroll(0, anchor.offset().top);
+					}
+				});
+			}
+		}
+	}
+
+	setupControls() {
+		this.loadTerms().then(() => {
+			var searchHtml = this.searchTemplate({ terms: this.terms });
 			this.searchElement = jq('<div></div>').addClass('milo-widget').html(searchHtml).insertAfter(this.scriptTag);
-            this.resultsElement = this.searchElement.find('.mw-results');
-            this.bindControls();
-        }).catch((err) => {
-            console.error('Failed to get terms', err);
-        });
-    }
+			this.resultsElement = this.searchElement.find('.mw-results');
+			this._bindControls();
+			this.hashChange();
+		}).catch((err) => {
+			console.error('Failed to get terms', err);
+		});
+	}
 
-    bindControls(){
-        console.warn('Not implemented');
-    }
+	bindControls() {
+		console.warn('bindControls not implemented');
+	}
 
-    protected loadTerms(){
-        return new Promise<void>((resolve, reject) => {
-            var payload = {
-                index: this.index,
-                type: this.index,
-                size: 0,
-                body: {
-                    aggs: {}
-                }
-            };
+	_bindControls() {
+		jq('#mw-' + this.type + '-back').on('click', () => {
+			this.renderResults();
+			window.location.hash = 'mw-' + this.type + '-results';
+		});
+		this.bindControls();
+	}
 
-            this.termFields.forEach((field) => {
-                payload.body.aggs[field] = {
-                    terms: {
-                        field: field,
-                        size: 0
-                    }
-                }
-            });
+	protected loadTerms() {
+		return new Promise<void>((resolve, reject) => {
+			var payload = {
+				index: this.index,
+				type: this.index,
+				size: 0,
+				body: {
+					aggs: {}
+				}
+			};
 
-            this.runQuery(payload).then((results) => {
-                var aggs = results.aggregations;
-                var terms = {};
-                this.termFields.forEach((field) => {
-                    terms[field] = aggs[field].buckets.map((term) => new Term(term.key, term.doc_count));
-                });
-                this.terms = terms;
-                resolve();
-            }).catch((err) => {
-                reject(err);
-            })
-        });
-    }
+			this.termFields.forEach((field) => {
+				payload.body.aggs[field] = {
+					terms: {
+						field: field,
+						size: 0
+					}
+				}
+			});
 
-    protected runQuery(query){
-        return new Promise<any>((resolve, reject) => {
-            this.client.search(query, (err, results) => {
-                if(err){
-                    console.error(err);
-                    reject(err);
-                    return;
-                }
-                resolve(results);
-            });
-        })
-    }
+			this.runQuery(payload).then((results) => {
+				var aggs = results.aggregations;
+				var terms = {};
+				this.termFields.forEach((field) => {
+					terms[field] = aggs[field].buckets.map((term) => new Term(term.key, term.doc_count));
+				});
+				this.terms = terms;
+				resolve();
+			}).catch((err) => {
+				reject(err);
+			})
+		});
+	}
 
-    protected search(query, page = 1){
+	protected runQuery(query) {
+		return new Promise<any>((resolve, reject) => {
+			this.client.search(query, (err, results) => {
+				if (err) {
+					console.error(err);
+					reject(err);
+					return;
+				}
+				resolve(results);
+			});
+		})
+	}
+
+	protected one(id: string) {
+		return new Promise((resolve, reject) => {
+			var payload: elasticsearch.GetParams = {
+				id: id,
+				index: this.index,
+				type: this.index
+			};
+
+			this.client.get(payload).then((response: elasticsearch.GetResponse<any>) => {
+				if (response.found) {
+					var doc = response._source;
+					doc.resultSet = this.resultSet;
+					var viewHtml = this.viewTemplate(doc, handlebars);
+					this.resultsElement.html(viewHtml);
+					this._bindControls();
+					resolve(doc);
+				} else {
+					reject(new Error('Document not found'));
+				}
+			});
+		});
+	}
+
+	protected search(query, page = 1) {
 		return new Promise((resolve, reject) => {
 			var from = (page - 1) * 10;
 			var payload: any = {
@@ -107,7 +158,7 @@ export abstract class BaseWidget {
 				}
 			};
 
-			if(payload.body.query.hasOwnProperty('sort')){
+			if (payload.body.query.hasOwnProperty('sort')) {
 				payload.body.sort = payload.body.query.sort;
 				delete payload.body.query.sort;
 			}
@@ -117,26 +168,31 @@ export abstract class BaseWidget {
 					response.hits.total,
 					response.hits.hits.map((hit) => hit._source),
 					page);
-				var resultsHtml = this.resultsTemplate(resultSet, handlebars);
-				this.resultsElement.html(resultsHtml);
-				this.bindControls();
+				this.resultSet = resultSet;
+				this.renderResults();
 				resolve(resultSet);
 			}).catch((err) => {
 				console.error('Failed to search', err);
 				reject(err);
 			});
 		});
-    }
+	}
+
+	renderResults() {
+		var resultsHtml = this.resultsTemplate(this.resultSet || [], handlebars);
+		this.resultsElement.html(resultsHtml);
+		this._bindControls();
+	}
 }
 
-export interface IResultSet{
-    total: number;
-    results: any[];
+export interface IResultSet {
+	total: number;
+	results: any[];
 	currentPage: number;
 	totalPages: number;
 }
 
-export class ResultSet implements IResultSet{
+export class ResultSet implements IResultSet {
 	get totalPages(): number {
 		var tp = Math.ceil(this.total / 10);
 		return tp;
@@ -147,24 +203,24 @@ export class ResultSet implements IResultSet{
 	get nextPage(): number {
 		return this.currentPage < this.totalPages ? this.currentPage + 1 : null;
 	}
-	constructor(public total: number, public results: any[], public currentPage: number = 1){}
+	constructor(public total: number, public results: any[], public currentPage: number = 1) { }
 }
 
-export interface ITerm{
+export interface ITerm {
 	term: string;
 	count: number;
 	slug: string;
 }
 
-export class Term implements ITerm{
+export class Term implements ITerm {
 	private _slug: string = null;
 	public get slug(): string {
-		if(!this._slug){
+		if (!this._slug) {
 			this._slug = s(this.term).slugify().s;
 		}
 		return this._slug;
 	}
-	constructor(public term: string, public count: number){	}
+	constructor(public term: string, public count: number) { }
 }
 
 export interface ITermCollection {
@@ -199,25 +255,25 @@ handlebars.registerHelper('uri', function (uri) {
 		return null;
 	}
 
-	if(uri.indexOf('http') !== 0){
+	if (uri.indexOf('http') !== 0) {
 		uri = 'http://' + uri;
 	}
 
 	return uri;
 });
 
-handlebars.registerHelper('any', function(){
+handlebars.registerHelper('any', function () {
 	var options = arguments[arguments.length - 1];
 	var any = false;
-	for(var i = 0; i < arguments.length - 1; i++){
-		if(arguments[i]){
+	for (var i = 0; i < arguments.length - 1; i++) {
+		if (arguments[i]) {
 			any = true;
 			break;
 		}
 	}
-	if(any){
+	if (any) {
 		return options.fn(this);
-	}else{
+	} else {
 		return options.inverse(this);
 	}
 })
@@ -252,17 +308,17 @@ handlebars.registerHelper('pa', function (pa) {
 	if (pa.organisationLocationsCityCounty) lines.push(pa.organisationLocationsCityCounty);
 	if (pa.organisationLocationsPostcode) lines.push(pa.organisationLocationsPostcode);
 
-	if(lines.length > 0){
+	if (lines.length > 0) {
 		return new handlebars.SafeString(
 			"<addr>" + lines.join(',<br />') + "<addr>"
 		);
-	}else{
+	} else {
 		return new handlebars.SafeString('No address listed');
 	}
 });
 
 handlebars.registerHelper('ps', function (str) {
-	if(!str){
+	if (!str) {
 		return new handlebars.SafeString('');
 	}
 	var lines = str.split(/\r\n|\r|\n/gm);
@@ -280,16 +336,16 @@ handlebars.registerHelper('ps', function (str) {
 
 		if (!prevBullet && currBullet) { //Starting a list
 			out += '<ul><li>' + stripBullet(curr) + '</li>';
-		}else if (!nextBullet && currBullet) { //Ending a list
+		} else if (!nextBullet && currBullet) { //Ending a list
 			out += '<li>' + stripBullet(curr) + '</li></ul>';
-		}else if (currBullet) { //In a list
+		} else if (currBullet) { //In a list
 			out += '<li>' + stripBullet(curr) + '</li>';
-		}else{ //Regular Paragraph
+		} else { //Regular Paragraph
 			out += '<p>' + curr + '</p>';
 		}
 	}
 
-	function isBullet(str){
+	function isBullet(str) {
 		return str.match(/(?:^[\s\t]*[.->•*][\s\t]*)(?:.*$)/igm) || false;
 	}
 
@@ -311,9 +367,9 @@ handlebars.registerHelper('picklist', function (picklist, defaultString) {
 
 handlebars.registerHelper('abx', function (bool, a, b, c) {
 	switch (typeof bool) {
-		case('boolean'):
+		case ('boolean'):
 			return bool ? a : b;
-		case('string'):
+		case ('string'):
 			bool = bool.toLowerCase();
 			var affirmative = ['true', 'yes', 'y', 'aye', 'correct', 'yeah', 'yeh', 'yup', 'right', 'valid', 'success', '1'];
 			return affirmative.indexOf(bool) > -1 ? a : b;

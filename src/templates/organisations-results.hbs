@@ -1,11 +1,6 @@
 {{#xif total '>' 0}}
 <div class="alert alert-info">
-	<span class="pull-right">
-		<a role="button" id="mw-organisations-expand-collapse-all">
-			Expand/Collapse All
-		</a>
-	</span>
-	<p>Number of results: {{total}} | Page {{currentPage}} of {{totalPages}}</p>
+	Number of results: {{total}} | Page {{currentPage}} of {{totalPages}}
 </div>
 {{else}}
 <div class="alert alert-warning">
@@ -30,66 +25,28 @@
 
 {{#each results}}
 <div class="panel panel-default mw-organisations-result">
-	<div class="panel-heading" title="Show/Hide Result Details">
+	<div class="panel-heading">
 		<h3 class="panel-title">
-			<i class="fa fa-fw fa-chevron-down fa-pull-right"></i>
-			<strong>{{name}}</strong>
-			{{#if registeredCharityNo}}
-			<small>({{registeredCharityNo}})</small>
-			{{/if}}
+			<strong>{{name}}</strong> {{#if registeredCharityNo}}
+			<small>({{registeredCharityNo}})</small> {{/if}}
 		</h3>
 	</div>
 
-	<div class="panel-collapse hide" id="mw-organisations-result-{{Id}}">
-		<div class="panel-body">
-			<div class="row">
-				<div class="col-sm-8">
-					<div class="row">
-						<div class="col-sm-6">
-							<h3>Primary Address</h3>
-							{{pa this}}
-						</div>
-						<div class="col-sm-6">
-							<h3>Contact Information</h3>
-							<ul class="list-unstyled">
-								{{#if phone}}
-								<li>
-									<strong>Phone:</strong>
-									<a href="tel:{{phone}}">{{phone}}</a>
-								</li>
-								{{/if}}
-								{{#if email}}
-								<li>
-									<strong>Email:</strong>
-									<a href="mailto:{{email}}">Send Email</a>
-								</li>
-								{{/if}}
-								{{#if website}}
-								<li>
-									<strong>Website:</strong>
-									<a href="{{uri website}}">Visit Website</a>
-								</li>
-								{{/if}}
-							</ul>
-						</div>
-					</div>
-					<h3>Aims and Objectives</h3>
-					{{#if aimsAndObjectives}}
-					{{ps aimsAndObjectives}}
-					{{else}}
-					No Aims or Objectives given.
-					{{/if}}
-				</div>
-				<div class="col-sm-4">
-					<h3>Activities</h3>
-					<ul class="list-unstyled">
-					{{#each mainActivitiesGlobal}}
-						<li>{{this}}</li>
-					{{/each}}
-					</ul>
-				</div>
+	<div class="panel-body" id="mw-organisations-result-{{Id}}">
+		<div class="row">
+			<div class="col-sm-8">
+				<h4>Aims and Objectives</h4>
+				{{#if aimsAndObjectives}} {{ps aimsAndObjectives}} {{else}} No Aims or Objectives given. {{/if}}
+			</div>
+			<div class="col-sm-4">
+				<h4>Address</h4>
+				{{pa this}}
 			</div>
 		</div>
+	</div>
+
+	<div class="panel-footer text-right">
+		<a href="#mw-organisations-{{Id}}">View organisation</a>
 	</div>
 </div>
 {{/each}}
