@@ -1,21 +1,37 @@
-# Milo Widgets
-Search widgets for Milo data
+# Milo widgets [![Build Status](https://travis-ci.org/scvodigital/milo-widgets.svg?branch=master)](https://travis-ci.org/scvodigital/milo-widgets)
 
-## Instructions
-To install
+[![Dependency Status](https://david-dm.org/scvodigital/milo-widgets/master.svg)](https://david-dm.org/scvodigital/milo-widgets/master) [![devDependency Status](https://david-dm.org/scvodigital/milo-widgets/master/dev-status.svg)](https://david-dm.org/scvodigital/milo-widgets/master#info=devDependencies)
+
+This is the repository for the Get Involved website, it contains the codebase for the public website. Deployment instructions are detailed below.
+
+## Installation
 ```
+git clone https://github.com/scvodigital/milo-widgets
+cd milo-widgets
+sudo npm i -g typescript firebase-tools
 npm i
 ```
 
-To run locally
+## Run Development Server
 ```
-webpack-dev-server
+npm start
 ```
+Navigate to [localhost:9010](http://localhost:9010). The app will automatically reload if you change any of the source files.
 
-To build to `./dist`
-```
-webpack -p --progress
-```
+## Live Deployment
+### CI
+There is continuous integration via [Travis](https://travis-ci.org) on `git push` which automatically deploys to [Google Firebase](https://firebase.google.com) CDN hosting.
 
-## Global NPM Requirements
-* `typescript@2.1.4`
+### Manually
+```
+npm run deploy
+```
+This builds minified code and deploys via Firebase.
+
+## Information
+The repository [wiki](https://github.com/scvodigital/milo-widgets/wiki) will contain project documentation.
+
+The website address is [milo.scvo.org.uk](https://milo.scvo.org.uk).
+
+* [Documentation](https://github.com/scvodigital/milo-widgets/wiki)
+* [Bug tracker](https://github.com/scvodigital/milo-widgets/issues)
