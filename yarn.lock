@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@types/core-js@^0.9.36":
-  version "0.9.41"
-  resolved "https://registry.yarnpkg.com/@types/core-js/-/core-js-0.9.41.tgz#cfeceb63c2beaa29f882252c7c18e0e9471ff4e2"
+"@types/core-js@0.9.36":
+  version "0.9.36"
+  resolved "https://registry.yarnpkg.com/@types/core-js/-/core-js-0.9.36.tgz#d721e7cc0007d10ce66ad263ebf478a4071c53f4"
 
 "@types/elasticsearch@^5.0.13":
   version "5.0.13"

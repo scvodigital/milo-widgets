@@ -16,7 +16,7 @@
   "author": "Matthew Wilkes (SCVO)",
   "license": "ISC",
   "devDependencies": {
-    "@types/core-js": "^0.9.36",
+    "@types/core-js": "0.9.36",
     "@types/elasticsearch": "^5.0.13",
     "@types/google-maps": "^3.2.0",
     "@types/handlebars": "^4.0.32",
