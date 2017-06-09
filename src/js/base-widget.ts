@@ -1,11 +1,14 @@
 import * as jq from 'jquery';
 import * as elasticsearch from 'elasticsearch';
 import * as handlebars from 'handlebars';
+import * as helpers from 'handlebars-helpers';
 import * as s from 'string';
 import * as ResultsCountPartial from '../templates/results-count.hbs';
 import 'core-js';
 
 import '../styles/main.scss';
+
+helpers({ handlebars: handlebars });
 
 export abstract class BaseWidget {
     protected scriptTag;

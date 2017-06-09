@@ -32,6 +32,10 @@ module.exports = {
                 loader: "handlebars-loader"
             },
             {
+                test: /\.js$/,
+                loader: 'unlazy-loader'
+            },
+            {
                 test: /\.scss$/,
                 use: [
                     'style-loader',
@@ -78,14 +82,22 @@ module.exports = {
         })
     ],
     resolve: {
-        extensions: [".tsx", ".ts", ".js", ".html", ".hbs", ".scss"]
+        extensions: [".tsx", ".ts", ".js", ".html", ".hbs", ".scss"],
+        alias: {
+            "handlebars": "handlebars/dist/handlebars.js"
+        }
+    },
+    resolveLoader: {
+        alias: {
+            "hbs": "handlebars-loader"
+        }
     },
     //devtool: 'inline-source-map',
     devtool: 'cheap-module-source-map',
     devServer: {
         contentBase: path.join(__dirname, './dist'),
         compress: true,
-        port: 9000
+        port: 9010
     },
     node: {
         fs: 'empty'
