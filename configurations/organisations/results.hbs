@@ -1,0 +1,36 @@
+{{#xif total '>' 0}}
+<div class="alert alert-info">
+	Number of results: {{total}} | Page {{currentPage}} of {{totalPages}}
+</div>
+{{else}}
+<div class="alert alert-warning">
+	<p>No Results</p>
+</div>
+{{/xif}}
+
+{{#each results}}
+	<div class="mw-organisation-result" id="mw-organisations-result-{{Id}}">
+		<h3>
+			<a href="#mw-organisations-{{Id}}">
+				<strong>{{name}}</strong>
+				{{#if registeredCharityNo}}
+					<small>({{registeredCharityNo}})</small>
+				{{/if}}
+			</a>
+		</h3>
+
+		<p>
+			{{#if aimsAndObjectives}} {{truncate aimsAndObjectives 255 '[...]'}} {{else}} No Aims or Objectives given. {{/if}}
+		</p>
+		<p>
+			{{#any organisationLocationsStreet organisationLocationsAreaTown organisationLocationsCityCounty organisationLocationsPostcode}}
+				{{#if organisationLocationsStreet}}{{organisationLocationsStreet}}, {{/if}}
+				{{#if organisationLocationsAreaTown}}{{organisationLocationsAreaTown}}, {{/if}}
+				{{#if organisationLocationsCityCounty}}{{organisationLocationsCityCounty}}, {{/if}}
+				{{#if organisationLocationsPostcode}}{{organisationLocationsPostcode}}{{/if}}
+			{{else}}
+				No address given
+			{{/any}}
+		</p>
+	</div>
+{{/each}}

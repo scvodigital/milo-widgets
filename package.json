@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server",
     "build": "webpack -p --progress",
-    "deploy": "npm run build && firebase deploy"
+    "deploy": "npm run build && firebase deploy",
+    "deploy-configurations": "node ./configurations/compile-configurations.js && firebase database:set -y /configurations ./configurations/configurations.json"
   },
   "keywords": [
     "SCVO",

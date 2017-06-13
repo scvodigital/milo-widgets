@@ -1,86 +1,41 @@
 import * as jq from 'jquery';
-import { BaseWidget, ResultSet } from './base-widget';
-import * as SearchTemplate from '../templates/opportunities-search.hbs';
-import * as ResultsTemplate from '../templates/opportunities-results.hbs';
-import * as ViewTemplate from '../templates/opportunities-view.hbs';
-
+import { BaseWidget, IWidgetConfiguration, ResultSet, TemplateSet, MapOptions } from './base-widget';
 import * as GoogleMapsLoader from 'google-maps'
+
+const opportunitiesConfiguration: IWidgetConfiguration = {
+    index: 'volunteering-opportunity',
+    type: 'volunteering-opportunity',
+    termFields: ['workType', 'clientGroup'],
+    templateSet: new TemplateSet({
+        searchFormTemplate: '',
+        resultsTemplate: '',
+        viewTemplate: '',
+        infoWindowTemplate: ''
+    }),
+    mapOptions: {
+        fields: {
+            lat: 'geo_coords.lat',
+            lng: 'geo_coords.lon',
+            title: 'title'
+        },
+        initialLocation: { lat: 56.85132, lng: -4.1180987 },
+        initialZoom: 6
+    },
+    name: 'opportunities',
+    title: 'Milo Voluntary Opportunity Search'
+}
 
 class OpportunitiesWidget extends BaseWidget {
     tsi: number;
     hideMap: boolean = false;
-    map: google.maps.Map;
-    markers: google.maps.Marker[] = [];
-    scotland = { lat: 56.85132, lng: -4.1180987 };
 
     constructor() {
-        super('opportunities', 'volunteering-opportunity', ['workType', 'clientGroup'], SearchTemplate, ResultsTemplate, ViewTemplate);
+        super('');
         this.tsi = this.scriptTag.data('tsi');
         this.hideMap = this.scriptTag.data('hide-map') || false;
-
-        if (!this.hideMap) {
-            (<any>GoogleMapsLoader)['KEY'] = 'AIzaSyBGANoz_QO2iBbM-j1LIvkdaH6ZKnqgTfA';
-            (<any>GoogleMapsLoader)['LIBRARIES'] = ['geometry', 'places'];
-        }
     }
 
-    bindControls() {
-        var __this = this;
-        jq('#mw-opportunities-show-hide-opening-times').off('click').on('click', function () {
-            jq('.mw-opportunities-times').toggleClass('hide');
-        });
-
-        jq('.mw-opportunities-result .panel-heading').off('click').on('click', function (event) {
-            var $this = jq(this);
-            var body = $this.next('.panel-collapse');
-            body.toggleClass('hide');
-        });
-
-        jq('#mw-opportunities-search').off('click').on('click', function () {
-            __this.doSearch();
-        });
-
-        this.searchElement.find('.pager button').off('click').on('click', function (event: JQueryEventObject) {
-            var page = jq(event.currentTarget).data('search');
-            __this.doSearch(page);
-        });
-
-        jq('[data-toggle="print"]').off('click').on('click', function () {
-            var $this = jq(this);
-            var id = $this.data('id');
-            __this.print(id);
-        });
-
-        jq('#mw-opportunities-expand-collapse-all').off('click').on('click', function () {
-            var total = jq('.mw-opportunities-result .panel-collapse').length;
-            var closed = jq('.mw-opportunities-result .panel-collapse.hide').length;
-
-            var half = Math.floor(total / 2);
-
-            if (closed < half) {
-                jq('.mw-opportunities-result .panel-collapse').addClass('hide');
-            } else {
-                jq('.mw-opportunities-result .panel-collapse').removeClass('hide');
-            }
-        });
-
-        jq('#mw-opportunities-query, #mw-opportunities-user-postcode').on('keyup', (event) => {
-          if(event.which === 13){
-              this.doSearch();
-          }
-        });
-
-        jq('#mw-opportunities-distance, #mw-opportunities-activity, #mw-opportunities-client-group, [data-bind="Times"]').on('change', () => {
-            this.doSearch();
-        });
-
-        if(this.hideMap){
-            jq('#mw-opportunities-map').hide();
-        }
-        this.setupMap();
-    }
-
-    doSearch(page: number = 1) {
+    doOldSearch(page: number = 1) {
         var query = jq('#mw-opportunities-query').val();
         var distance = jq('#mw-opportunities-distance').val();
         var postcode = jq('#mw-opportunities-user-postcode').val();
@@ -164,10 +119,10 @@ class OpportunitiesWidget extends BaseWidget {
                     ];
                     payload.sort = sort;
                 }
-                this.search(payload, page).then((resultSet: ResultSet) => { this.placeMarkers(resultSet); });
+                this.search(payload, page).then((resultSet: ResultSet) => { });
             });
         } else {
-            this.search(payload, page).then((resultSet: ResultSet) => { this.placeMarkers(resultSet); });
+            this.search(payload, page).then((resultSet: ResultSet) => { });
         }
     }
 
@@ -237,53 +192,6 @@ class OpportunitiesWidget extends BaseWidget {
         iframe.document.write(template);
         iframe.focus();
     }
-
-    placeMarkers(resultSet: ResultSet) {
-        if (!this.hideMap) {
-            this.markers.forEach((marker: google.maps.Marker) => {
-                marker.setMap(null);
-            });
-            this.markers = [];
-            var bounds = new google.maps.LatLngBounds();
-            resultSet.results.forEach((result) => {
-                if (result.geo_coords) {
-                    var coords = { lat: result.geo_coords.lat, lng: result.geo_coords.lon };
-                    var marker = new google.maps.Marker({
-                        position: coords,
-                        map: this.map,
-                        title: result.name
-                    });
-                    marker.addListener('click', (event) => {
-                        var details = jq('#mw-opportunities-result-' + result.Id);
-                        details.removeClass('hide');
-                        window.scrollTo(0, details.offset().top - 50);
-                    });
-                    bounds.extend(coords);
-                    this.markers.push(marker);
-                }
-            });
-            if (this.markers.length === 0) {
-                this.map.setCenter(this.scotland);
-                this.map.setZoom(6);
-            } else {
-                this.map.fitBounds(bounds);
-            }
-        }
-    }
-
-    setupMap() {
-        if (!this.hideMap) {
-            if (!this.map) {
-                GoogleMapsLoader.load((google) => {
-                    this.map = new google.maps.Map(jq('#mw-opportunities-map')[0], {
-                        zoom: 6,
-                        center: this.scotland,
-                        draggable: !("ontouchend" in document)
-                    });
-                });
-            }
-        }
-    }
 }
 
-var widget = new OpportunitiesWidget();
+var widget = new BaseWidget('opportunities');
