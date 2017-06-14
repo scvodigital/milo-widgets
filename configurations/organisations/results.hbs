@@ -23,11 +23,11 @@
 			{{#if aimsAndObjectives}} {{truncate aimsAndObjectives 255 '[...]'}} {{else}} No Aims or Objectives given. {{/if}}
 		</p>
 		<p>
-			{{#any organisationLocationsStreet organisationLocationsAreaTown organisationLocationsCityCounty organisationLocationsPostcode}}
-				{{#if organisationLocationsStreet}}{{organisationLocationsStreet}}, {{/if}}
-				{{#if organisationLocationsAreaTown}}{{organisationLocationsAreaTown}}, {{/if}}
-				{{#if organisationLocationsCityCounty}}{{organisationLocationsCityCounty}}, {{/if}}
-				{{#if organisationLocationsPostcode}}{{organisationLocationsPostcode}}{{/if}}
+			{{#any locationAreaTown locationCityCounty locationPostcode locationStreet}}
+				{{#if locationStreet}}{{locationStreet}}, {{/if}}
+				{{#if locationAreaTown}}{{locationAreaTown}}, {{/if}}
+				{{#if locationCityCounty}}{{locationCityCounty}}, {{/if}}
+				{{#if locationPostcode}}{{locationPostcode}}{{/if}}
 			{{else}}
 				No address given
 			{{/any}}

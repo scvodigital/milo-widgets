@@ -10,11 +10,11 @@
         <div class="row">
             <div class="col-sm-6">
                 <h3>Primary Address</h3>
-                {{#any organisationLocationsStreet organisationLocationsAreaTown organisationLocationsCityCounty organisationLocationsPostcode}}
-                    {{#if organisationLocationsStreet}}{{organisationLocationsStreet}}, <br />{{/if}}
-                    {{#if organisationLocationsAreaTown}}{{organisationLocationsAreaTown}}, <br />{{/if}}
-                    {{#if organisationLocationsCityCounty}}{{organisationLocationsCityCounty}}, <br />{{/if}}
-                    {{#if organisationLocationsPostcode}}{{organisationLocationsPostcode}}{{/if}}
+                {{#any locationAreaTown locationCityCounty locationPostcode locationStreet}}
+                    {{#if locationStreet}}{{locationStreet}}, <br />{{/if}}
+                    {{#if locationAreaTown}}{{locationAreaTown}}, <br />{{/if}}
+                    {{#if locationCityCounty}}{{locationCityCounty}}, <br />{{/if}}
+                    {{#if locationPostcode}}{{locationPostcode}}{{/if}}
                 {{else}}
                     No address given
                 {{/any}}
@@ -36,6 +36,24 @@
                     <li>
                         <strong>Website:</strong>
                         <a href="{{#startsWith website "http"}}{{else}}http://{{/startsWith}}{{website}}">Visit Website</a>
+                    </li>
+                    {{/if}}
+                    {{#if twitter}}
+                    <li>
+                        <strong>Twitter:</strong>
+                        <a href="{{#startsWith twitter "http"}}{{else}}https://{{/startsWith}}{{twitter}}">
+                            <i class="fa fa-fw fa-twitter"></i>
+                            Twitter
+                        </a>
+                    </li>
+                    {{/if}}
+                    {{#if facebook}}
+                    <li>
+                        <strong>Facebook:</strong>
+                        <a href="{{#startsWith facebook "http"}}{{else}}https://{{/startsWith}}{{facebook}}">
+                            <i class="fa fa-fw fa-facebook"></i>
+                            Facebook
+                        </a>
                     </li>
                     {{/if}}
                 </ul>

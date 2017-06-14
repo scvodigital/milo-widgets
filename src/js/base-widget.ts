@@ -186,30 +186,36 @@ export class BaseWidget {
 	}
 
 	doSearch(page: number = 1, jump: boolean = false) {
-		this.getGeo().then((geo: IGeoQuery) => {
-			var terms: ITermQuery[] = this.getTerms();
-			var ranges: IRangeQuery[] = this.getRanges();
-			var query: IQueryQuery = this.getQuery();
+		this.getPostcodeQuery().then((geo: IGeoQuery) => {
+			this.getLocationQuery().then((location: IGeoBoundingBoxQuery) => {
+				var terms: ITermQuery[] = this.getTerms();
+				var ranges: IRangeQuery[] = this.getRanges();
+				var query: IQueryQuery = this.getQuery();
 
-			var payload: any = {
-				bool: {
-					must: []
+				var payload: any = {
+					bool: {
+						must: []
+					}
 				}
-			}
 
-			payload.bool.must = payload.bool.must.concat(terms);
-			payload.bool.must = payload.bool.must.concat(ranges);
+				payload.bool.must = payload.bool.must.concat(terms);
+				payload.bool.must = payload.bool.must.concat(ranges);
 
-			if (geo) {
-				payload.bool.must.push(geo.query);
-				payload.sort = geo.sort;
-			}
+				if (geo) {
+					payload.bool.must.push(geo.query);
+					payload.sort = geo.sort;
+				}
 
-			if (query) {
-				payload.bool.must.push(query);
-			}
+				if(location){
+					payload.bool.must.push(location);
+				}
 
-			this.search(payload, page, jump).then((resultSet: ResultSet) => { });
+				if (query) {
+					payload.bool.must.push(query);
+				}
+
+				this.search(payload, page, jump).then((resultSet: ResultSet) => { });
+			});
 		});
 	}
 
@@ -220,15 +226,44 @@ export class BaseWidget {
 		} else {
 			var query: IQueryQuery = {
 				simple_query_string: {
-					query: queryString,
-					analyzer: "snowball"
+					query: queryString
 				}
 			};
 			return query;
 		}
 	}
 
-	private getGeo(): Promise<IGeoQuery> {
+	private getLocationQuery(): Promise<IGeoBoundingBoxQuery> {
+		return new Promise<IGeoBoundingBoxQuery>((resolve, reject) => {
+			var locationElement = this.widgetElement.find('[data-geo-code]');
+			var field = locationElement.data('geo-code');
+			var query = locationElement.val();
+			if(!query){
+				return resolve(null);
+			}
+
+			this.getLocation(query).then((bounds: IBounds) => {
+				if(!bounds){
+					console.error('Failed to lookup location', query);
+					return resolve(null);
+				}
+
+				var geo: IGeoBoundingBoxQuery = {
+					geo_bounding_box: {
+						[field]: {
+							top_right: bounds.northeast,
+							bottom_left: bounds.southwest
+						}
+					}
+				};
+				resolve(geo);
+			}).catch((err) => {
+				console.error('Failed to get location', err);
+			});
+		});
+	}
+
+	private getPostcodeQuery(): Promise<IGeoQuery> {
 		return new Promise<IGeoQuery>((resolve, reject) => {
 			var postcodeElement = this.widgetElement.find('[data-geo]');
 			var postcode = postcodeElement.val() || null;
@@ -239,36 +274,84 @@ export class BaseWidget {
 				return resolve(null);
 			}
 
-			jq.getJSON(window.location.protocol + '//api.postcodes.io/postcodes/' + postcode, (result) => {
-				if (result.status === 200) {
-					var field = postcodeElement.data('geo');
+			this.getPostcode(postcode).then((location: ILocation) => {
+				if(!location){
+					console.error('Failed to get postcode', postcode);
+					return resolve(null);
+				}
 
-					var geo = {
-						query: {
-							geo_distance_range: {
-								lt: distance + unit,
-								field: field,
-								[field]: {
-									lat: result.result.latitude,
-									lon: result.result.longitude
-								}
-							}
-						},
-						sort: {
-							_geo_distance: {
-								[field]: {
-									lat: result.result.latitude,
-									lon: result.result.longitude
-								},
-								order: 'asc',
-								unit: unit,
-								distance_type: 'arc'
+				var field = postcodeElement.data('geo');
+				var geo = {
+					query: {
+						geo_distance_range: {
+							lt: distance + unit,
+							field: field,
+							[field]: {
+								lat: location.lat,
+								lon: location.lon
 							}
 						}
-					};
+					},
+					sort: {
+						_geo_distance: {
+							[field]: {
+								lat: location.lat,
+								lon: location.lon
+							},
+							order: 'asc',
+							unit: unit,
+							distance_type: 'arc'
+						}
+					}
+				};
 
-					resolve(geo);
-				} else {
+				resolve(geo);
+			}).catch((err) => {
+				console.error('Failed to get postcode', err);
+				resolve(null);
+			});
+		});
+	}
+
+	private getPostcode(postcode: string): Promise<ILocation>{
+		return new Promise<ILocation>((resolve, reject) => {
+			jq.getJSON(window.location.protocol + '//api.postcodes.io/postcodes/' + postcode, (result) => {
+				if (result.status === 200) {
+					if(result.result && result.result.latitude && result.result.longiture){
+						resolve({
+							lat: result.result.latitude,
+							lon: result.result.longitude
+						});
+					}else{
+						resolve(null);
+					}
+				}else{
+					resolve(null);
+				}
+			});
+		});
+	}
+
+	private getLocation(query: string): Promise<IBounds>{
+		return new Promise<IBounds>((resolve, reject) => {
+			jq.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURIComponent(query), (result) => {
+				if (result && result.status && result.status === "OK" && result.results && result.results.length > 0) {
+					var location = result.results[0];
+					if(location.geometry && location.geometry.bounds){
+						resolve({
+							northeast: {
+								lat: location.geometry.bounds.northeast.lat,
+								lon: location.geometry.bounds.northeast.lng,
+							},
+							southwest: {
+								lat: location.geometry.bounds.southwest.lat,
+								lon: location.geometry.bounds.southwest.lng,
+							}
+						});
+					}else{
+						resolve(null);
+					}
+				}else{
 					resolve(null);
 				}
 			});
@@ -468,9 +551,12 @@ export class BaseWidget {
 			if (payload.body.query.hasOwnProperty('sort')) {
 				payload.body.sort = payload.body.query.sort;
 				delete payload.body.query.sort;
+			}else{
+				payload.body.sort = this.config.sort;
 			}
 
 			console.log(payload);
+			console.log(JSON.stringify(payload, null, 4));
 
 			this.runQuery(payload).then((response) => {
 				var resultSet: ResultSet = new ResultSet(
@@ -595,6 +681,7 @@ export interface IWidgetConfiguration {
 	mapOptions: MapOptions;
 	name: string;
 	title: string;
+	sort: any;
 }
 
 export class WidgetConfiguration implements IWidgetConfiguration {
@@ -605,6 +692,7 @@ export class WidgetConfiguration implements IWidgetConfiguration {
 	mapOptions: MapOptions = null;
 	name: string = null;
 	title: string = null;
+	sort: any;
 
 	constructor(widgetConfiguration?: IWidgetConfiguration) {
 		if (widgetConfiguration) {
@@ -746,15 +834,22 @@ export interface IRangeQuery {
 	}
 }
 
+export interface ILocation {
+	lat: number;
+	lon: number;
+}
+
+export interface IBounds {
+	northeast: ILocation;
+	southwest: ILocation;
+}
+
 export interface IGeoQuery {
 	query: {
 		geo_distance_range: {
 			lt: string;
 			field: string;
-			[field: string]: {
-				lat: number,
-				lon: number
-			} | string;
+			[field: string]: ILocation | string;
 		}
 	};
 	sort: {
@@ -762,18 +857,27 @@ export interface IGeoQuery {
 			order: string;
 			unit: string;
 			distance_type: string;
-			[field: string]: {
-				lat: number,
-				lon: number
-			} | string;
+			[field: string]: ILocation | string;
 		}
 	};
+};
+
+export interface IGeoBoundingBoxQuery {
+	geo_bounding_box: {
+		[field: string]: {
+			top_left: ILocation;
+			bottom_right: ILocation;
+		} | {
+			top_right: ILocation;
+			bottom_left: ILocation;
+		} | string;
+	}
 };
 
 export interface IQueryQuery {
 	simple_query_string: {
 		query: string;
-		analyzer: string;
+		analyzer?: string;
 	};
 }
 

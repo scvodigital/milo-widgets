@@ -21,7 +21,10 @@ const organisationConfiguration: IWidgetConfiguration = {
         initialZoom: 6
     },
     name: 'organisations',
-    title: 'Milo Organisations Search'
+    title: 'Milo Organisations Search',
+    sort: {
+        name: 'asc'
+    }
 }
 
 class OrganisationWidget extends BaseWidget {

@@ -143,7 +143,7 @@ sundayAfternoon mondayEvening tuesdayEvening wednesdayEvening thursdayEvening fr
 	<dt>
 		<i class="fa fa-fw fa-gbp"></i> Expenses Paid:
 	</dt>
-	<dd>{{abx expensesPaid 'Yes' 'No'}}</dd>
+	<dd>{{#if expensesPaid}}Yes{{else}}No{{/if}}</dd>
 	{{/if}} {{#if supportOptions}}
 	<dt>
 		<i class="fa fa-fw fa-list"></i> Support Options:

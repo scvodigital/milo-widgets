@@ -22,7 +22,10 @@ const opportunitiesConfiguration: IWidgetConfiguration = {
         initialZoom: 6
     },
     name: 'opportunities',
-    title: 'Milo Voluntary Opportunity Search'
+    title: 'Milo Voluntary Opportunity Search',
+    sort: {
+        title: 'asc'
+    }
 }
 
 class OpportunitiesWidget extends BaseWidget {
