@@ -45,7 +45,7 @@ export class BaseWidget {
 	constructor(name: string) {
 		this.scriptTag = jq('script[src*="' + name + '.bundle.js"]');
 
-		if(this.scriptTag.data('widget')){
+		if (this.scriptTag.data('widget')) {
 			name = this.scriptTag.data('widget');
 		}
 
@@ -89,6 +89,7 @@ export class BaseWidget {
 			this.searchElement.html(searchHtml);
 
 			this.setupMap().then(() => {
+				this.bindControlsOnce();
 				this.updateBody('');
 				this.hashChange();
 			});
@@ -97,15 +98,45 @@ export class BaseWidget {
 		});
 	}
 
-	bindControls() {
-		jq('#mw-' + this.config.name + '-search-button').off('click').on('click', () => {
+	bindControlsOnce() {
+		this.widgetElement.find('.mw-search-button').off('click').on('click', () => {
 			this.doSearch(1);
 			window.location.hash = 'mw-' + this.config.name + '-top';
 		});
 
+		this.widgetElement.find('[data-show-hide-toggle]').each((i, o) => {
+			o = jq(o);
+			o.on('click', () => {
+				this.showHide(o);
+			});
+			this.showHide(o);
+		});
+	}
+
+	showHide(element, hide?: boolean){
+		var targetSelector = element.data('show-hide-toggle');
+		var target = jq(targetSelector);
+		var text = element.find('.mw-show-hide-text');
+		var icon = element.find('.mw-show-hide-icon');
+		if(!target.hasClass('hide') || (typeof hide === 'boolean' && hide)){
+			target.addClass('hide');
+			text.text('Show');
+			icon.removeClass('fa-eye-slash').addClass('fa-eye');
+		}else{
+			target.removeClass('hide');
+			text.text('Hide');
+			icon.removeClass('fa-eye').addClass('fa-eye-slash');
+		}
+	}
+
+	bindControls() {
 		this.widgetElement.find('.mw-back-to-results').off('click').on('click', () => {
 			this.renderResults(true);
 			window.location.hash = 'mw-' + this.config.name + '-top';
+		});
+
+		this.widgetElement.find('.mw-print').off('click').on('click', () => {
+			this.print();
 		});
 
 		this.widgetElement.find('.mw-previous, .mw-next').off('click').on('click', (e) => {
@@ -250,8 +281,19 @@ export class BaseWidget {
 
 		var terms: { [term: string]: string[] } = {};
 		termFields.each((i, o) => {
-			var term = jq(o).data('term');
-			if (jq(o).val()) {
+			o = jq(o);
+			var term = o.data('term');
+			if(o.attr('type') === 'checkbox' || o.attr('type') === 'radio'){
+				if (o.attr('type') === 'checkbox') {
+					if (o.is(':checked')) {
+						terms[term] = ['true'];
+					}
+				} else if (jq(o).attr('type') === 'radio') {
+					if (o.is(':selected')) {
+						terms[term] = ['true'];
+					}
+				}
+			} else if (o.val() && o.val() !== '') {
 				if (!terms.hasOwnProperty(term)) {
 					terms[term] = [];
 				}
@@ -339,12 +381,13 @@ export class BaseWidget {
 		this.bodyElement.html(html);
 		if (this.resultSet) {
 			this.widgetElement.find('.mw-navigation').show();
+			this.widgetElement.find('.mw-back-to-results').show();
 			if (this.doc) {
 				this.widgetElement.find('.mw-paging').hide();
-				this.widgetElement.find('.mw-back-to-results').show();
+				this.widgetElement.find('.mw-document-nav').show();
 			} else {
 				this.widgetElement.find('.mw-paging').show();
-				this.widgetElement.find('.mw-back-to-results').hide();
+				this.widgetElement.find('.mw-document-nav').hide();
 
 				this.widgetElement.find('.mw-previous')
 					.prop('disabled', this.resultSet.currentPage === 1)
@@ -356,7 +399,13 @@ export class BaseWidget {
 		} else {
 			this.widgetElement.find('.mw-paging').hide();
 			this.widgetElement.find('.mw-back-to-results').hide();
-			this.widgetElement.find('.mw-navigation').hide();
+			if (this.doc) {
+				this.widgetElement.find('.mw-document-nav').show();
+				this.widgetElement.find('.mw-navigation').show();
+			} else {
+				this.widgetElement.find('.mw-document-nav').hide();
+				this.widgetElement.find('.mw-navigation').hide();
+			}
 		}
 
 		this.bindControls();
@@ -367,6 +416,41 @@ export class BaseWidget {
 			var top = topElement.offset().top;
 			window.scroll(0, top);
 		}
+	}
+
+	print() {
+		if (!this.doc) {
+			return;
+		}
+		var content = this.config.templateSet.view(this.doc, handlebars);
+		var template = `
+            <html>
+                </head>
+                    <title>${this.config.title}</title>
+                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+                </head>
+                <body>
+                    ${content}
+                    <script>
+                        window.print();
+                        var me = window.parent.document.getElementById('print-frame-${this.config.name}');
+                        me.parentNode.removeChild(window.parent.document.getElementById('print-frame-${this.config.name}'));
+                    </script>
+                </body>
+            </html>`;
+		var frame = jq('<iframe />', {
+			src: 'about:blank',
+			border: 0,
+			id: 'print-frame-' + this.config.name
+		}).css({
+			width: 800,
+			height: 800,
+			visibility: 'hidden'
+		}).appendTo('body');
+
+		var iframe = (<any>frame.get(0)).contentWindow;
+		iframe.document.write(template);
+		iframe.focus();
 	}
 
 	protected search(query, page = 1, jump: boolean = false) {
@@ -385,6 +469,8 @@ export class BaseWidget {
 				payload.body.sort = payload.body.query.sort;
 				delete payload.body.query.sort;
 			}
+
+			console.log(payload);
 
 			this.runQuery(payload).then((response) => {
 				var resultSet: ResultSet = new ResultSet(

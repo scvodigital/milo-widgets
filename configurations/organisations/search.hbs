@@ -2,7 +2,7 @@
 	<div class="col-sm-12">
 		<div class="form-group">
 			<label for="mw-organisations-query" class="control-label">Query or Organisation name: </label>
-			<input type="text" id="mw-organisations-query" class="form-control" data-bind="QueryString" data-query />
+			<input type="text" id="mw-organisations-query" class="form-control" data-query />
 		</div>
 	</div>
 </div>
@@ -11,7 +11,7 @@
 		<div class="form-group">
 			<label for="mw-organisations-distance" class="control-label">Distance from your postcode: </label>
 			<div class="input-group">
-				<select id="mw-organisations-distance" class="form-control" data-bind="Distance" data-geo-distance data-geo-unit="mi">
+				<select id="mw-organisations-distance" class="form-control" data-geo-distance data-geo-unit="mi">
 						<option value="0">within ..</option>
 						<option value="1">1 mile</option>
 						<option value="3">3 miles</option>
@@ -25,14 +25,14 @@
 						<option value="1000">Nationwide</option>
 					</select>
 				<label for="mw-organisations-user-postcode" class="input-group-addon">of</label>
-				<input type="text" id="mw-organisations-user-postcode" class="form-control" data-bind="UserPostcode" placeholder="enter your home postcode"
+				<input type="text" id="mw-organisations-user-postcode" class="form-control" placeholder="enter your home postcode"
 				data-geo="geo_coords" />
 			</div>
 		</div>
 	</div>
 	<div class="col-sm-6">
 		<label for="mw-organisations-activity" class="control-label">Activities</label>
-		<select id="mw-organisations-activity" class="form-control" data-bind="Activity" data-term="mainActivitiesGlobal_slugs">
+		<select id="mw-organisations-activity" class="form-control" data-term="mainActivitiesGlobal_slugs">
 				<option value="">-- Select Activity --</option>
 				{{#each terms.mainActivitiesGlobal}}
 					<option value="{{slug}}">{{term}}</option>

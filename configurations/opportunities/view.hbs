@@ -1,0 +1,220 @@
+<h3>
+	<span class="mw-emoji pull-right">&#9207;</span>
+	<strong>{{title}}</strong> {{#if organisationName}} | {{organisationName}} {{/if}} {{#each ../sorts}} ({{round this 2}}
+	miles) {{/each}}
+</h3>
+
+<ul class="list-inline">
+	{{#if referenceCode}}
+	<li>
+		<i class="fa fa-fw fa-book"></i> Ref: {{referenceCode}}
+	</li>
+	{{/if}} {{#if startData}}
+	<li>
+		<i class="fa fa-fw fa-calendar"></i> Start Date: {{startDate}}
+	</li>
+	{{/if}} {{#if workType}}
+	<li>
+		<i class="fa fa-fw fa-briefcase"></i> Work Type: {{workType}}
+	</li>
+	{{/if}} {{#if clientGroup}}
+	<li>
+		<i class="fa fa-fw fa-users"></i> Client Group: {{clientGroup}}
+	</li>
+	{{/if}} {{#if organisationCharityNo}}
+	<li>
+		<i class="fa fa-fw fa-hashtag"></i> Charity Number: {{organisationCharityNo}}
+	</li>
+	{{/if}}
+</ul>
+
+<h4>
+	Summary:
+</h4>
+{{ps summary}}
+
+{{#if fullDescription}}
+<h4>
+	<i class="fa fa-fw fa-file-text-o"></i> Opportunity Details:
+</h4>
+{{ps fullDescription}}
+
+{{/if}} {{#if organisationAims_And_Objectives}}
+<h4>
+	<i class="fa fa-fw fa-bullseye"></i> Organisation's Aims and Objectives:
+</h4>
+{{ps organisationAims_And_Objectives}} {{/if}} {{#any mondayMorning tuesdayMorning wednesdayMorning thursdayMorning fridayMorning
+saturdayMorning sundayMorning mondayAfternoon tuesdayAfternoon wednesdayAfternoon thursdayAfternoon fridayAfternoon saturdayAfternoon
+sundayAfternoon mondayEvening tuesdayEvening wednesdayEvening thursdayEvening fridayEvening saturdayEvening sundayEvening}}
+<h4><i class="fa fa-fw fa-clock-o"></i> Opening Times</h4>
+<div class="table-responsive">
+	<table class="table table-condensed table-hover">
+		<thead>
+			<tr>
+				<th></th>
+				<th style="text-align:center;font-weight:bold;">Mon</th>
+				<th style="text-align:center;font-weight:bold;">Tue</th>
+				<th style="text-align:center;font-weight:bold;">Wed</th>
+				<th style="text-align:center;font-weight:bold;">Thu</th>
+				<th style="text-align:center;font-weight:bold;">Fri</th>
+				<th style="text-align:center;font-weight:bold;">Sat</th>
+				<th style="text-align:center;font-weight:bold;">Sun</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th>Morning</th>
+				<td style="text-align:center;font-weight:bold;">{{#if mondayMorning}}<i class="fa fa-fw fa-check-square-o"></i>{{else}}<i class="fa fa-fw fa-square-o"></i>{{/if}}</td>
+				<td style="text-align:center;font-weight:bold;">{{#if tuesdayMorning}}<i class="fa fa-fw fa-check-square-o"></i>{{else}}<i class="fa fa-fw fa-square-o"></i>{{/if}}</td>
+				<td style="text-align:center;font-weight:bold;">{{#if wednesdayMorning}}<i class="fa fa-fw fa-check-square-o"></i>{{else}}<i class="fa fa-fw fa-square-o"></i>{{/if}}</td>
+				<td style="text-align:center;font-weight:bold;">{{#if thursdayMorning}}<i class="fa fa-fw fa-check-square-o"></i>{{else}}<i class="fa fa-fw fa-square-o"></i>{{/if}}</td>
+				<td style="text-align:center;font-weight:bold;">{{#if fridayMorning}}<i class="fa fa-fw fa-check-square-o"></i>{{else}}<i class="fa fa-fw fa-square-o"></i>{{/if}}</td>
+				<td style="text-align:center;font-weight:bold;">{{#if saturdayMorning}}<i class="fa fa-fw fa-check-square-o"></i>{{else}}<i class="fa fa-fw fa-square-o"></i>{{/if}}</td>
+				<td style="text-align:center;font-weight:bold;">{{#if sundayMorning}}<i class="fa fa-fw fa-check-square-o"></i>{{else}}<i class="fa fa-fw fa-square-o"></i>{{/if}}</td>
+			</tr>
+			<tr>
+				<th>Afternoon</th>
+				<td style="text-align:center;font-weight:bold;">{{#if mondayAfternoon}}<i class="fa fa-fw fa-check-square-o"></i>{{else}}<i class="fa fa-fw fa-square-o"></i>{{/if}}</td>
+				<td style="text-align:center;font-weight:bold;">{{#if tuesdayAfternoon}}<i class="fa fa-fw fa-check-square-o"></i>{{else}}<i class="fa fa-fw fa-square-o"></i>{{/if}}</td>
+				<td style="text-align:center;font-weight:bold;">{{#if wednesdayAfternoon}}<i class="fa fa-fw fa-check-square-o"></i>{{else}}<i class="fa fa-fw fa-square-o"></i>{{/if}}</td>
+				<td style="text-align:center;font-weight:bold;">{{#if thursdayAfternoon}}<i class="fa fa-fw fa-check-square-o"></i>{{else}}<i class="fa fa-fw fa-square-o"></i>{{/if}}</td>
+				<td style="text-align:center;font-weight:bold;">{{#if fridayAfternoon}}<i class="fa fa-fw fa-check-square-o"></i>{{else}}<i class="fa fa-fw fa-square-o"></i>{{/if}}</td>
+				<td style="text-align:center;font-weight:bold;">{{#if saturdayAfternoon}}<i class="fa fa-fw fa-check-square-o"></i>{{else}}<i class="fa fa-fw fa-square-o"></i>{{/if}}</td>
+				<td style="text-align:center;font-weight:bold;">{{#if sundayAfternoon}}<i class="fa fa-fw fa-check-square-o"></i>{{else}}<i class="fa fa-fw fa-square-o"></i>{{/if}}</td>
+			</tr>
+			<tr>
+				<th>Evening</th>
+				<td style="text-align:center;font-weight:bold;">{{#if mondayEvening}}<i class="fa fa-fw fa-check-square-o"></i>{{else}}<i class="fa fa-fw fa-square-o"></i>{{/if}}</td>
+				<td style="text-align:center;font-weight:bold;">{{#if tuesdayEvening}}<i class="fa fa-fw fa-check-square-o"></i>{{else}}<i class="fa fa-fw fa-square-o"></i>{{/if}}</td>
+				<td style="text-align:center;font-weight:bold;">{{#if wednesdayEvening}}<i class="fa fa-fw fa-check-square-o"></i>{{else}}<i class="fa fa-fw fa-square-o"></i>{{/if}}</td>
+				<td style="text-align:center;font-weight:bold;">{{#if thursdayEvening}}<i class="fa fa-fw fa-check-square-o"></i>{{else}}<i class="fa fa-fw fa-square-o"></i>{{/if}}</td>
+				<td style="text-align:center;font-weight:bold;">{{#if fridayEvening}}<i class="fa fa-fw fa-check-square-o"></i>{{else}}<i class="fa fa-fw fa-square-o"></i>{{/if}}</td>
+				<td style="text-align:center;font-weight:bold;">{{#if saturdayEvening}}<i class="fa fa-fw fa-check-square-o"></i>{{else}}<i class="fa fa-fw fa-square-o"></i>{{/if}}</td>
+				<td style="text-align:center;font-weight:bold;">{{#if sundayEvening}}<i class="fa fa-fw fa-check-square-o"></i>{{else}}<i class="fa fa-fw fa-square-o"></i>{{/if}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+{{/any}} {{#any experienceRequired restrictionDetails travelDetails minimumAge}}
+<h4><i class="fa fa-fw fa-ban"></i> Restrictions</h4>
+<dl class="dl-horizontal">
+	{{#if experienceRequired}}
+	<dt>
+		<i class="fa fa-fw fa-graduation-cap"></i> Experience Required:
+	</dt>
+	<dd>{{ps experienceRequired}}</dd>
+	{{/if}} {{#if restrictionDetails}}
+	<dt>
+		<i class="fa fa-fw fa-flag"></i> Restriction Details:
+	</dt>
+	<dd>{{ps restrictionDetails}}</dd>
+	{{/if}} {{#if travelDetails}}
+	<dt>
+		<i class="fa fa-fw fa-plane"></i> Travel Details
+	</dt>
+	<dd>{{travelDetails}}</dd>
+	{{/if}} {{#if minimumAge}}
+	<dt>
+		<i class="fa fa-fw fa-child"></i> Minimum Age:
+	</dt>
+	<dd>{{minimumAge}}</dd>
+	{{/if}}
+</dl>
+{{/any}} {{#any travelExpenses frequency expensesPaid supportOptions}}
+
+<h4><i class="fa fa-fw fa-life-ring"></i> Support</h4>
+<dl class="dl-horizontal">
+	{{#if travelExpenses}}
+	<dt>
+		<i class="fa fa-fw fa-money"></i> Travel Expenses:
+	</dt>
+	<dd>{{travelExpenses}}</dd>
+	{{/if}} {{#if frequency}}
+	<dt>
+		<i class="fa fa-fw fa-clock-o"></i> Frequency:
+	</dt>
+	<dd>{{frequency}}</dd>
+	{{/if}} {{#if expensesPaid}}
+	<dt>
+		<i class="fa fa-fw fa-gbp"></i> Expenses Paid:
+	</dt>
+	<dd>{{abx expensesPaid 'Yes' 'No'}}</dd>
+	{{/if}} {{#if supportOptions}}
+	<dt>
+		<i class="fa fa-fw fa-list"></i> Support Options:
+	</dt>
+	<dd>{{supportOptions}}</dd>
+	{{/if}}
+</dl>
+{{/any}}
+
+{{#xif detailsToDisplayOnVS '==' 'TSI/VC'}}
+<h4><i class="fa fa-fw fa-bullhorn"></i> Please contact {{tsiName}} Third Sector Interface about this opportunity</h4>
+<dl class="dl-horizontal">
+	<dt>
+		<i class="fa fa-fw fa-user"></i> Contact Name:
+	</dt>
+	<dd>{{tsiContactFirstName}} {{tsiContactLastName}}</dd>
+
+	{{#validpa this}}
+	<dt>
+		<i class="fa fa-fw fa-home"></i> Address:
+	</dt>
+	<dd>{{pa this}}</dd>
+	{{/validpa}} {{#validtel tsiContactPhone}}
+	<dt>
+		<i class="fa fa-fw fa-phone"></i> Phone:
+	</dt>
+	<dd><a href="tel:{{tsiContactPhone}}">{{tsiContactPhone}}</a></dd>
+	{{/validtel}} {{#if organisationWebsite}}
+	<dt>
+		<i class="fa fa-fw fa-external-link"></i> Website:
+	</dt>
+	<dd>
+		<a href="{{uri organisationWebsite 'http'}}" target="_blank">Visit Website</a>
+	</dd>
+	{{/if}} {{#if tsiContactEmail}}
+	<dt>
+		<i class="fa fa-fw fa-envelope"></i> Email:
+	</dt>
+	<dd>
+		<a href="mailto:{{tsiContactEmail}}">Email us if you're interested in this opportunity</a>
+	</dd>
+	{{/if}}
+</dl>
+{{else}}
+<h4><i class="fa fa-fw fa-bullhorn"></i> Please contact {{organisationName}} direct about this opportunity</h4>
+<dl class="dl-horizontal">
+	<dt>
+		<i class="fa fa-fw fa-user"></i> Contact Name:
+	</dt>
+	<dd>{{organisationContactFirstName}} {{organisationContactLastName}}</dd>
+
+	{{#validpa this}}
+	<dt>
+		<i class="fa fa-fw fa-home"></i> Address:
+	</dt>
+	<dd>{{pa this}}</dd>
+	{{/validpa}} {{#validtel organisationContactPhone}}
+	<dt>
+		<i class="fa fa-fw fa-phone"></i> Phone:
+	</dt>
+	<dd><a href="tel:{{organisationContactPhone}}">{{organisationContactPhone}}</a></dd>
+	{{/validtel}} {{#if organisationWebsite}}
+	<dt>
+		<i class="fa fa-fw fa-external-link"></i> Website:
+	</dt>
+	<dd>
+		<a href="{{uri organisationWebsite 'http'}}" target="_blank">Visit Website</a>
+	</dd>
+	{{/if}} {{#if organisationContactEmail}}
+	<dt>
+		<i class="fa fa-fw fa-envelope-o"></i> Email:
+	</dt>
+	<dd>
+		<a href="mailto:{{organisationContactEmail}}">Email us if you're interested in this opportunity</a>
+	</dd>
+	{{/if}}
+</dl>
+{{/xif}}
+</div>
