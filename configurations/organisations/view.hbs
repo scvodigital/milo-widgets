@@ -10,7 +10,14 @@
         <div class="row">
             <div class="col-sm-6">
                 <h3>Primary Address</h3>
-                {{pa this}}
+                {{#any organisationLocationsStreet organisationLocationsAreaTown organisationLocationsCityCounty organisationLocationsPostcode}}
+                    {{#if organisationLocationsStreet}}{{organisationLocationsStreet}}, <br />{{/if}}
+                    {{#if organisationLocationsAreaTown}}{{organisationLocationsAreaTown}}, <br />{{/if}}
+                    {{#if organisationLocationsCityCounty}}{{organisationLocationsCityCounty}}, <br />{{/if}}
+                    {{#if organisationLocationsPostcode}}{{organisationLocationsPostcode}}{{/if}}
+                {{else}}
+                    No address given
+                {{/any}}
             </div>
             <div class="col-sm-6">
                 <h3>Contact Information</h3>
@@ -28,7 +35,7 @@
                     {{/if}} {{#if website}}
                     <li>
                         <strong>Website:</strong>
-                        <a href="{{uri website}}">Visit Website</a>
+                        <a href="{{#startsWith website "http"}}{{else}}http://{{/startsWith}}{{website}}">Visit Website</a>
                     </li>
                     {{/if}}
                 </ul>

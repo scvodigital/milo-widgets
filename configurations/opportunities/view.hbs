@@ -43,7 +43,8 @@
 <h4>
 	<i class="fa fa-fw fa-bullseye"></i> Organisation's Aims and Objectives:
 </h4>
-{{ps organisationAims_And_Objectives}} {{/if}} {{#any mondayMorning tuesdayMorning wednesdayMorning thursdayMorning fridayMorning
+{{ps organisationAims_And_Objectives}} {{/if}}
+{{#any mondayMorning tuesdayMorning wednesdayMorning thursdayMorning fridayMorning
 saturdayMorning sundayMorning mondayAfternoon tuesdayAfternoon wednesdayAfternoon thursdayAfternoon fridayAfternoon saturdayAfternoon
 sundayAfternoon mondayEvening tuesdayEvening wednesdayEvening thursdayEvening fridayEvening saturdayEvening sundayEvening}}
 <h4><i class="fa fa-fw fa-clock-o"></i> Opening Times</h4>
@@ -95,7 +96,8 @@ sundayAfternoon mondayEvening tuesdayEvening wednesdayEvening thursdayEvening fr
 		</tbody>
 	</table>
 </div>
-{{/any}} {{#any experienceRequired restrictionDetails travelDetails minimumAge}}
+{{/any}}
+{{#any experienceRequired restrictionDetails travelDetails minimumAge}}
 <h4><i class="fa fa-fw fa-ban"></i> Restrictions</h4>
 <dl class="dl-horizontal">
 	{{#if experienceRequired}}
@@ -103,25 +105,28 @@ sundayAfternoon mondayEvening tuesdayEvening wednesdayEvening thursdayEvening fr
 		<i class="fa fa-fw fa-graduation-cap"></i> Experience Required:
 	</dt>
 	<dd>{{ps experienceRequired}}</dd>
-	{{/if}} {{#if restrictionDetails}}
+	{{/if}}
+	{{#if restrictionDetails}}
 	<dt>
 		<i class="fa fa-fw fa-flag"></i> Restriction Details:
 	</dt>
 	<dd>{{ps restrictionDetails}}</dd>
-	{{/if}} {{#if travelDetails}}
+	{{/if}}
+	{{#if travelDetails}}
 	<dt>
 		<i class="fa fa-fw fa-plane"></i> Travel Details
 	</dt>
 	<dd>{{travelDetails}}</dd>
-	{{/if}} {{#if minimumAge}}
+	{{/if}}
+	{{#if minimumAge}}
 	<dt>
 		<i class="fa fa-fw fa-child"></i> Minimum Age:
 	</dt>
 	<dd>{{minimumAge}}</dd>
 	{{/if}}
 </dl>
-{{/any}} {{#any travelExpenses frequency expensesPaid supportOptions}}
-
+{{/any}}
+{{#any travelExpenses frequency expensesPaid supportOptions}}
 <h4><i class="fa fa-fw fa-life-ring"></i> Support</h4>
 <dl class="dl-horizontal">
 	{{#if travelExpenses}}
@@ -148,7 +153,7 @@ sundayAfternoon mondayEvening tuesdayEvening wednesdayEvening thursdayEvening fr
 </dl>
 {{/any}}
 
-{{#xif detailsToDisplayOnVS '==' 'TSI/VC'}}
+{{#compare detailsToDisplayOnVS '==' 'TSI/VC'}}
 <h4><i class="fa fa-fw fa-bullhorn"></i> Please contact {{tsiName}} Third Sector Interface about this opportunity</h4>
 <dl class="dl-horizontal">
 	<dt>
@@ -156,24 +161,35 @@ sundayAfternoon mondayEvening tuesdayEvening wednesdayEvening thursdayEvening fr
 	</dt>
 	<dd>{{tsiContactFirstName}} {{tsiContactLastName}}</dd>
 
-	{{#validpa this}}
 	<dt>
 		<i class="fa fa-fw fa-home"></i> Address:
 	</dt>
-	<dd>{{pa this}}</dd>
-	{{/validpa}} {{#validtel tsiContactPhone}}
+	<dd>
+		{{#any organisationLocationsStreet organisationLocationsAreaTown organisationLocationsCityCounty organisationLocationsPostcode}}
+			{{#if organisationLocationsStreet}}{{organisationLocationsStreet}}, <br />{{/if}}
+			{{#if organisationLocationsAreaTown}}{{organisationLocationsAreaTown}}, <br />{{/if}}
+			{{#if organisationLocationsCityCounty}}{{organisationLocationsCityCounty}}, <br />{{/if}}
+			{{#if organisationLocationsPostcode}}{{organisationLocationsPostcode}}{{/if}}
+		{{else}}
+			No address given
+		{{/any}}
+	</dd>
+
+	{{#if tsiContactPhone}}
 	<dt>
 		<i class="fa fa-fw fa-phone"></i> Phone:
 	</dt>
 	<dd><a href="tel:{{tsiContactPhone}}">{{tsiContactPhone}}</a></dd>
-	{{/validtel}} {{#if organisationWebsite}}
+	{{/if}}
+	{{#if organisationWebsite}}
 	<dt>
 		<i class="fa fa-fw fa-external-link"></i> Website:
 	</dt>
 	<dd>
-		<a href="{{uri organisationWebsite 'http'}}" target="_blank">Visit Website</a>
+		<a href="{{#startsWith organisationWebsite "http"}}{{else}}http://{{/startsWith}}{{organisationWebsite}}" target="_blank">Visit Website</a>
 	</dd>
-	{{/if}} {{#if tsiContactEmail}}
+	{{/if}}
+	{{#if tsiContactEmail}}
 	<dt>
 		<i class="fa fa-fw fa-envelope"></i> Email:
 	</dt>
@@ -190,24 +206,35 @@ sundayAfternoon mondayEvening tuesdayEvening wednesdayEvening thursdayEvening fr
 	</dt>
 	<dd>{{organisationContactFirstName}} {{organisationContactLastName}}</dd>
 
-	{{#validpa this}}
 	<dt>
 		<i class="fa fa-fw fa-home"></i> Address:
 	</dt>
-	<dd>{{pa this}}</dd>
-	{{/validpa}} {{#validtel organisationContactPhone}}
+	<dd>
+		{{#any organisationLocationsStreet organisationLocationsAreaTown organisationLocationsCityCounty organisationLocationsPostcode}}
+			{{#if organisationLocationsStreet}}{{organisationLocationsStreet}}, <br />{{/if}}
+			{{#if organisationLocationsAreaTown}}{{organisationLocationsAreaTown}}, <br />{{/if}}
+			{{#if organisationLocationsCityCounty}}{{organisationLocationsCityCounty}}, <br />{{/if}}
+			{{#if organisationLocationsPostcode}}{{organisationLocationsPostcode}}{{/if}}
+		{{else}}
+			No address given
+		{{/any}}
+	</dd>
+
+	{{#if organisationContactPhone}}
 	<dt>
 		<i class="fa fa-fw fa-phone"></i> Phone:
 	</dt>
 	<dd><a href="tel:{{organisationContactPhone}}">{{organisationContactPhone}}</a></dd>
-	{{/validtel}} {{#if organisationWebsite}}
+	{{/if}}
+	{{#if organisationWebsite}}
 	<dt>
 		<i class="fa fa-fw fa-external-link"></i> Website:
 	</dt>
 	<dd>
-		<a href="{{uri organisationWebsite 'http'}}" target="_blank">Visit Website</a>
+		<a href="{{#startsWith organisationWebsite "http"}}{{else}}http://{{/startsWith}}{{organisationWebsite}}" target="_blank">Visit Website</a>
 	</dd>
-	{{/if}} {{#if organisationContactEmail}}
+	{{/if}}
+	{{#if organisationContactEmail}}
 	<dt>
 		<i class="fa fa-fw fa-envelope-o"></i> Email:
 	</dt>
@@ -216,5 +243,5 @@ sundayAfternoon mondayEvening tuesdayEvening wednesdayEvening thursdayEvening fr
 	</dd>
 	{{/if}}
 </dl>
-{{/xif}}
+{{/compare}}
 </div>

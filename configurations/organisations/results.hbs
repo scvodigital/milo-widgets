@@ -1,4 +1,4 @@
-{{#xif total '>' 0}}
+{{#compare total '>' 0}}
 <div class="alert alert-info">
 	Number of results: {{total}} | Page {{currentPage}} of {{totalPages}}
 </div>
@@ -6,7 +6,7 @@
 <div class="alert alert-warning">
 	<p>No Results</p>
 </div>
-{{/xif}}
+{{/compare}}
 
 {{#each results}}
 	<div class="mw-organisation-result" id="mw-organisations-result-{{Id}}">

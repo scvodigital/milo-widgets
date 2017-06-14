@@ -565,6 +565,7 @@ export class BaseWidget {
 					});
 				}
 			} else {
+				this.mapElement.hide();
 				resolve();
 			}
 		});
@@ -776,41 +777,6 @@ export interface IQueryQuery {
 	};
 }
 
-handlebars.registerHelper('xif', function (v1, operator, v2, options) {
-	switch (operator) {
-		case '==':
-			return (v1 == v2) ? options.fn(this) : options.inverse(this);
-		case '===':
-			return (v1 === v2) ? options.fn(this) : options.inverse(this);
-		case '<':
-			return (v1 < v2) ? options.fn(this) : options.inverse(this);
-		case '<=':
-			return (v1 <= v2) ? options.fn(this) : options.inverse(this);
-		case '>':
-			return (v1 > v2) ? options.fn(this) : options.inverse(this);
-		case '>=':
-			return (v1 >= v2) ? options.fn(this) : options.inverse(this);
-		case '&&':
-			return (v1 && v2) ? options.fn(this) : options.inverse(this);
-		case '||':
-			return (v1 || v2) ? options.fn(this) : options.inverse(this);
-		default:
-			return options.inverse(this);
-	}
-});
-
-handlebars.registerHelper('uri', function (uri) {
-	if (!uri) {
-		return null;
-	}
-
-	if (uri.indexOf('http') !== 0) {
-		uri = 'http://' + uri;
-	}
-
-	return uri;
-});
-
 handlebars.registerHelper('any', function () {
 	var options = arguments[arguments.length - 1];
 	var any = false;
@@ -826,45 +792,6 @@ handlebars.registerHelper('any', function () {
 		return options.inverse(this);
 	}
 })
-
-handlebars.registerHelper('validtel', function (tel, options) {
-	return !tel || tel.replace(/[^0-9]/igm, '') == '' ? options.inverse(this) : options.fn(this);
-});
-
-handlebars.registerHelper('validpa', function (pa, options) {
-	if (!pa || pa.organisationLocationsHomeAddress) {
-		return options.inverse(this);
-	}
-
-	var lines = [];
-	if (pa.organisationLocationsStreet) lines.push(pa.organisationLocationsStreet);
-	if (pa.organisationLocationsAreaTown) lines.push(pa.organisationLocationsAreaTown);
-	if (pa.organisationLocationsCityCounty) lines.push(pa.organisationLocationsCityCounty);
-	if (pa.organisationLocationsPostcode) lines.push(pa.organisationLocationsPostcode);
-
-	return lines.length == 0 ? options.inverse(this) : options.fn(this);
-});
-
-handlebars.registerHelper('bootstrap', function (version, options) {
-	var loaded = $('link[href*="bootstrap"][href*="' + version + '"]').length > 0;
-	return loaded ? options.inverse(this) : options.fn(this);
-});
-
-handlebars.registerHelper('pa', function (pa) {
-	var lines = [];
-	if (pa.organisationLocationsStreet) lines.push(pa.organisationLocationsStreet);
-	if (pa.organisationLocationsAreaTown) lines.push(pa.organisationLocationsAreaTown);
-	if (pa.organisationLocationsCityCounty) lines.push(pa.organisationLocationsCityCounty);
-	if (pa.organisationLocationsPostcode) lines.push(pa.organisationLocationsPostcode);
-
-	if (lines.length > 0) {
-		return new handlebars.SafeString(
-			"<addr>" + lines.join(',<br />') + "<addr>"
-		);
-	} else {
-		return new handlebars.SafeString('No address listed');
-	}
-});
 
 handlebars.registerHelper('ps', function (str) {
 	if (!str) {
@@ -903,32 +830,4 @@ handlebars.registerHelper('ps', function (str) {
 	}
 
 	return new handlebars.SafeString(out);
-});
-
-handlebars.registerHelper('round', function (number, dp) {
-	return number.toFixed(dp);
-});
-
-handlebars.registerHelper('picklist', function (picklist, defaultString) {
-	return new handlebars.SafeString('');
-
-});
-
-handlebars.registerHelper('abx', function (bool, a, b, c) {
-	switch (typeof bool) {
-		case ('boolean'):
-			return bool ? a : b;
-		case ('string'):
-			bool = bool.toLowerCase();
-			var affirmative = ['true', 'yes', 'y', 'aye', 'correct', 'yeah', 'yeh', 'yup', 'right', 'valid', 'success', '1'];
-			return affirmative.indexOf(bool) > -1 ? a : b;
-		case ('number'):
-			return bool === 0 ? b : a;
-		default:
-			return a || b;
-	}
-});
-
-handlebars.registerHelper('inc', function (int) {
-	return int + 1;
 });
