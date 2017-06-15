@@ -24,5 +24,15 @@
     "title": "Milo Organisations Search",
     "sort": {
         "name": "asc"
-    }
+    },
+    "injectableFilters": [
+        {
+            "attribute": "tsi",
+            "field": "ownerTSILegacyRef"
+        },
+        {
+            "attribute": "strive",
+            "field": "publishToStriveDirectory"
+        }
+    ]
 }

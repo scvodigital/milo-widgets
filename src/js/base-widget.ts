@@ -189,6 +189,7 @@ export class BaseWidget {
 		this.getPostcodeQuery().then((geo: IGeoQuery) => {
 			this.getLocationQuery().then((location: IGeoBoundingBoxQuery) => {
 				var terms: ITermQuery[] = this.getTerms();
+				var injected: ITermQuery[] = this.getInjected();
 				var ranges: IRangeQuery[] = this.getRanges();
 				var query: IQueryQuery = this.getQuery();
 
@@ -199,6 +200,7 @@ export class BaseWidget {
 				}
 
 				payload.bool.must = payload.bool.must.concat(terms);
+				payload.bool.must = payload.bool.must.concat(injected);
 				payload.bool.must = payload.bool.must.concat(ranges);
 
 				if (geo) {
@@ -217,6 +219,27 @@ export class BaseWidget {
 				this.search(payload, page, jump).then((resultSet: ResultSet) => { });
 			});
 		});
+	}
+
+	private getInjected(): ITermQuery[] {
+		if(!this.config.injectableFilters){
+			return [];
+		}
+
+		var must: ITermQuery[] = [];
+		this.config.injectableFilters.forEach((filter: IInjectableFilter) => {
+			var value: string = this.scriptTag.data(filter.attribute);
+			if(typeof value !== 'undefined' && value !== null){
+				var query: ITermQuery = {
+					terms: {
+						[filter.field]: [value]
+					}
+				};
+				must.push(query);
+			}
+		});
+
+		return must;
 	}
 
 	private getQuery(): IQueryQuery {
@@ -630,8 +653,10 @@ export class BaseWidget {
 				this.map.setZoom(this.config.mapOptions.initialZoom);
 			} else {
 				this.mapElement.show();
-				this.map.fitBounds(bounds);
-				google.maps.event.trigger(this.map, 'resize')
+				google.maps.event.trigger(this.map, 'resize');
+				window.setTimeout(() => {
+					this.map.fitBounds(bounds);
+				}, 500);
 			}
 		}
 	}
@@ -645,7 +670,8 @@ export class BaseWidget {
 						this.map = new google.maps.Map(element, {
 							zoom: this.config.mapOptions.initialZoom,
 							center: this.config.mapOptions.initialLocation,
-							draggable: !("ontouchend" in document)
+							draggable: !("ontouchend" in document),
+							scrollwheel: false
 						});
 						resolve();
 					});
@@ -673,6 +699,11 @@ export class BaseWidget {
 	}
 }
 
+export interface IInjectableFilter {
+	attribute: string;
+	field: string;
+}
+
 export interface IWidgetConfiguration {
 	index: string;
 	type: string;
@@ -682,6 +713,7 @@ export interface IWidgetConfiguration {
 	name: string;
 	title: string;
 	sort: any;
+	injectableFilters?: IInjectableFilter[];
 }
 
 export class WidgetConfiguration implements IWidgetConfiguration {
@@ -693,6 +725,7 @@ export class WidgetConfiguration implements IWidgetConfiguration {
 	name: string = null;
 	title: string = null;
 	sort: any;
+	injectableFilters = [];
 
 	constructor(widgetConfiguration?: IWidgetConfiguration) {
 		if (widgetConfiguration) {
