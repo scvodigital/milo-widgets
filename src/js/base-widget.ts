@@ -603,15 +603,12 @@ export class BaseWidget {
 			payload: body,
 			function: func
 		}
-		console.log(body);
 		jq.ajax({
 			url: 'https://us-central1-scvo-widgets-9d094.cloudfunctions.net/analytics',
 			type: 'POST',
 			data: JSON.stringify(body, null, 4),
 			contentType: 'application/json',
-			complete: (analytics) => {
-				console.log(analytics);
-			}
+			complete: (analytics) => { }
 		});
 	}
 
