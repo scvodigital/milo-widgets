@@ -23,5 +23,11 @@
     "title": "Milo Voluntary Opportunity Search",
     "sort": {
         "title": "asc"
-    }
+    },
+    "injectableFilters": [
+        {
+            "attribute": "tsi",
+            "field": "ownerTSILegacyRef"
+        }
+    ]
 }

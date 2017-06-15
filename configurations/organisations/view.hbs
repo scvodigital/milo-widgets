@@ -71,3 +71,11 @@
         </ul>
     </div>
 </div>
+
+{{#if geo_coords.lat}}
+<p>
+    <a href="https://www.google.co.uk/maps/?q={{geo_coords.lat}},{{geo_coords.lon}}">
+	    <img src="https://maps.googleapis.com/maps/api/staticmap?center={{geo_coords.lat}},{{geo_coords.lon}}&size=1170x400&maptype=roadmap&markers={{geo_coords.lat}},{{geo_coords.lon}}&scale=2" class="img-responsive" alt="Map for {{name}}">
+    </a>
+<p>
+{{/if}}
