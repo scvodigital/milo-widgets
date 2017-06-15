@@ -27,7 +27,7 @@
     "injectableFilters": [
         {
             "attribute": "tsi",
-            "field": "ownerTSILegacyRef"
+            "field": "tsiLegacyRef"
         }
     ]
 }
