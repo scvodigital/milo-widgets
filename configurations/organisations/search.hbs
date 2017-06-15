@@ -1,0 +1,48 @@
+<div class="row">
+	<div class="col-sm-6">
+		<div class="form-group">
+			<label for="mw-organisations-query" class="control-label">Keyword search or Organisation Name: </label>
+			<input type="text" id="mw-organisations-query" class="form-control" data-query />
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<label for="mw-organisations-activity" class="control-label">Activities</label>
+		<select id="mw-organisations-activity" class="form-control" data-term="mainActivitiesGlobal_slugs">
+				<option value="">-- Select Activity --</option>
+				{{#each terms.mainActivitiesGlobal}}
+					<option value="{{slug}}">{{term}}</option>
+				{{/each}}
+			</select>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-6">
+		<div class="form-group">
+			<label for="mw-opportunities-location" class="control-label">Location: </label>
+			<input type="text" id="mw-opportunities-location" class="form-control" data-geo-code="geo_coords" placeholder="enter a location, eg. Dundee">
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="form-group">
+			<label for="mw-organisations-distance" class="control-label">Distance from your postcode: </label>
+			<div class="input-group">
+				<select id="mw-organisations-distance" class="form-control" data-geo-distance data-geo-unit="mi">
+						<option value="0">within ..</option>
+						<option value="1">1 mile</option>
+						<option value="3">3 miles</option>
+						<option value="5">5 miles</option>
+						<option value="10">10 miles</option>
+						<option value="15">15 miles</option>
+						<option value="30">30 miles</option>
+						<option value="50">50 miles</option>
+						<option value="75">75 miles</option>
+						<option value="100">100 miles</option>
+						<option value="1000">Nationwide</option>
+					</select>
+				<label for="mw-organisations-user-postcode" class="input-group-addon">of</label>
+				<input type="text" id="mw-organisations-user-postcode" class="form-control" placeholder="enter your home postcode"
+				data-geo="geo_coords" />
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,3 +1,23 @@
 {
-  "explorerExcludedFiles.show": true
+  "explorerExcludedFiles.show": false,
+  "editor.fontFamily": "monospace",
+  "files.exclude": {
+    "logs": "explorerExcludedFiles",
+    "*.log": "explorerExcludedFiles",
+    "npm-debug.log*": "explorerExcludedFiles",
+    "pids": "explorerExcludedFiles",
+    "*.pid": "explorerExcludedFiles",
+    "*.seed": "explorerExcludedFiles",
+    "lib-cov": "explorerExcludedFiles",
+    "coverage": "explorerExcludedFiles",
+    ".nyc_output": "explorerExcludedFiles",
+    ".grunt": "explorerExcludedFiles",
+    ".lock-wscript": "explorerExcludedFiles",
+    "build/Release": "explorerExcludedFiles",
+    "node_modules": "explorerExcludedFiles",
+    "jspm_packages": "explorerExcludedFiles",
+    "**/dist/**": "explorerExcludedFiles",
+    ".npm": "explorerExcludedFiles",
+    ".node_repl_history": "explorerExcludedFiles"
+  }
 }

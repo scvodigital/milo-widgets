@@ -1,4 +1,6 @@
-.milo-widget{
+
+.mw-search-widget{
+    @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
     @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/variables";
     @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
     @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/normalize";
@@ -21,24 +23,6 @@
     @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/utilities";
     @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities";
 
-    .mw-emoji{
-        display: inline-block;
-        font-size: 1.5em;
-        width: 1.5em;
-        line-height: 1.5em;
-        text-align: center;
-        font-weight: bold;
-        vertical-align: middle;
-    }
-
-    .btn .mw-emoji.left{
-        text-align: left;
-    }
-
-    .btn .mw-emoji.right{
-        text-align: left;
-    }
-
     .dl-horizontal dt, .dl-horizontal dd{
         line-height:1.5em;
         vertical-align:middle;
@@ -52,7 +36,22 @@
         padding-top: 0.25em;
     }
 
-    h1 span.mw-emoji.pull-right, h2 span.mw-emoji.pull-right, h3 span.mw-emoji.pull-right, h4 span.mw-emoji.pull-right {
-        margin-top: -0.5em;
+    .mw-navigation{
+        margin-top: 15px;
+        margin-bottom: 15px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
+    }
+
+    .mw-map{
+        width:100%;
+        height:400px;
+    }
+
+    .mw-search-widget{
+        padding:15px;
+        background-color:#fff;
     }
 }

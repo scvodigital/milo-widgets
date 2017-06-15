@@ -32,6 +32,13 @@ This builds minified code and deploys via Firebase.
 The repository [wiki](https://github.com/scvodigital/milo-widgets/wiki) will contain project documentation.
 
 The website address is [milo.scvo.org.uk](https://milo.scvo.org.uk).
-
 * [Documentation](https://github.com/scvodigital/milo-widgets/wiki)
 * [Bug tracker](https://github.com/scvodigital/milo-widgets/issues)
+
+## Configurations
+All configurations are stored in `./configurations` and are deployed to Firebase at `/configurations`. To deploy a new one, run:
+```
+npm run deploy-configurations
+```
+## Global NPM Requirements
+* `typescript@2.1.4`

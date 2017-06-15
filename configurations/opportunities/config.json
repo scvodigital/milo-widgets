@@ -1,0 +1,33 @@
+{
+    "index": "volunteering-opportunity",
+    "type": "volunteering-opportunity",
+    "termFields": ["workType", "clientGroup"],
+    "templateSet": {
+        "searchFormTemplate": "",
+        "resultsTemplate": "",
+        "viewTemplate": "",
+        "infoWindowTemplate": ""
+    },
+    "mapOptions": {
+        "fields": {
+            "lat": "geo_coords.lat",
+            "lng": "geo_coords.lon",
+            "title": "title"
+        },
+        "initialLocation": {
+            "lat": 56.85132,
+            "lng": -4.1180987 },
+        "initialZoom": 6
+    },
+    "name": "opportunities",
+    "title": "Milo Voluntary Opportunity Search",
+    "sort": {
+        "title": "asc"
+    },
+    "injectableFilters": [
+        {
+            "attribute": "tsi",
+            "field": "ownerTSILegacyRef"
+        }
+    ]
+}

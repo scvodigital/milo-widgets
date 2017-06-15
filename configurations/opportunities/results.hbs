@@ -1,0 +1,53 @@
+{{#compare total '>' 0}}
+<div class="alert alert-info">
+	Number of results: {{total}} | Page {{currentPage}} of {{totalPages}}
+</div>
+{{else}}
+<div class="alert alert-warning">
+	<p>No Results</p>
+</div>
+{{/compare}}
+
+{{#each results}}
+	<div class="mw-opportunities-result" id="mw-opportunities-result-{{Id}}">
+		<h3>
+			<a href="#mw-opportunities-{{Id}}">
+				<strong>{{title}}</strong>
+				{{#if organisationName}}
+					| {{organisationName}}
+				{{/if}}
+				{{#each ../sorts}}
+					({{round this 2}} miles)
+				{{/each}}
+			</a>
+		</h3>
+
+		<ul class="list-inline">
+			{{#if referenceCode}}
+			<li>
+				<i class="fa fa-fw fa-book"></i> Ref: {{referenceCode}}
+			</li>
+			{{/if}} {{#if startData}}
+			<li>
+				<i class="fa fa-fw fa-calendar"></i> Start Date: {{startDate}}
+			</li>
+			{{/if}} {{#if workType}}
+			<li>
+				<i class="fa fa-fw fa-briefcase"></i> Work Type: {{workType}}
+			</li>
+			{{/if}} {{#if clientGroup}}
+			<li>
+				<i class="fa fa-fw fa-users"></i> Client Group: {{clientGroup}}
+			</li>
+			{{/if}} {{#if organisationCharityNo}}
+			<li>
+				<i class="fa fa-fw fa-hashtag"></i> Charity Number: {{organisationCharityNo}}
+			</li>
+			{{/if}}
+		</ul>
+
+		<p>
+			{{#if summary}} {{truncate summary 255 '[...]'}} {{else}} No summary given. {{/if}}
+		</p>
+	</div>
+{{/each}}

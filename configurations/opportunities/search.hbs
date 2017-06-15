@@ -1,0 +1,120 @@
+﻿<div class="mw-opportunities-search">
+	<h3>
+		Voluntary Opportunities Search
+	</h3>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="form-group">
+				<label for="mw-opportunities-query" class="control-label">Keywords: </label>
+				<input type="text" id="mw-opportunities-query" class="form-control" data-query />
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="form-group">
+				<label for="mw-opportunities-location" class="control-label">Location: </label>
+				<input type="text" id="mw-opportunities-location" class="form-control" data-geo-code="geo_coords" placeholder="enter a location, eg. Dundee">
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="form-group">
+				<label for="mw-opportunities-distance" class="control-label">Distance from your postcode: </label>
+				<div class="input-group">
+					<select id="mw-opportunities-distance" class="form-control" data-geo-distance data-geo-unit="mi">
+							<option value="0">within ..</option>
+							<option value="1">1 mile</option>
+							<option value="3">3 miles</option>
+							<option value="5">5 miles</option>
+							<option value="10">10 miles</option>
+							<option value="15">15 miles</option>
+							<option value="30">30 miles</option>
+							<option value="50">50 miles</option>
+							<option value="75">75 miles</option>
+							<option value="100">100 miles</option>
+							<option value="1000">Nationwide</option>
+						</select>
+					<label for="mw-opportunities-user-postcode" class="input-group-addon">of</label>
+					<input type="text" id="mw-opportunities-user-postcode" class="form-control" data-geo="geo_coords" placeholder="enter your home postcode"
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6">
+			<label for="mw-opportunities-activity" class="control-label">Activities</label>
+			<select id="mw-opportunities-activity" class="form-control" data-term="workType_slugs">
+					<option value="">-- Select Activity --</option>
+					{{#each terms.workType}}
+						<option value="{{slug}}">{{term}}</option>
+					{{/each}}
+				</select>
+		</div>
+		<div class="col-sm-6">
+			<label for="mw-opportunities-client-group" class="control-label">Client Groups</label>
+			<select id="mw-opportunities-client-group" class="form-control" data-term="clientGroup_slugs">
+					<option value="">-- Select Client Group --</option>
+					{{#each terms.clientGroup}}
+						<option value="{{slug}}">{{term}}</option>
+					{{/each}}
+				</select>
+		</div>
+	</div>
+	<div style="margin-top:15px;">
+		<button type="button" class="btn btn-default" data-show-hide-toggle="#mw-opportunities-times">
+			<span class="mw-show-hide-text">Show/Hide</span>
+			Opening Times
+			<i class="fa fa-fw fa-eye mw-show-hide-icon"></i>
+		</button>
+		<div class="mw-opportunities-times table-responsive" id="mw-opportunities-times">
+			<table class="table table-condensed table-hover">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Mon</th>
+						<th>Tue</th>
+						<th>Wed</th>
+						<th>Thu</th>
+						<th>Fri</th>
+						<th>Sat</th>
+						<th>Sun</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>Morning</th>
+						<td><input type="checkbox" data-term="mondayMorning"></td>
+						<td><input type="checkbox" data-term="tuesdayMorning"></td>
+						<td><input type="checkbox" data-term="wednesdayMorning"></td>
+						<td><input type="checkbox" data-term="thursdayMorning"></td>
+						<td><input type="checkbox" data-term="fridayMorning"></td>
+						<td><input type="checkbox" data-term="saturdayMorning"></td>
+						<td><input type="checkbox" data-term="sundayMorning"></td>
+					</tr>
+					<tr>
+						<th>Afternoon</th>
+						<td><input type="checkbox" data-term="mondayAfternoon"></td>
+						<td><input type="checkbox" data-term="tuesdayAfternoon"></td>
+						<td><input type="checkbox" data-term="wednesdayAfternoon"></td>
+						<td><input type="checkbox" data-term="thursdayAfternoon"></td>
+						<td><input type="checkbox" data-term="fridayAfternoon"></td>
+						<td><input type="checkbox" data-term="saturdayAfternoon"></td>
+						<td><input type="checkbox" data-term="sundayAfternoon"></td>
+					</tr>
+					<tr>
+						<th>Evening</th>
+						<td><input type="checkbox" data-term="mondayEvening"></td>
+						<td><input type="checkbox" data-term="tuesdayEvening"></td>
+						<td><input type="checkbox" data-term="wednesdayEvening"></td>
+						<td><input type="checkbox" data-term="thursdayEvening"></td>
+						<td><input type="checkbox" data-term="fridayEvening"></td>
+						<td><input type="checkbox" data-term="saturdayEvening"></td>
+						<td><input type="checkbox" data-term="sundayEvening"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

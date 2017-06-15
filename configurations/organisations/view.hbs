@@ -1,0 +1,81 @@
+<h2>
+    <strong>{{name}}</strong>
+    {{#if registeredCharityNo}}
+    <small>({{registeredCharityNo}})</small>
+    {{/if}}
+</h2>
+
+<div class="row">
+    <div class="col-sm-12 col-md-8">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Primary Address</h3>
+                {{#any locationAreaTown locationCityCounty locationPostcode locationStreet}}
+                    {{#if locationStreet}}{{locationStreet}}, <br />{{/if}}
+                    {{#if locationAreaTown}}{{locationAreaTown}}, <br />{{/if}}
+                    {{#if locationCityCounty}}{{locationCityCounty}}, <br />{{/if}}
+                    {{#if locationPostcode}}{{locationPostcode}}{{/if}}
+                {{else}}
+                    No address given
+                {{/any}}
+            </div>
+            <div class="col-sm-6">
+                <h3>Contact Information</h3>
+                <ul class="list-unstyled">
+                    {{#if phone}}
+                    <li>
+                        <strong>Phone:</strong>
+                        <a href="tel:{{phone}}">{{phone}}</a>
+                    </li>
+                    {{/if}} {{#if email}}
+                    <li>
+                        <strong>Email:</strong>
+                        <a href="mailto:{{email}}">Send Email</a>
+                    </li>
+                    {{/if}} {{#if website}}
+                    <li>
+                        <strong>Website:</strong>
+                        <a href="{{#startsWith website "http"}}{{else}}http://{{/startsWith}}{{website}}">Visit Website</a>
+                    </li>
+                    {{/if}}
+                    {{#if twitter}}
+                    <li>
+                        <strong>Twitter:</strong>
+                        <a href="{{#startsWith twitter "http"}}{{else}}https://{{/startsWith}}{{twitter}}">
+                            <i class="fa fa-fw fa-twitter"></i>
+                            Twitter
+                        </a>
+                    </li>
+                    {{/if}}
+                    {{#if facebook}}
+                    <li>
+                        <strong>Facebook:</strong>
+                        <a href="{{#startsWith facebook "http"}}{{else}}https://{{/startsWith}}{{facebook}}">
+                            <i class="fa fa-fw fa-facebook"></i>
+                            Facebook
+                        </a>
+                    </li>
+                    {{/if}}
+                </ul>
+            </div>
+        </div>
+        <h3>Aims and Objectives</h3>
+        {{#if aimsAndObjectives}} {{ps aimsAndObjectives}} {{else}} No Aims or Objectives given. {{/if}}
+    </div>
+    <div class="col-sm-12 col-md-4">
+        <h3>Activities</h3>
+        <ul class="list-unstyled">
+            {{#each mainActivitiesGlobal}}
+            <li>{{this}}</li>
+            {{/each}}
+        </ul>
+    </div>
+</div>
+
+{{#if geo_coords.lat}}
+<p>
+    <a href="https://www.google.co.uk/maps/?q={{geo_coords.lat}},{{geo_coords.lon}}">
+	    <img src="https://maps.googleapis.com/maps/api/staticmap?center={{geo_coords.lat}},{{geo_coords.lon}}&size=1170x400&maptype=roadmap&markers={{geo_coords.lat}},{{geo_coords.lon}}&scale=2" class="img-responsive" alt="Map for {{name}}">
+    </a>
+<p>
+{{/if}}

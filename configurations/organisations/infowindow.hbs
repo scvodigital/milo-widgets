@@ -1,0 +1,23 @@
+<h4>
+    <a href="#mw-organisations-{{Id}}">
+        <strong>{{name}}</strong>
+        {{#if registeredCharityNo}}
+            <small>({{registeredCharityNo}})</small>
+        {{/if}}
+    </a>
+</h4>
+
+<p>
+    {{#if aimsAndObjectives}} {{truncate aimsAndObjectives 255 '[...]'}} {{else}} No Aims or Objectives given. {{/if}}
+</p>
+
+<address>
+{{#any locationAreaTown locationCityCounty locationPostcode locationStreet}}
+    {{#if locationStreet}}{{locationStreet}}, <br />{{/if}}
+    {{#if locationAreaTown}}{{locationAreaTown}}, <br />{{/if}}
+    {{#if locationCityCounty}}{{locationCityCounty}}, <br />{{/if}}
+    {{#if locationPostcode}}{{locationPostcode}}{{/if}}
+{{else}}
+    No address given
+{{/any}}
+<address>

@@ -1,0 +1,26 @@
+<div class="mw-search-widget-inner">
+	<h3>{{title}}</h3>
+
+    <div class="mw-search-form" id="mw-{{name}}-form"></div>
+
+    <hr />
+
+    <div class="form-group text-right">
+		<button type="button" class="btn btn-primary mw-search-button" id="mw-{{name}}-search-button">
+			Search
+            <i class="fa fa-fw fa-search"></i>
+		</button>
+	</div>
+
+    <a name="mw-{{name}}-top"></a>
+
+    {{> navigation this}}
+
+    <div class="mw-body" id="mw-{{name}}-body"></div>
+
+    <div class="mw-map" id="mw-{{name}}-map"></div>
+
+    {{> navigation this}}
+</div>
+
+<div class="clearfix"></div>
