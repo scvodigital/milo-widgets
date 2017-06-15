@@ -15,7 +15,7 @@ exports.analytics = functions.https.onRequest(function (req, res) {
             }
 
             var referer = url.parse(req.get('referer'));
-            var host = referer.hostname;
+            var host = referer.hostname.replace(/\./gi, '_');
             var timestamp = new Date().toString();
             var analytic = {
                 source: req.get('x-forwarded-for') || req.connection.remoteAddress,
