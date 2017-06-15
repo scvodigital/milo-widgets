@@ -113,16 +113,16 @@ export class BaseWidget {
 		});
 	}
 
-	showHide(element, hide?: boolean){
+	showHide(element, hide?: boolean) {
 		var targetSelector = element.data('show-hide-toggle');
 		var target = jq(targetSelector);
 		var text = element.find('.mw-show-hide-text');
 		var icon = element.find('.mw-show-hide-icon');
-		if(!target.hasClass('hide') || (typeof hide === 'boolean' && hide)){
+		if (!target.hasClass('hide') || (typeof hide === 'boolean' && hide)) {
 			target.addClass('hide');
 			text.text('Show');
 			icon.removeClass('fa-eye-slash').addClass('fa-eye');
-		}else{
+		} else {
 			target.removeClass('hide');
 			text.text('Hide');
 			icon.removeClass('fa-eye').addClass('fa-eye-slash');
@@ -208,7 +208,7 @@ export class BaseWidget {
 					payload.sort = geo.sort;
 				}
 
-				if(location){
+				if (location) {
 					payload.bool.must.push(location);
 				}
 
@@ -222,14 +222,14 @@ export class BaseWidget {
 	}
 
 	private getInjected(): ITermQuery[] {
-		if(!this.config.injectableFilters){
+		if (!this.config.injectableFilters) {
 			return [];
 		}
 
 		var must: ITermQuery[] = [];
 		this.config.injectableFilters.forEach((filter: IInjectableFilter) => {
 			var value: string = this.scriptTag.data(filter.attribute);
-			if(typeof value !== 'undefined' && value !== null){
+			if (typeof value !== 'undefined' && value !== null) {
 				var query: ITermQuery = {
 					terms: {
 						[filter.field]: [value]
@@ -261,12 +261,12 @@ export class BaseWidget {
 			var locationElement = this.widgetElement.find('[data-geo-code]');
 			var field = locationElement.data('geo-code');
 			var query = locationElement.val();
-			if(!query){
+			if (!query) {
 				return resolve(null);
 			}
 
 			this.getLocation(query).then((bounds: IBounds) => {
-				if(!bounds){
+				if (!bounds) {
 					console.error('Failed to lookup location', query);
 					return resolve(null);
 				}
@@ -298,7 +298,7 @@ export class BaseWidget {
 			}
 
 			this.getPostcode(postcode).then((location: ILocation) => {
-				if(!location){
+				if (!location) {
 					console.error('Failed to get postcode', postcode);
 					return resolve(null);
 				}
@@ -336,31 +336,31 @@ export class BaseWidget {
 		});
 	}
 
-	private getPostcode(postcode: string): Promise<ILocation>{
+	private getPostcode(postcode: string): Promise<ILocation> {
 		return new Promise<ILocation>((resolve, reject) => {
 			jq.getJSON(window.location.protocol + '//api.postcodes.io/postcodes/' + postcode, (result) => {
 				if (result.status === 200) {
-					if(result.result && result.result.latitude && result.result.longiture){
+					if (result.result && result.result.latitude && result.result.longiture) {
 						resolve({
 							lat: result.result.latitude,
 							lon: result.result.longitude
 						});
-					}else{
+					} else {
 						resolve(null);
 					}
-				}else{
+				} else {
 					resolve(null);
 				}
 			});
 		});
 	}
 
-	private getLocation(query: string): Promise<IBounds>{
+	private getLocation(query: string): Promise<IBounds> {
 		return new Promise<IBounds>((resolve, reject) => {
 			jq.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURIComponent(query), (result) => {
 				if (result && result.status && result.status === "OK" && result.results && result.results.length > 0) {
 					var location = result.results[0];
-					if(location.geometry && location.geometry.bounds){
+					if (location.geometry && location.geometry.bounds) {
 						resolve({
 							northeast: {
 								lat: location.geometry.bounds.northeast.lat,
@@ -371,10 +371,10 @@ export class BaseWidget {
 								lon: location.geometry.bounds.southwest.lng,
 							}
 						});
-					}else{
+					} else {
 						resolve(null);
 					}
-				}else{
+				} else {
 					resolve(null);
 				}
 			});
@@ -389,7 +389,7 @@ export class BaseWidget {
 		termFields.each((i, o) => {
 			o = jq(o);
 			var term = o.data('term');
-			if(o.attr('type') === 'checkbox' || o.attr('type') === 'radio'){
+			if (o.attr('type') === 'checkbox' || o.attr('type') === 'radio') {
 				if (o.attr('type') === 'checkbox') {
 					if (o.is(':checked')) {
 						terms[term] = ['true'];
@@ -468,6 +468,8 @@ export class BaseWidget {
 				index: this.config.index,
 				type: this.config.type
 			};
+
+			this.logAnalytics(payload, 'document');
 
 			this.client.get(payload).then((response: elasticsearch.GetResponse<any>) => {
 				if (response.found) {
@@ -574,12 +576,11 @@ export class BaseWidget {
 			if (payload.body.query.hasOwnProperty('sort')) {
 				payload.body.sort = payload.body.query.sort;
 				delete payload.body.query.sort;
-			}else{
+			} else {
 				payload.body.sort = this.config.sort;
 			}
 
-			console.log(payload);
-			console.log(JSON.stringify(payload, null, 4));
+			this.logAnalytics(payload, 'search');
 
 			this.runQuery(payload).then((response) => {
 				var resultSet: ResultSet = new ResultSet(
@@ -593,6 +594,24 @@ export class BaseWidget {
 				console.error('Failed to search', err);
 				reject(err);
 			});
+		});
+	}
+
+	logAnalytics(body, func) {
+		body = {
+			name: this.config.name,
+			payload: body,
+			function: func
+		}
+		console.log(body);
+		jq.ajax({
+			url: 'https://us-central1-scvo-widgets-9d094.cloudfunctions.net/analytics',
+			type: 'POST',
+			data: JSON.stringify(body, null, 4),
+			contentType: 'application/json',
+			complete: (analytics) => {
+				console.log(analytics);
+			}
 		});
 	}
 
