@@ -33,7 +33,7 @@
     "source-map-loader": "^0.2.0",
     "style-loader": "^0.13.2",
     "ts-loader": "^2.0.1",
-    "webpack": "^2.2.1",
+    "webpack": "2.3.3",
     "webpack-bundle-analyzer": "^2.8.2",
     "webpack-dev-server": "^2.4.1",
     "write-file-webpack-plugin": "^4.0.0"
