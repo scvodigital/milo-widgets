@@ -4,7 +4,7 @@
     var parts = toInclude.split('/');
     var type = parts[parts.length - 1];
     var widgetFileName = type + '.bundle.js';
-    var widgetUrl = window.location.protocol + '//' + window.location.host + '/' + widgetFileName;
+    var widgetUrl = window.location.protocol + '//milo.scvo.org.uk/' + widgetFileName;
 
     var widgetTag = document.createElement('script');
     widgetTag.setAttribute('src', widgetUrl);
