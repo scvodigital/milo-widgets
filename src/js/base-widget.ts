@@ -166,6 +166,7 @@ export class BaseWidget {
 				payload.body.aggs[field] = {
 					terms: {
 						field: field,
+						order: { "_term" : "asc" },
 						size: 0
 					}
 				}

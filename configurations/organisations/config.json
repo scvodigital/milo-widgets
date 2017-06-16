@@ -21,7 +21,7 @@
         "initialZoom": 6
     },
     "name": "organisations",
-    "title": "Milo Organisations Search",
+    "title": "Search for voluntary organisations",
     "sort": {
         "name": "asc"
     },
