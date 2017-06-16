@@ -340,7 +340,7 @@ export class BaseWidget {
 		return new Promise<ILocation>((resolve, reject) => {
 			jq.getJSON(window.location.protocol + '//api.postcodes.io/postcodes/' + postcode, (result) => {
 				if (result.status === 200) {
-					if (result.result && result.result.latitude && result.result.longiture) {
+					if (result.result && result.result.latitude && result.result.longitude) {
 						resolve({
 							lat: result.result.latitude,
 							lon: result.result.longitude
@@ -630,15 +630,8 @@ export class BaseWidget {
 			});
 			this.infoWindows = [];
 
-			if (this.doc) {
-				this.mapElement.hide();
-				this.map.setCenter(this.config.mapOptions.initialLocation);
-				this.map.setZoom(this.config.mapOptions.initialZoom);
-				return;
-			}
-
 			var bounds = new google.maps.LatLngBounds();
-			var items = this.resultSet ? this.resultSet.results : [];
+			var items = this.doc ? [this.doc] : this.resultSet ? this.resultSet.results : [];
 
 			items.forEach((result) => {
 				var lat = this.propertyByString(result, this.config.mapOptions.fields.lat) || false;
@@ -672,6 +665,9 @@ export class BaseWidget {
 				google.maps.event.trigger(this.map, 'resize');
 				window.setTimeout(() => {
 					this.map.fitBounds(bounds);
+					if(this.doc){
+						this.map.setZoom(15);
+					}
 				}, 500);
 			}
 		}
