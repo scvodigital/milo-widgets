@@ -340,7 +340,7 @@ export class BaseWidget {
 		return new Promise<ILocation>((resolve, reject) => {
 			jq.getJSON(window.location.protocol + '//api.postcodes.io/postcodes/' + postcode, (result) => {
 				if (result.status === 200) {
-					if (result.result && result.result.latitude && result.result.longiture) {
+					if (result.result && result.result.latitude && result.result.longitude) {
 						resolve({
 							lat: result.result.latitude,
 							lon: result.result.longitude
