@@ -1,4 +1,4 @@
-﻿<div class="mw-opportunities-search">
+<div class="mw-opportunities-search">
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="form-group">
@@ -19,18 +19,18 @@
 				<label for="mw-opportunities-distance" class="control-label">Distance from your postcode: </label>
 				<div class="input-group">
 					<select id="mw-opportunities-distance" class="form-control" data-geo-distance data-geo-unit="mi">
-							<option value="0">within ..</option>
-							<option value="1">1 mile</option>
-							<option value="3">3 miles</option>
-							<option value="5">5 miles</option>
-							<option value="10">10 miles</option>
-							<option value="15">15 miles</option>
-							<option value="30">30 miles</option>
-							<option value="50">50 miles</option>
-							<option value="75">75 miles</option>
-							<option value="100">100 miles</option>
-							<option value="1000">Nationwide</option>
-						</select>
+						<option value="0">within&hellip;</option>
+						<option value="1">1 mile</option>
+						<option value="3">3 miles</option>
+						<option value="5">5 miles</option>
+						<option value="10">10 miles</option>
+						<option value="15">15 miles</option>
+						<option value="30">30 miles</option>
+						<option value="50">50 miles</option>
+						<option value="75">75 miles</option>
+						<option value="100">100 miles</option>
+						<option value="1000">Nationwide</option>
+					</select>
 					<label for="mw-opportunities-user-postcode" class="input-group-addon">of</label>
 					<input type="text" id="mw-opportunities-user-postcode" class="form-control" data-geo="geo_coords" placeholder="enter your home postcode"
 					/>
@@ -42,20 +42,20 @@
 		<div class="col-sm-6">
 			<label for="mw-opportunities-activity" class="control-label">Activities</label>
 			<select id="mw-opportunities-activity" class="form-control" data-term="workType_slugs">
-					<option value="">-- Select Activity --</option>
-					{{#each terms.workType}}
-						<option value="{{slug}}">{{term}}</option>
-					{{/each}}
-				</select>
+				<option value="">-- Select Activity --</option>
+				{{#each terms.workType}}
+				<option value="{{slug}}">{{term}}</option>
+				{{/each}}
+			</select>
 		</div>
 		<div class="col-sm-6">
 			<label for="mw-opportunities-client-group" class="control-label">Client Groups</label>
 			<select id="mw-opportunities-client-group" class="form-control" data-term="clientGroup_slugs">
-					<option value="">-- Select Client Group --</option>
-					{{#each terms.clientGroup}}
-						<option value="{{slug}}">{{term}}</option>
-					{{/each}}
-				</select>
+				<option value="">-- Select Client Group --</option>
+				{{#each terms.clientGroup}}
+				<option value="{{slug}}">{{term}}</option>
+				{{/each}}
+			</select>
 		</div>
 	</div>
 	<div style="margin-top:15px;">

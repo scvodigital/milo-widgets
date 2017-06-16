@@ -1,7 +1,6 @@
-
-.mw-search-widget{
-    padding:15px;
-    background-color:#ffffff;
+.mw-search-widget {
+    padding: 5px;
+    background-color: #ffffff;
 
     @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
     @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/variables";
@@ -26,20 +25,29 @@
     @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/utilities";
     @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities";
 
-    .dl-horizontal dt, .dl-horizontal dd{
-        line-height:1.5em;
-        vertical-align:middle;
+    a {
+        text-decoration-skip: ink;
     }
-
+    b,strong,h3,h4,th {
+        font-weight: 600;
+    }
+    h3, .h3 {
+        margin: 0;
+        font-size: 20px;
+    }
+    .dl-horizontal dt, .dl-horizontal dd {
+        line-height: 1.5em;
+        vertical-align: middle;
+    }
     .dl-horizontal dt {
+        font-weight: 600;
         text-align: left;
+        width: 200px;
     }
-
     .dl-horizontal dd {
-        padding-top: 0.25em;
+        margin-left: 200px;
     }
-
-    .mw-navigation{
+    .mw-navigation {
         margin-top: 15px;
         margin-bottom: 15px;
         padding-top: 15px;
@@ -47,9 +55,11 @@
         border-top: 1px solid #eee;
         border-bottom: 1px solid #eee;
     }
-
-    .mw-map{
-        width:100%;
-        height:400px;
+    .mw-map {
+        width: 100%;
+        height: 400px;
+    }
+    .mw-body h3 {
+        margin: 15px 0 10px;
     }
 }
