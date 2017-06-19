@@ -1,5 +1,5 @@
 .mw-search-widget {
-    padding: 5px;
+    padding: 10px;
     background-color: #ffffff;
 
     @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
@@ -61,5 +61,79 @@
     }
     .mw-body h3 {
         margin: 15px 0 10px;
+    }
+
+    @media screen and (max-width: 767px) {
+        .dl-horizontal dt {
+            width: 100%;
+        }
+        .dl-horizontal dd {
+            margin-left: 0;
+        }
+        table.table-condensed {
+            thead, tbody {
+                float: left;
+            }
+            thead {
+                width: 20%;
+                tr {
+                    width: 100%;
+                    margin-top: 20px;
+                    th {
+                        border-width: 1px;
+                    }
+                    th:last-child {
+                        border-bottom: none;
+                    }
+                }
+            }
+            tbody {
+                width: 80%;
+                tr {
+                    width: 33.33%;
+                    th {
+                        font-size: 90%;
+                        text-align: center;
+                        border-top: none;
+                    }
+                }
+            }
+            tr {
+                display: block;
+                float: left;
+            }
+            th, td {
+                display: block;
+            }
+        }
+
+        // table.table-condensed {
+        //     thead tr {
+        //         position: absolute;
+        //         top: -9999px;
+        //         left: -9999px;
+        //     }
+        //
+        //     td {
+        //         /* Behave  like a "row" */
+        //         border: none;
+        //         border-bottom: 1px solid #eee;
+        //         position: relative;
+        //         padding-left: 50%;
+        //         display: block;
+        //     }
+        //
+        //     td:before {
+        //         font-weight: bold;
+        //         /* Now like a table header */
+        //         position: absolute;
+        //         /* Top/left values mimic padding */
+        //         top: 5px;
+        //         left: 0;
+        //         width: 45%;
+        //         padding-right: 10px;
+        //         white-space: nowrap;
+        //     }
+        // }
     }
 }
