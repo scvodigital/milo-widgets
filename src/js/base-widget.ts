@@ -92,6 +92,10 @@ export class BaseWidget {
 				this.bindControlsOnce();
 				this.updateBody('');
 				this.hashChange();
+
+				if(this.config.autoSearch){
+					this.doSearch(1);
+				}
 			});
 		}).catch((err) => {
 			console.error('Failed to get terms', err);
@@ -727,6 +731,7 @@ export interface IWidgetConfiguration {
 	title: string;
 	sort: any;
 	injectableFilters?: IInjectableFilter[];
+	autoSearch: boolean;
 }
 
 export class WidgetConfiguration implements IWidgetConfiguration {
@@ -739,6 +744,7 @@ export class WidgetConfiguration implements IWidgetConfiguration {
 	title: string = null;
 	sort: any;
 	injectableFilters = [];
+	autoSearch: boolean = false;
 
 	constructor(widgetConfiguration?: IWidgetConfiguration) {
 		if (widgetConfiguration) {

@@ -22,19 +22,22 @@ const opportunitiesConfiguration: IWidgetConfiguration = {
         initialZoom: 6
     },
     name: 'opportunities',
-    title: 'Milo Voluntary Opportunity Search',
+    title: 'Milo volunteering opportunity search',
     sort: {
         title: 'asc'
-    }
+    },
+    autoSearch: false
 }
 
 class OpportunitiesWidget extends BaseWidget {
     tsi: number;
+    org: string;
     hideMap: boolean = false;
 
     constructor() {
         super('');
         this.tsi = this.scriptTag.data('tsi');
+        this.org = this.scriptTag.data('org');
         this.hideMap = this.scriptTag.data('hide-map') || false;
     }
 
@@ -59,6 +62,10 @@ class OpportunitiesWidget extends BaseWidget {
 
         if (this.tsi) {
             must.push({ term: { tsiLegacyRef: this.tsi } });
+        }
+
+        if (this.org) {
+            must.push({ term: { organisationCharityNo: this.org } });
         }
 
         if (openingTimes && openingTimes.length > 0) {

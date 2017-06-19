@@ -11,19 +11,19 @@
 	</li>
 	{{/if}} {{#if startData}}
 	<li>
-		<i class="fa fa-fw fa-calendar"></i> <strong>Start Date:</strong> {{startDate}}
+		<i class="fa fa-fw fa-calendar"></i> <strong>Start date:</strong> {{startDate}}
 	</li>
 	{{/if}} {{#if workType}}
 	<li>
-		<i class="fa fa-fw fa-briefcase"></i> <strong>Work Type:</strong> {{workType}}
+		<i class="fa fa-fw fa-briefcase"></i> <strong>Work type:</strong> {{workType}}
 	</li>
 	{{/if}} {{#if clientGroup}}
 	<li>
-		<i class="fa fa-fw fa-users"></i> <strong>Client Group:</strong> {{clientGroup}}
+		<i class="fa fa-fw fa-users"></i> <strong>Client group:</strong> {{clientGroup}}
 	</li>
 	{{/if}} {{#if organisationCharityNo}}
 	<li>
-		<i class="fa fa-fw fa-hashtag"></i> <strong>Charity Number:</strong> {{organisationCharityNo}}
+		<i class="fa fa-fw fa-hashtag"></i> <strong>Charity number:</strong> {{organisationCharityNo}}
 	</li>
 	{{/if}}
 </ul>
@@ -35,13 +35,13 @@
 
 {{#if fullDescription}}
 <h4>
-	<i class="fa fa-fw fa-file-text-o"></i> Opportunity Details
+	<i class="fa fa-fw fa-file-text-o"></i> Opportunity details
 </h4>
 {{ps fullDescription}}
 
 {{/if}} {{#if organisationAims_And_Objectives}}
 <h4>
-	<i class="fa fa-fw fa-bullseye"></i> Organisation's Aims and Objectives
+	<i class="fa fa-fw fa-bullseye"></i> Organisation's aims and objectives
 </h4>
 {{ps organisationAims_And_Objectives}} {{/if}}
 {{#any mondayMorning tuesdayMorning wednesdayMorning thursdayMorning fridayMorning
@@ -102,25 +102,25 @@ sundayAfternoon mondayEvening tuesdayEvening wednesdayEvening thursdayEvening fr
 <dl class="dl-horizontal">
 	{{#if experienceRequired}}
 	<dt>
-		<i class="fa fa-fw fa-graduation-cap"></i> Experience Required:
+		<i class="fa fa-fw fa-graduation-cap"></i> Experience required:
 	</dt>
 	<dd>{{ps experienceRequired}}</dd>
 	{{/if}}
 	{{#if restrictionDetails}}
 	<dt>
-		<i class="fa fa-fw fa-flag"></i> Restriction Details
+		<i class="fa fa-fw fa-flag"></i> Restriction details
 	</dt>
 	<dd>{{ps restrictionDetails}}</dd>
 	{{/if}}
 	{{#if travelDetails}}
 	<dt>
-		<i class="fa fa-fw fa-plane"></i> Travel Details
+		<i class="fa fa-fw fa-plane"></i> Travel details
 	</dt>
 	<dd>{{travelDetails}}</dd>
 	{{/if}}
 	{{#if minimumAge}}
 	<dt>
-		<i class="fa fa-fw fa-child"></i> Minimum Age
+		<i class="fa fa-fw fa-child"></i> Minimum age
 	</dt>
 	<dd>{{minimumAge}}</dd>
 	{{/if}}
@@ -131,7 +131,7 @@ sundayAfternoon mondayEvening tuesdayEvening wednesdayEvening thursdayEvening fr
 <dl class="dl-horizontal">
 	{{#if travelExpenses}}
 	<dt>
-		<i class="fa fa-fw fa-money"></i> Travel Expenses:
+		<i class="fa fa-fw fa-money"></i> Travel expenses:
 	</dt>
 	<dd>{{travelExpenses}}</dd>
 	{{/if}} {{#if frequency}}
@@ -141,12 +141,12 @@ sundayAfternoon mondayEvening tuesdayEvening wednesdayEvening thursdayEvening fr
 	<dd>{{frequency}}</dd>
 	{{/if}} {{#if expensesPaid}}
 	<dt>
-		<i class="fa fa-fw fa-gbp"></i> Expenses Paid:
+		<i class="fa fa-fw fa-gbp"></i> Expenses paid:
 	</dt>
 	<dd>{{#if expensesPaid}}Yes{{else}}No{{/if}}</dd>
 	{{/if}} {{#if supportOptions}}
 	<dt>
-		<i class="fa fa-fw fa-list"></i> Support Options:
+		<i class="fa fa-fw fa-list"></i> Support options:
 	</dt>
 	<dd>{{supportOptions}}</dd>
 	{{/if}}
@@ -157,7 +157,7 @@ sundayAfternoon mondayEvening tuesdayEvening wednesdayEvening thursdayEvening fr
 <h4><i class="fa fa-fw fa-bullhorn"></i> Please contact {{tsiName}} Third Sector Interface about this opportunity</h4>
 <dl class="dl-horizontal">
 	<dt>
-		<i class="fa fa-fw fa-user"></i> Contact Name:
+		<i class="fa fa-fw fa-user"></i> Contact name:
 	</dt>
 	<dd>{{tsiContactFirstName}} {{tsiContactLastName}}</dd>
 
@@ -199,10 +199,10 @@ sundayAfternoon mondayEvening tuesdayEvening wednesdayEvening thursdayEvening fr
 	{{/if}}
 </dl>
 {{else}}
-<h4><i class="fa fa-fw fa-bullhorn"></i> Please contact {{organisationName}} direct about this opportunity</h4>
+<h4><i class="fa fa-fw fa-bullhorn"></i> Please contact {{organisationName}} directly about this opportunity</h4>
 <dl class="dl-horizontal">
 	<dt>
-		<i class="fa fa-fw fa-user"></i> Contact Name:
+		<i class="fa fa-fw fa-user"></i> Contact name:
 	</dt>
 	<dd>{{organisationContactFirstName}} {{organisationContactLastName}}</dd>
 

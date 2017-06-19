@@ -1,0 +1,34 @@
+{{#compare total '>' 0}}
+<div class="alert alert-info">
+	Number of results: {{total}} | Page {{currentPage}} of {{totalPages}}
+</div>
+{{else}}
+<div class="alert alert-warning">
+	<p>No results</p>
+</div>
+{{/compare}}
+
+{{#each results}}
+    {{#if registeredCharityNo}}
+    	<div class="mw-organisation-result" id="mw-organisations-result-{{registeredCharityNo}}">
+    		<h4>
+    			<strong>{{name}}</strong>
+    				({{registeredCharityNo}})
+    		</h4>
+    		<p>
+                <a href="#mw-organisations-{{Id}}">
+                    Volunteering opportunities for this organisation
+                </a>
+    		</p>
+    	</div>
+    {{else}}
+    <div class="mw-organisation-result">
+        <h4>
+            <strong>{{name}}</strong>
+        </h4>
+        <p>
+            Volunteering opportunities for this organisation cannot be embedded as no charity number is listed.
+        </p>
+    </div>
+    {{/if}}
+{{/each}}

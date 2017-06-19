@@ -42,16 +42,16 @@
 		<div class="col-sm-6">
 			<label for="mw-opportunities-activity" class="control-label">Activities</label>
 			<select id="mw-opportunities-activity" class="form-control" data-term="workType_slugs">
-				<option value="">-- Select Activity --</option>
+				<option value="">-- Select activity --</option>
 				{{#each terms.workType}}
 				<option value="{{slug}}">{{term}}</option>
 				{{/each}}
 			</select>
 		</div>
 		<div class="col-sm-6">
-			<label for="mw-opportunities-client-group" class="control-label">Client Groups</label>
+			<label for="mw-opportunities-client-group" class="control-label">Client groups</label>
 			<select id="mw-opportunities-client-group" class="form-control" data-term="clientGroup_slugs">
-				<option value="">-- Select Client Group --</option>
+				<option value="">-- Select client group --</option>
 				{{#each terms.clientGroup}}
 				<option value="{{slug}}">{{term}}</option>
 				{{/each}}
@@ -60,8 +60,8 @@
 	</div>
 	<div style="margin-top:15px;">
 		<button type="button" class="btn btn-default" data-show-hide-toggle="#mw-opportunities-times">
-			<span class="mw-show-hide-text">Show/Hide</span>
-			Opening Times
+			<span class="mw-show-hide-text">Show/hide</span>
+			Opening times
 			<i class="fa fa-fw fa-eye mw-show-hide-icon"></i>
 		</button>
 		<div class="mw-opportunities-times table-responsive" id="mw-opportunities-times">
