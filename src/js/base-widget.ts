@@ -59,7 +59,7 @@ export class BaseWidget {
 			(<any>GoogleMapsLoader)['LIBRARIES'] = ['geometry', 'places'];
 
 			this.setupControls();
-			window.addEventListener('popstate', () => { this.hashChange(true); }, false);
+			window.addEventListener('hashchange', () => { this.hashChange(true); }, false);
 		});
 	}
 
