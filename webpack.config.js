@@ -10,6 +10,8 @@ module.exports = {
     entry: {
         organisations: './src/js/organisations-widget.ts',
         opportunities: './src/js/opportunities-widget.ts',
+        'opportunities-organisation': './src/js/opportunities-organisation-widget.ts',
+        'opportunities-organisations': './src/js/opportunities-organisations-widget.ts',
     },
     output: {
         path: path.join(__dirname, "./dist"),

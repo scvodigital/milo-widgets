@@ -1,5 +1,5 @@
 .mw-search-widget {
-    padding: 10px;
+    padding: 15px;
     background-color: #ffffff;
 
     @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
@@ -34,6 +34,16 @@
     h3, .h3 {
         margin: 0;
         font-size: 20px;
+    }
+    .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .row.mw-document-nav,
+    .row.mw-paging,
+    .row .row {
+        margin-left: -15px;
+        margin-right: -15px;
     }
     .dl-horizontal dt, .dl-horizontal dd {
         line-height: 1.5em;
@@ -124,34 +134,8 @@
                 display: block;
             }
         }
-
-        // table.table-condensed {
-        //     thead tr {
-        //         position: absolute;
-        //         top: -9999px;
-        //         left: -9999px;
-        //     }
-        //
-        //     td {
-        //         /* Behave  like a "row" */
-        //         border: none;
-        //         border-bottom: 1px solid #eee;
-        //         position: relative;
-        //         padding-left: 50%;
-        //         display: block;
-        //     }
-        //
-        //     td:before {
-        //         font-weight: bold;
-        //         /* Now like a table header */
-        //         position: absolute;
-        //         /* Top/left values mimic padding */
-        //         top: 5px;
-        //         left: 0;
-        //         width: 45%;
-        //         padding-right: 10px;
-        //         white-space: nowrap;
-        //     }
-        // }
     }
+}
+#mw-opportunities-organisation-widget .mw-search-widget-inner {
+    display: none;
 }

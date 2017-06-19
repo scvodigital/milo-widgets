@@ -1,17 +1,19 @@
 <div class="mw-search-widget-inner">
-	<h3>{{title}}</h3>
+    <h3>{{title}}</h3>
 
     <div class="mw-search-form" id="mw-{{name}}-form"></div>
 
-    <hr />
+    <!-- <hr /> -->
 
-    <div class="form-group text-right">
-		<button type="button" class="btn btn-primary mw-search-button" id="mw-{{name}}-search-button">
-			Search
+    <div class="row form-group text-right">
+        <button type="button" class="btn btn-primary mw-search-button" id="mw-{{name}}-search-button">
+            Search
             <i class="fa fa-fw fa-search"></i>
-		</button>
-	</div>
+        </button>
+    </div>
+</div>
 
+<div class="mw-search-widget-detail">
     <a name="mw-{{name}}-top"></a>
 
     {{> navigation this}}

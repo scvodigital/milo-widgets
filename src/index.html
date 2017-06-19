@@ -70,6 +70,13 @@
             -ms-user-select: none;
             user-select: none;
         }
+        #mw-opportunities-organisations-widget {
+            padding-top: 0;
+        }
+        #mw-opportunities-organisations-widget #mw-organisations-print,
+        #mw-opportunities-organisations-widget .mw-print {
+            display: none;
+        }
         footer {
             padding-top: 3.75rem;
         }
@@ -129,7 +136,7 @@
                 Milo search widget builder
             </h2>
             <p>
-                Please choose a search type and optional location filter
+                Please choose a widget type and optional location filter
             </p>
 
             <hr />
@@ -138,18 +145,23 @@
 
                 <div class="form-group">
                     <label for="type" class="col-sm-2 control-label">
-                        Search type
+                        Widget type
                     </label>
                     <div class="col-sm-10">
                         <select name="type" ng-model="type" class="form-control">
-                            <option value="" disabled="disabled">Select a search type</option>
-                            <option value="opportunities">Voluntary opportunity search</option>
-                            <option value="organisations">Voluntary organisation search</option>
+                            <option value="" disabled="disabled">Please select a widget type</option>
+                            <option value="opportunities">Volunteering opportunities search</option>
+                            <option value="opportunities-organisations">Volunteering opportunities for your organisation</option>
+                            <option value="organisations">Organisations search</option>
                         </select>
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" ng-show="type && (type == 'opportunities-organisations')">
+                    <script src="/opportunities-organisations.bundle.js" data-hide-map="true"></script>
+                </div>
+
+                <div class="form-group" ng-show="type && (type == 'opportunities' || type == 'organisations')">
                     <label for="type" class="col-sm-2 control-label">
                         Search filter
                     </label>
@@ -194,14 +206,13 @@
             </form>
         </div>
 
-        <div class="container body-content" ng-show="type">
+        <div class="container body-content" ng-show="type && (type == 'opportunities' || type == 'organisations')">
             <h3>How to embed the widget</h3>
-            <p>Please use the following code to embed the Milo {{type}} search widget on your own website</p>
+            <p>Please use the following code to embed the Milo {{type}} search widget on your website:</p>
             <div class="copyable" id="embed">&lt;script src="https://milo.scvo.org.uk/{{type}}.bundle.js" data-hide-map="true"<span ng-show="filter"> data-tsi="{{filter}}"</span>&gt;&lt;/script&gt;</div>
             <button class="btn btn-sm copy" data-source="embed" unselectable="on"><i class="fa fa-clipboard" aria-hidden="true"></i> Copy</button>
         </div>
     </main>
-
 
     <footer>
         <div class="container">

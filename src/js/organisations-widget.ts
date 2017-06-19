@@ -21,20 +21,23 @@ const organisationConfiguration: IWidgetConfiguration = {
         initialZoom: 6
     },
     name: 'organisations',
-    title: 'Milo Organisations Search',
+    title: 'Milo organisations search',
     sort: {
         name: 'asc'
-    }
+    },
+    autoSearch: false
 }
 
 class OrganisationWidget extends BaseWidget {
     tsi: number;
     strive: boolean = false;
+    hideMap: boolean = false;
 
     constructor() {
         super('');
         this.tsi = this.scriptTag.data('tsi');
         this.strive = this.scriptTag.data('strive');
+        this.hideMap = this.scriptTag.data('hide-map') || false;
     }
 
     doSearchOld(page: number = 1) {

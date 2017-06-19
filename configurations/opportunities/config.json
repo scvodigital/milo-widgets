@@ -29,5 +29,6 @@
             "attribute": "tsi",
             "field": "tsiLegacyRef"
         }
-    ]
+    ],
+    "autoSearch": false
 }
