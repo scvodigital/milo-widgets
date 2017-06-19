@@ -63,12 +63,27 @@
         margin: 15px 0 10px;
     }
 
+    input[type=checkbox] {
+        display: inline-block;
+        -webkit-appearance: checkbox;
+        appearance: checkbox;
+    }
+
     @media screen and (max-width: 767px) {
         .dl-horizontal dt {
             width: 100%;
         }
         .dl-horizontal dd {
             margin-left: 0;
+        }
+        .mw-document-nav,
+        .mw-paging {
+            .text-left {
+                float: left;
+            }
+            .text-right {
+                float: right;
+            }
         }
         table.table-condensed {
             thead, tbody {
@@ -95,6 +110,9 @@
                         font-size: 90%;
                         text-align: center;
                         border-top: none;
+                    }
+                    td {
+                        text-align: center;
                     }
                 }
             }
