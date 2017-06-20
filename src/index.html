@@ -115,19 +115,27 @@
     }
     </style>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
     <script type="text/javascript">
-    var app = angular.module("app", []);
-    // app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-    //     $locationProvider.html5Mode(true);
-    // }]);
-    app.controller('controller',function ($scope, $location) {
-        $scope.hash = $location.hash();
+    var app = angular.module("app", ["ngRoute"]);
+    app.config(function ($routeProvider, $locationProvider) {
+        $routeProvider
+        .when("/", {
+            templateUrl: "search.html",
+        })
+        .when("/organisation-opportunities", {
+            templateUrl: "opportunities-for-organisations.html",
+        })
+        .otherwise({redirectTo: "/"});
+
+        $locationProvider
+        .html5Mode(true);
     });
     </script>
 </head>
 
 <body ng-app="app">
-    <main ng-controller="controller">
+    <main>
         <nav class="navbar navbar-default">
             <div class="container">
                 <div class="navbar-header">
@@ -141,87 +149,7 @@
             </div>
         </nav>
 
-        <div class="container body-content">
-            <h2>
-                Milo widget builder
-            </h2>
-            <p ng-show="hash != 'opportunities-organisations'">
-                Please choose a widget type and optional location filter
-            </p>
-
-            <hr />
-
-            <form class="form-horizontal">
-
-                <div class="form-group" ng-show="hash != 'opportunities-organisations'">
-                    <label for="type" class="col-sm-2 control-label">
-                        Widget type
-                    </label>
-                    <div class="col-sm-10">
-                        <select name="type" ng-model="type" class="form-control">
-                            <option value="" disabled="disabled">Please select a widget type</option>
-                            <option value="opportunities">Volunteering opportunities search</option>
-                            <!-- <option value="opportunities-organisations">Volunteering opportunities for your organisation</option> -->
-                            <option value="organisations">Organisations search</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group" ng-show="hash == 'opportunities-organisations'">
-                    <script src="/opportunities-organisations.bundle.js" data-hide-map="true"></script>
-                </div>
-
-                <div class="form-group" ng-show="type">
-                    <label for="type" class="col-sm-2 control-label">
-                        Search filter
-                    </label>
-                    <div class="col-sm-10">
-                        <select name="filter" ng-model="filter" class="form-control">
-                            <option value="">All of Scotland (no filter)</option>
-                            <option value="1">Aberdeen City</option>
-                            <option value="2">Aberdeenshire</option>
-                            <option value="3">Angus</option>
-                            <option value="4">Argyll and Bute</option>
-                            <option value="5">Clackmannanshire</option>
-                            <option value="6">Dumfries and Galloway</option>
-                            <option value="7">Dundee City</option>
-                            <option value="8">East Ayrshire</option>
-                            <option value="9">East Dunbartonshire</option>
-                            <option value="10">East Lothian</option>
-                            <option value="11">East Renfrewshire</option>
-                            <option value="12">Edinburgh City</option>
-                            <option value="13">Falkirk</option>
-                            <option value="14">Fife</option>
-                            <option value="15">Glasgow City</option>
-                            <option value="16">Highland</option>
-                            <option value="17">Inverclyde</option>
-                            <option value="18">Midlothian</option>
-                            <option value="19">Moray</option>
-                            <option value="32">Na h-Eileanan Siar (Western Isles)</option>
-                            <option value="20">North Ayrshire</option>
-                            <option value="21">North Lanarkshire</option>
-                            <option value="22">Orkney Islands</option>
-                            <option value="23">Perth and Kinross</option>
-                            <option value="24">Renfrewshire</option>
-                            <option value="25">Scottish Borders</option>
-                            <option value="26">Shetland Islands</option>
-                            <option value="27">South Ayrshire</option>
-                            <option value="28">South Lanarkshire</option>
-                            <option value="29">Stirling</option>
-                            <option value="30">West Dunbartonshire</option>
-                            <option value="31">West Lothian</option>
-                        </select>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <div class="container body-content" ng-show="type">
-            <h3>How to embed the widget</h3>
-            <p>Please use the following code to embed the Milo {{type}} search widget on your website:</p>
-            <div class="embed copyable" id="embed">&lt;script src="https://milo.scvo.org.uk/{{type}}.bundle.js" data-hide-map="true"<span ng-show="filter"> data-tsi="{{filter}}"</span>&gt;&lt;/script&gt;</div>
-            <button class="btn btn-sm copy" data-source="embed" unselectable="on"><i class="fa fa-clipboard" aria-hidden="true"></i> Copy</button>
-        </div>
+        <ng-view></ng-view>
     </main>
 
     <footer>

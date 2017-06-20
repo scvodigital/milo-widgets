@@ -56,6 +56,8 @@ module.exports = {
         new WriteFilePlugin(),
         new CopyWebpackPlugin([
             { from: './src/index.html' },
+            { from: './src/search.html' },
+            { from: './src/opportunities-for-organisations.html' },
             { from: './src/js/require.js', to: './lib/require.js' }
         ]),
         new webpack.DefinePlugin({
