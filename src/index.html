@@ -116,6 +116,7 @@
         }
     }
     </style>
+    <script type="text/javascript" src="//code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
     <script type="text/javascript">
@@ -132,19 +133,6 @@
 
         $locationProvider
         .html5Mode(true);
-    });
-    app.directive('script', function() {
-        return {
-            restrict: 'E',
-            scope: false,
-            link: function(scope, elem, attr) {
-                if (attr.type === 'text/javascript-lazy') {
-                    var code = elem.text();
-                    var f = new Function(code);
-                    f();
-                }
-            }
-        };
     });
     </script>
 </head>
