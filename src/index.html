@@ -33,8 +33,10 @@
         border-radius: 0;
     }
     .navbar-default .navbar-brand,
-    .navbar-default .navbar-brand:hover {
+    .navbar-default .navbar-brand:hover,
+    .navbar-default .navbar-brand:focus {
         color: white;
+        outline: none;
     }
     nav .right {
         float: right;
@@ -130,6 +132,19 @@
 
         $locationProvider
         .html5Mode(true);
+    });
+    app.directive('script', function() {
+        return {
+            restrict: 'E',
+            scope: false,
+            link: function(scope, elem, attr) {
+                if (attr.type === 'text/javascript-lazy') {
+                    var code = elem.text();
+                    var f = new Function(code);
+                    f();
+                }
+            }
+        };
     });
     </script>
 </head>
