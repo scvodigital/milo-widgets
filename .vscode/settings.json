@@ -17,6 +17,7 @@
     "node_modules": "explorerExcludedFiles",
     "jspm_packages": "explorerExcludedFiles",
     "**/dist/**": "explorerExcludedFiles",
+    "dist": "explorerExcludedFiles",
     ".npm": "explorerExcludedFiles",
     ".node_repl_history": "explorerExcludedFiles"
   }
