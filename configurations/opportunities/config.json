@@ -2,6 +2,7 @@
     "index": "volunteering-opportunity",
     "type": "volunteering-opportunity",
     "termFields": ["workType", "clientGroup"],
+    "default_operator": "AND",
     "templateSet": {
         "searchFormTemplate": "",
         "resultsTemplate": "",
