@@ -2,6 +2,7 @@
     "index": "milo-organisation",
     "type": "milo-organisation",
     "termFields": ["mainActivitiesGlobal"],
+    "default_operator": "AND",
     "templateSet": {
         "searchFormTemplate": "",
         "resultsTemplate": "",
