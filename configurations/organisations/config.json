@@ -2,7 +2,7 @@
     "index": "milo-organisation",
     "type": "milo-organisation",
     "termFields": ["mainActivitiesGlobal"],
-    "default_operator": "AND",
+    "defaultOperator": "AND",
     "templateSet": {
         "searchFormTemplate": "",
         "resultsTemplate": "",
