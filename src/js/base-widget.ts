@@ -193,6 +193,8 @@ export class BaseWidget {
 	doSearch(page: number = 1, jump: boolean = false) {
 		this.getPostcodeQuery().then((geo: IGeoQuery) => {
 			this.getLocationQuery().then((location: IGeoBoundingBoxQuery) => {
+                var allowSort = true;
+
 				var terms: ITermQuery[] = this.getTerms();
 				var injected: ITermQuery[] = this.getInjected();
 				var ranges: IRangeQuery[] = this.getRanges();
@@ -208,20 +210,27 @@ export class BaseWidget {
 				payload.bool.must = payload.bool.must.concat(injected);
 				payload.bool.must = payload.bool.must.concat(ranges);
 
+                if(payload.bool.must.length > 1){
+                    allowSort = false;
+                }
+
 				if (geo) {
 					payload.bool.must.push(geo.query);
 					payload.sort = geo.sort;
+                    allowSort = false;
 				}
 
 				if (location) {
 					payload.bool.must.push(location);
+                    allowSort = false;
 				}
 
 				if (query) {
 					payload.bool.must.push(query);
+                    allowSort = false;
 				}
 
-				this.search(payload, page, jump).then((resultSet: ResultSet) => { });
+				this.search(payload, page, jump, allowSort).then((resultSet: ResultSet) => { });
 			});
 		});
 	}
@@ -254,7 +263,10 @@ export class BaseWidget {
 		} else {
 			var query: IQueryQuery = {
 				simple_query_string: {
-					query: queryString
+					query: queryString,
+                    //analyzer: 'my_snowball_analyzer', //uncomment this once I've managed to re-index after updating the settings to have the my_snow filter's language as 'english' instead of 'English'
+                    default_operator: 'and',
+                    minimum_should_match: '100%'
 				}
 			};
 			return query;
@@ -456,6 +468,7 @@ export class BaseWidget {
 	protected runQuery(query) {
 		return new Promise<any>((resolve, reject) => {
 			this.client.search(query, (err, results) => {
+                console.log('QUERY', query, results);
 				if (err) {
 					console.error(err);
 					reject(err);
@@ -566,7 +579,7 @@ export class BaseWidget {
 		iframe.focus();
 	}
 
-	protected search(query, page = 1, jump: boolean = false) {
+	protected search(query, page = 1, jump: boolean = false, allowSort: boolean = true) {
 		return new Promise((resolve, reject) => {
 			var from = (page - 1) * 10;
 			var payload: any = {
@@ -581,7 +594,7 @@ export class BaseWidget {
 			if (payload.body.query.hasOwnProperty('sort')) {
 				payload.body.sort = payload.body.query.sort;
 				delete payload.body.query.sort;
-			} else {
+			} else if(allowSort) {
 				payload.body.sort = this.config.sort;
 			}
 
@@ -930,6 +943,8 @@ export interface IQueryQuery {
 	simple_query_string: {
 		query: string;
 		analyzer?: string;
+        default_operator?: string;
+        minimum_should_match?: string | number;
 	};
 }
 
