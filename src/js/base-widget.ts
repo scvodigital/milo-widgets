@@ -229,7 +229,7 @@ export class BaseWidget {
 					payload.bool.must.push(query);
                     allowSort = false;
 				}
-
+console.log(payload);
 				this.search(payload, page, jump, allowSort).then((resultSet: ResultSet) => { });
 			});
 		});
@@ -265,7 +265,7 @@ export class BaseWidget {
 				simple_query_string: {
 					query: queryString,
                     //analyzer: 'my_snowball_analyzer', //uncomment this once I've managed to re-index after updating the settings to have the my_snow filter's language as 'english' instead of 'English'
-                    default_operator: 'and',
+                    default_operator: 'AND',
                     minimum_should_match: '100%'
 				}
 			};

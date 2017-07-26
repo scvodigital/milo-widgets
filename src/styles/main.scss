@@ -1,6 +1,7 @@
 .mw-search-widget {
     padding: 15px;
     background-color: #ffffff;
+    font-family: sans-serif;
 
     @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
     @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/variables";
@@ -32,7 +33,7 @@
         font-weight: 600;
     }
     h3, .h3 {
-        margin: 0;
+        margin: 0 0 0.5rem;
         font-size: 20px;
     }
     .row {
