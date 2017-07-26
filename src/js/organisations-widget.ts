@@ -64,7 +64,7 @@ class OrganisationWidget extends BaseWidget {
             must.push({
                 simple_query_string: {
                     query: query,
-                    analyzer: 'my_snowball_analyzer', //uncomment this once I've managed to re-index after updating the settings to have the my_snow filter's language as 'english' instead of 'English'
+                    analyzer: 'my_snowball_analyzer',
                     default_operator: 'AND',
                     minimum_should_match: '100%'
                 }
