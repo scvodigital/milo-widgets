@@ -40,8 +40,12 @@
 
     a {
         text-decoration-skip: ink;
+        color: #337ab7;
+        strong {
+            color: #337ab7;
+        }
     }
-    b,strong,h3,h4,th {
+    b,strong,h2,h3,h4,th {
         font-weight: 600;
     }
     h3, .h3 {
@@ -84,6 +88,9 @@
     }
     .mw-body h3 {
         margin: 15px 0 10px;
+    }
+    .mw-body .list-inline {
+        margin-bottom: 4px;
     }
 
     input[type=checkbox] {
