@@ -48,7 +48,10 @@
     }
     h3, .h3 {
         margin: 0 0 0.5rem;
-        font-size: 20px;
+        font-size: 1.3rem;
+    }
+    h4, .h4 {
+        font-size: 1.2rem;
     }
     .row {
         margin-left: -15px;
@@ -135,9 +138,9 @@
                 width: 20%;
                 tr {
                     width: 100%;
-                    margin-top: 17px;
+                    margin-top: 15px;
                     th {
-                        font-size: 16px;
+                        font-size: 0.97rem;
                         text-align: left;
                         border-width: 1px;
                     }
@@ -151,7 +154,7 @@
                 tr {
                     width: 33.33%;
                     th {
-                        font-size: 12px;
+                        font-size: 0.7rem;
                         text-align: center;
                         border-top: none;
                     }
