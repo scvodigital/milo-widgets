@@ -468,7 +468,7 @@ export class BaseWidget {
 	protected runQuery(query) {
 		return new Promise<any>((resolve, reject) => {
 			this.client.search(query, (err, results) => {
-                console.log('QUERY', query, results);
+                // console.log('QUERY', query, results);
 				if (err) {
 					console.error(err);
 					reject(err);
@@ -541,6 +541,7 @@ export class BaseWidget {
 			var topElement = this.widgetElement.find('[name="mw-' + this.config.name + '-top"]');
 			var top = topElement.offset().top;
 			window.scroll(0, top);
+            jump = false;
 		}
 	}
 

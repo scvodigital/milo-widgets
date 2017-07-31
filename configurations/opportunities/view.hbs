@@ -1,12 +1,12 @@
 <h3>
-	<strong>{{title}}</strong> {{#if organisationName}} | {{organisationName}} {{/if}} {{#each ../sorts}} ({{round this 2}}
+	{{title}} {{#if organisationName}} | {{organisationName}} {{/if}} {{#each ../sorts}} ({{round this 2}}
 	miles) {{/each}}
 </h3>
 
 <ul class="list-inline">
-	{{#if referenceCode}}
+	{{#if miloRef}}
 	<li>
-		<i class="fa fa-fw fa-book"></i> <strong>Ref:</strong> {{referenceCode}}
+		<i class="fa fa-fw fa-hashtag"></i> <strong>Ref:</strong> {{miloRef}}
 	</li>
 	{{/if}} {{#if startData}}
 	<li>
@@ -22,7 +22,7 @@
 	</li>
 	{{/if}} {{#if organisationCharityNo}}
 	<li>
-		<i class="fa fa-fw fa-hashtag"></i> <strong>Charity number:</strong> {{organisationCharityNo}}
+		<i class="fa fa-fw fa-book"></i> <strong>Charity number:</strong> {{organisationCharityNo}}
 	</li>
 	{{/if}}
 </ul>
