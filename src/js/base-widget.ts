@@ -23,8 +23,10 @@ export class BaseWidget {
 	protected mapElement;
 
 	protected resultSet: any = null;
-	private terms: ITermCollection;
-	protected hideMap: boolean = false;
+    private terms: ITermCollection;
+    private exampleLocation: string;
+    protected hideMap: boolean = false;
+    protected hideTitle: boolean = false;
 	protected map: google.maps.Map;
 	protected markers: google.maps.Marker[] = [];
 	protected infoWindows: google.maps.InfoWindow[] = [];
@@ -53,7 +55,11 @@ export class BaseWidget {
 		jq.getJSON('https://scvo-widgets-9d094.firebaseio.com/configurations/' + name + '.json').then((configuration) => {
 			this.config = new WidgetConfiguration(configuration);
 
-			this.hideMap = this.scriptTag.data('hide-map') || false;
+            this.hideMap = this.scriptTag.data('hide-map') || false;
+            this.hideTitle = this.scriptTag.data('hide-title') || false;
+            if (this.hideTitle) {
+                jq('.mw-title').hide();
+            }
 
 			(<any>GoogleMapsLoader)['KEY'] = 'AIzaSyBGANoz_QO2iBbM-j1LIvkdaH6ZKnqgTfA';
 			(<any>GoogleMapsLoader)['LIBRARIES'] = ['geometry', 'places'];
@@ -85,6 +91,8 @@ export class BaseWidget {
 			this.searchElement = this.widgetElement.find('.mw-search-form');
 			this.bodyElement = this.widgetElement.find('.mw-body');
 			this.mapElement = this.widgetElement.find('.mw-map');
+
+            this.exampleLocation = 'Dundee';
 
 			this.searchElement.html(searchHtml);
 
