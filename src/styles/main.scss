@@ -1,5 +1,4 @@
 .mw-search-widget {
-    @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
     @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
     @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/variables";
     @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
@@ -25,7 +24,6 @@
 
     padding: 15px;
     background-color: #ffffff;
-    font-family: 'Open Sans', sans-serif;
 
     .mw-search-widget-inner,
     .mw-search-widget-detail {
@@ -37,16 +35,13 @@
     .btn-primary {
         padding: 6px 24px;
     }
+    .btn:focus,
     .btn, select, input {
         outline: none;
     }
 
     a {
         text-decoration-skip: ink;
-        color: #337ab7;
-        strong {
-            color: #337ab7;
-        }
     }
     b,strong,h2,h3,h4,th {
         font-weight: 600;
