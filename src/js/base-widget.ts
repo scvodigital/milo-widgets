@@ -539,7 +539,9 @@ export class BaseWidget {
 
 		if (jump) {
 			var topElement = this.widgetElement.find('[name="mw-' + this.config.name + '-top"]');
+            console.log(topElement);
 			var top = topElement.offset().top;
+            console.log(top);
 			window.scroll(0, top);
             jump = false;
 		}
