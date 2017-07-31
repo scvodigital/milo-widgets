@@ -22,9 +22,12 @@
     @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/utilities";
     @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities";
 
-    padding: 15px;
+    padding: 0;
     background-color: #ffffff;
 
+    .hidden {
+        display: none;
+    }
     .mw-search-widget-inner,
     .mw-search-widget-detail {
         padding: 0;

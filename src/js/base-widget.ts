@@ -23,8 +23,9 @@ export class BaseWidget {
 	protected mapElement;
 
 	protected resultSet: any = null;
-	private terms: ITermCollection;
-	protected hideMap: boolean = false;
+    private terms: ITermCollection;
+    protected hideMap: boolean = false;
+    protected hideTitle: boolean = false;
 	protected map: google.maps.Map;
 	protected markers: google.maps.Marker[] = [];
 	protected infoWindows: google.maps.InfoWindow[] = [];
@@ -53,12 +54,14 @@ export class BaseWidget {
 		jq.getJSON('https://scvo-widgets-9d094.firebaseio.com/configurations/' + name + '.json').then((configuration) => {
 			this.config = new WidgetConfiguration(configuration);
 
-			this.hideMap = this.scriptTag.data('hide-map') || false;
+            this.hideMap = this.scriptTag.data('hide-map') || false;
+            this.hideTitle = this.scriptTag.data('hide-title') || false;
 
 			(<any>GoogleMapsLoader)['KEY'] = 'AIzaSyBGANoz_QO2iBbM-j1LIvkdaH6ZKnqgTfA';
 			(<any>GoogleMapsLoader)['LIBRARIES'] = ['geometry', 'places'];
 
 			this.setupControls();
+
 			window.addEventListener('hashchange', () => { this.hashChange(true); }, false);
 		});
 	}
@@ -85,6 +88,10 @@ export class BaseWidget {
 			this.searchElement = this.widgetElement.find('.mw-search-form');
 			this.bodyElement = this.widgetElement.find('.mw-body');
 			this.mapElement = this.widgetElement.find('.mw-map');
+
+            if (this.hideTitle) {
+                this.widgetElement.find('.mw-title').addClass('hidden');
+            }
 
 			this.searchElement.html(searchHtml);
 
@@ -764,7 +771,7 @@ export class WidgetConfiguration implements IWidgetConfiguration {
 		if (widgetConfiguration) {
 			Object.assign(this, widgetConfiguration);
 			this.templateSet = new TemplateSet(this.templateSet);
-			this.mapOptions = new MapOptions(this.mapOptions);
+            this.mapOptions = new MapOptions(this.mapOptions);
 		}
 	}
 }
