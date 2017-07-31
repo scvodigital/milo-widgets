@@ -37,6 +37,9 @@
     .btn-primary {
         padding: 6px 24px;
     }
+    .btn, select, input {
+        outline: none;
+    }
 
     a {
         text-decoration-skip: ink;
@@ -93,6 +96,10 @@
         margin-bottom: 4px;
     }
 
+    table th {
+        text-align: center;
+    }
+
     input[type=checkbox] {
         display: inline-block;
         -webkit-appearance: checkbox;
@@ -116,6 +123,8 @@
             }
         }
         table.table-condensed {
+            margin-bottom: 0;
+            border-top: 0;
             thead, tbody {
                 float: left;
             }
@@ -123,8 +132,10 @@
                 width: 20%;
                 tr {
                     width: 100%;
-                    margin-top: 20px;
+                    margin-top: 17px;
                     th {
+                        text-align: left;
+                        font-size: 12px;
                         border-width: 1px;
                     }
                     th:last-child {
@@ -153,6 +164,13 @@
             th, td {
                 display: block;
             }
+        }
+        .opening-times .btn {
+            width: 100%;
+        }
+        .mw-search-button {
+            margin-top: 15px;
+            width: 100%;
         }
     }
 }
