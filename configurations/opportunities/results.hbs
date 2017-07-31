@@ -12,7 +12,7 @@
 	<div class="mw-opportunities-result" id="mw-opportunities-result-{{Id}}">
 		<h3>
 			<a href="#mw-opportunities-{{Id}}">
-				<strong>{{title}}</strong>
+				{{title}}
 				{{#if organisationName}}
 					| {{organisationName}}
 				{{/if}}
@@ -23,9 +23,9 @@
 		</h3>
 
 		<ul class="list-inline">
-			{{#if referenceCode}}
+			{{#if miloRef}}
 			<li>
-				<i class="fa fa-fw fa-book"></i> <strong>Ref:</strong> {{referenceCode}}
+				<i class="fa fa-fw fa-book"></i> <strong>Ref:</strong> {{miloRef}}
 			</li>
 			{{/if}} {{#if startData}}
 			<li>

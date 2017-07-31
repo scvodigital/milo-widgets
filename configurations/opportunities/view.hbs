@@ -1,6 +1,12 @@
 <h3>
-	{{title}} {{#if organisationName}} | {{organisationName}} {{/if}} {{#each ../sorts}} ({{round this 2}}
-	miles) {{/each}}
+	{{title}}
+    {{#if organisationName}}
+        |
+        {{organisationName}}
+    {{/if}}
+    {{#each ../sorts}}
+        ({{round this 2}} miles)
+    {{/each}}
 </h3>
 
 <ul class="list-inline">
