@@ -186,7 +186,7 @@ sundayAfternoon mondayEvening tuesdayEvening wednesdayEvening thursdayEvening fr
 	</dt>
 	<dd>{{tsiContactFirstName}} {{tsiContactLastName}}</dd>
 
-	{{#any organisationLocationsStreet organisationLocationsAreaTown organisationLocationsCityCounty organisationLocationsPostcode}}
+	<!-- {{#any organisationLocationsStreet organisationLocationsAreaTown organisationLocationsCityCounty organisationLocationsPostcode}}
 		<dt>
 			<i class="fa fa-fw fa-home"></i>
 			Address:
@@ -197,7 +197,7 @@ sundayAfternoon mondayEvening tuesdayEvening wednesdayEvening thursdayEvening fr
 			{{#if organisationLocationsCityCounty}}{{organisationLocationsCityCounty}}, <br />{{/if}}
 			{{#if organisationLocationsPostcode}}{{organisationLocationsPostcode}}{{/if}}
 		</dd>
-	{{/any}}
+	{{/any}} -->
 
 	{{#if tsiContactPhone}}
 	<dt>
@@ -207,7 +207,7 @@ sundayAfternoon mondayEvening tuesdayEvening wednesdayEvening thursdayEvening fr
 	<dd><a href="tel:{{tsiContactPhone}}">{{tsiContactPhone}}</a></dd>
 	{{/if}}
 
-	{{#if organisationWebsite}}
+	<!-- {{#if organisationWebsite}}
 	<dt>
 		<i class="fa fa-fw fa-external-link"></i>
 		Website:
@@ -215,7 +215,7 @@ sundayAfternoon mondayEvening tuesdayEvening wednesdayEvening thursdayEvening fr
 	<dd>
 		<a href="{{#startsWith organisationWebsite "http"}}{{else}}http://{{/startsWith}}{{organisationWebsite}}" target="_blank">Visit website</a>
 	</dd>
-	{{/if}}
+	{{/if}} -->
 
 	{{#if tsiContactEmail}}
 	<dt>
