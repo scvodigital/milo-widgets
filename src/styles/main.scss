@@ -95,6 +95,14 @@
     .mw-body .list-inline {
         margin-bottom: 4px;
     }
+    .input-group-addon {
+        border-left: 0;
+        border-right: 0;
+    }
+    .form-control:focus {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
 
     table th {
         text-align: center;
