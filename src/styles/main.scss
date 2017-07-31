@@ -1,5 +1,4 @@
 .mw-search-widget {
-    @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
     @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
     @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/variables";
     @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
@@ -25,7 +24,6 @@
 
     padding: 15px;
     background-color: #ffffff;
-    font-family: 'Open Sans', sans-serif;
 
     .mw-search-widget-inner,
     .mw-search-widget-detail {
@@ -37,23 +35,23 @@
     .btn-primary {
         padding: 6px 24px;
     }
+    .btn:focus,
     .btn, select, input {
         outline: none;
     }
 
     a {
         text-decoration-skip: ink;
-        color: #337ab7;
-        strong {
-            color: #337ab7;
-        }
     }
     b,strong,h2,h3,h4,th {
         font-weight: 600;
     }
     h3, .h3 {
         margin: 0 0 0.5rem;
-        font-size: 20px;
+        font-size: 1.3rem;
+    }
+    h4, .h4 {
+        font-size: 1.2rem;
     }
     .row {
         margin-left: -15px;
@@ -95,6 +93,14 @@
     .mw-body .list-inline {
         margin-bottom: 4px;
     }
+    .input-group-addon {
+        border-left: 0;
+        border-right: 0;
+    }
+    .form-control:focus {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
 
     table th {
         text-align: center;
@@ -132,10 +138,10 @@
                 width: 20%;
                 tr {
                     width: 100%;
-                    margin-top: 17px;
+                    margin-top: 15px;
                     th {
+                        font-size: 0.97rem;
                         text-align: left;
-                        font-size: 12px;
                         border-width: 1px;
                     }
                     th:last-child {
@@ -148,7 +154,7 @@
                 tr {
                     width: 33.33%;
                     th {
-                        font-size: 90%;
+                        font-size: 0.7rem;
                         text-align: center;
                         border-top: none;
                     }
