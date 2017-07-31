@@ -25,6 +25,9 @@
     padding: 0;
     background-color: #ffffff;
 
+    .hidden {
+        display: none;
+    }
     .mw-search-widget-inner,
     .mw-search-widget-detail {
         padding: 0;

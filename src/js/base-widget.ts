@@ -24,7 +24,6 @@ export class BaseWidget {
 
 	protected resultSet: any = null;
     private terms: ITermCollection;
-    private exampleLocation: string;
     protected hideMap: boolean = false;
     protected hideTitle: boolean = false;
 	protected map: google.maps.Map;
@@ -57,14 +56,12 @@ export class BaseWidget {
 
             this.hideMap = this.scriptTag.data('hide-map') || false;
             this.hideTitle = this.scriptTag.data('hide-title') || false;
-            if (this.hideTitle) {
-                jq('.mw-title').hide();
-            }
 
 			(<any>GoogleMapsLoader)['KEY'] = 'AIzaSyBGANoz_QO2iBbM-j1LIvkdaH6ZKnqgTfA';
 			(<any>GoogleMapsLoader)['LIBRARIES'] = ['geometry', 'places'];
 
 			this.setupControls();
+
 			window.addEventListener('hashchange', () => { this.hashChange(true); }, false);
 		});
 	}
@@ -92,7 +89,9 @@ export class BaseWidget {
 			this.bodyElement = this.widgetElement.find('.mw-body');
 			this.mapElement = this.widgetElement.find('.mw-map');
 
-            this.exampleLocation = 'Dundee';
+            if (this.hideTitle) {
+                this.widgetElement.find('.mw-title').addClass('hidden');
+            }
 
 			this.searchElement.html(searchHtml);
 
@@ -772,7 +771,7 @@ export class WidgetConfiguration implements IWidgetConfiguration {
 		if (widgetConfiguration) {
 			Object.assign(this, widgetConfiguration);
 			this.templateSet = new TemplateSet(this.templateSet);
-			this.mapOptions = new MapOptions(this.mapOptions);
+            this.mapOptions = new MapOptions(this.mapOptions);
 		}
 	}
 }
