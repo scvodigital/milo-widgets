@@ -1,4 +1,4 @@
-<div class="container body-content">
+<div class="body-content">
     <h2>
         Milo search widget builder
     </h2>
@@ -6,28 +6,26 @@
         Please choose a widget type and optional location filter
     </p>
 
-    <hr />
-
     <form class="form-horizontal">
-        <div class="form-group">
+        <div class="form-group row">
             <label for="type" class="col-sm-2 control-label">
                 Widget type
             </label>
             <div class="col-sm-10">
-                <select name="type" ng-model="type" class="form-control" onchange="updatePreview()">
-                    <option value="" disabled="disabled">Please select a widget type</option>
+                <select name="type" [(ngModel)]="type" class="form-control">
+                    <option value="" disabled="disabled" selected="selected">Please select a widget type</option>
                     <option value="opportunities">Volunteering opportunities search</option>
                     <option value="organisations">Organisations search</option>
                 </select>
             </div>
         </div>
 
-        <div class="form-group" ng-show="type">
+        <div class="form-group row" *ngIf="type">
             <label for="type" class="col-sm-2 control-label">
                 Search filter
             </label>
             <div class="col-sm-10">
-                <select name="filter" ng-model="filter" class="form-control" onchange="updatePreview()">
+                <select name="filter" [(ngModel)]="filter" class="form-control">
                     <option value="">All of Scotland (no filter)</option>
                     <option value="1">Aberdeen City</option>
                     <option value="2">Aberdeenshire</option>
@@ -64,14 +62,35 @@
                 </select>
             </div>
         </div>
+
+        <div class="form-group row" *ngIf="type">
+            <label class="col-sm-2 control-label">
+                Options
+            </label>
+            <div class="col-sm-2">
+                <div class="checkbox">
+                    <label>
+                        <input [(ngModel)]="hideTitle" name="hideTitle" type="checkbox" data-toggle="toggle"> Hide title
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="checkbox">
+                    <label>
+                        <input [(ngModel)]="hideMap" name="hideMap" type="checkbox" data-toggle="toggle"> Hide map
+                    </label>
+                </div>
+            </div>
+        </div>
     </form>
 </div>
 
-<div class="container body-content" ng-show="type">
+<div class="body-content" *ngIf="type">
     <h3>How to embed the widget</h3>
-    <p>Please use the following code to embed the Milo {{type}} search widget on your website:</p>
-    <div class="embed copyable" id="embed">&lt;script src="https://milo.scvo.org.uk/{{type}}.bundle.js" data-hide-title="false" data-hide-map="true"<span ng-show="filter"> data-tsi="{{filter}}"</span>&gt;&lt;/script&gt;</div>
+    <p>Please use the following code to embed the specified Milo search widget on your own website:</p>
+    <div class="embed copyable" id="embed">&lt;script src="https://milo.scvo.org/{{type}}.bundle.js"<span *ngIf="filter"> data-tsi="{{filter}}"</span> data-hide-title="{{hideTitle}}" data-hide-map="{{hideMap}}"&gt;&lt;/script&gt;</div>
     <button class="btn btn-sm copy" data-source="embed" unselectable="on"><i class="fa fa-clipboard" aria-hidden="true"></i> Copy</button>
-    <h3>Preview: </h3>
-    <div id="preview-container"></div>
+
+    <h3>Preview</h3>
+    <preview [type]="type" [filter]="filter" [hideMap]="hideMap" [hideTitle]="hideTitle"></preview>
 </div>

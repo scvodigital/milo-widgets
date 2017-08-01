@@ -44,7 +44,7 @@ class OrganisationWidget extends BaseWidget {
         var query = jq('#mw-organisations-query').val();
         var activity = jq('#mw-organisations-activity').val();
         var distance = jq('#mw-organisations-distance').val();
-        var postcode = jq('#mw-organisations-user-postcode').val();
+        var postcode = ""+jq('#mw-organisations-user-postcode').val();
 
         var must = [];
 

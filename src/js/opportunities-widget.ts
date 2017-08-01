@@ -44,7 +44,7 @@ class OpportunitiesWidget extends BaseWidget {
     doOldSearch(page: number = 1) {
         var query = jq('#mw-opportunities-query').val();
         var distance = jq('#mw-opportunities-distance').val();
-        var postcode = jq('#mw-opportunities-user-postcode').val();
+        var postcode = ""+jq('#mw-opportunities-user-postcode').val();
         var activity = jq('#mw-opportunities-activity').val();
         var clientGroup = jq('#mw-opportunities-client-group').val();
         var timesCheckboxes = jq('[data-bind="Times"]:checked');
