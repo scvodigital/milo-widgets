@@ -8,13 +8,13 @@ var path = require('path');
 
 module.exports = {
     entry: {
-        organisations: './src/js/organisations-widget.ts',
-        opportunities: './src/js/opportunities-widget.ts',
+        'organisations': './src/js/organisations-widget.ts',
+        'opportunities': './src/js/opportunities-widget.ts',
         'opportunities-organisation': './src/js/opportunities-organisation-widget.ts',
         'opportunities-organisations': './src/js/opportunities-organisations-widget.ts',
     },
     output: {
-        path: path.join(__dirname, "./dist"),
+        path: path.join(__dirname, "./compiled"),
         filename: '[name].bundle.js',
     },
     module: {
@@ -55,9 +55,6 @@ module.exports = {
     plugins: [
         new WriteFilePlugin(),
         new CopyWebpackPlugin([
-            { from: './src/index.html' },
-            { from: './src/search.html' },
-            { from: './src/opportunities-for-organisations.html' },
             { from: './src/js/require.js', to: './lib/require.js' }
         ]),
         new webpack.DefinePlugin({

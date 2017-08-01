@@ -34,6 +34,9 @@ jspm_packages
 **/dist/**
 /dist
 dist
+**/compiled/**
+/compiled
+compiled
 
 # Optional npm cache directory
 .npm

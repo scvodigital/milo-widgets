@@ -8,7 +8,7 @@ import 'core-js';
 
 import * as BaseTemplate from '../templates/base.hbs';
 import * as NavigationTemplate from '../templates/navigation.hbs';
-import '../styles/main.scss';
+import '../styles/widget.scss';
 
 helpers({ handlebars: handlebars });
 handlebars.registerPartial('navigation', NavigationTemplate);
@@ -427,7 +427,7 @@ export class BaseWidget {
 				if (!terms.hasOwnProperty(term)) {
 					terms[term] = [];
 				}
-				var value = jq(o).val();
+				var value = ""+jq(o).val();
 				if (Array.isArray(value)) {
 					terms[term] = terms[term].concat(value);
 				} else {
@@ -457,7 +457,7 @@ export class BaseWidget {
 			if (!ranges.hasOwnProperty(field)) {
 				ranges[field] = {};
 			}
-			ranges[field][operator] = jq(o).val();
+			ranges[field][operator] = ""+jq(o).val();
 		});
 
 		Object.keys(ranges).forEach((field) => {

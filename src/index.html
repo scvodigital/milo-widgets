@@ -1,299 +1,52 @@
-<!DOCTYPE html>
-<html>
-
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Milo Search Widgets</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=0" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" >
+
     <base href="/">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" />
-    <style>
-        body {
-            background: #263238;
-            font-size: 16px;
-        }
 
-        h1,
-        h2,
-        h3,
-        h4,
-        p,
-        div,
-        li {
-            font-family: "Open Sans", Helvetica, Arial, sans-serif;
-        }
+    <title>Milo Search Widgets</title>
 
-        a {
-            text-decoration-skip: ink;
-        }
+    <!-- TODO: Update meta tags and social media graph data -->
+    <meta name="description" content="">
 
-        nav {
-            background: #3eaa8d;
-            background: -moz-linear-gradient(top, #3eaa8d 0%, #169383 100%);
-            background: -webkit-linear-gradient(top, #3eaa8d 0%, #169383 100%);
-            background: linear-gradient(to bottom, #3eaa8d 0%, #169383 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3eaa8d', endColorstr='#169383', GradientType=0);
-            border: none;
-            padding: 0.5rem 0;
-        }
+    <meta name="twitter:card" content="" />
+    <meta name="twitter:site" content="@scvotweet" />
+    <meta name="twitter:creator" content="@scvotweet" />
+    <meta name="twitter:image" content="" />
 
-        .navbar {
-            border: none;
-            border-radius: 0;
-        }
+    <meta property="og:image" content="" />
+    <meta name="og:type" content="" />
+    <meta property="og:image:width" content="" />
+    <meta property="og:image:height" content="" />
+    <meta property="og:title" content="" />
 
-        .navbar-default .navbar-brand,
-        .navbar-default .navbar-brand:hover,
-        .navbar-default .navbar-brand:focus {
-            color: white;
-            outline: none;
-        }
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
-        nav .right {
-            float: right;
-        }
-
-        nav .right img {
-            margin-top: 0.85rem;
-        }
-
-        main {
-            background: white;
-            padding-bottom: 3rem;
-        }
-
-        .embed {
-            font-family: monospace;
-            white-space: pre;
-            display: block;
-            padding: 9.5px 9.5px 27px;
-            margin: 0 0 10px;
-            font-size: 13px;
-            line-height: 1.42857143;
-            color: #333;
-            word-break: break-all;
-            word-wrap: break-word;
-            background-color: #f5f5f5;
-            border: 1px solid #ccc;
-            border-radius: 0;
-        }
-
-        .btn.copy {
-            margin-top: -40px;
-            float: right;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        #mw-opportunities-organisations-widget {
-            padding-top: 0;
-        }
-
-        #mw-opportunities-organisations-widget #mw-organisations-print,
-        #mw-opportunities-organisations-widget .mw-print {
-            display: none;
-        }
-
-        footer {
-            padding-top: 3.75rem;
-        }
-
-        footer .container {
-            position: relative;
-        }
-
-        footer small {
-            font-size: 88%;
-        }
-
-        footer p {
-            color: white;
-        }
-
-        footer a,
-        footer a:hover {
-            color: white;
-            text-decoration: underline;
-        }
-
-        footer .right {
-            position: absolute;
-            top: 4.5rem;
-            right: 15px;
-            display: block;
-        }
-
-        footer .right img {
-            max-width: 150px;
-        }
-
-        @media only screen and (max-width: 767px) {
-            nav .right {
-                display: none;
-            }
-            footer .right {
-                right: auto;
-                left: 15px;
-            }
-        }
-    </style>
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script type="text/javascript" src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
-    <script type="text/javascript">
-        var app = angular.module("app", ["ngRoute"]);
-        app.config(function ($routeProvider, $locationProvider) {
-            $routeProvider
-                .when("/", {
-                    templateUrl: "search.html",
-                })
-                .when("/organisation-opportunities", {
-                    templateUrl: "opportunities-for-organisations.html",
-                })
-                .otherwise({ redirectTo: "/" });
-
-            $locationProvider
-                .html5Mode(true);
-        });
-    </script>
+    <script src="//unpkg.com/es6-shim@0.35.3/es6-shim.min.js"></script>
+    <script src="//unpkg.com/systemjs@0.19.47/dist/system-polyfills.js"></script>
+    <script src="//unpkg.com/angular2@2.0.0-beta.21/es6/dev/src/testing/shims_for_IE.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5-history-api/4.2.7/history.min.js"></script>
 </head>
+<body>
+    <milo-widgets></milo-widgets>
 
-<body ng-app="app">
-    <main>
-        <nav class="navbar navbar-default">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="/">
-                        Milo Search Widgets
-                    </a>
-                </div>
-                <a href="http://scvo.org" class="right">
-                    <img src="https://digitalparticipation.scot/app/assets/images/logos/scvo.png" alt="Scottish Council for Voluntary Organisations" />
-                </a>
-            </div>
-        </nav>
+    <script async src="//cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en"></script>
 
-        <ng-view></ng-view>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-10">
-                    <p>
-                        SCVO provides a data management and reporting platform (Milo) that is used by Scotland's Third Sector Interfaces (TSIs).<br
-                        /> Milo is funded by the Scottish Government.
-                    </p>
-                    <p class="copyright">
-                        <small>&copy; The Scottish Council for Voluntary Organisations (SCVO) is a Scottish Charitable Incorporated Organisation. Registration number <a href="http://www.oscr.org.uk/charities/search-scottish-charity-register/charity-details?number=SC003558">SC003558</a>.</small>
-                    </p>
-                </div>
-                <div class="col-sm-2">
-                    <a href="http://scvo.org" class="right"><img src="https://digitalparticipation.scot/app/assets/images/logos/scvo.png" alt="Scottish Council for Voluntary Organisations" /></a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
-    <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function () {
-            var host = window.location.host;
-            var preTags = document.getElementsByTagName('pre');
-            [].slice.call(preTags).forEach(function (pre) {
-                var code = pre.innerHTML;
-                code = code.replace(/\{host\}/ig, host);
-                pre.innerHTML = code;
-            });
-
-            new Clipboard('.btn.copy', {
-                text: function (trigger) {
-                    var sourceId = trigger.getAttribute('data-source');
-                    var source = document.getElementById(sourceId);
-                    var code = source.innerHTML;
-                    code = code.replace(/\&gt\;/ig, '>').replace(/\&lt\;/ig, '<');
-                    code = code.replace(/<\/?span ng-show="filter" class="ng-binding ng-hide"[^>]*> data-tsi=""/g, "");
-                    code = code.replace(/<\/?span ng-show="filter" class="ng-binding"[^>]*>/g, "");
-                    code = code.replace(/<\/span>/g, "");
-                    // console.log(code);
-                    return code;
-                }
-            });
-
-        });
-        function updatePreview() {
-            window.setTimeout(function () {
-                var source = document.getElementById('embed');
-                var code = source.innerHTML;
-                code = code.replace(/\&gt\;/ig, '>').replace(/\&lt\;/ig, '<');
-                code = code.replace(/<\/?span ng-show="filter" class="ng-binding ng-hide"[^>]*> data-tsi=""/g, "");
-                code = code.replace(/<\/?span ng-show="filter" class="ng-binding"[^>]*>/g, "");
-                code = code.replace(/<\/span>/g, "");
-
-                if ($('#preview-frame').length > 0) {
-                    $('#preview-frame').remove();
-                }
-
-                var template = `
-                <!DOCTYPE html>
-                <html>
-                    </head>
-                        <title>Widget Preview</title>
-                        <style>
-                            body{
-                                margin:0;
-                                padding:0;
-                            }
-                        </style>
-                    </head>
-                    <body>
-                        ${code}
-                        <script>
-                            function onElementHeightChange(elm, callback){
-                                var lastHeight = elm.clientHeight, newHeight;
-                                (function run(){
-                                    newHeight = elm.clientHeight;
-                                    if( lastHeight != newHeight )
-                                        callback(newHeight);
-                                    lastHeight = newHeight;
-
-                                    if( elm.onElementHeightChangeTimer )
-                                        clearTimeout(elm.onElementHeightChangeTimer);
-
-                                    elm.onElementHeightChangeTimer = setTimeout(run, 200);
-                                })();
-                            }
-
-                            onElementHeightChange(document.body, function(height){
-                                window.parent.document.querySelector('#preview-frame').style.height = (parseInt(height) + 30) + 'px';
-                            });
-                        </` + `script>
-                    </body>
-                </html>`;
-                var frame = $('<iframe />', {
-                    src: 'about:blank',
-                    border: 0,
-                    id: 'preview-frame'
-                }).css({
-                    width: '100%',
-                    height: 20,
-                    border: 'none'
-                }).appendTo('#preview-container');
-
-                var iframe = (frame.get(0)).contentWindow;
-                iframe.document.write(template);
-                iframe.focus();
-            }, 500);
-        }
+    <!-- Begin Browser Update plugin -->
+    <script>
+    var $buoop = {vs:{i:10,f:-6,o:-6,s:7,c:-8},unsecure:true,mobile:false,api:4};
+    function $buo_f(){
+        var e = document.createElement("script");
+        e.src = "//browser-update.org/update.min.js";
+        document.body.appendChild(e);
+    };
+    try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
+    catch(e){window.attachEvent("onload", $buo_f)}
     </script>
+    <!-- End Browser Update plugin -->
 </body>
-
 </html>
