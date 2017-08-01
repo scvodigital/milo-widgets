@@ -1,0 +1,11 @@
+<h1>Login</h1>
+<div id="signin-buttons">
+    <span class="error" *ngIf="error">{{ error }}</span>
+    <div *ngIf="!auth.currentUser; else alreadyLoggedIn">
+        <button (click)="signInWithGithub()" class="btn btn-primary login" color="primary"><span class="fa fa-github"></span> Login With Github</button>
+    </div>
+</div>
+
+<ng-template #alreadyLoggedIn>
+    already logged in!
+</ng-template>

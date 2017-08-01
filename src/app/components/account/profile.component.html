@@ -1,0 +1,13 @@
+<!-- User logged in -->
+<div *ngIf="auth.currentUser">
+    <h3>Hi there, {{ auth.currentUserDisplayName }}</h3>
+    <img [src]="auth.currentUser.photoURL || 'https://api.adorable.io/avatars/109/fire.png'" id="account-img" class="img-circle">
+    <br>
+    <button class="btn btn-primary" color="primary" (click)="logout()"> Logout</button>
+</div>
+<!-- User NOT logged in -->
+<div *ngIf="!auth.currentUser">
+    <h3>Hi there, {{ auth.currentUserDisplayName }}</h3>
+    <p>Login to get started...</p>
+    <button class="btn btn-primary" color="primary" routerLink="/login">Login</button>
+</div>
