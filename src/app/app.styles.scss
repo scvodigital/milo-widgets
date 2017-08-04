@@ -125,8 +125,8 @@ main {
     border-radius: 0;
 }
 
-.btn.copy {
-    border-radius: 0;
+.btn-sm.copy {
+    border-radius: 0 !important;
     margin-top: -37px;
     float: right;
     -webkit-touch-callout: none;
@@ -135,17 +135,20 @@ main {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    border-right-color: #ccc;
-    border-bottom-color: #ccc;
+    border-right-color: #ccc !important;
+    border-bottom-color: #ccc !important;
+}
+.mw-search-widget .btn-sm.copy {
+    margin-top: -40px !important;
 }
 .btn.copy:focus {
-    outline: none;
-    box-shadow: none;
+    outline: none !important;
+    box-shadow: none !important;
 }
 .btn.copy:hover {
-    color: white;
-    background: #555;
-    cursor: pointer;
+    color: white !important;
+    background: #555 !important;
+    cursor: pointer !important;
 }
 .form-control:focus {
     border-color: #3eaa8d;

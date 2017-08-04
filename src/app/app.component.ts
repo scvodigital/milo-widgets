@@ -19,15 +19,13 @@ export class AppComponent {
         renderer.listen(elementRef.nativeElement, 'click', (event) => {
            if (event.target.className == 'btn btn-sm copy') {
                var code = jq("#"+event.target.dataset.source)[0].innerText;
-
                var aux = document.createElement("input");
                aux.setAttribute("value", code);
                document.body.appendChild(aux);
                aux.select();
                document.execCommand("copy");
-
                document.body.removeChild(aux);
            }
-        })
+       });
     }
 }

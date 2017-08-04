@@ -124,21 +124,21 @@ sundayAfternoon mondayEvening tuesdayEvening wednesdayEvening thursdayEvening fr
 	{{#if restrictionDetails}}
 	<dt>
 		<i class="fa fa-fw fa-flag"></i>
-		Restriction details
+		Restriction details:
 	</dt>
 	<dd>{{ps restrictionDetails}}</dd>
 	{{/if}}
 	{{#if travelDetails}}
 	<dt>
 		<i class="fa fa-fw fa-plane"></i>
-		Travel details
+		Travel details:
 	</dt>
 	<dd>{{travelDetails}}</dd>
 	{{/if}}
 	{{#if minimumAge}}
 	<dt>
 		<i class="fa fa-fw fa-child"></i>
-		Minimum age
+		Minimum age:
 	</dt>
 	<dd>{{minimumAge}}</dd>
 	{{/if}}
@@ -186,19 +186,6 @@ sundayAfternoon mondayEvening tuesdayEvening wednesdayEvening thursdayEvening fr
 	</dt>
 	<dd>{{tsiContactFirstName}} {{tsiContactLastName}}</dd>
 
-	<!-- {{#any organisationLocationsStreet organisationLocationsAreaTown organisationLocationsCityCounty organisationLocationsPostcode}}
-		<dt>
-			<i class="fa fa-fw fa-home"></i>
-			Address:
-		</dt>
-		<dd>
-			{{#if organisationLocationsStreet}}{{organisationLocationsStreet}}, <br />{{/if}}
-			{{#if organisationLocationsAreaTown}}{{organisationLocationsAreaTown}}, <br />{{/if}}
-			{{#if organisationLocationsCityCounty}}{{organisationLocationsCityCounty}}, <br />{{/if}}
-			{{#if organisationLocationsPostcode}}{{organisationLocationsPostcode}}{{/if}}
-		</dd>
-	{{/any}} -->
-
 	{{#if tsiContactPhone}}
 	<dt>
 		<i class="fa fa-fw fa-phone"></i>
@@ -207,23 +194,13 @@ sundayAfternoon mondayEvening tuesdayEvening wednesdayEvening thursdayEvening fr
 	<dd><a href="tel:{{tsiContactPhone}}">{{tsiContactPhone}}</a></dd>
 	{{/if}}
 
-	<!-- {{#if organisationWebsite}}
-	<dt>
-		<i class="fa fa-fw fa-external-link"></i>
-		Website:
-	</dt>
-	<dd>
-		<a href="{{#startsWith organisationWebsite "http"}}{{else}}http://{{/startsWith}}{{organisationWebsite}}" target="_blank">Visit website</a>
-	</dd>
-	{{/if}} -->
-
 	{{#if tsiContactEmail}}
 	<dt>
 		<i class="fa fa-fw fa-envelope-o"></i>
 		Email:
 	</dt>
 	<dd>
-		<a href="mailto:{{tsiContactEmail}}">Email {{tsiContactFirstName}} {{tsiContactLastName}}</a>
+		<a href="mailto:{{tsiContactEmail}}?subject=[{{miloRef}} Register Interest]" class="btn btn-primary">Register Interest</a>
 	</dd>
 	{{/if}}
 </dl>
@@ -268,7 +245,7 @@ sundayAfternoon mondayEvening tuesdayEvening wednesdayEvening thursdayEvening fr
 		Website:
 	</dt>
 	<dd>
-		<a href="{{#startsWith organisationWebsite "http"}}{{else}}http://{{/startsWith}}{{organisationWebsite}}" target="_blank">Visit website</a>
+		<a href="{{#startsWith organisationWebsite "http"}}{{else}}http://{{/startsWith}}{{organisationWebsite}}" target="_blank">{{organisationName}}</a>
 	</dd>
 	{{/if}}
 
@@ -278,7 +255,7 @@ sundayAfternoon mondayEvening tuesdayEvening wednesdayEvening thursdayEvening fr
 		Email:
 	</dt>
 	<dd>
-		<a href="mailto:{{organisationContactEmail}}">Email {{organisationContactFirstName}} {{organisationContactLastName}}</a>
+		<a href="mailto:{{organisationContactEmail}}?subject=[{{miloRef}} Register Interest]">Register Interest</a>
 	</dd>
 	{{/if}}
 </dl>
