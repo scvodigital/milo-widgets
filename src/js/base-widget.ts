@@ -50,7 +50,7 @@ export class BaseWidget {
 			name = this.scriptTag.data('widget');
 		}
 
-		this.widgetElement = jq('<div>Loading...</div>').addClass('mw-search-widget').attr('id', 'mw-' + name + '-widget').insertAfter(this.scriptTag);
+		this.widgetElement = jq('<div><strong>Loading&hellip;</strong></div>').addClass('mw-search-widget').attr('id', 'mw-' + name + '-widget').insertAfter(this.scriptTag);
 		jq.getJSON('https://scvo-widgets-9d094.firebaseio.com/configurations/' + name + '.json').then((configuration) => {
 			this.config = new WidgetConfiguration(configuration);
 
