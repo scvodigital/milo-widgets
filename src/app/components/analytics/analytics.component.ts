@@ -22,6 +22,7 @@ export class AnalyticsComponent implements OnInit {
         'milo.scvo.org.uk',
         'widgets.scvo.org',
         'widgets.scvo.org.uk',
+        'engage.projectstatus.in',
         'masoncross.net',
         'r.search.yahoo.com',
         'vd.byzen.net'
@@ -30,18 +31,20 @@ export class AnalyticsComponent implements OnInit {
     constructor(public auth: AuthService, public db: AngularFireDatabase) {}
 
     getAnalytics(): void {
-        this.db.list('/analytics/opportunities').subscribe(oppResults => {
+        this.db.list('/analytics/opportunities').subscribe(dbResults => {
             this.opportunities = [];
             this.opportunities_global.searches = 0;
             this.opportunities_global.documents = 0;
             var opportunities_results = {};
-            for (let i = 0; i < oppResults.length; i++) {
-                for (var property in oppResults[i]) {
-                    if (oppResults[i].hasOwnProperty(property)) {
+            for (let i = 0; i < dbResults.length; i++) {
+                for (var property in dbResults[i]) {
+                    if (dbResults[i].hasOwnProperty(property)) {
                         var address = property.replace(/_/g, '.');
                         if (this.suppressionList.indexOf(address) === -1) {
-                            var type = oppResults[i].$key;
-                            var count = _.size(oppResults[i][property]);
+                            var type = dbResults[i].$key;
+                            var filteredResults = dbResults[i][property];
+
+                            var count = _.size(dbResults[i][property]);
                             if (opportunities_results[address] == undefined)
                                 opportunities_results[address] = {};
                             if (type == 'search') {
@@ -60,20 +63,21 @@ export class AnalyticsComponent implements OnInit {
             for (var key in opportunities_results) {
                 this.opportunities.push(opportunities_results[key]);
             }
+            this.opportunities.sort(this.dynamicSort("-searches"));
         });
 
-        this.db.list('/analytics/organisations').subscribe(orgResults => {
+        this.db.list('/analytics/organisations').subscribe(dbResults => {
             this.organisations = [];
             this.organisations_global.searches = 0;
             this.organisations_global.documents = 0;
             var organisations_results = {};
-            for (let i = 0; i < orgResults.length; i++) {
-                for (var property in orgResults[i]) {
-                    if (orgResults[i].hasOwnProperty(property)) {
+            for (let i = 0; i < dbResults.length; i++) {
+                for (var property in dbResults[i]) {
+                    if (dbResults[i].hasOwnProperty(property)) {
                         var address = property.replace(/_/g, '.');
                         if (this.suppressionList.indexOf(address) === -1) {
-                            var type = orgResults[i].$key;
-                            var count = _.size(orgResults[i][property]);
+                            var type = dbResults[i].$key;
+                            var count = _.size(dbResults[i][property]);
                             if (organisations_results[address] == undefined)
                                 organisations_results[address] = {};
                             if (type == 'search') {
@@ -92,7 +96,20 @@ export class AnalyticsComponent implements OnInit {
             for (var key in organisations_results) {
                 this.organisations.push(organisations_results[key]);
             }
+            this.organisations.sort(this.dynamicSort("-searches"));
         });
+    }
+
+    dynamicSort(property) {
+        var sortOrder = 1;
+        if(property[0] === "-") {
+            sortOrder = -1;
+            property = property.substr(1);
+        }
+        return function (a,b) {
+            var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+            return result * sortOrder;
+        }
     }
 
     ngOnInit() {

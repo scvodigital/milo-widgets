@@ -1,62 +1,78 @@
 <div class="body-content">
     <h2>
-        Usage analytics
+        Live usage analytics
     </h2>
     <div class="row">
         <div class="col-sm-2">
             <strong>Filter</strong>
         </div>
         <div class="col-sm-2">
-            <select disabled="disabled">
-                <option value="">Start date</option>
+            <select name="start_date" disabled="disabled">
+                <option disabled="disabled" value="">Start date</option>
             </select>
         </div>
         <div class="col-sm-2">
-            <select disabled="disabled">
-                <option value="">End date</option>
+            <select name="end_date" disabled="disabled">
+                <option disabled="disabled" value="">End date</option>
             </select>
         </div>
         <div class="col-sm-6">
             <button disabled="disabled" class="btn btn-disabled">Filter</button>
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <strong>Sort</strong>
+        </div>
+        <div class="col-sm-4">
+            <select name="sort">
+                <option disabled="disabled" value="">Sort by</option>
+                <option value="-searches" selected="selected">Number of searches</option>
+                <option disabled="disabled" value="-documents">Number of search results opened</option>
+                <option disabled="disabled" value="address">Website address (a-z)</option>
+            </select>
+        </div>
+        <div class="col-sm-6">
+            <button disabled="disabled" class="btn btn-disabled">Sort</button>
+        </div>
+    </div>
     <!-- <p>
         Filter by date coming soon&hellip;
     </p> -->
-    <p *ngIf="opportunities.length == 0">
+    <p *ngIf="!opportunities || opportunities.length == 0">
         Loading analytics&hellip;
     </p>
 
     <div class="results" *ngIf="opportunities.length > 0">
         <h3>
-            Volunteering opportunity searches
+            Volunteering opportunity widget usage
         </h3>
         <ul>
             <li>
                 <strong>All locations*</strong> &ensp;
-                <i class="fa fa-search" aria-hidden="true"></i> {{opportunities_global.searches}} &ensp;
-                <i class="fa fa-file-text-o" aria-hidden="true"></i> {{opportunities_global.documents}}
+                <i class="fa fa-search" aria-hidden="true"></i> {{opportunities_global.searches | number}} &ensp;
+                <i class="fa fa-file-text-o" aria-hidden="true"></i> {{opportunities_global.documents | number}}
             </li>
             <li *ngFor="let website of opportunities">
                 <a href="http://{{website.address}}">{{website.address}}</a> &ensp;
-                <i class="fa fa-search" aria-hidden="true"></i> {{(website.searches) || 0}} &ensp;
-                <i class="fa fa-file-text-o" aria-hidden="true"></i> {{(website.documents) || 0}}
+                <i class="fa fa-search" aria-hidden="true"></i> {{(website.searches | number) || 0}} &ensp;
+                <i class="fa fa-file-text-o" aria-hidden="true"></i> {{(website.documents | number) || 0}}
             </li>
         </ul>
 
         <h3>
-            Organisation searches
+            Organisation widget usage
         </h3>
         <ul>
             <li>
                 <strong>All locations*</strong> &ensp;
-                <i class="fa fa-search" aria-hidden="true"></i> {{organisations_global.searches}} &ensp;
-                <i class="fa fa-file-text-o" aria-hidden="true"></i> {{organisations_global.documents}}
+                <i class="fa fa-search" aria-hidden="true"></i> {{organisations_global.searches | number}} &ensp;
+                <i class="fa fa-file-text-o" aria-hidden="true"></i> {{organisations_global.documents | number}}
             </li>
             <li *ngFor="let website of organisations">
                 <a href="http://{{website.address}}">{{website.address}}</a> &ensp;
-                <i class="fa fa-search" aria-hidden="true"></i> {{(website.searches) || 0}} &ensp;
-                <i class="fa fa-file-text-o" aria-hidden="true"></i> {{(website.documents) || 0}}
+                <i class="fa fa-search" aria-hidden="true"></i> {{(website.searches | number) || 0}} &ensp;
+                <i class="fa fa-file-text-o" aria-hidden="true"></i> {{(website.documents | number) || 0}}
             </li>
         </ul>
 
