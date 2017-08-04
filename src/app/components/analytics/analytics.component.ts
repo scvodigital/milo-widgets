@@ -61,6 +61,7 @@ export class AnalyticsComponent implements OnInit {
             for (var key in opportunities_results) {
                 this.opportunities.push(opportunities_results[key]);
             }
+            this.opportunities.sort(this.dynamicSort("-searches"));
         });
 
         this.db.list('/analytics/organisations').subscribe(orgResults => {
@@ -93,7 +94,20 @@ export class AnalyticsComponent implements OnInit {
             for (var key in organisations_results) {
                 this.organisations.push(organisations_results[key]);
             }
+            this.organisations.sort(this.dynamicSort("-searches"));
         });
+    }
+
+    dynamicSort(property) {
+        var sortOrder = 1;
+        if(property[0] === "-") {
+            sortOrder = -1;
+            property = property.substr(1);
+        }
+        return function (a,b) {
+            var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+            return result * sortOrder;
+        }
     }
 
     ngOnInit() {
