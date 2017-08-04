@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
     private afterSignIn(): void {
         // Do after login stuff here, such router redirects, toast messages, etc.
-        this.router.navigate(['/profile']);
+        this.router.navigate(['/analytics']);
     }
 
     signInWithGithub(): void {
