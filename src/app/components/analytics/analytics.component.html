@@ -1,15 +1,67 @@
 <div class="body-content">
     <h2>
-        Milo search widget analytics
+        Usage analytics
     </h2>
-    <p>
-        Work in progress...
+    <div class="row">
+        <div class="col-sm-2">
+            <strong>Filter</strong>
+        </div>
+        <div class="col-sm-2">
+            <select disabled="disabled">
+                <option value="">Start date</option>
+            </select>
+        </div>
+        <div class="col-sm-2">
+            <select disabled="disabled">
+                <option value="">End date</option>
+            </select>
+        </div>
+        <div class="col-sm-6">
+            <button disabled="disabled" class="btn btn-disabled">Filter</button>
+        </div>
+    </div>
+    <!-- <p>
+        Filter by date coming soon&hellip;
+    </p> -->
+    <p *ngIf="opportunities.length == 0">
+        Loading analytics&hellip;
     </p>
 
-    <ul>
-        <li class="text" *ngFor="let item of items | async">
-            {{item.$value}}
-        </li>
-    </ul>
+    <div class="results" *ngIf="opportunities.length > 0">
+        <h3>
+            Volunteering opportunity searches
+        </h3>
+        <ul>
+            <li>
+                <strong>All locations*</strong> &ensp;
+                <i class="fa fa-search" aria-hidden="true"></i> {{opportunities_global.searches}} &ensp;
+                <i class="fa fa-file-text-o" aria-hidden="true"></i> {{opportunities_global.documents}}
+            </li>
+            <li *ngFor="let website of opportunities">
+                <a href="http://{{website.address}}">{{website.address}}</a> &ensp;
+                <i class="fa fa-search" aria-hidden="true"></i> {{(website.searches) || 0}} &ensp;
+                <i class="fa fa-file-text-o" aria-hidden="true"></i> {{(website.documents) || 0}}
+            </li>
+        </ul>
 
+        <h3>
+            Organisation searches
+        </h3>
+        <ul>
+            <li>
+                <strong>All locations*</strong> &ensp;
+                <i class="fa fa-search" aria-hidden="true"></i> {{organisations_global.searches}} &ensp;
+                <i class="fa fa-file-text-o" aria-hidden="true"></i> {{organisations_global.documents}}
+            </li>
+            <li *ngFor="let website of organisations">
+                <a href="http://{{website.address}}">{{website.address}}</a> &ensp;
+                <i class="fa fa-search" aria-hidden="true"></i> {{(website.searches) || 0}} &ensp;
+                <i class="fa fa-file-text-o" aria-hidden="true"></i> {{(website.documents) || 0}}
+            </li>
+        </ul>
+
+        <p>
+            <small><strong>*</strong> Doesn't include preview / test locations</small>
+        </p>
+    </div>
 </div>
