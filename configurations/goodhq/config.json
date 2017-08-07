@@ -1,0 +1,34 @@
+{
+    "index": "goodhq-organisation",
+    "type": "organisation",
+    "termFields": [""],
+    "templateSet": {
+        "searchFormTemplate": "",
+        "resultsTemplate": "",
+        "viewTemplate": "",
+        "infoWindowTemplate": ""
+    },
+    "mapOptions": {
+        "fields": {
+            "lat": "geo_coords.lat",
+            "lng": "geo_coords.lon",
+            "title": "title"
+        },
+        "initialLocation": {
+            "lat": 56.85132,
+            "lng": -4.1180987 },
+        "initialZoom": 6
+    },
+    "name": "organisations",
+    "title": "Good HQ organisations",
+    "sort": {
+        "title": "asc"
+    },
+    "injectableFilters": [
+        {
+            "attribute": "xid",
+            "field": "xid"
+        }
+    ],
+    "autoSearch": true
+}
