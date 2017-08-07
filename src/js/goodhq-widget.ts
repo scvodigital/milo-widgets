@@ -5,7 +5,7 @@ import * as GoogleMapsLoader from 'google-maps'
 const organisationsConfiguration: IWidgetConfiguration = {
     index: 'goodhq-organisation',
     type: 'organisation',
-    termFields: [''],
+    termFields: ['xid'],
     templateSet: new TemplateSet({
         searchFormTemplate: '',
         resultsTemplate: '',
