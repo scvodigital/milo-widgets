@@ -1,0 +1,19 @@
+{{#compare total '>' 0}}
+<div class="alert alert-info">
+	Number of results: {{total}} | Page {{currentPage}} of {{totalPages}}
+</div>
+{{else}}
+<div class="alert alert-warning">
+	<p>No results</p>
+</div>
+{{/compare}}
+
+{{#each results}}
+	<div class="mw-opportunities-result" id="mw-opportunities-result-{{Id}}">
+		<h3>
+			<a href="#mw-opportunities-{{Id}}">
+				<strong>{{name}}</strong>
+			</a>
+		</h3>
+	</div>
+{{/each}}
