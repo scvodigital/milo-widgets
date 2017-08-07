@@ -8,6 +8,8 @@ import * as jq from 'jquery';
 export class PreviewComponent {
     @Input() public type: string = "organisations";
     @Input() public filter: string = "";
+    @Input() public style: string = "";
+    @Input() public xid: string = "";
     @Input() public hideTitle: boolean = false;
     @Input() public hideMap: boolean = true;
 
@@ -18,6 +20,8 @@ export class PreviewComponent {
         s.type = "text/javascript";
         s.src = "https://milo.scvo.org/"+this.type+".bundle.js";
         if (this.filter !== "") s.setAttribute("data-tsi", ""+this.filter);
+        if (this.style !== "") s.setAttribute("data-widget-style", ""+this.style);
+        if (this.xid !== "") s.setAttribute("data-xid", ""+this.xid);
         s.setAttribute("data-hide-title", ""+this.hideTitle);
         s.setAttribute("data-hide-map", ""+this.hideMap);
         jq('preview').children().remove();

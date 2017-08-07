@@ -12,10 +12,11 @@ module.exports = {
         'opportunities': './src/js/opportunities-widget.ts',
         'opportunities-organisation': './src/js/opportunities-organisation-widget.ts',
         'opportunities-organisations': './src/js/opportunities-organisations-widget.ts',
+        'goodhq': './src/js/goodhq-widget.ts'
     },
     output: {
         path: path.join(__dirname, "./compiled"),
-        filename: '[name].bundle.js',
+        filename: '[name].bundle.js'
     },
     module: {
         rules: [
