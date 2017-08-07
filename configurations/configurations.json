@@ -1,4 +1,41 @@
 {
+    "goodhq": {
+        "index": "goodhq-organisation",
+        "type": "organisation",
+        "termFields": [
+            ""
+        ],
+        "templateSet": {
+            "searchFormTemplate": "",
+            "resultsTemplate": "{{#compare total '>' 0}}\n<div class=\"alert alert-info\">\n\tNumber of results: {{total}} | Page {{currentPage}} of {{totalPages}}\n</div>\n{{else}}\n<div class=\"alert alert-warning\">\n\t<p>No results</p>\n</div>\n{{/compare}}\n\n{{#each results}}\n\t<div class=\"mw-opportunities-result\" id=\"mw-opportunities-result-{{Id}}\">\n\t\t<h3>\n\t\t\t<a href=\"#mw-opportunities-{{Id}}\">\n\t\t\t\t<strong>{{name}}</strong>\n\t\t\t</a>\n\t\t</h3>\n\t</div>\n{{/each}}\n",
+            "viewTemplate": "<h3>\n\t<!-- <span class=\"mw-emoji pull-right\">&#9207;</span> -->\n\t<strong>{{name}}</strong>\n</h3>\n\n<p>{{about}}</p>\n\n<p>{{stars}}</p>\n",
+            "infoWindowTemplate": ""
+        },
+        "mapOptions": {
+            "fields": {
+                "lat": "geo_coords.lat",
+                "lng": "geo_coords.lon",
+                "title": "title"
+            },
+            "initialLocation": {
+                "lat": 56.85132,
+                "lng": -4.1180987
+            },
+            "initialZoom": 6
+        },
+        "name": "goodhq",
+        "title": "Good HQ organisations",
+        "sort": {
+            "title": "asc"
+        },
+        "injectableFilters": [
+            {
+                "attribute": "xid",
+                "field": "xid"
+            }
+        ],
+        "autoSearch": true
+    },
     "opportunities": {
         "index": "volunteering-opportunity",
         "type": "volunteering-opportunity",
