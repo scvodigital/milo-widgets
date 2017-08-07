@@ -31,7 +31,7 @@ This builds minified code and deploys via Firebase.
 ## Information
 The repository [wiki](https://github.com/scvodigital/milo-widgets/wiki) will contain project documentation.
 
-The website address is [milo.scvo.org.uk](https://milo.scvo.org.uk).
+The website address is [milo.scvo.org](https://milo.scvo.org).
 * [Documentation](https://github.com/scvodigital/milo-widgets/wiki)
 * [Bug tracker](https://github.com/scvodigital/milo-widgets/issues)
 
