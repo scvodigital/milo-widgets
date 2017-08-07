@@ -21,7 +21,7 @@ const organisationsConfiguration: IWidgetConfiguration = {
         initialLocation: { lat: 56.85132, lng: -4.1180987 },
         initialZoom: 6
     },
-    name: 'organisations',
+    name: 'goodhq',
     title: 'Good HQ organisations',
     sort: {
         title: 'asc'
