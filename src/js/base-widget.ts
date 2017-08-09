@@ -557,21 +557,7 @@ export class BaseWidget {
 			return;
 		}
 		var content = this.config.templateSet.view(this.doc, handlebars);
-		var template = `
-            <html>
-                </head>
-                    <title>${this.config.title}</title>
-                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-                </head>
-                <body>
-                    ${content}
-                    <script>
-                        window.print();
-                        var me = window.parent.document.getElementById('print-frame-${this.config.name}');
-                        me.parentNode.removeChild(window.parent.document.getElementById('print-frame-${this.config.name}'));
-                    </script>
-                </body>
-            </html>`;
+		var template = '<html></head><title>'+this.config.title+'</title><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" /></head><body>'+content+'<script>window.print();var me = window.parent.document.getElementById(\'print-frame-'+this.config.name+'\');me.parentNode.removeChild(window.parent.document.getElementById(\'print-frame-'+this.config.name+'\'));</script></body></html>';
 		var frame = jq('<iframe />', {
 			src: 'about:blank',
 			border: 0,
