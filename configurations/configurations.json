@@ -3,7 +3,7 @@
         "index": "goodhq-organisation",
         "type": "organisation",
         "termFields": [
-            ""
+            "xid"
         ],
         "templateSet": {
             "searchFormTemplate": "",
@@ -15,7 +15,7 @@
             "fields": {
                 "lat": "geo_coords.lat",
                 "lng": "geo_coords.lon",
-                "title": "title"
+                "title": "xid"
             },
             "initialLocation": {
                 "lat": 56.85132,
@@ -26,7 +26,7 @@
         "name": "goodhq",
         "title": "Good HQ organisations",
         "sort": {
-            "title": "asc"
+            "xid": "asc"
         },
         "injectableFilters": [
             {
