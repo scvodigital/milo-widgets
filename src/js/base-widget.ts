@@ -272,8 +272,8 @@ export class BaseWidget {
 				simple_query_string: {
 					query: queryString,
                     analyzer: 'my_snowball_analyzer',
-                    default_operator: 'AND',
-                    minimum_should_match: '100%'
+                    // minimum_should_match: '100%',
+                    default_operator: 'AND'
 				}
 			};
 			return query;
