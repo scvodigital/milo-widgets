@@ -35,6 +35,10 @@ module.exports = {
                 loader: "handlebars-loader"
             },
             {
+                test: /\.json$/,
+                loader: 'json-loader'
+            },
+            {
                 test: /\.js$/,
                 loader: 'unlazy-loader'
             },
@@ -54,6 +58,7 @@ module.exports = {
         ],
     },
     plugins: [
+        new webpack.optimize.UglifyJsPlugin(),
         new WriteFilePlugin(),
         new CopyWebpackPlugin([
             { from: './src/js/require.js', to: './lib/require.js' }
