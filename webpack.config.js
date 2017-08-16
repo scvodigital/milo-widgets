@@ -3,7 +3,6 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 var WriteFilePlugin = require('write-file-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var CompressionPlugin = require("compression-webpack-plugin");
-var UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 var path = require('path');
 
@@ -66,7 +65,6 @@ module.exports = {
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': '"production"'
         }),
-        new UglifyJSPlugin(),
         new CompressionPlugin({
             asset: "[path].gz[query]",
             algorithm: "gzip",
