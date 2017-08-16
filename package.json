@@ -76,8 +76,6 @@
         "style-loader": "^0.18.2",
         "ts-loader": "^2.3.2",
         "typescript": "^2.4.2",
-        "uglify-js": "^3.0.27",
-        "uglifyjs-webpack-plugin": "^1.0.0-beta.2",
         "unlazy-loader": "^0.1.2",
         "webpack": "^3.5.4",
         "webpack-bundle-analyzer": "^2.9.0",
