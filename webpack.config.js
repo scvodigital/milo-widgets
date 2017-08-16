@@ -3,6 +3,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 var WriteFilePlugin = require('write-file-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var CompressionPlugin = require("compression-webpack-plugin");
+var BabelEnginePlugin = require('babel-engine-plugin');
 
 var path = require('path');
 
@@ -24,6 +25,17 @@ module.exports = {
                 test: /\.js$/,
                 enforce: 'pre',
                 loader: 'source-map-loader'
+            },
+            {
+                test: /\.(js|jsx)$/,
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['es2015'],
+                        },
+                    },
+                ],
             },
             {
                 test: /\.tsx?$/,
@@ -58,7 +70,9 @@ module.exports = {
         ],
     },
     plugins: [
-        new webpack.optimize.UglifyJsPlugin(),
+        new BabelEnginePlugin({
+            presets: ['env']
+        }),
         new WriteFilePlugin(),
         new CopyWebpackPlugin([
             { from: './src/js/require.js', to: './lib/require.js' }
