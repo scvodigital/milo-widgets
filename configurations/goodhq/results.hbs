@@ -1,19 +1,13 @@
-{{#compare total '>' 0}}
-<div class="alert alert-info">
-	Number of results: {{total}} | Page {{currentPage}} of {{totalPages}}
-</div>
-{{else}}
+{{#compare total '==' 0}}
 <div class="alert alert-warning">
-	<p>No results</p>
+	<p>Couldn't find that xid</p>
 </div>
 {{/compare}}
 
 {{#each results}}
 	<div class="mw-goodhq-result" id="mw-goodhq-result-{{Id}}">
-		<h3>
-			<a href="#mw-goodhq-{{Id}}">
-				<strong>{{xid}}</strong>
-			</a>
-		</h3>
+		<a href="https://goodhq.org/{{Id}}">
+			<strong>{{name}}</strong>
+		</a>
 	</div>
 {{/each}}
