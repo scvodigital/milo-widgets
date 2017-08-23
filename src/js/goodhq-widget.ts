@@ -31,11 +31,12 @@ const organisationsConfiguration: IWidgetConfiguration = {
 
 class GoodHQWidget extends BaseWidget {
     xid: string;
-    hideMap: boolean = true;
+    style: string = 'basic';
 
     constructor() {
         super('');
         this.xid = this.scriptTag.data('xid');
+        this.style = this.scriptTag.data('style');
     }
 
     doOldSearch(page: number = 1) {
@@ -54,7 +55,7 @@ class GoodHQWidget extends BaseWidget {
             }
         };
 
-        this.search(payload, page).then((resultSet: ResultSet) => { });
+        this.search(payload, page).then((resultSet: ResultSet) => {});
     }
 }
 
