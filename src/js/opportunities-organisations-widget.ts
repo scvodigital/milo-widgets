@@ -44,7 +44,8 @@ class OpportunitiesOrganisationsWidget extends BaseWidget {
             must.push({
                 simple_query_string: {
                     query: query,
-                    analyzer: "snowball"
+                    default_operator: 'AND',
+                    minimum_should_match: '100%'
                 }
             });
         }
@@ -56,7 +57,7 @@ class OpportunitiesOrganisationsWidget extends BaseWidget {
             }
         };
 
-        this.search(payload, page).then((resultSet: ResultSet) => {  });
+        this.search(payload, page).then((resultSet: ResultSet) => {});
     }
 }
 

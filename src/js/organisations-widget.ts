@@ -109,10 +109,10 @@ class OrganisationWidget extends BaseWidget {
                     ];
                     payload.sort = sort;
                 }
-                this.search(payload, page).then((resultSet: ResultSet) => {  });
+                this.search(payload, page).then((resultSet: ResultSet) => {});
             });
         } else {
-            this.search(payload, page).then((resultSet: ResultSet) => {  });
+            this.search(payload, page).then((resultSet: ResultSet) => {});
         }
     }
 }

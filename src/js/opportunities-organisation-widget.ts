@@ -52,7 +52,7 @@ class OpportunitiesOrganisationWidget extends BaseWidget {
             }
         };
 
-        this.search(payload, page).then((resultSet: ResultSet) => { });
+        this.search(payload, page).then((resultSet: ResultSet) => {});
     }
 }
 

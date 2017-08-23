@@ -24,11 +24,5 @@
     "sort": {
         "xid": "asc"
     },
-    "injectableFilters": [
-        {
-            "attribute": "xid",
-            "field": "xid"
-        }
-    ],
     "autoSearch": true
 }
