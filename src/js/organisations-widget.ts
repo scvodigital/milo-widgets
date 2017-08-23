@@ -64,7 +64,6 @@ class OrganisationWidget extends BaseWidget {
             must.push({
                 simple_query_string: {
                     query: query,
-                    analyzer: 'my_snowball_analyzer',
                     default_operator: 'AND',
                     minimum_should_match: '100%'
                 }
