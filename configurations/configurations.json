@@ -7,8 +7,8 @@
         ],
         "templateSet": {
             "searchFormTemplate": "",
-            "resultsTemplate": "{{#compare total '>' 0}}\n<div class=\"alert alert-info\">\n\tNumber of results: {{total}} | Page {{currentPage}} of {{totalPages}}\n</div>\n{{else}}\n<div class=\"alert alert-warning\">\n\t<p>No results</p>\n</div>\n{{/compare}}\n\n{{#each results}}\n\t<div class=\"mw-goodhq-result\" id=\"mw-goodhq-result-{{Id}}\">\n\t\t<h3>\n\t\t\t<a href=\"#mw-goodhq-{{Id}}\">\n\t\t\t\t<strong>{{xid}}</strong>\n\t\t\t</a>\n\t\t</h3>\n\t</div>\n{{/each}}\n",
-            "viewTemplate": "<h3>\n\t<strong>{{xid}}</strong>\n</h3>\n",
+            "resultsTemplate": "{{#compare total '==' 0}}\n<div class=\"alert alert-warning\">\n\t<p>Couldn't find that xid</p>\n</div>\n{{/compare}}\n\n{{#each results}}\n\t<div class=\"mw-goodhq-result\" id=\"mw-goodhq-result-{{Id}}\">\n\t\t<a href=\"https://goodhq.org/{{Id}}\">\n\t\t\t<strong>{{name}}</strong>\n\t\t</a>\n\t</div>\n{{/each}}\n",
+            "viewTemplate": "",
             "infoWindowTemplate": ""
         },
         "mapOptions": {
