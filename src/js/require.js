@@ -14,6 +14,6 @@
             widgetTag.setAttribute(attr.name, attr.value);
         }
     }
-    console.log(widgetTag.outerHTML);
+    // console.log(widgetTag.outerHTML);
     scriptTag.insertAdjacentElement('afterEnd', widgetTag);
 })();
