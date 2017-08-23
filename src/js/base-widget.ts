@@ -578,7 +578,7 @@ export class BaseWidget {
 			var from = (page - 1) * 10;
 			var payload: any = {
 				index: this.config.index,
-				type: this.config.index,
+				type: this.config.type,
 				body: {
 					query: query,
 					from: from
