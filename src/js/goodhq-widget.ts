@@ -52,7 +52,8 @@ class GoodHQWidget extends BaseWidget {
             bool: {
                 must: must,
                 minimum_should_match: 1
-            }
+            },
+            size: 1
         };
 
         this.search(payload, page).then((resultSet: ResultSet) => {});

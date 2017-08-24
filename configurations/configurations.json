@@ -7,7 +7,7 @@
         ],
         "templateSet": {
             "searchFormTemplate": "",
-            "resultsTemplate": "{{#compare total '==' 0}}\n<div class=\"alert alert-warning\">\n\t<p>Couldn't find that xid</p>\n</div>\n{{/compare}}\n\n{{#each results}}\n\t<div class=\"mw-goodhq-result\" id=\"mw-goodhq-result-{{Id}}\">\n\t\t<a href=\"https://goodhq.org/{{Id}}\">\n\t\t\t<strong>{{name}}</strong>\n\t\t</a>\n\t</div>\n{{/each}}\n",
+            "resultsTemplate": "{{#compare total '==' 0}}\n<div class=\"alert alert-warning\">\n\t<p>Couldn't find that username</p>\n</div>\n{{/compare}}\n\n{{#each results}}\n<div class=\"mw-goodhq-result\" id=\"mw-goodhq-result-{{Id}}\">\n\t{{#if reviewcount}}\n\t<img src=\"https://goodhq.org/images/good_hq_logo.png\" />\n\t<p>\n\t\t<a href=\"https://goodhq.org/{{xid}}\">{{name}}</a> has {{reviewcount}} review{{#compare reviewcount '>' 1}}s{{/compare}} on Good HQ<br />\n\t\t[hearts]<br />\n\t\t<a href=\"https://goodhq.org/{{xid}}/review\">Share your story</a> |\n\t\t<a href=\"https://goodhq.org/{{xid}}?mode=review\">Read review{{#compare reviewcount '>' 1}}s{{/compare}}</a>\n\t</p>\n\t{{else}}\n\t<p>\n\t\t<a href=\"https://goodhq.org/{{xid}}\">{{name}}</a> is on\n\t</p>\n\t<img src=\"https://goodhq.org/images/good_hq_logo.png\" />\n\t<p>\n\t\tBe the first person to<br />\n\t\t<strong><a href=\"https://goodhq.org/{{xid}}/review\">share your story</a></strong>\n\t</p>\n\t{{/if}}\n</div>\n{{/each}}\n",
             "viewTemplate": "",
             "infoWindowTemplate": ""
         },
