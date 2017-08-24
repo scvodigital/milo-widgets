@@ -188,5 +188,23 @@
 #mw-goodhq-widget .mw-search-widget-inner,
 #mw-goodhq-widget .mw-navigation,
 #mw-opportunities-organisation-widget .mw-search-widget-inner {
-    display: none;
+    display: none !important;
+}
+#mw-goodhq-widget {
+  .mw-goodhq-result {
+    background-color: #4033E9;
+    color: white;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    width: 250px;
+    text-align: center;
+    a {
+      color: white;
+      text-decoration: none;
+    }
+    a:hover {
+      color: white;
+      text-decoration: none;
+    }
+  }
 }
