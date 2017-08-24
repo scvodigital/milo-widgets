@@ -10,9 +10,11 @@
 	<a href="https://goodhq.org"><img src="https://goodhq.org/images/good_hq_logo.png" /></a>
 	<p>
 		<a href="https://goodhq.org/{{xid}}">{{name}}</a> has {{reviewcount}} review{{#compare reviewcount '>' 1}}s{{/compare}} on Good HQ<br />
-		{{#times (round stars)}}
-			&hearts;
-		{{/times}}
+		<ul class="hearts">
+			{{#times (round stars)}}
+				<li><span class="icon-heart"></span></li>
+			{{/times}}
+		</ul>
 		<br />
 		<a href="https://goodhq.org/{{xid}}/review">Share your story</a> |
 		<a href="https://goodhq.org/{{xid}}?mode=review">Read review{{#compare reviewcount '>' 1}}s{{/compare}}</a>

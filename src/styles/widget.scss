@@ -196,7 +196,7 @@
     color: white;
     padding: 1.5rem 0.2rem 1rem;
     border-radius: 0.75rem;
-    max-width: 300px;
+    max-width: 345px;
     text-align: center;
     a {
       color: white;
@@ -204,7 +204,7 @@
     }
     a:hover {
       color: white;
-      text-decoration: none;
+      text-decoration: underline;
     }
     p {
       font-size: 0.95rem;
@@ -215,5 +215,59 @@
     img {
       max-width: 70%;
     }
+  }
+
+  @font-face {
+      font-family: 'goodhq';
+      src: url("https://goodhq.org/fonts/goodhq.eot");
+      src: url("https://goodhq.org/fonts/goodhq.eot?#iefix") format("embedded-opentype"), url("https://goodhq.org/fonts/goodhq.woff") format("woff"), url("https://goodhq.org/fonts/goodhq.ttf") format("truetype"), url("https://goodhq.org/fonts/goodhq.svg#goodhq") format("svg");
+      font-weight: normal;
+      font-style: normal;
+  }
+
+  // Heart icons =================================================================
+  .icon-heart:before,
+  ul.hearts li:before {
+      display: inline-block;
+      font-family: 'goodhq';
+      font-style: normal;
+      font-weight: normal;
+      line-height: 1;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+  }
+  ul.hearts {
+      list-style: none;
+  }
+  ul.hearts li p {
+      display: inline;
+  }
+  ul.hearts li {
+      margin-bottom: 5px;
+  }
+  ul.hearts li:before {
+      margin: 5px 0 0 -30px;
+      float: left;
+      color: white;
+      font-size: 1.3rem;
+  }
+  ul.rating li span.icon-heart:before {
+      content: '\004a';
+  }
+  ul.rating li.half span.icon-heart:before {
+      content: '\0049';
+  }
+  span.icon-heart:before,
+  ul.rating li.filled span.icon-heart:before {
+      content: '\0048';
+  }
+  ul.hearts li:before {
+      content: '\004b';
+  }
+
+  span.icon-heart-verified:before {
+      content: '\004c';
+      color: white;
+      position: absolute;
   }
 }
