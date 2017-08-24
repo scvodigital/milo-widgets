@@ -8,23 +8,23 @@
 
     <form class="form-horizontal">
         <div class="form-group row">
-            <label for="xid" class="col-sm-2 control-label">
-                Organisation xid
+            <label for="xid" class="col-sm-3 control-label">
+                Organisation username
             </label>
-            <div class="col-sm-10">
+            <div class="col-sm-9">
                 <input name="xid" [(ngModel)]="xid" class="form-control" />
             </div>
         </div>
 
         <div class="form-group row">
-            <label for="style" class="col-sm-2 control-label">
+            <label for="style" class="col-sm-3 control-label">
                 Widget style
             </label>
-            <div class="col-sm-10">
+            <div class="col-sm-9">
                 <select name="style" [(ngModel)]="style" class="form-control">
                     <option value="" disabled="disabled" selected="selected">Please select a widget style</option>
                     <option value="basic">Basic</option>
-                    <option value="advanced">Advanced</option>
+                    <option value="advanced" disabled>Advanced</option>
                 </select>
             </div>
         </div>

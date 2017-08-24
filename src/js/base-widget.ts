@@ -237,7 +237,7 @@ export class BaseWidget {
                     allowSort = false;
 				}
 
-				this.search(payload, page, jump, allowSort).then((resultSet: ResultSet) => { });
+				this.search(payload, page, jump, allowSort).then((resultSet: ResultSet) => {});
 			});
 		});
 	}
@@ -957,6 +957,17 @@ handlebars.registerHelper('any', function () {
 		return options.inverse(this);
 	}
 })
+
+handlebars.registerHelper('times', function(n, block) {
+	    var accum = '';
+	    for(var i = 0; i < n; ++i) {
+	        block.data.index = i;
+	        block.data.first = i === 0;
+	        block.data.last = i === (n - 1);
+	        accum += block.fn(this);
+	    }
+	    return accum;
+	})
 
 handlebars.registerHelper('ps', function (str) {
 	if (!str) {

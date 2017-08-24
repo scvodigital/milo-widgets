@@ -1,16 +1,19 @@
 {{#compare total '==' 0}}
 <div class="alert alert-warning">
-	<p>Couldn't find that username</p>
+	<p>Couldn't find an organisation with that username on Good HQ</p>
 </div>
 {{/compare}}
 
 {{#each results}}
 <div class="mw-goodhq-result" id="mw-goodhq-result-{{Id}}">
 	{{#if reviewcount}}
-	<img src="https://goodhq.org/images/good_hq_logo.png" />
+	<a href="https://goodhq.org"><img src="https://goodhq.org/images/good_hq_logo.png" /></a>
 	<p>
 		<a href="https://goodhq.org/{{xid}}">{{name}}</a> has {{reviewcount}} review{{#compare reviewcount '>' 1}}s{{/compare}} on Good HQ<br />
-		[hearts]<br />
+		{{#times (round stars)}}
+			&hearts;
+		{{/times}}
+		<br />
 		<a href="https://goodhq.org/{{xid}}/review">Share your story</a> |
 		<a href="https://goodhq.org/{{xid}}?mode=review">Read review{{#compare reviewcount '>' 1}}s{{/compare}}</a>
 	</p>
@@ -18,7 +21,7 @@
 	<p>
 		<a href="https://goodhq.org/{{xid}}">{{name}}</a> is on
 	</p>
-	<img src="https://goodhq.org/images/good_hq_logo.png" />
+	<a href="https://goodhq.org"><img src="https://goodhq.org/images/good_hq_logo.png" /></a>
 	<p>
 		Be the first person to<br />
 		<strong><a href="https://goodhq.org/{{xid}}/review">share your story</a></strong>
