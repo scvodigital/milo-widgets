@@ -12,10 +12,12 @@
 		<a href="https://goodhq.org/{{xid}}">{{name}}</a> has {{reviewcount}} review{{#compare reviewcount '>' 1}}s{{/compare}} on Good HQ<br />
 		<ul class="hearts">
 			{{#times (round stars)}}
-				<li><span class="icon-heart"></span></li>
+				<li class="filled"><span aria-hidden="true" class="icon-heart"></span></li>
 			{{/times}}
+			{{#compare stars '<' 5}}
+				<!-- <li><span aria-hidden="true" class="icon-heart"></span></li> -->
+			{{/compare}}
 		</ul>
-		<br />
 		<a href="https://goodhq.org/{{xid}}/review">Share your story</a> |
 		<a href="https://goodhq.org/{{xid}}?mode=review">Read review{{#compare reviewcount '>' 1}}s{{/compare}}</a>
 	</p>

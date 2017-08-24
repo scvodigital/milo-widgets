@@ -205,15 +205,16 @@
     a:hover {
       color: white;
       text-decoration: underline;
+      text-decoration-skip: ink;
     }
     p {
       font-size: 0.95rem;
     }
-    p, img {
+    p, img, ul {
       margin: 0 0 0.5rem
     }
     img {
-      max-width: 70%;
+      max-width: 50%;
     }
   }
 
