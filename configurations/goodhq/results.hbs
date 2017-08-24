@@ -5,9 +5,19 @@
 {{/compare}}
 
 {{#each results}}
-	<div class="mw-goodhq-result" id="mw-goodhq-result-{{Id}}">
-		<a href="https://goodhq.org/{{Id}}">
-			<strong>{{name}}</strong>
-		</a>
-	</div>
+<div class="mw-goodhq-result" id="mw-goodhq-result-{{Id}}">
+	{{#compare reviewcount '==' 0}}
+	<p>
+		<a href="https://goodhq.org/{{Id}}">{{name}}</a> is on<br />
+		<a href="https://goodhq.org"><img src="https://goodhq.org/images/good_hq_logo.png" /></a><br />
+		Be the first person to<br />
+		<strong><a href="https://goodhq.org/{{Id}}/review">share your story</a></strong>
+	</p>
+	{{/compare}}
+	{{#compare reviewcount '>' 0}}
+	<a href="https://goodhq.org/{{Id}}">
+		<strong>{{name}}</strong>
+	</a>
+	{{/compare}}
+</div>
 {{/each}}
