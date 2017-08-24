@@ -194,9 +194,9 @@
   .mw-goodhq-result {
     background-color: #4033E9;
     color: white;
-    padding: 1rem;
+    padding: 1rem 0.2rem 0.5rem;
     border-radius: 0.75rem;
-    width: 250px;
+    max-width: 250px;
     text-align: center;
     a {
       color: white;
@@ -205,6 +205,15 @@
     a:hover {
       color: white;
       text-decoration: none;
+    }
+    p {
+      font-size: 0.95rem;
+    }
+    p, img {
+      margin: 0 0 0.5rem
+    }
+    img {
+      max-width: 70%;
     }
   }
 }

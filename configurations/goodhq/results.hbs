@@ -1,23 +1,28 @@
 {{#compare total '==' 0}}
 <div class="alert alert-warning">
-	<p>Couldn't find that xid</p>
+	<p>Couldn't find that username</p>
 </div>
 {{/compare}}
 
 {{#each results}}
 <div class="mw-goodhq-result" id="mw-goodhq-result-{{Id}}">
-	{{#compare reviewcount '==' 0}}
+	{{#if reviewcount}}
+	<img src="https://goodhq.org/images/good_hq_logo.png" />
 	<p>
-		<a href="https://goodhq.org/{{Id}}">{{name}}</a> is on<br />
-		<a href="https://goodhq.org"><img src="https://goodhq.org/images/good_hq_logo.png" /></a><br />
-		Be the first person to<br />
-		<strong><a href="https://goodhq.org/{{Id}}/review">share your story</a></strong>
+		<a href="https://goodhq.org/{{xid}}">{{name}}</a> has {{reviewcount}} review{{#compare reviewcount '>' 1}}s{{/compare}} on Good HQ<br />
+		[hearts]<br />
+		<a href="https://goodhq.org/{{xid}}/review">Share your story</a> |
+		<a href="https://goodhq.org/{{xid}}?mode=review">Read review{{#compare reviewcount '>' 1}}s{{/compare}}</a>
 	</p>
-	{{/compare}}
-	{{#compare reviewcount '>' 0}}
-	<a href="https://goodhq.org/{{Id}}">
-		<strong>{{name}}</strong>
-	</a>
-	{{/compare}}
+	{{else}}
+	<p>
+		<a href="https://goodhq.org/{{xid}}">{{name}}</a> is on
+	</p>
+	<img src="https://goodhq.org/images/good_hq_logo.png" />
+	<p>
+		Be the first person to<br />
+		<strong><a href="https://goodhq.org/{{xid}}/review">share your story</a></strong>
+	</p>
+	{{/if}}
 </div>
 {{/each}}
