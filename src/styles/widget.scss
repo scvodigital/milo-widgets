@@ -254,18 +254,15 @@
         color: white;
         font-size: 1.3rem;
     }
-    ul.rating li span.icon-heart:before {
-        content: '\004a';
+    ul.rating li span.icon-heart:before,
+    ul.rating li.filled span.icon-heart:before {
+        content: '\0048';
     }
     ul.rating li.half span.icon-heart:before {
         content: '\0049';
     }
-    span.icon-heart:before,
-    ul.rating li.filled span.icon-heart:before {
-        content: '\0048';
-    }
-    ul.hearts li:before {
-        content: '\004b';
+    ul.rating li.empty span.icon-heart:before {
+        content: '\004a';
     }
 
     span.icon-heart-verified:before {
