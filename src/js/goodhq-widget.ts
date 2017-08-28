@@ -43,7 +43,19 @@ class GoodHQWidget extends BaseWidget {
         var must = [];
 
         if (this.xid) {
-            must.push({ term: { xid: this.xid } });
+            // must.push({ term: { xid: this.xid } });
+            must.push({
+                simple_query_string: {
+                    query: {
+                        query_string: {
+                            fields: ['xid'],
+                            query: this.xid
+                        }
+                    },
+                    default_operator: 'AND',
+                    minimum_should_match: '100%'
+                }
+            });
         } else {
             return;
         }
