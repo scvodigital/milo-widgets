@@ -11,12 +11,37 @@
 	<p>
 		<a href="https://goodhq.org/{{xid}}">{{name}}</a> has {{reviewcount}} review{{#compare reviewcount '>' 1}}s{{/compare}} on Good HQ<br />
 		<ul class="hearts">
-			{{#times (round stars)}}
-				<li class="filled"><span aria-hidden="true" class="icon-heart"></span></li>
-			{{/times}}
-			{{#compare stars '<' 5}}
-				<!-- <li><span aria-hidden="true" class="icon-heart"></span></li> -->
-			{{/compare}}
+            {{#compare stars '<' 0.5}}
+                <li class="empty"><span aria-hidden="true" class="icon-heart"></span></li>
+            {{/compare}}
+            {{#compare stars '>=' 0.5}}
+                <li class="filled"><span aria-hidden="true" class="icon-heart"></span></li>
+            {{/compare}}
+            {{#compare stars '<' 1.5}}
+                <li class="empty"><span aria-hidden="true" class="icon-heart"></span></li>
+            {{/compare}}
+            {{#compare stars '>=' 1.5}}
+                <li class="filled"><span aria-hidden="true" class="icon-heart"></span></li>
+            {{/compare}}
+            {{#compare stars '<' 2.5}}
+                <li class="empty"><span aria-hidden="true" class="icon-heart"></span></li>
+            {{/compare}}
+            {{#compare stars '>=' 2.5}}
+                <li class="filled"><span aria-hidden="true" class="icon-heart"></span></li>
+            {{/compare}}
+            {{#compare stars '<' 3.5}}
+                <li class="empty"><span aria-hidden="true" class="icon-heart"></span></li>
+            {{/compare}}
+            {{#compare stars '>=' 3.5}}
+                <li class="filled"><span aria-hidden="true" class="icon-heart"></span></li>
+            {{/compare}}
+            {{#compare stars '<' 4.5}}
+                <li class="empty"><span aria-hidden="true" class="icon-heart"></span></li>
+            {{/compare}}
+            {{#compare stars '>=' 4.5}}
+                <li class="filled"><span aria-hidden="true" class="icon-heart"></span></li>
+            {{/compare}}
+            <!-- <li class="filled"><span aria-hidden="true" class="icon-heart"></span></li> -->
 		</ul>
 		<a href="https://goodhq.org/{{xid}}/review">Share your story</a> |
 		<a href="https://goodhq.org/{{xid}}?mode=review">Read review{{#compare reviewcount '>' 1}}s{{/compare}}</a>
