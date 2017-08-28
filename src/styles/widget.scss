@@ -227,47 +227,41 @@
     }
 
     // Heart icons =================================================================
-    .icon-heart:before {
-        display: inline-block;
-        font-family: 'goodhq';
-        font-style: normal;
-        font-weight: normal;
-        line-height: 1;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
     ul.hearts {
         list-style: none;
         margin: 0;
         padding: 0;
-    }
-    ul.hearts li p {
-        display: inline;
-    }
-    ul.hearts li {
-        margin-bottom: 0.1rem;
-        display: inline-block;
-    }
-    ul.hearts li:before {
-        margin: 5px 0 0 -30px;
-        float: left;
-        color: white;
-        font-size: 1.3rem;
-    }
-    ul.rating li span.icon-heart:before,
-    ul.rating li.filled span.icon-heart:before {
-        content: '\0048';
-    }
-    ul.rating li.half span.icon-heart:before {
-        content: '\0049';
-    }
-    ul.rating li.empty span.icon-heart:before {
-        content: '\004a';
-    }
-
-    span.icon-heart-verified:before {
-        content: '\004c';
-        color: white;
-        position: absolute;
+        li {
+            margin-bottom: 0.1rem;
+            display: inline-block;
+            p {
+                display: inline;
+            }
+            .icon-heart:before {
+                display: inline-block;
+                font-family: 'goodhq';
+                font-style: normal;
+                font-weight: normal;
+                line-height: 1;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+        }
+        li:before {
+            margin: 5px 0 0 -30px;
+            float: left;
+            color: white;
+            font-size: 1.3rem;
+        }
+        li .icon-heart:before,
+        li.filled .icon-heart:before {
+            content: '\0048';
+        }
+        li.half .icon-heart:before {
+            content: '\0049';
+        }
+        li.empty .icon-heart:before {
+            content: '\004a';
+        }
     }
 }
