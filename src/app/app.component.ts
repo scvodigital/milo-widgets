@@ -11,7 +11,7 @@ export class AppComponent {
     constructor(private router: Router, elementRef: ElementRef, renderer: Renderer) {
         // Good HQ redirect
         if (window.location.hostname == 'widgets.goodhq.org') {
-          // window.location.href = 'https://goodhq.org';
+            window.location.href = 'https://goodhq.org';
         }
 
         // Scroll to top on new route
@@ -20,7 +20,7 @@ export class AppComponent {
                 window.scrollTo(0, 0);
             }
         });
-        
+
         // Click to copy
         renderer.listen(elementRef.nativeElement, 'click', (event) => {
            if (event.target.className == 'btn btn-sm copy') {
