@@ -43,6 +43,10 @@ module.exports = {
                 loader: 'unlazy-loader'
             },
             {
+                test: /\.(eot|svg|ttf|woff|woff2)$/,
+                loader: 'file?name=compiled/fonts/[name].[ext]'
+            },
+            {
                 test: /\.scss$/,
                 use: [
                     'style-loader',
@@ -61,6 +65,9 @@ module.exports = {
         new WriteFilePlugin(),
         new CopyWebpackPlugin([
             { from: './src/js/require.js', to: './lib/require.js' }
+        ]),
+        new CopyWebpackPlugin([
+            { from: './src/fonts', to: './fonts' }
         ]),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': '"production"'
