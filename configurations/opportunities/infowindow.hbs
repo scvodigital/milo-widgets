@@ -1,8 +1,8 @@
 <h4>
     <a href="#mw-opportunities-{{Id}}">
         <strong>{{title}}</strong>
-        {{#if organisationName}}
-            | {{organisationName}}
+        {{#if organisation_name}}
+            | {{organisation_name}}
         {{/if}}
         {{#each ../sorts}}
             ({{round this 2}} miles)
@@ -11,25 +11,25 @@
 </h4>
 
 <ul class="list-inline">
-    {{#if referenceCode}}
+    {{#if reference_code}}
     <li>
-        <i class="fa fa-fw fa-book"></i> <strong>Ref:</strong> {{referenceCode}}
+        <i class="fa fa-fw fa-book"></i> <strong>Ref:</strong> {{reference_code}}
     </li>
-    {{/if}} {{#if startData}}
+    {{/if}} {{#if start_date}}
     <li>
-        <i class="fa fa-fw fa-calendar"></i> <strong>Start Date:</strong> {{startDate}}
+        <i class="fa fa-fw fa-calendar"></i> <strong>Start Date:</strong> {{start_date}}
     </li>
-    {{/if}} {{#if workType}}
+    {{/if}} {{#if work_type}}
     <li>
-        <i class="fa fa-fw fa-briefcase"></i> <strong>Work Type:</strong> {{workType}}
+        <i class="fa fa-fw fa-briefcase"></i> <strong>Work Type:</strong> {{work_type}}
     </li>
-    {{/if}} {{#if clientGroup}}
+    {{/if}} {{#if client_group}}
     <li>
-        <i class="fa fa-fw fa-users"></i> <strong>Client Group:</strong> {{clientGroup}}
+        <i class="fa fa-fw fa-users"></i> <strong>Client Group:</strong> {{client_group}}
     </li>
-    {{/if}} {{#if organisationCharityNo}}
+    {{/if}} {{#if organisation_charity_number}}
     <li>
-        <i class="fa fa-fw fa-hashtag"></i> <strong>Charity Number:</strong> {{organisationCharityNo}}
+        <i class="fa fa-fw fa-hashtag"></i> <strong>Charity Number:</strong> {{organisation_charity_number}}
     </li>
     {{/if}}
 </ul>

@@ -3,9 +3,9 @@ import { BaseWidget, IWidgetConfiguration, ResultSet, TemplateSet, MapOptions } 
 import * as GoogleMapsLoader from 'google-maps'
 
 const opportunitiesConfiguration: IWidgetConfiguration = {
-    index: 'volunteering-opportunity',
-    type: 'volunteering-opportunity',
-    termFields: ['workType', 'clientGroup'],
+    index: 'web-content',
+    type: 'milo-volunteering-opportunity',
+    termFields: ['work_type', 'client_group'],
     templateSet: new TemplateSet({
         searchFormTemplate: '',
         resultsTemplate: '',
@@ -46,36 +46,36 @@ class OpportunitiesWidget extends BaseWidget {
         var distance = jq('#mw-opportunities-distance').val();
         var postcode = ""+jq('#mw-opportunities-user-postcode').val();
         var activity = jq('#mw-opportunities-activity').val();
-        var clientGroup = jq('#mw-opportunities-client-group').val();
-        var timesCheckboxes = jq('[data-bind="Times"]:checked');
-        var openingTimes = timesCheckboxes.toArray().map((time: any) => { return time.defaultValue });
+        var client_group = jq('#mw-opportunities-client-group').val();
+        var times_checkboxes = jq('[data-bind="Times"]:checked');
+        var opening_times = times_checkboxes.toArray().map((time: any) => { return time.defaultValue });
 
         var must = [];
 
         if (activity !== '') {
-            must.push({ term: { workType: activity } });
+            must.push({ term: { work_type: activity } });
         }
 
-        if (clientGroup !== '') {
-            must.push({ term: { clientGroup: clientGroup } });
+        if (client_group !== '') {
+            must.push({ term: { client_group: client_group } });
         }
 
         if (this.tsi) {
-            must.push({ term: { tsiLegacyRef: this.tsi } });
+            must.push({ term: { tsi_legacy_ref: this.tsi } });
         }
 
         if (this.org) {
-            must.push({ term: { organisationCharityNo: this.org } });
+            must.push({ term: { organisation_charity_number: this.org } });
         }
 
-        if (openingTimes && openingTimes.length > 0) {
-            var timesOr: { term: { [field: string]: boolean } }[] = [];
-            timesOr = openingTimes.map((time) => {
+        if (opening_times && opening_times.length > 0) {
+            var times_or: { term: { [field: string]: boolean } }[] = [];
+            times_or = opening_times.map((time) => {
                 return { term: { [time]: true } }
             });
             must.push({
                 bool: {
-                    should: timesOr,
+                    should: times_or,
                     minimum_should_match: 1
                 }
             })

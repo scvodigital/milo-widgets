@@ -2,9 +2,9 @@ import * as jq from 'jquery';
 import { BaseWidget, IWidgetConfiguration, ResultSet, TemplateSet, MapOptions } from './base-widget';
 
 const organisationConfiguration: IWidgetConfiguration = {
-    index: 'milo-organisation',
+    index: 'web-content',
     type: 'milo-organisation',
-    termFields: ['mainActivitiesGlobal'],
+    termFields: ['main_activities_global'],
     templateSet: new TemplateSet({
         searchFormTemplate: '',
         resultsTemplate: '',

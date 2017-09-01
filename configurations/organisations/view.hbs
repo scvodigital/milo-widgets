@@ -1,7 +1,7 @@
 <h2>
     {{name}}
-    {{#if registeredCharityNo}}
-    <small>({{registeredCharityNo}})</small>
+    {{#if registered_charity_number}}
+    <small>({{registered_charity_number}})</small>
     {{/if}}
 </h2>
 
@@ -10,11 +10,11 @@
         <div class="row">
             <div class="col-sm-6">
                 <h3>Primary Address</h3>
-                {{#any locationAreaTown locationCityCounty locationPostcode locationStreet}}
-                    {{#if locationStreet}}{{locationStreet}}, <br />{{/if}}
-                    {{#if locationAreaTown}}{{locationAreaTown}}, <br />{{/if}}
-                    {{#if locationCityCounty}}{{locationCityCounty}}, <br />{{/if}}
-                    {{#if locationPostcode}}{{locationPostcode}}{{/if}}
+                {{#any location_street location_area_town location_city_county location_postcode}}
+                    {{#if location_street}}{{location_street}}, <br />{{/if}}
+                    {{#if location_area_town}}{{location_area_town}}, <br />{{/if}}
+                    {{#if location_city_county}}{{location_city_county}}, <br />{{/if}}
+                    {{#if location_postcode}}{{location_postcode}}{{/if}}
                 {{else}}
                     No address given
                 {{/any}}
@@ -60,12 +60,12 @@
             </div>
         </div>
         <h3>Aims and objectives</h3>
-        {{#if aimsAndObjectives}} {{ps aimsAndObjectives}} {{else}} No aims or objectives given. {{/if}}
+        {{#if aims_and_objectives}} {{ps aims_and_objectives}} {{else}} No aims or objectives given. {{/if}}
     </div>
     <div class="col-sm-12 col-md-4">
         <h3>Activities</h3>
         <ul class="list-unstyled">
-            {{#each mainActivitiesGlobal}}
+            {{#each main_activities_global}}
             <li>{{this}}</li>
             {{/each}}
         </ul>

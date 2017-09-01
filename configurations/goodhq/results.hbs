@@ -9,7 +9,7 @@
 	{{#if reviewcount}}
 	<a href="https://goodhq.org"><img src="https://goodhq.org/images/good_hq_logo.png" /></a>
 	<p>
-		<a href="https://goodhq.org/{{xid}}">{{name}}</a> has {{reviewcount}} review{{#compare reviewcount '>' 1}}s{{/compare}} on Good HQ<br />
+		<a href="https://goodhq.org/{{xid}}">{{title}}</a> has {{reviewcount}} review{{#compare reviewcount '>' 1}}s{{/compare}} on Good HQ<br />
 		<ul class="hearts">
             {{#compare stars '<' 0.25}}
                 <li class="empty"><span aria-hidden="true" class="icon-heart"></span></li>
@@ -72,7 +72,7 @@
 	</p>
 	{{else}}
 	<p>
-		<a href="https://goodhq.org/{{xid}}">{{name}}</a> is on
+		<a href="https://goodhq.org/{{xid}}">{{title}}</a> is on
 	</p>
 	<a href="https://goodhq.org"><img src="https://goodhq.org/images/good_hq_logo.png" /></a>
 	<p>

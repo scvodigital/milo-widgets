@@ -8,9 +8,9 @@
         </div>
         <div class="col-sm-6">
             <label for="mw-organisations-activity" class="control-label">Activities: </label>
-            <select id="mw-organisations-activity" class="form-control" data-term="mainActivitiesGlobal_slugs">
+            <select id="mw-organisations-activity" class="form-control" data-term="main_activities_global-slugs">
                 <option value="">-- Select activity --</option>
-                {{#each terms.mainActivitiesGlobal}}
+                {{#each terms.main_activities_global}}
                 <option value="{{slug}}">{{term}}</option>
                 {{/each}}
             </select>

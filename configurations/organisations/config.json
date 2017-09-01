@@ -1,7 +1,7 @@
 {
-    "index": "milo-organisation",
+    "index": "web-content",
     "type": "milo-organisation",
-    "termFields": ["mainActivitiesGlobal"],
+    "termFields": ["main_activities_global"],
     "templateSet": {
         "searchFormTemplate": "",
         "resultsTemplate": "",
@@ -28,11 +28,11 @@
     "injectableFilters": [
         {
             "attribute": "tsi",
-            "field": "ownerTSILegacyRef"
+            "field": "owner_tsi_legacy_ref"
         },
         {
             "attribute": "strive",
-            "field": "publishToStriveDirectory"
+            "field": "publish_to_strive_directory"
         }
     ],
     "autoSearch": false
