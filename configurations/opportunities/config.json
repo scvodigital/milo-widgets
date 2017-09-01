@@ -22,7 +22,7 @@
     "name": "opportunities",
     "title": "Search for volunteering opportunities",
     "sort": {
-        "title": "asc"
+        "title-sort": "asc"
     },
     "injectableFilters": [
         {

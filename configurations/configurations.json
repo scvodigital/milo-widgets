@@ -64,7 +64,7 @@
         "name": "opportunities",
         "title": "Search for volunteering opportunities",
         "sort": {
-            "title": "asc"
+            "title-sort": "asc"
         },
         "injectableFilters": [
             {
@@ -102,7 +102,7 @@
         "name": "opportunities",
         "title": "Search for volunteering opportunities",
         "sort": {
-            "title": "asc"
+            "title-sort": "asc"
         },
         "injectableFilters": [
             {
@@ -139,7 +139,7 @@
         "name": "organisations",
         "title": "",
         "sort": {
-            "name": "asc"
+            "title-sort": "asc"
         },
         "autoSearch": false
     },
@@ -170,7 +170,7 @@
         "name": "organisations",
         "title": "Search for voluntary organisations",
         "sort": {
-            "name": "asc"
+            "title-sort": "asc"
         },
         "injectableFilters": [
             {
