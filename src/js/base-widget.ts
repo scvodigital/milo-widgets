@@ -372,7 +372,7 @@ export class BaseWidget {
 
 	private getLocation(query: string): Promise<IBounds> {
 		return new Promise<IBounds>((resolve, reject) => {
-			jq.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURIComponent(query) + ', UK', (result) => {
+			jq.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURIComponent(query) + ', Scotland, UK', (result) => {
 				if (result && result.status && result.status === "OK" && result.results && result.results.length > 0) {
 					var location = result.results[0];
 					if (location.geometry && location.geometry.bounds) {
