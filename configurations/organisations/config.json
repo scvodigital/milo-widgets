@@ -23,7 +23,7 @@
     "name": "organisations",
     "title": "Search for voluntary organisations",
     "sort": {
-        "name": "asc"
+        "title-sort": "asc"
     },
     "injectableFilters": [
         {

@@ -23,7 +23,7 @@
     "name": "organisations",
     "title": "",
     "sort": {
-        "name": "asc"
+        "title-sort": "asc"
     },
     "autoSearch": false
 }
