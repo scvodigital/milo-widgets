@@ -14,8 +14,8 @@ const opportunitiesConfiguration: IWidgetConfiguration = {
     }),
     mapOptions: {
         fields: {
-            lat: 'geo_coords.lat',
-            lng: 'geo_coords.lon',
+            lat: 'coords.lat',
+            lng: 'coords.lon',
             title: 'title'
         },
         initialLocation: { lat: 56.85132, lng: -4.1180987 },
