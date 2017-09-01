@@ -221,7 +221,6 @@ export class BaseWidget {
                 }
 
 				if (geo) {
-					payload.bool.must.push(geo.query);
 					payload.sort = geo.sort;
                     allowSort = false;
 				}
@@ -329,14 +328,6 @@ export class BaseWidget {
 				var field = postcodeElement.data('geo');
 				var geo = {
 					query: {
-						geo_distance_range: {
-							lt: distance + unit,
-							field: field,
-							[field]: {
-								lat: location.lat,
-								lon: location.lon
-							}
-						}
 					},
 					sort: {
 						_geo_distance: {
@@ -903,13 +894,6 @@ export interface IBounds {
 }
 
 export interface IGeoQuery {
-	query: {
-		geo_distance_range: {
-			lt: string;
-			field: string;
-			[field: string]: ILocation | string;
-		}
-	};
 	sort: {
 		_geo_distance: {
 			order: string;
