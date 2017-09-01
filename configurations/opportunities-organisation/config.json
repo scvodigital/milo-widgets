@@ -10,8 +10,8 @@
     },
     "mapOptions": {
         "fields": {
-            "lat": "geo_coords.lat",
-            "lng": "geo_coords.lon",
+            "lat": "coords.lat",
+            "lng": "coords.lon",
             "title": "title"
         },
         "initialLocation": {
