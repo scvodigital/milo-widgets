@@ -40,18 +40,18 @@
 	<div class="row">
 		<div class="col-sm-6">
 			<label for="mw-opportunities-activity" class="control-label">Activities</label>
-			<select id="mw-opportunities-activity" class="form-control" data-term="workType_slugs">
+			<select id="mw-opportunities-activity" class="form-control" data-term="work_type-slugs">
 				<option value="">-- Select activity --</option>
-				{{#each terms.workType}}
+				{{#each terms.work_type}}
 				<option value="{{slug}}">{{term}}</option>
 				{{/each}}
 			</select>
 		</div>
 		<div class="col-sm-6">
 			<label for="mw-opportunities-client-group" class="control-label">Client groups</label>
-			<select id="mw-opportunities-client-group" class="form-control" data-term="clientGroup_slugs">
+			<select id="mw-opportunities-client-group" class="form-control" data-term="client_group-slugs">
 				<option value="">-- Select client group --</option>
-				{{#each terms.clientGroup}}
+				{{#each terms.client_group}}
 				<option value="{{slug}}">{{term}}</option>
 				{{/each}}
 			</select>
@@ -81,33 +81,33 @@
     				<tbody>
     					<tr>
     						<th>Morning</th>
-    						<td><input type="checkbox" data-term="mondayMorning"></td>
-    						<td><input type="checkbox" data-term="tuesdayMorning"></td>
-    						<td><input type="checkbox" data-term="wednesdayMorning"></td>
-    						<td><input type="checkbox" data-term="thursdayMorning"></td>
-    						<td><input type="checkbox" data-term="fridayMorning"></td>
-    						<td><input type="checkbox" data-term="saturdayMorning"></td>
-    						<td><input type="checkbox" data-term="sundayMorning"></td>
+    						<td><input type="checkbox" data-term="monday_morning"></td>
+    						<td><input type="checkbox" data-term="tuesday_morning"></td>
+    						<td><input type="checkbox" data-term="wednesday_morning"></td>
+    						<td><input type="checkbox" data-term="thursday_morning"></td>
+    						<td><input type="checkbox" data-term="friday_morning"></td>
+    						<td><input type="checkbox" data-term="saturday_morning"></td>
+    						<td><input type="checkbox" data-term="sunday_morning"></td>
     					</tr>
     					<tr>
     						<th>Afternoon</th>
-    						<td><input type="checkbox" data-term="mondayAfternoon"></td>
-    						<td><input type="checkbox" data-term="tuesdayAfternoon"></td>
-    						<td><input type="checkbox" data-term="wednesdayAfternoon"></td>
-    						<td><input type="checkbox" data-term="thursdayAfternoon"></td>
-    						<td><input type="checkbox" data-term="fridayAfternoon"></td>
-    						<td><input type="checkbox" data-term="saturdayAfternoon"></td>
-    						<td><input type="checkbox" data-term="sundayAfternoon"></td>
+    						<td><input type="checkbox" data-term="monday_afternoon"></td>
+    						<td><input type="checkbox" data-term="tuesday_afternoon"></td>
+    						<td><input type="checkbox" data-term="wednesday_afternoon"></td>
+    						<td><input type="checkbox" data-term="thursday_afternoon"></td>
+    						<td><input type="checkbox" data-term="friday_afternoon"></td>
+    						<td><input type="checkbox" data-term="saturday_afternoon"></td>
+    						<td><input type="checkbox" data-term="sunday_afternoon"></td>
     					</tr>
     					<tr>
     						<th>Evening</th>
-    						<td><input type="checkbox" data-term="mondayEvening"></td>
-    						<td><input type="checkbox" data-term="tuesdayEvening"></td>
-    						<td><input type="checkbox" data-term="wednesdayEvening"></td>
-    						<td><input type="checkbox" data-term="thursdayEvening"></td>
-    						<td><input type="checkbox" data-term="fridayEvening"></td>
-    						<td><input type="checkbox" data-term="saturdayEvening"></td>
-    						<td><input type="checkbox" data-term="sundayEvening"></td>
+    						<td><input type="checkbox" data-term="monday_evening"></td>
+    						<td><input type="checkbox" data-term="tuesday_evening"></td>
+    						<td><input type="checkbox" data-term="wednesday_evening"></td>
+    						<td><input type="checkbox" data-term="thursday_evening"></td>
+    						<td><input type="checkbox" data-term="friday_evening"></td>
+    						<td><input type="checkbox" data-term="saturday_evening"></td>
+    						<td><input type="checkbox" data-term="sunday_evening"></td>
     					</tr>
     				</tbody>
     			</table>

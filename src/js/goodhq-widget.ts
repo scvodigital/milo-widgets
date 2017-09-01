@@ -3,8 +3,8 @@ import { BaseWidget, IWidgetConfiguration, ResultSet, TemplateSet, MapOptions } 
 import * as GoogleMapsLoader from 'google-maps'
 
 const organisationsConfiguration: IWidgetConfiguration = {
-    index: 'goodhq-organisation',
-    type: 'organisation',
+    index: 'web-content',
+    type: 'goodhq-organisation',
     termFields: ['xid'],
     templateSet: new TemplateSet({
         searchFormTemplate: '',

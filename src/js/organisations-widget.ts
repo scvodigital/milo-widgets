@@ -2,9 +2,9 @@ import * as jq from 'jquery';
 import { BaseWidget, IWidgetConfiguration, ResultSet, TemplateSet, MapOptions } from './base-widget';
 
 const organisationConfiguration: IWidgetConfiguration = {
-    index: 'milo-organisation',
+    index: 'web-content',
     type: 'milo-organisation',
-    termFields: ['mainActivitiesGlobal'],
+    termFields: ['main_activities_global'],
     templateSet: new TemplateSet({
         searchFormTemplate: '',
         resultsTemplate: '',
@@ -49,15 +49,15 @@ class OrganisationWidget extends BaseWidget {
         var must = [];
 
         if (activity !== '') {
-            must.push({ term: { mainActivitiesGlobal_slugs: activity } });
+            must.push({ term: { main_activities_global_slugs: activity } });
         }
 
         if (this.tsi) {
-            must.push({ term: { tsiLegacyRef: this.tsi } });
+            must.push({ term: { tsi_legacy_ref: this.tsi } });
         }
 
         if (this.strive) {
-            must.push({ term: { publishToStriveDirectory: true } });
+            must.push({ term: { publish_to_strive_directory: true } });
         }
 
         if (query !== '') {

@@ -1,7 +1,7 @@
 {
-    "index": "volunteering-opportunity",
-    "type": "volunteering-opportunity",
-    "termFields": ["workType", "clientGroup"],
+    "index": "web-content",
+    "type": "milo-volunteering-opportunity",
+    "termFields": ["work_type", "client_group"],
     "templateSet": {
         "searchFormTemplate": "",
         "resultsTemplate": "",
@@ -27,7 +27,7 @@
     "injectableFilters": [
         {
             "attribute": "org",
-            "field": "organisationCharityNo"
+            "field": "organisation_charity_number"
         }
     ],
     "autoSearch": true

@@ -3,9 +3,9 @@ import { BaseWidget, IWidgetConfiguration, ResultSet, TemplateSet, MapOptions } 
 import * as GoogleMapsLoader from 'google-maps'
 
 const opportunitiesConfiguration: IWidgetConfiguration = {
-    index: 'volunteering-opportunity',
-    type: 'volunteering-opportunity',
-    termFields: ['workType', 'clientGroup'],
+    index: 'web-content',
+    type: 'milo-volunteering-opportunity',
+    termFields: ['work_type', 'client_group'],
     templateSet: new TemplateSet({
         searchFormTemplate: '',
         resultsTemplate: '',
@@ -42,7 +42,7 @@ class OpportunitiesOrganisationWidget extends BaseWidget {
         var must = [];
 
         if (this.org) {
-            must.push({ term: { organisationCharityNo: this.org } });
+            must.push({ term: { organisation_charity_number: this.org } });
         }
 
         var payload: any = {
