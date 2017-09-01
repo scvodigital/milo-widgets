@@ -43,7 +43,7 @@ class OrganisationWidget extends BaseWidget {
     doSearchOld(page: number = 1) {
         var query = jq('#mw-organisations-query').val();
         var activity = jq('#mw-organisations-activity').val();
-        var distance = jq('#mw-organisations-distance').val();
+        // var distance = jq('#mw-organisations-distance').val();
         var postcode = ""+jq('#mw-organisations-user-postcode').val();
 
         var must = [];
@@ -77,13 +77,14 @@ class OrganisationWidget extends BaseWidget {
             }
         };
 
-        if (distance && distance > 0 && postcode) {
+        // if (distance && distance > 0 && postcode) {
+        if (postcode) {
             postcode = postcode.toLowerCase().replace(/[^0-9a-z]/gi, '');
             jq.getJSON(window.location.protocol + '//api.postcodes.io/postcodes/' + postcode, (result) => {
                 if (result.status === 200) {
                     var geo = {
                         geo_distance_range: {
-                            lt: distance + 'mi',
+                            // lt: distance + 'mi',
                             field: 'coords',
                             coords: {
                                 lat: result.result.latitude,
