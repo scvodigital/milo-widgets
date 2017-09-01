@@ -167,7 +167,7 @@ export class BaseWidget {
 			var payload = {
 				index: this.config.index,
 				type: this.config.type,
-				size: 0,
+				size: 10000,
 				body: {
 					aggs: {}
 				}
@@ -178,7 +178,7 @@ export class BaseWidget {
 					terms: {
 						field: field,
 						order: { "_term" : "asc" },
-						size: 0
+						size: 10000
 					}
 				}
 			});
@@ -271,7 +271,7 @@ export class BaseWidget {
 			var query: IQueryQuery = {
 				simple_query_string: {
 					query: queryString,
-                    analyzer: 'my_snowball_analyzer',
+                    // analyzer: 'my_snowball_analyzer',
                     // minimum_should_match: '100%',
                     default_operator: 'AND'
 				}
