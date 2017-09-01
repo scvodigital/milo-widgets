@@ -43,7 +43,7 @@ class OpportunitiesWidget extends BaseWidget {
 
     doOldSearch(page: number = 1) {
         var query = jq('#mw-opportunities-query').val();
-        var distance = jq('#mw-opportunities-distance').val();
+        // var distance = jq('#mw-opportunities-distance').val();
         var postcode = ""+jq('#mw-opportunities-user-postcode').val();
         var activity = jq('#mw-opportunities-activity').val();
         var client_group = jq('#mw-opportunities-client-group').val();
@@ -96,13 +96,14 @@ class OpportunitiesWidget extends BaseWidget {
             }
         };
 
-        if (distance && distance > 0 && postcode) {
+        // if (distance && distance > 0 && postcode) {
+        if (postcode) {
             postcode = postcode.toLowerCase().replace(/[^0-9a-z]/gi, '');
             jq.getJSON(window.location.protocol + '//api.postcodes.io/postcodes/' + postcode, (result) => {
                 if (result.status === 200) {
                     var geo = {
                         geo_distance_range: {
-                            lt: distance + 'mi',
+                            // lt: distance + 'mi',
                             field: 'coords',
                             coords: {
                                 lat: result.result.latitude,
