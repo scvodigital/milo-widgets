@@ -13,8 +13,8 @@ const organisationConfiguration: IWidgetConfiguration = {
     }),
     mapOptions: {
         fields: {
-            lat: 'geo_coords.lat',
-            lng: 'geo_coords.lon',
+            lat: 'coords.lat',
+            lng: 'coords.lon',
             title: 'name'
         },
         initialLocation: { lat: 56.85132, lng: -4.1180987 },
@@ -84,8 +84,8 @@ class OrganisationWidget extends BaseWidget {
                     var geo = {
                         geo_distance_range: {
                             lt: distance + 'mi',
-                            field: 'geo_coords',
-                            geo_coords: {
+                            field: 'coords',
+                            coords: {
                                 lat: result.result.latitude,
                                 lon: result.result.longitude
                             }
@@ -97,7 +97,7 @@ class OrganisationWidget extends BaseWidget {
                     var sort = [
                         {
                             _geo_distance: {
-                                geo_coords: {
+                                coords: {
                                     lat: result.result.latitude,
                                     lon: result.result.longitude
                                 },

@@ -20,7 +20,7 @@
 		</h3>
 
 		<p>
-			{{#if aims_and_objectives}} {{truncate aims_and_objectives 255 '[...]'}} {{else}} No aims or objectives given. {{/if}}
+			{{#if description}} {{truncate description 255 '[...]'}} {{else}} No aims or objectives given. {{/if}}
 		</p>
 		<p>
 			{{#any location_street location_area_town location_city_county location_postcode}}
