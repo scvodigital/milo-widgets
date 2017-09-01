@@ -312,10 +312,11 @@ export class BaseWidget {
 		return new Promise<IGeoQuery>((resolve, reject) => {
 			var postcodeElement = this.widgetElement.find('[data-geo]');
 			var postcode = postcodeElement.val() || null;
-			var distanceElement = this.widgetElement.find('[data-geo-distance]');
-			var distance = distanceElement.val() || null;
-			var unit = distanceElement.data('geo-unit') || 'mi';
-			if (!postcode || !distance) {
+			// var distanceElement = this.widgetElement.find('[data-geo-distance]');
+			// var distance = distanceElement.val() || null;
+			var unit = 'mi';
+            // if (!postcode || !distance) {
+            if (!postcode) {
 				return resolve(null);
 			}
 
