@@ -167,7 +167,6 @@ export class BaseWidget {
 			var payload = {
 				index: this.config.index,
 				type: this.config.type,
-				size: 10000,
 				body: {
 					aggs: {}
 				}

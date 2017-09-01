@@ -85,16 +85,14 @@ class OpportunitiesWidget extends BaseWidget {
             must.push({
                 simple_query_string: {
                     query: query,
-                    default_operator: 'AND',
-                    minimum_should_match: '100%'
+                    default_operator: 'AND'
                 }
             });
         }
 
         var payload: any = {
             bool: {
-                must: must,
-                minimum_should_match: 1
+                must: must
             }
         };
 
