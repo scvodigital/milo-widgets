@@ -32,6 +32,7 @@ const organisationsConfiguration: IWidgetConfiguration = {
 class GoodHQWidget extends BaseWidget {
     xid: string;
     style: string = 'basic';
+    hideMap: boolean = true;
 
     constructor() {
         super('');
