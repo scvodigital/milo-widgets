@@ -92,6 +92,9 @@ export class BaseWidget {
             if (this.hideTitle) {
                 this.widgetElement.find('.mw-title').addClass('hidden');
             }
+            if (this.hideMap) {
+                this.mapElement.hide();
+            }
 
 			this.searchElement.html(searchHtml);
 
