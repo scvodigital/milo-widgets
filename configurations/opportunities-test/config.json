@@ -1,0 +1,34 @@
+{
+    "index": "web-content-test",
+    "type": "milo-volunteering-opportunity",
+    "termFields": ["work_type", "client_group"],
+    "templateSet": {
+        "searchFormTemplate": "",
+        "resultsTemplate": "",
+        "viewTemplate": "",
+        "infoWindowTemplate": ""
+    },
+    "mapOptions": {
+        "fields": {
+            "lat": "coords.lat",
+            "lng": "coords.lon",
+            "title": "title"
+        },
+        "initialLocation": {
+            "lat": 56.85132,
+            "lng": -4.1180987 },
+        "initialZoom": 6
+    },
+    "name": "opportunities",
+    "title": "Search for volunteering opportunities",
+    "sort": {
+        "title-sort": "asc"
+    },
+    "injectableFilters": [
+        {
+            "attribute": "tsi",
+            "field": "tsi_legacy_ref"
+        }
+    ],
+    "autoSearch": false
+}
