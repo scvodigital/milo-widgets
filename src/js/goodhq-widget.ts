@@ -40,6 +40,7 @@ class GoodHQWidget extends BaseWidget {
         if (!this.xid) this.xid = 'undefined';
         this.style = this.scriptTag.data('style');
         if (!this.style) this.xid = 'basic';
+        this.hideMap = true;
     }
 
     doOldSearch(page: number = 1) {
