@@ -37,7 +37,7 @@
         "autoSearch": true
     },
     "opportunities": {
-        "index": "web-content",
+        "index": "web-content-production",
         "type": "milo-volunteering-opportunity",
         "termFields": [
             "work_type",
@@ -182,7 +182,7 @@
         "autoSearch": false
     },
     "organisations": {
-        "index": "web-content",
+        "index": "web-content-production",
         "type": "milo-organisation",
         "termFields": [
             "main_activities_global"
