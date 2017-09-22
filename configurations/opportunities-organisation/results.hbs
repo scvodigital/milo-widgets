@@ -9,45 +9,9 @@
 {{/compare}}
 
 {{#each results}}
-	<div class="mw-opportunities-result" id="mw-opportunities-result-{{Id}}">
-		<h3>
-			<a href="#mw-opportunities-{{Id}}">
-				<strong>{{title}}</strong>
-				{{#if organisation_name}}
-					| {{organisation_name}}
-				{{/if}}
-				{{#each ../sorts}}
-					({{round this 2}} miles)
-				{{/each}}
-			</a>
-		</h3>
-
-		<ul class="list-inline">
-			{{#if reference_code}}
-			<li>
-				<i class="fa fa-fw fa-book"></i> <strong>Ref:</strong> {{reference_code}}
-			</li>
-			{{/if}} {{#if start_date}}
-			<li>
-				<i class="fa fa-fw fa-calendar"></i> <strong>Start date:</strong> {{moment start_date format="dddd, DD MMMM YYYY"}}
-			</li>
-			{{/if}} {{#if work_type}}
-			<li>
-				<i class="fa fa-fw fa-briefcase"></i> <strong>Work type:</strong> {{work_type}}
-			</li>
-			{{/if}} {{#if client_group}}
-			<li>
-				<i class="fa fa-fw fa-users"></i> <strong>Client group:</strong> {{client_group}}
-			</li>
-			{{/if}} {{#if organisation_charity_number}}
-			<li>
-				<i class="fa fa-fw fa-hashtag"></i> <strong>Charity number:</strong> {{organisation_charity_number}}
-			</li>
-			{{/if}}
-		</ul>
-
-		<p>
-			{{#if summary}} {{truncate summary 255 '[...]'}} {{else}} No summary given. {{/if}}
-		</p>
-	</div>
+    {{#each this.views}}
+        {{#eq this.name "search-result"}}
+            {{{this.html}}}
+        {{/eq}}
+    {{/each}}
 {{/each}}
