@@ -1,0 +1,17 @@
+{{#compare total '>' 0}}
+<div class="alert alert-info">
+	Number of results: {{total}} | Page {{currentPage}} of {{totalPages}}
+</div>
+{{else}}
+<div class="alert alert-warning">
+	<p>No results</p>
+</div>
+{{/compare}}
+
+{{#each results}}
+    {{#each this.views}}
+        {{#eq this.name "search-results-widget"}}
+            {{{this.html}}}
+        {{/eq}}
+    {{/each}}
+{{/each}}

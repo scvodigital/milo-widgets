@@ -92,6 +92,9 @@ export class BaseWidget {
             if (this.hideTitle) {
                 this.widgetElement.find('.mw-title').addClass('hidden');
             }
+            if (this.hideMap) {
+                this.mapElement.hide();
+            }
 
 			this.searchElement.html(searchHtml);
 
@@ -221,7 +224,6 @@ export class BaseWidget {
                 }
 
 				if (geo) {
-					payload.bool.must.push(geo.query);
 					payload.sort = geo.sort;
                     allowSort = false;
 				}
@@ -313,10 +315,11 @@ export class BaseWidget {
 		return new Promise<IGeoQuery>((resolve, reject) => {
 			var postcodeElement = this.widgetElement.find('[data-geo]');
 			var postcode = postcodeElement.val() || null;
-			var distanceElement = this.widgetElement.find('[data-geo-distance]');
-			var distance = distanceElement.val() || null;
-			var unit = distanceElement.data('geo-unit') || 'mi';
-			if (!postcode || !distance) {
+			// var distanceElement = this.widgetElement.find('[data-geo-distance]');
+			// var distance = distanceElement.val() || null;
+			var unit = 'mi';
+            // if (!postcode || !distance) {
+            if (!postcode) {
 				return resolve(null);
 			}
 
@@ -329,14 +332,6 @@ export class BaseWidget {
 				var field = postcodeElement.data('geo');
 				var geo = {
 					query: {
-						geo_distance_range: {
-							lt: distance + unit,
-							field: field,
-							[field]: {
-								lat: location.lat,
-								lon: location.lon
-							}
-						}
 					},
 					sort: {
 						_geo_distance: {
@@ -380,7 +375,7 @@ export class BaseWidget {
 
 	private getLocation(query: string): Promise<IBounds> {
 		return new Promise<IBounds>((resolve, reject) => {
-			jq.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURIComponent(query), (result) => {
+			jq.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=' + encodeURIComponent(query) + ', Scotland, UK', (result) => {
 				if (result && result.status && result.status === "OK" && result.results && result.results.length > 0) {
 					var location = result.results[0];
 					if (location.geometry && location.geometry.bounds) {
@@ -903,13 +898,6 @@ export interface IBounds {
 }
 
 export interface IGeoQuery {
-	query: {
-		geo_distance_range: {
-			lt: string;
-			field: string;
-			[field: string]: ILocation | string;
-		}
-	};
 	sort: {
 		_geo_distance: {
 			order: string;

@@ -3,7 +3,7 @@ import { BaseWidget, IWidgetConfiguration, ResultSet, TemplateSet, MapOptions } 
 import * as GoogleMapsLoader from 'google-maps'
 
 const opportunitiesConfiguration: IWidgetConfiguration = {
-    index: 'web-content',
+    index: 'web-content-test',
     type: 'milo-volunteering-opportunity',
     termFields: ['work_type', 'client_group'],
     templateSet: new TemplateSet({
@@ -43,7 +43,7 @@ class OpportunitiesWidget extends BaseWidget {
 
     doOldSearch(page: number = 1) {
         var query = jq('#mw-opportunities-query').val();
-        // var distance = jq('#mw-opportunities-distance').val();
+        var distance = jq('#mw-opportunities-distance').val();
         var postcode = ""+jq('#mw-opportunities-user-postcode').val();
         var activity = jq('#mw-opportunities-activity').val();
         var client_group = jq('#mw-opportunities-client-group').val();
@@ -96,14 +96,13 @@ class OpportunitiesWidget extends BaseWidget {
             }
         };
 
-        // if (distance && distance > 0 && postcode) {
-        if (postcode) {
+        if (distance && distance > 0 && postcode) {
             postcode = postcode.toLowerCase().replace(/[^0-9a-z]/gi, '');
             jq.getJSON(window.location.protocol + '//api.postcodes.io/postcodes/' + postcode, (result) => {
                 if (result.status === 200) {
                     var geo = {
                         geo_distance_range: {
-                            // lt: distance + 'mi',
+                            lt: distance + 'mi',
                             field: 'coords',
                             coords: {
                                 lat: result.result.latitude,
@@ -137,4 +136,4 @@ class OpportunitiesWidget extends BaseWidget {
     }
 }
 
-var widget = new BaseWidget('opportunities');
+var widget = new BaseWidget('opportunities-test');
