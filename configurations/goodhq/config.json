@@ -1,5 +1,5 @@
 {
-  "index": "web-content",
+  "index": "web-content-production",
   "type": "goodhq-organisation",
   "termFields": ["xid"],
   "templateSet": {

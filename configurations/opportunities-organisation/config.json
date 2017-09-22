@@ -1,5 +1,5 @@
 {
-    "index": "web-content",
+    "index": "web-content-production",
     "type": "milo-volunteering-opportunity",
     "termFields": ["work_type", "client_group"],
     "templateSet": {
