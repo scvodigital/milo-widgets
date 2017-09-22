@@ -1,5 +1,5 @@
 {
-    "index": "web-content",
+    "index": "web-content-production",
     "type": "milo-organisation",
     "termFields": ["main_activities_global"],
     "templateSet": {
