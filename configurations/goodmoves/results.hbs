@@ -1,13 +1,12 @@
-{{#compare total '==' 0}}
-<div class="alert alert-warning">
-    <p>Couldn't find any jobs currently posted on <strong>good</strong>moves</p>
-</div>
-{{/compare}}
-
 <div class="panel-goodmoves">
     <a href="https://goodmoves.com">
-        <img src="https://widgets.goodmoves.com/app/images/assets/logos/goodmoves-logo.png" alt="Goodmoves - charity and voluntary sector recruitment" />
+        <img src="https://widgets.goodmoves.com/app/assets/images/logos/goodmoves-logo.png" alt="Goodmoves - charity and voluntary sector recruitment" />
     </a>
+    {{#compare total '==' 0}}
+    <div class="alert alert-warning">
+        <p>Couldn't find any jobs currently posted on <strong>good</strong>moves</p>
+    </div>
+    {{/compare}}
     <ul>
         {{#each results}}
             {{#each this.views}}

@@ -5,8 +5,7 @@
       "sectors",
       "roles",
       "status",
-      "region",
-      "top_job"
+      "region"
   ],
   "templateSet": {
     "searchFormTemplate": "",
@@ -18,7 +17,7 @@
     "fields": {
       "lat": "coords.lat",
       "lng": "coords.lon",
-      "title": "xid"
+      "title": "title"
     },
     "initialLocation": {
       "lat": 56.85132,
