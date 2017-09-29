@@ -36,6 +36,36 @@
         ],
         "autoSearch": true
     },
+    "goodmoves": {
+        "index": "web-content-production",
+        "type": "goodmoves-job",
+        "termFields": [],
+        "templateSet": {
+            "searchFormTemplate": "",
+            "resultsTemplate": "{{#compare total '==' 0}}\n<div class=\"alert alert-warning\">\n\t<p>Couldn't find any jobs currently posted on <strong>good</strong>moves</p>\n</div>\n{{/compare}}\n\n{{#each results}}\n<div class=\"mw-goodmoves-result\" id=\"mw-goodmoves-result-{{Id}}\">\n    {{title}}\n</div>\n{{/each}}\n",
+            "viewTemplate": "",
+            "infoWindowTemplate": ""
+        },
+        "mapOptions": {
+            "fields": {
+                "lat": "coords.lat",
+                "lng": "coords.lon",
+                "title": "xid"
+            },
+            "initialLocation": {
+                "lat": 56.85132,
+                "lng": -4.1180987
+            },
+            "initialZoom": 6
+        },
+        "name": "goodmoves",
+        "title": "",
+        "sort": {
+            "Id": "desc"
+        },
+        "injectableFilters": [],
+        "autoSearch": true
+    },
     "opportunities": {
         "index": "web-content-production",
         "type": "milo-volunteering-opportunity",

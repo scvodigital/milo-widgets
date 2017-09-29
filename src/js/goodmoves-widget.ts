@@ -1,17 +1,16 @@
 import * as jq from 'jquery';
-import { BaseWidget, IWidgetConfiguration, ResultSet, TemplateSet, MapOptions } from './base-widget';
+import { BaseWidget, ResultSet, TemplateSet, MapOptions } from './base-widget';
 // import * as GoogleMapsLoader from 'google-maps'
 
 class GoodHQWidget extends BaseWidget {
-    xid: string;
-    style: string = 'basic';
     number: number = 3;
+    style: string = 'basic';
     hideMap: boolean = true;
 
     constructor() {
         super('');
-        this.style = this.scriptTag.data('style');
         this.number = this.scriptTag.data('number');
+        this.style = this.scriptTag.data('style');
         this.hideMap = true;
     }
 

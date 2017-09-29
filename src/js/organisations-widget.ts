@@ -1,5 +1,5 @@
 import * as jq from 'jquery';
-import { BaseWidget, IWidgetConfiguration, ResultSet, TemplateSet, MapOptions } from './base-widget';
+import { BaseWidget, ResultSet, TemplateSet, MapOptions } from './base-widget';
 
 class OrganisationWidget extends BaseWidget {
     tsi: number;
