@@ -11,6 +11,8 @@ class GoodHQWidget extends BaseWidget {
         this.number = this.scriptTag.data('number');
         this.style = this.scriptTag.data('style');
         this.hideMap = true;
+
+        console.log("return number: "+this.number);
     }
 
     doOldSearch(page: number = 1) {
