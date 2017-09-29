@@ -1,6 +1,5 @@
 import * as jq from 'jquery';
 import { BaseWidget, ResultSet, TemplateSet, MapOptions } from './base-widget';
-// import * as GoogleMapsLoader from 'google-maps'
 
 class GoodHQWidget extends BaseWidget {
     number: number = 3;
