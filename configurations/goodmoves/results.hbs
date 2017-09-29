@@ -1,11 +1,27 @@
 {{#compare total '==' 0}}
 <div class="alert alert-warning">
-	<p>Couldn't find any jobs currently posted on <strong>good</strong>moves</p>
+    <p>Couldn't find any jobs currently posted on <strong>good</strong>moves</p>
 </div>
 {{/compare}}
 
-{{#each results}}
-<div class="mw-goodmoves-result" id="mw-goodmoves-result-{{Id}}">
-    {{title}}
+<div class="panel-goodmoves">
+    <a href="http://www.goodmoves.org.uk/">
+        <img src="/images/assets/widgets/goodmoves.gif" alt="goodmoves" />
+    </a>
+    <ul>
+        {{#each results}}
+        <li class="mw-goodmoves-result click-node item item-{count}{if count == absolute_results} last{/if}" id="mw-goodmoves-result-{{Id}}">
+            <div class="content">
+                <p class="title">{{title}}</p>
+                <p class="text">
+                    Organisation: {{organisation.name}}<br />
+                    Salary: {{salary}}<br />
+                    Location: {{location}}<br />
+                    Closing date: {{closing_date}}
+                </p>
+                <p class="act"><a href="https://goodmoves.com/{{slug}}">View job &rsaquo;</a></p>
+            </div>
+        </li>
+        {{/each}}
+    </ul>
 </div>
-{{/each}}

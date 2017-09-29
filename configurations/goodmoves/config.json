@@ -1,7 +1,13 @@
 {
   "index": "web-content-production",
   "type": "goodmoves-job",
-  "termFields": [],
+  "termFields": [
+      "sectors",
+      "roles",
+      "status",
+      "region",
+      "top_job"
+  ],
   "templateSet": {
     "searchFormTemplate": "",
     "resultsTemplate": "",
