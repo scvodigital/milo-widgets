@@ -1,33 +1,6 @@
 import * as jq from 'jquery';
 import { BaseWidget, IWidgetConfiguration, ResultSet, TemplateSet, MapOptions } from './base-widget';
 
-const organisationConfiguration: IWidgetConfiguration = {
-    index: 'web-content',
-    type: 'milo-organisation',
-    termFields: ['main_activities_global'],
-    templateSet: new TemplateSet({
-        searchFormTemplate: '',
-        resultsTemplate: '',
-        viewTemplate: '',
-        infoWindowTemplate: ''
-    }),
-    mapOptions: {
-        fields: {
-            lat: 'coords.lat',
-            lng: 'coords.lon',
-            title: 'name'
-        },
-        initialLocation: { lat: 56.85132, lng: -4.1180987 },
-        initialZoom: 6
-    },
-    name: 'organisations',
-    title: 'Milo organisations search for volunteering opportunities',
-    sort: {
-        name: 'asc'
-    },
-    autoSearch: false
-}
-
 class OpportunitiesOrganisationsWidget extends BaseWidget {
     hideMap: boolean = true;
 
@@ -42,18 +15,18 @@ class OpportunitiesOrganisationsWidget extends BaseWidget {
 
         if (query !== '') {
             must.push({
-                simple_query_string: {
-                    query: query,
-                    default_operator: 'AND',
-                    minimum_should_match: '100%'
+                "simple_query_string": {
+                    "query": query,
+                    "default_operator": "AND",
+                    "minimum_should_match": "100%"
                 }
             });
         }
 
         var payload: any = {
-            bool: {
-                must: must,
-                minimum_should_match: 1
+            "bool": {
+                "must": must,
+                "minimum_should_match": 1
             }
         };
 

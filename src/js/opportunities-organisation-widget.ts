@@ -1,33 +1,6 @@
 import * as jq from 'jquery';
-import { BaseWidget, IWidgetConfiguration, ResultSet, TemplateSet, MapOptions } from './base-widget';
+import { BaseWidget, ResultSet, TemplateSet, MapOptions } from './base-widget';
 import * as GoogleMapsLoader from 'google-maps'
-
-const opportunitiesConfiguration: IWidgetConfiguration = {
-    index: 'web-content',
-    type: 'milo-volunteering-opportunity',
-    termFields: ['work_type', 'client_group'],
-    templateSet: new TemplateSet({
-        searchFormTemplate: '',
-        resultsTemplate: '',
-        viewTemplate: '',
-        infoWindowTemplate: ''
-    }),
-    mapOptions: {
-        fields: {
-            lat: 'coords.lat',
-            lng: 'coords.lon',
-            title: 'title'
-        },
-        initialLocation: { lat: 56.85132, lng: -4.1180987 },
-        initialZoom: 6
-    },
-    name: 'opportunities',
-    title: 'Milo volunteering opportunities',
-    sort: {
-        title: 'asc'
-    },
-    autoSearch: true
-}
 
 class OpportunitiesOrganisationWidget extends BaseWidget {
     org: string;

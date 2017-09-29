@@ -37,7 +37,6 @@ export class BaseWidget {
 			this._client = new elasticsearch.Client({
 				host: 'https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io:443',
 				apiVersion: '2.4',
-				//log: 'trace'
 			});
 		}
 		return this._client;
@@ -168,19 +167,19 @@ export class BaseWidget {
 	protected loadTerms() {
 		return new Promise<void>((resolve, reject) => {
 			var payload = {
-				index: this.config.index,
-				type: this.config.type,
-				body: {
-					aggs: {}
+				"index": this.config.index,
+				"type": this.config.type,
+				"body": {
+					"aggs": {}
 				}
 			};
 
 			this.config.termFields.forEach((field) => {
 				payload.body.aggs[field] = {
-					terms: {
-						field: field,
-						order: { "_term" : "asc" },
-						size: 10000
+					"terms": {
+						"field": field,
+						"order": { "_term" : "asc" },
+						"size": 10000
 					}
 				}
 			});
@@ -210,8 +209,8 @@ export class BaseWidget {
 				var query: IQueryQuery = this.getQuery();
 
 				var payload: any = {
-					bool: {
-						must: []
+					"bool": {
+						"must": []
 					}
 				}
 
@@ -253,7 +252,7 @@ export class BaseWidget {
 			var value: string = this.scriptTag.data(filter.attribute);
 			if (typeof value !== 'undefined' && value !== null) {
 				var query: ITermQuery = {
-					terms: {
+					"terms": {
 						[filter.field]: [value]
 					}
 				};
@@ -270,11 +269,9 @@ export class BaseWidget {
 			return null;
 		} else {
 			var query: IQueryQuery = {
-				simple_query_string: {
-					query: queryString,
-                    // analyzer: 'my_snowball_analyzer',
-                    // minimum_should_match: '100%',
-                    default_operator: 'AND'
+				"simple_query_string": {
+					"query": queryString,
+                    "default_operator": 'AND'
 				}
 			};
 			return query;
@@ -297,10 +294,10 @@ export class BaseWidget {
 				}
 
 				var geo: IGeoBoundingBoxQuery = {
-					geo_bounding_box: {
+					"geo_bounding_box": {
 						[field]: {
-							top_right: bounds.northeast,
-							bottom_left: bounds.southwest
+							"top_right": bounds.northeast,
+							"bottom_left": bounds.southwest
 						}
 					}
 				};
@@ -315,10 +312,7 @@ export class BaseWidget {
 		return new Promise<IGeoQuery>((resolve, reject) => {
 			var postcodeElement = this.widgetElement.find('[data-geo]');
 			var postcode = postcodeElement.val() || null;
-			// var distanceElement = this.widgetElement.find('[data-geo-distance]');
-			// var distance = distanceElement.val() || null;
 			var unit = 'mi';
-            // if (!postcode || !distance) {
             if (!postcode) {
 				return resolve(null);
 			}
@@ -331,17 +325,16 @@ export class BaseWidget {
 
 				var field = postcodeElement.data('geo');
 				var geo = {
-					query: {
-					},
-					sort: {
-						_geo_distance: {
+					"query": {},
+					"sort": {
+						"_geo_distance": {
 							[field]: {
-								lat: location.lat,
-								lon: location.lon
+								"lat": location.lat,
+								"lon": location.lon
 							},
-							order: 'asc',
-							unit: unit,
-							distance_type: 'arc'
+							"order": 'asc',
+							"unit": unit,
+							"distance_type": 'arc'
 						}
 					}
 				};
@@ -456,7 +449,7 @@ export class BaseWidget {
 
 		Object.keys(ranges).forEach((field) => {
 			var range = {
-				range: {
+				"range": {
 					[field]: ranges[field]
 				}
 			};
@@ -469,7 +462,6 @@ export class BaseWidget {
 	protected runQuery(query) {
 		return new Promise<any>((resolve, reject) => {
 			this.client.search(query, (err, results) => {
-                // console.log('QUERY', query, results);
 				if (err) {
 					console.error(err);
 					reject(err);
@@ -483,9 +475,9 @@ export class BaseWidget {
 	protected one(id: string) {
 		return new Promise((resolve, reject) => {
 			var payload: elasticsearch.GetParams = {
-				id: id,
-				index: this.config.index,
-				type: this.config.type
+				"id": id,
+				"index": this.config.index,
+				"type": this.config.type
 			};
 
 			this.logAnalytics(payload, 'document');
@@ -571,11 +563,11 @@ export class BaseWidget {
 		return new Promise((resolve, reject) => {
 			var from = (page - 1) * 10;
 			var payload: any = {
-				index: this.config.index,
-				type: this.config.type,
-				body: {
-					query: query,
-					from: from
+				"index": this.config.index,
+				"type": this.config.type,
+				"body": {
+					"query": query,
+					"from": from
 				}
 			};
 
@@ -605,9 +597,9 @@ export class BaseWidget {
 
 	logAnalytics(body, func) {
 		body = {
-			name: this.config.name,
-			payload: body,
-			function: func
+			"name": this.config.name,
+			"payload": body,
+			"function": func
 		}
 		jq.ajax({
 			url: 'https://us-central1-scvo-widgets-9d094.cloudfunctions.net/analytics',

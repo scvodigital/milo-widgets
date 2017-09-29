@@ -20,6 +20,7 @@ import { BuilderComponent } from './components/builder/builder.component';
 import { PreviewComponent } from './components/builder/preview.component';
 import { OrgBuilderComponent } from './components/builder/builder-organisation.component';
 import { GoodHQBuilderComponent } from './components/builder/builder-goodhq.component';
+import { GoodmovesBuilderComponent } from './components/builder/builder-goodmoves.component';
 import { AnalyticsComponent } from './components/analytics/analytics.component';
 import { LoginComponent } from './components/account/login.component';
 import { ProfileComponent } from './components/account/profile.component';
@@ -40,6 +41,7 @@ import { ProfileComponent } from './components/account/profile.component';
         PreviewComponent,
         OrgBuilderComponent,
         GoodHQBuilderComponent,
+        GoodmovesBuilderComponent,
         AnalyticsComponent,
         LoginComponent,
         ProfileComponent

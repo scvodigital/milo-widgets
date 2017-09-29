@@ -1,0 +1,29 @@
+{
+  "index": "web-content-production",
+  "type": "goodmoves-job",
+  "termFields": [],
+  "templateSet": {
+    "searchFormTemplate": "",
+    "resultsTemplate": "",
+    "viewTemplate": "",
+    "infoWindowTemplate": ""
+  },
+  "mapOptions": {
+    "fields": {
+      "lat": "coords.lat",
+      "lng": "coords.lon",
+      "title": "xid"
+    },
+    "initialLocation": {
+      "lat": 56.85132,
+      "lng": -4.1180987 },
+      "initialZoom": 6
+    },
+    "name": "goodmoves",
+    "title": "",
+    "sort": {
+      "Id": "desc"
+    },
+    "injectableFilters": [],
+    "autoSearch": true
+  }

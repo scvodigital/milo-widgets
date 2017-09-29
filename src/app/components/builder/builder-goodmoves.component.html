@@ -1,15 +1,15 @@
 <div class="body-content">
     <h2>
-        GoodHQ widget builder
+        Goodmoves widget builder
     </h2>
 
     <form class="form-horizontal">
         <div class="form-group row">
-            <label for="xid" class="col-sm-3 control-label">
-                Organisation username
+            <label for="number" class="col-sm-3 control-label">
+                How many jobs to show
             </label>
             <div class="col-sm-9">
-                <input name="xid" [(ngModel)]="xid" class="form-control" />
+                <input name="number" [(ngModel)]="number" class="form-control" />
             </div>
         </div>
 
@@ -30,10 +30,10 @@
 
 <div class="body-content" *ngIf="style && xid">
     <h3>How to embed the widget</h3>
-    <p>Please use the following code to embed the specified GoodHQ widget on your own website:</p>
-    <div class="embed copyable" id="embed">&lt;script src="https://widgets.goodhq.org/goodhq.bundle.js" data-xid="{{xid}}" data-widget-style="{{style}}"&gt;&lt;/script&gt;</div>
+    <p>Please use the following code to embed the specified goodmoves widget on your own website:</p>
+    <div class="embed copyable" id="embed">&lt;script src="https://widgets.goodmoves.com/goodmoves.bundle.js" data-number="{{number}}" data-widget-style="{{style}}"&gt;&lt;/script&gt;</div>
     <button class="btn btn-sm copy" data-source="embed" unselectable="on"><i class="fa fa-clipboard" aria-hidden="true"></i> Copy</button>
 
     <h3>Preview</h3>
-    <preview [type]="'goodhq'" [style]="style" [xid]="xid"></preview>
+    <preview [type]="'goodmoves'" [style]="style" [number]="number"></preview>
 </div>

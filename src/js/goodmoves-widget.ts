@@ -3,36 +3,33 @@ import { BaseWidget, IWidgetConfiguration, ResultSet, TemplateSet, MapOptions } 
 // import * as GoogleMapsLoader from 'google-maps'
 
 class GoodHQWidget extends BaseWidget {
-    xid: string = 'undefined';
+    xid: string;
     style: string = 'basic';
+    number: number = 3;
     hideMap: boolean = true;
 
     constructor() {
         super('');
-        this.xid = this.scriptTag.data('xid');
         this.style = this.scriptTag.data('style');
+        this.number = this.scriptTag.data('number');
         this.hideMap = true;
     }
 
     doOldSearch(page: number = 1) {
         var must = [];
 
-        must.push({
-            "term": {
-                "xid": this.xid
-            }
-        });
+        must.push({});
 
         var payload: any = {
             "bool": {
                 "must": must,
                 "minimum_should_match": 1
             },
-            "size": 1
+            "size": this.number
         };
 
         this.search(payload, page).then((resultSet: ResultSet) => {});
     }
 }
 
-var widget = new BaseWidget('goodhq');
+var widget = new BaseWidget('goodmoves');

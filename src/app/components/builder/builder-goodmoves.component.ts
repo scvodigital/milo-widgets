@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'main-container.content',
-    templateUrl: './builder-goodhq.component.html'
+    templateUrl: './builder-goodmoves.component.html'
 })
-export class GoodHQBuilderComponent {
+export class GoodmovesBuilderComponent {
     private type: string = "basic";
-    private xid: string = "";
+    private number: number = 3;
 
     constructor() {}
 
