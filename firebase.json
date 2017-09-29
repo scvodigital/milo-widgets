@@ -16,6 +16,15 @@
                         "value" : "*"
                     }
                 ]
+            },
+            {
+                "source" : "**/*.@(woff)",
+                "headers" : [
+                    {
+                        "key" : "Content-Type",
+                        "value" : "application/font-woff"
+                    }
+                ]
             }
         ]
     },
