@@ -14,7 +14,7 @@ module.exports = {
         'opportunities-test': './src/js/opportunities-test-widget.ts',
         'opportunities-organisation': './src/js/opportunities-organisation-widget.ts',
         'opportunities-organisations': './src/js/opportunities-organisations-widget.ts',
-        'goodhq': './src/js/goodhq-widget.ts'
+        'goodhq': './src/js/goodhq-widget.ts',
         'goodmoves': './src/js/goodmoves-widget.ts'
     },
     output: {
