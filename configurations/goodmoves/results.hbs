@@ -1,0 +1,11 @@
+{{#compare total '==' 0}}
+<div class="alert alert-warning">
+	<p>Couldn't find any jobs currently posted on <strong>good</strong>moves</p>
+</div>
+{{/compare}}
+
+{{#each results}}
+<div class="mw-goodmoves-result" id="mw-goodmoves-result-{{Id}}">
+    {{title}}
+</div>
+{{/each}}
