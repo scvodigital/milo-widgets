@@ -174,15 +174,17 @@ export class BaseWidget {
 				}
 			};
 
-			this.config.termFields.forEach((field) => {
-				payload.body.aggs[field] = {
-					"terms": {
-						"field": field,
-						"order": { "_term" : "asc" },
-						"size": 10000
-					}
-				}
-			});
+            if (this.config.termFields && this.config.termFields.length > 0) {
+    			this.config.termFields.forEach((field) => {
+    				payload.body.aggs[field] = {
+    					"terms": {
+    						"field": field,
+    						"order": { "_term" : "asc" },
+    						"size": 10000
+    					}
+    				}
+    			});
+            }
 
 			this.runQuery(payload).then((results) => {
 				var aggs = results.aggregations;
