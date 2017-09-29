@@ -29,6 +29,11 @@
     "sort": {
       "Id": "desc"
     },
-    "injectableFilters": [],
+    "injectableFilters": [
+      {
+        "attribute": "size",
+        "field": "number"
+      }
+    ],
     "autoSearch": true
   }

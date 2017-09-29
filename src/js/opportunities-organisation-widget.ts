@@ -16,16 +16,16 @@ class OpportunitiesOrganisationWidget extends BaseWidget {
 
         if (this.org) {
             must.push({
-                term: {
-                    organisation_charity_number: this.org
+                "term": {
+                    "organisation_charity_number": this.org
                 }
             });
         }
 
         var payload: any = {
-            bool: {
-                must: must,
-                minimum_should_match: 1
+            "bool": {
+                "must": must,
+                "minimum_should_match": 1
             }
         };
 

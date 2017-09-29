@@ -9,11 +9,13 @@
     {{/compare}}
     <ul>
         {{#each results}}
+            {{#compare @index '<' 3}}
             {{#each this.views}}
                 {{#eq this.name "search-result-widget"}}
                     {{{this.html}}}
                 {{/eq}}
             {{/each}}
+            {{/compare}}
         {{/each}}
     </ul>
 </div>
