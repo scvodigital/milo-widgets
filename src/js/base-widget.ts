@@ -177,6 +177,7 @@ export class BaseWidget {
             if (this.config.termFields && this.config.termFields.length > 0) {
     			this.config.termFields.forEach((field) => {
     				payload.body.aggs[field] = {
+						"_source": false,
     					"terms": {
     						"field": field,
     						"order": { "_term" : "asc" },
