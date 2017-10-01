@@ -3,7 +3,7 @@
         "index": "web-content-production",
         "type": "goodhq-organisation",
         "termFields": [
-            "xid"
+            "Id"
         ],
         "templateSet": {
             "searchFormTemplate": "",
@@ -28,12 +28,7 @@
         "sort": {
             "xid": "asc"
         },
-        "injectableFilters": [
-            {
-                "attribute": "xid",
-                "field": "xid"
-            }
-        ],
+        "injectableFilters": [],
         "autoSearch": true
     },
     "goodmoves": {
@@ -68,12 +63,7 @@
         "sort": {
             "Id": "desc"
         },
-        "injectableFilters": [
-            {
-                "attribute": "size",
-                "field": "number"
-            }
-        ],
+        "injectableFilters": [],
         "autoSearch": true
     },
     "opportunities": {

@@ -1,7 +1,7 @@
 {
   "index": "web-content-production",
   "type": "goodhq-organisation",
-  "termFields": ["xid"],
+  "termFields": ["Id"],
   "templateSet": {
     "searchFormTemplate": "",
     "resultsTemplate": "",
@@ -24,11 +24,6 @@
     "sort": {
       "xid": "asc"
     },
-    "injectableFilters": [
-      {
-        "attribute": "xid",
-        "field": "xid"
-      }
-    ],
+    "injectableFilters": [],
     "autoSearch": true
   }
