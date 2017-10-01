@@ -1,7 +1,7 @@
 {
   "index": "web-content-production",
   "type": "goodhq-organisation",
-  "termFields": ["Id"],
+  "termFields": [],
   "templateSet": {
     "searchFormTemplate": "",
     "resultsTemplate": "",
