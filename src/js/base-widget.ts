@@ -166,16 +166,16 @@ export class BaseWidget {
 
 	protected loadTerms() {
 		return new Promise<void>((resolve, reject) => {
-			var payload = {
-				"index": this.config.index,
-				"type": this.config.type,
-				"body": {
-					"_source": false,
-					"aggs": {}
-				}
-			};
-
             if (this.config.termFields && this.config.termFields.length > 0) {
+                var payload = {
+    				"index": this.config.index,
+    				"type": this.config.type,
+    				"body": {
+    					"_source": false,
+    					"aggs": {}
+    				}
+    			};
+
     			this.config.termFields.forEach((field) => {
     				payload.body.aggs[field] = {
     					"terms": {
@@ -197,6 +197,8 @@ export class BaseWidget {
     			}).catch((err) => {
     				reject(err);
     			});
+            } else {
+                resolve();
             }
 		});
 	}

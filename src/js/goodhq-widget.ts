@@ -1,5 +1,6 @@
 import * as jq from 'jquery';
 import { BaseWidget, IWidgetConfiguration, ResultSet, TemplateSet, MapOptions } from './base-widget';
+import '../styles/goodhq-font.scss';
 
 class GoodHQWidget extends BaseWidget {
     xid: string = 'undefined';
