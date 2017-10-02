@@ -2,6 +2,10 @@
     <a href="https://goodmoves.com">
         <img src="https://widgets.goodmoves.com/app/assets/images/logos/goodmoves-logo.png" alt="Goodmoves - charity and voluntary sector recruitment" />
     </a>
+    <form action="https://goodmoves.com/search" method="get">
+        <input type="text" name="query" placeholder="Keywords" style="width: 59.5%; height: 2rem; top: 1px; position: relative;" />
+        <input type="submit" value="Job Search" style="width: 35%; height: 2rem; top: 4px; position: relative;" />
+    </form>
     {{#compare total '==' 0}}
     <div class="alert alert-warning">
         <p>Couldn't find any jobs currently posted on <strong>good</strong>moves</p>
@@ -10,7 +14,7 @@
     <ul>
         {{#each results}}
             {{#compare @index '<' 3}}
-            <li class="mw-goodmoves-result click-node item item-{{@index}}{{#compare @index '=' 3}} last{{/if}}" id="mw-goodmoves-result-{{Id}}">
+            <li class="mw-goodmoves-result mw-goodmoves-result-{{Id}} click-node item item-{{add @index 1}}{{#compare @index '==' 2}} last{{/compare}} click-node-active">
                 {{{this.search_result_widget}}}
             </li>
             {{/compare}}
