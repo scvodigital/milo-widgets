@@ -10,7 +10,7 @@
     <ul>
         {{#each results}}
             {{#compare @index '<' 3}}
-            <li class="mw-goodmoves-result click-node item item-{{@index}}{{#compare @index '=' 3}} last{{/if}}" id="mw-goodmoves-result-{{Id}}">
+            <li class="mw-goodmoves-result mw-goodmoves-result-{{Id}} click-node item item-{{add @index 1}}{{#compare @index '==' 2}} last{{/compare}} click-node-active">
                 {{{this.search_result_widget}}}
             </li>
             {{/compare}}
