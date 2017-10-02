@@ -1,8 +1,8 @@
-import * as jq from 'jquery';
 import * as elasticsearch from 'elasticsearch';
 import * as handlebars from 'handlebars';
 import * as helpers from 'handlebars-helpers';
 import * as s from 'string';
+import * as jq from 'jquery';
 import * as GoogleMapsLoader from 'google-maps';
 import 'core-js';
 

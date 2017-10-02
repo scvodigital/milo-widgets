@@ -1,7 +1,6 @@
-import * as jq from 'jquery';
-import { BaseWidget, ResultSet, TemplateSet, MapOptions } from './base-widget';
+import { BaseWidget } from './base-widget';
 
-class GoodHQWidget extends BaseWidget {
+class GoodmovesWidget extends BaseWidget {
     number: number = 3;
     style: string = 'basic';
     hideMap: boolean = true;
@@ -11,26 +10,6 @@ class GoodHQWidget extends BaseWidget {
         this.number = this.scriptTag.data('number');
         this.style = this.scriptTag.data('style');
         this.hideMap = true;
-    }
-
-    doOldSearch(page: number = 1) {
-        var must = [];
-
-        must.push({});
-
-        var payload: any = {
-            "_source": [
-                "widget_basic",
-                "widget_enhanced"
-            ],
-            "bool": {
-                "must": must,
-                "minimum_should_match": 1
-            },
-            "size": this.number
-        };
-
-        this.search(payload, page).then((resultSet: ResultSet) => {});
     }
 }
 
