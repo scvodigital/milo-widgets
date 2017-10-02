@@ -170,6 +170,7 @@ export class BaseWidget {
 				"index": this.config.index,
 				"type": this.config.type,
 				"body": {
+					"_source": false,
 					"aggs": {}
 				}
 			};
@@ -189,9 +190,11 @@ export class BaseWidget {
 			this.runQuery(payload).then((results) => {
 				var aggs = results.aggregations;
 				var terms = {};
-				this.config.termFields.forEach((field) => {
-					terms[field] = aggs[field].buckets.map((term) => new Term(term.key, term.doc_count));
-				});
+				if (this.config.termFields && this.config.termFields.length > 0) {
+					this.config.termFields.forEach((field) => {
+						terms[field] = aggs[field].buckets.map((term) => new Term(term.key, term.doc_count));
+					});
+				}
 				this.terms = terms;
 				resolve();
 			}).catch((err) => {
