@@ -1,29 +1,35 @@
 {
-  "index": "web-content-production",
-  "type": "goodhq-organisation",
-  "termFields": ["Id"],
-  "templateSet": {
-    "searchFormTemplate": "",
-    "resultsTemplate": "",
-    "viewTemplate": "",
-    "infoWindowTemplate": ""
-  },
-  "mapOptions": {
-    "fields": {
-      "lat": "coords.lat",
-      "lng": "coords.lon",
-      "title": "xid"
+    "index": "web-content-production",
+    "type": "goodhq-organisation",
+    "termFields": [],
+    "templateSet": {
+        "searchFormTemplate": "",
+        "resultsTemplate": "",
+        "viewTemplate": "",
+        "infoWindowTemplate": ""
     },
-    "initialLocation": {
-      "lat": 56.85132,
-      "lng": -4.1180987 },
-      "initialZoom": 6
+    "mapOptions": {
+        "fields": {
+            "lat": "coords.lat",
+            "lng": "coords.lon",
+            "title": "xid"
+        },
+        "initialLocation": {
+            "lat": 56.85132,
+            "lng": -4.1180987
+        },
+        "initialZoom": 6
     },
     "name": "goodhq",
     "title": "",
     "sort": {
-      "xid": "asc"
+        "xid": "asc"
     },
-    "injectableFilters": [],
+    "injectableFilters": [
+        {
+            "attribute": "xid",
+            "field": "xid"
+        }
+    ],
     "autoSearch": true
-  }
+}

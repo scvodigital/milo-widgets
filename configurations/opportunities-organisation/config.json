@@ -16,7 +16,8 @@
         },
         "initialLocation": {
             "lat": 56.85132,
-            "lng": -4.1180987 },
+            "lng": -4.1180987
+        },
         "initialZoom": 6
     },
     "name": "opportunities",
