@@ -20,8 +20,7 @@ class GoodHQWidget extends BaseWidget {
 
         var payload: any = {
             "_source": [
-                "widget_basic",
-                "widget_enhanced"
+                "search_result_widget"
             ],
             "bool": {
                 "must": must,

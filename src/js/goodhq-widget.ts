@@ -24,6 +24,10 @@ class GoodHQWidget extends BaseWidget {
         });
 
         var payload: any = {
+            "_source": [
+                "widget_basic",
+                "widget_enhanced"
+            ],
             "bool": {
                 "must": must,
                 "minimum_should_match": 1
