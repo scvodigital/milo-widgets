@@ -19,6 +19,10 @@ class GoodHQWidget extends BaseWidget {
         must.push({});
 
         var payload: any = {
+            "_source": [
+                "widget_basic",
+                "widget_enhanced"
+            ],
             "bool": {
                 "must": must,
                 "minimum_should_match": 1
