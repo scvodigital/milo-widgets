@@ -1,6 +1,6 @@
-# Milo widgets [![Build Status](https://travis-ci.org/scvodigital/milo-widgets.svg?branch=master)](https://travis-ci.org/scvodigital/milo-widgets)
+# Milo widgets [![Build Status](https://travis-ci.org/scvodigital/milo-widgets.svg?branch=release)](https://travis-ci.org/scvodigital/milo-widgets)
 
-[![Dependency Status](https://david-dm.org/scvodigital/milo-widgets/master.svg)](https://david-dm.org/scvodigital/milo-widgets/master) [![devDependency Status](https://david-dm.org/scvodigital/milo-widgets/master/dev-status.svg)](https://david-dm.org/scvodigital/milo-widgets/master?type=dev)
+[![Dependency Status](https://david-dm.org/scvodigital/milo-widgets/release.svg)](https://david-dm.org/scvodigital/milo-widgets/release) [![devDependency Status](https://david-dm.org/scvodigital/milo-widgets/release/dev-status.svg)](https://david-dm.org/scvodigital/milo-widgets/release?type=dev)
 
 This is the repository for the Get Involved website, it contains the codebase for the public website. Deployment instructions are detailed below.
 

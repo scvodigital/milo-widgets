@@ -9,9 +9,7 @@ var path = require('path');
 module.exports = {
     entry: {
         'organisations': './src/js/organisations-widget.ts',
-        'organisations-test': './src/js/organisations-test-widget.ts',
         'opportunities': './src/js/opportunities-widget.ts',
-        'opportunities-test': './src/js/opportunities-test-widget.ts',
         'opportunities-organisation': './src/js/opportunities-organisation-widget.ts',
         'opportunities-organisations': './src/js/opportunities-organisations-widget.ts',
         'goodhq': './src/js/goodhq-widget.ts',
@@ -67,10 +65,16 @@ module.exports = {
     plugins: [
         new WriteFilePlugin(),
         new CopyWebpackPlugin([
-            { from: './src/js/require.js', to: './lib/require.js' }
+            {
+                from: './src/js/require.js',
+                to: './lib/require.js'
+            }
         ]),
         new CopyWebpackPlugin([
-            { from: './src/fonts', to: './fonts' }
+            {
+                from: './src/fonts',
+                to: './fonts'
+            }
         ]),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': '"production"'
