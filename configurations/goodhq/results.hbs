@@ -1,7 +1,7 @@
 {{#each results}}
-    {{#compare style '==' 'basic'}}
-    {{{widget_basic}}}
+    {{#compare this.style '==' 'basic'}}
+    {{{this.rendered.widget_basic}}}
     {{else}}
-    {{{widget_basic}}}
+    {{{this.rendered.widget_basic}}}
     {{/compare}}
 {{/each}}
