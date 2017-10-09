@@ -81,7 +81,9 @@ export class BaseWidget {
 	setupControls() {
 		this.loadTerms().then(() => {
 			var baseHtml = BaseTemplate(this.config);
-			var searchHtml = this.config.templateSet.searchForm({ terms: this.terms });
+			var searchHtml = this.config.templateSet.searchForm({
+                "terms": this.terms
+            });
 
 			this.widgetElement.html(baseHtml);
 			this.searchElement = this.widgetElement.find('.mw-search-form');
@@ -223,7 +225,7 @@ export class BaseWidget {
 				payload.bool.must = payload.bool.must.concat(injected);
 				payload.bool.must = payload.bool.must.concat(ranges);
 
-                if(payload.bool.must.length > 1){
+                if (payload.bool.must.length > 1) {
                     allowSort = false;
                 }
 
@@ -358,8 +360,8 @@ export class BaseWidget {
 				if (result.status === 200) {
 					if (result.result && result.result.latitude && result.result.longitude) {
 						resolve({
-							lat: result.result.latitude,
-							lon: result.result.longitude
+							"lat": result.result.latitude,
+							"lon": result.result.longitude
 						});
 					} else {
 						resolve(null);
@@ -378,13 +380,13 @@ export class BaseWidget {
 					var location = result.results[0];
 					if (location.geometry && location.geometry.bounds) {
 						resolve({
-							northeast: {
-								lat: location.geometry.bounds.northeast.lat,
-								lon: location.geometry.bounds.northeast.lng,
+							"northeast": {
+								"lat": location.geometry.bounds.northeast.lat,
+								"lon": location.geometry.bounds.northeast.lon,
 							},
-							southwest: {
-								lat: location.geometry.bounds.southwest.lat,
-								lon: location.geometry.bounds.southwest.lng,
+							"southwest": {
+								"lat": location.geometry.bounds.southwest.lat,
+								"lon": location.geometry.bounds.southwest.lon,
 							}
 						});
 					} else {
@@ -430,7 +432,9 @@ export class BaseWidget {
 
 		Object.keys(terms).forEach((key) => {
 			var term = {
-				terms: { [key]: terms[key] }
+				"terms": {
+                    [key]: terms[key]
+                }
 			};
 			must.push(term);
 		});
@@ -607,10 +611,10 @@ export class BaseWidget {
 			"function": func
 		}
 		jq.ajax({
-			url: 'https://us-central1-scvo-widgets-9d094.cloudfunctions.net/analytics',
-			type: 'POST',
-			data: JSON.stringify(body, null, 4),
-			contentType: 'application/json',
+			"url": 'https://us-central1-scvo-widgets-9d094.cloudfunctions.net/analytics',
+			"type": 'POST',
+			"data": JSON.stringify(body, null, 4),
+			"contentType": 'application/json',
 			complete: (analytics) => { }
 		});
 	}
@@ -638,16 +642,19 @@ export class BaseWidget {
 
 			items.forEach((result) => {
 				var lat = this.propertyByString(result, this.config.mapOptions.fields.lat) || false;
-				var lng = this.propertyByString(result, this.config.mapOptions.fields.lng) || false;
-				if (lat && lng) {
-					var coords = { lat: lat, lng: lng };
+				var lon = this.propertyByString(result, this.config.mapOptions.fields.lng) || false;
+				if (lat && lon) {
+					var coords = {
+                        "lat": lat,
+                        "lng": lon
+                    };
 					var infoWindow = new google.maps.InfoWindow({
-						content: this.config.templateSet.infoWindow(result, handlebars)
+						"content": this.config.templateSet.infoWindow(result, handlebars)
 					});
 					var marker = new google.maps.Marker({
-						position: coords,
-						map: this.map,
-						title: result.name
+						"position": coords,
+						"map": this.map,
+						"title": result.name
 					});
 					marker.addListener('click', () => {
 						this.infoWindows.forEach((infoWindow) => {
