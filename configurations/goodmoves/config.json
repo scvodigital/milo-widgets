@@ -1,6 +1,6 @@
 {
     "index": "web-content-production",
-    "type": "goodmoves-job",
+    "type": "goodmoves-legacy",
     "termFields": [
         "sectors",
         "roles",
