@@ -7,10 +7,13 @@
 .mw-search-widget {
     .widget-header {
         background-color: #3b9db1;
+        padding: 0.25rem 0.75rem;
+        font-family: 'MuseoSlab Medium', Rockwell, serif;
         a {
             color: #fff;
             font-weight: normal;
             text-decoration: underline;
+            font-size: 1.1rem;
         }
         a.ir {
             display: block;
@@ -23,16 +26,23 @@
             li {
                 display: inline-block;
                 a {
-                    font-size: 1rem;
-                    width: 30px;
-                    height: 30px;
+                    font-size: 1.25rem;
+                    width: 2.5rem;
+                    height: 2.5rem;
                     padding: 0;
                     border: 2px solid #fff;
+                    display: block;
+                    text-align: center;
+                    line-height: 2.25rem;
+                    margin-top: 1rem;
                 }
             }
         }
     }
-    .row {
+    .mw-tfn-result .row {
+        margin-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid #3b9db1;
         margin-left: -0.75rem;
         margin-right: -0.75rem;
         p {
