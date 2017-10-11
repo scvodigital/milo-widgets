@@ -1,0 +1,14 @@
+#mw-tfn-map,
+#mw-tfn-widget .mw-map,
+#mw-tfn-widget .mw-search-widget-inner,
+#mw-tfn-widget .mw-navigation {
+    display: none !important;
+}
+.mw-search-widget {
+    .widget-header {
+        background-color: #3b9db1;
+        a {
+            color: #fff;
+        }
+    }
+}

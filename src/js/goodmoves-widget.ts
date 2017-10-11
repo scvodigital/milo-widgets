@@ -1,4 +1,5 @@
 import { BaseWidget } from './base-widget';
+import '../styles/goodmoves.scss';
 
 class GoodmovesWidget extends BaseWidget {
     number: number = 3;

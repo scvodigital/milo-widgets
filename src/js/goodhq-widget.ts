@@ -1,5 +1,5 @@
 import { BaseWidget } from './base-widget';
-import '../styles/goodhq-font.scss';
+import '../styles/goodhq.scss';
 
 class GoodHQWidget extends BaseWidget {
     xid: string = 'undefined';
