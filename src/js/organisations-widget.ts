@@ -1,6 +1,7 @@
 import * as jq from 'jquery';
 import { BaseWidget, ResultSet, TemplateSet, MapOptions } from './base-widget';
 import * as GoogleMapsLoader from 'google-maps'
+import '../styles/milo.scss';
 
 class OrganisationWidget extends BaseWidget {
     hideMap: boolean = false;

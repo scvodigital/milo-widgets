@@ -8,7 +8,6 @@ import 'core-js';
 
 import * as BaseTemplate from '../templates/base.hbs';
 import * as NavigationTemplate from '../templates/navigation.hbs';
-import '../styles/widget.scss';
 
 helpers({ handlebars: handlebars });
 handlebars.registerPartial('navigation', NavigationTemplate);

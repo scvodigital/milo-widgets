@@ -1,6 +1,6 @@
 {
     "index": "web-content-production",
-    "type": "tfn-news-posts",
+    "type": "tfn-news-post",
     "termFields": [
         "categories"
     ],
@@ -25,7 +25,7 @@
     "name": "tfn",
     "title": "",
     "sort": {
-        "publish_on": "desc"
+        "date_published": "desc"
     },
     "injectableFilters": [],
     "autoSearch": true

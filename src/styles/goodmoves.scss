@@ -1,0 +1,14 @@
+#mw-goodmoves-map,
+#mw-goodmoves-widget .mw-map,
+#mw-goodmoves-widget .mw-search-widget-inner,
+#mw-goodmoves-widget .mw-navigation {
+    display: none !important;
+}
+#mw-goodmoves-widget {
+    ul {
+        margin-top: 20px;
+    }
+    a {
+        color: #000;
+    }
+}

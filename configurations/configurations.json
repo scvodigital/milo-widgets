@@ -219,7 +219,7 @@
     },
     "tfn": {
         "index": "web-content-production",
-        "type": "tfn-news-posts",
+        "type": "tfn-news-post",
         "termFields": [
             "categories"
         ],
@@ -244,7 +244,7 @@
         "name": "tfn",
         "title": "",
         "sort": {
-            "post_date": "desc"
+            "date_published": "desc"
         },
         "injectableFilters": [],
         "autoSearch": true
