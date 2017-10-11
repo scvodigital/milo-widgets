@@ -1,0 +1,32 @@
+{
+    "index": "web-content-production",
+    "type": "tfn-news-posts",
+    "termFields": [
+        "categories"
+    ],
+    "templateSet": {
+        "searchFormTemplate": "",
+        "resultsTemplate": "",
+        "viewTemplate": "",
+        "infoWindowTemplate": ""
+    },
+    "mapOptions": {
+        "fields": {
+            "lat": "coords.lat",
+            "lng": "coords.lon",
+            "title": "title"
+        },
+        "initialLocation": {
+            "lat": 56.85132,
+            "lng": -4.1180987
+        },
+        "initialZoom": 6
+    },
+    "name": "tfn",
+    "title": "",
+    "sort": {
+        "post_date": "desc"
+    },
+    "injectableFilters": [],
+    "autoSearch": true
+}
