@@ -25,7 +25,7 @@
     "name": "tfn",
     "title": "",
     "sort": {
-        "post_date": "desc"
+        "publish_on": "desc"
     },
     "injectableFilters": [],
     "autoSearch": true
