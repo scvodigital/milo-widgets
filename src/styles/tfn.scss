@@ -9,6 +9,37 @@
         background-color: #3b9db1;
         a {
             color: #fff;
+            font-weight: normal;
+            text-decoration: underline;
+        }
+        a.ir {
+            display: block;
+            width: 361px;
+            height: 71px;
+            background: url('https://thirdforcenews.org.uk/images/assets/brand/tfn-small.gif') no-repeat left center;
+            text-indent: -9999em;
+        }
+        .socialmedia {
+            li {
+                display: inline-block;
+                a {
+                    font-size: 1rem;
+                    width: 30px;
+                    height: 30px;
+                    padding: 0;
+                    border: 2px solid #fff;
+                }
+            }
+        }
+    }
+    .row {
+        margin-left: -0.75rem;
+        margin-right: -0.75rem;
+        p {
+            margin: 0;
+            a:link {
+                color: #3b9db1;
+            }
         }
     }
 }
