@@ -9,9 +9,5 @@
 {{/compare}}
 
 {{#each results}}
-    {{#each this.views}}
-        {{#eq this.name "search-result"}}
-            {{{this.html}}}
-        {{/eq}}
-    {{/each}}
+    {{{this.rendered.search_result}}}
 {{/each}}

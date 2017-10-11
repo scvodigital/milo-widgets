@@ -1,11 +1,8 @@
 {
     "index": "web-content-production",
-    "type": "goodmoves-legacy",
+    "type": "tfn-news-posts",
     "termFields": [
-        "sectors",
-        "roles",
-        "status",
-        "region"
+        "categories"
     ],
     "templateSet": {
         "searchFormTemplate": "",
@@ -25,10 +22,10 @@
         },
         "initialZoom": 6
     },
-    "name": "goodmoves",
+    "name": "tfn",
     "title": "",
     "sort": {
-        "Id": "desc"
+        "post_date": "desc"
     },
     "injectableFilters": [],
     "autoSearch": true

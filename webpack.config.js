@@ -13,7 +13,8 @@ module.exports = {
         'opportunities-organisation': './src/js/opportunities-organisation-widget.ts',
         'opportunities-organisations': './src/js/opportunities-organisations-widget.ts',
         'goodhq': './src/js/goodhq-widget.ts',
-        'goodmoves': './src/js/goodmoves-widget.ts'
+        'goodmoves': './src/js/goodmoves-widget.ts',
+        'tfn': './src/js/tfn-widget.ts'
     },
     output: {
         path: path.join(__dirname, "./compiled"),
