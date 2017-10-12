@@ -13,6 +13,9 @@ export class AppComponent {
         if (window.location.hostname == 'widgets.goodhq.org') {
             window.location.href = 'https://goodhq.org';
         }
+        if (window.location.hostname == 'widgets.thirdforcenews.scot') {
+            window.location.href = 'http://thirdforcenews.scot';
+        }
         if (window.location.hostname == 'widgets.goodmoves.com') {
             window.location.href = 'https://goodmoves.com';
         }
