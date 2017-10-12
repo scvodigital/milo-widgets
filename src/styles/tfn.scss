@@ -52,19 +52,22 @@
                     width: 100%;
                 }
             }
-            p {
-                margin: 0;
-                a:link {
-                    color: #3b9db1;
-                }
-                a:link.read-more {
-                    font-weight: normal;
+            .copy {
+                padding: 0;
+                p {
+                    margin: 0;
+                    a {
+                        color: #3b9db1;
+                    }
+                    a.read-more {
+                        font-weight: normal;
+                    }
                 }
             }
         }
     }
     .widget-footer {
-        a:link {
+        a {
             color: #3b9db1;
         }
     }
