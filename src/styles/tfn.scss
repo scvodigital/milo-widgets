@@ -8,7 +8,7 @@
     .widget-header {
         background-color: #3b9db1;
         padding: 0.25rem 0.75rem;
-        font-family: 'MuseoSlab Medium', Rockwell, serif;
+        font-family: 'MuseoSlab Medium', 'Rockwell', serif;
         a {
             color: #fff;
             font-weight: normal;
@@ -39,16 +39,19 @@
             }
         }
     }
-    .mw-tfn-result .row {
-        margin-top: 0.75rem;
-        padding-bottom: 0.75rem;
+    .mw-tfn-result {
         border-bottom: 2px solid #3b9db1;
-        margin-left: -0.75rem;
-        margin-right: -0.75rem;
-        p {
-            margin: 0;
-            a:link {
-                color: #3b9db1;
+        margin-bottom: .75rem;
+        .row {
+            margin: .75rem -.75rem .75rem -.75rem;
+            p {
+                margin: 0;
+                a:link {
+                    color: #3b9db1;
+                }
+                a:link.read-more {
+                    font-weight: normal;
+                }
             }
         }
     }
