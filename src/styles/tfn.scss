@@ -7,7 +7,7 @@
 .mw-search-widget {
     .widget-header {
         background-color: #3b9db1;
-        padding: 0.25rem 0.75rem;
+        padding: 0.25rem;
         font-family: 'MuseoSlab Medium', 'Rockwell', serif;
         a {
             color: #fff;
@@ -42,9 +42,9 @@
     }
     .mw-tfn-result {
         border-bottom: 2px solid #3b9db1;
-        margin-bottom: .75rem;
+        margin-bottom: 0.75rem;
         .row {
-            margin: .75rem -.75rem .75rem -.75rem;
+            margin: 0.75rem -0.75rem 0.75rem -0.75rem;
             .image a {
                 float: left;
                 line-height: 0;
@@ -52,19 +52,22 @@
                     width: 100%;
                 }
             }
-            p {
-                margin: 0;
-                a:link {
-                    color: #3b9db1;
-                }
-                a:link.read-more {
-                    font-weight: normal;
+            .copy {
+                padding: 0;
+                p {
+                    margin: 0;
+                    a {
+                        color: #3b9db1;
+                    }
+                    a.read-more {
+                        font-weight: normal;
+                    }
                 }
             }
         }
     }
     .widget-footer {
-        a:link {
+        a {
             color: #3b9db1;
         }
     }
