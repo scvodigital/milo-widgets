@@ -59,6 +59,13 @@
                 padding-left: 0;
                 p {
                     margin: 0;
+                    .date {
+                        color: #555;
+                    }
+                    .date,
+                    .read-more {
+                        font-size: 0.9rem;
+                    }
                     a {
                         color: #3b9db1;
                     }
