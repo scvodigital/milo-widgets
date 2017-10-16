@@ -488,7 +488,9 @@ export class BaseWidget {
 				"type": this.config.type
 			};
 
-			this.logAnalytics(payload, 'document');
+            if (this.config.type == 'milo-volunteering-opportunities' || this.config.type == 'milo-organisations') {
+                this.logAnalytics(payload, 'document');
+            }
 
 			this.client.get(payload).then((response: elasticsearch.GetResponse<any>) => {
 				if (response.found) {
@@ -586,7 +588,9 @@ export class BaseWidget {
 				payload.body.sort = this.config.sort;
 			}
 
-			this.logAnalytics(payload, 'search');
+            if (this.config.type == 'milo-volunteering-opportunities' || this.config.type == 'milo-organisations') {
+                this.logAnalytics(payload, 'search');
+            }
 
 			this.runQuery(payload).then((response) => {
 				var resultSet: ResultSet = new ResultSet(
