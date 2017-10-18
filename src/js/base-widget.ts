@@ -180,15 +180,13 @@ export class BaseWidget {
     				"type": this.config.type,
     				"body": {
     					"_source": false,
+                        "size": 0,
     					"aggs": {},
-                        "query": {
-                            "must": []
-                        }
+                        "query": {}
     				}
     			};
 
-                var injected: ITermQuery[] = this.getInjected();
-				payload.body.query.must = payload.body.query.must.concat(injected);
+				payload.body.query = this.getInjectedFilter();
 
     			this.config.termFields.forEach((field) => {
     				payload.body.aggs[field] = {
@@ -196,7 +194,8 @@ export class BaseWidget {
     						"field": field,
     						"order": {
                                 "_term" : "asc"
-                            }
+                            },
+                            "size": 10000
     					}
     				}
     			});
@@ -262,7 +261,7 @@ export class BaseWidget {
 		});
 	}
 
-	private getInjected(): ITermQuery[] {
+    private getInjected(): ITermQuery[] {
 		if (!this.config.injectableFilters) {
 			return [];
 		}
@@ -274,6 +273,27 @@ export class BaseWidget {
 				var query: ITermQuery = {
 					"terms": {
 						[filter.field]: [value]
+					}
+				};
+				must.push(query);
+			}
+		});
+
+		return must;
+	}
+
+    private getInjectedFilter(): ITermFilter[] {
+		if (!this.config.injectableFilters) {
+			return [];
+		}
+
+		var must: ITermFilter[] = [];
+		this.config.injectableFilters.forEach((filter: IInjectableFilter) => {
+			var value: string = this.scriptTag.data(filter.attribute);
+			if (typeof value !== 'undefined' && value !== null) {
+				var query: ITermFilter = {
+					"term": {
+						[filter.field]: value
 					}
 				};
 				must.push(query);
@@ -918,6 +938,12 @@ export interface ITermCollection {
 export interface ITermQuery {
 	terms: {
 		[field: string]: string[]
+	}
+}
+
+export interface ITermFilter {
+	term: {
+		[field: string]: string
 	}
 }
 
