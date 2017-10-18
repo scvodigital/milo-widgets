@@ -282,25 +282,24 @@ export class BaseWidget {
 		return must;
 	}
 
-    private getInjectedFilter(): ITermFilter[] {
+    private getInjectedFilter(): ITermFilter {
 		if (!this.config.injectableFilters) {
-			return [];
+			return;
 		}
 
-		var must: ITermFilter[] = [];
+		var query: ITermFilter;
 		this.config.injectableFilters.forEach((filter: IInjectableFilter) => {
 			var value: string = this.scriptTag.data(filter.attribute);
 			if (typeof value !== 'undefined' && value !== null) {
-				var query: ITermFilter = {
+				let query: ITermFilter = {
 					"term": {
 						[filter.field]: value
 					}
 				};
-				must.push(query);
 			}
 		});
 
-		return must;
+		return query;
 	}
 
 	private getQuery(): IQueryQuery {
