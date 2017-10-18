@@ -30,6 +30,8 @@ export class BaseWidget {
 	protected infoWindows: google.maps.InfoWindow[] = [];
 	protected doc: any;
 
+    private perPage: number = 10;
+
 	private _client: elasticsearch.Client = null;
 	protected get client(): elasticsearch.Client {
 		if (this._client === null) {
@@ -53,6 +55,9 @@ export class BaseWidget {
 			this.config = new WidgetConfiguration(configuration);
 
             this.config.style = this.scriptTag.data('widget-style') || 'basic';
+            if (this.config.style == 'enhanced') {
+                this.perPage = 5;
+            }
 
             this.hideTitle = this.scriptTag.data('hide-title') || false;
             this.hideMap = this.scriptTag.data('hide-map') || false;
@@ -487,7 +492,13 @@ export class BaseWidget {
 			var payload: elasticsearch.GetParams = {
 				"id": id,
 				"index": this.config.index,
-				"type": this.config.type
+				"type": this.config.type,
+                "body": {
+                    "_source": [
+                        'rendered.full',
+                        'coords'
+                    ]
+                }
 			};
 
             if (this.config.type == 'milo-volunteering-opportunities' || this.config.type == 'milo-organisations') {
@@ -573,13 +584,14 @@ export class BaseWidget {
 
 	protected search(query, page = 1, jump: boolean = false, allowSort: boolean = true) {
 		return new Promise((resolve, reject) => {
-			var from = (page - 1) * 10;
+			var from = (page - 1) * this.perPage;
 
 			var payload: any = {
 				"index": this.config.index,
 				"type": this.config.type,
 				"body": {
 					"query": query,
+                    "size": this.perPage,
 					"from": from
 				}
 			};
