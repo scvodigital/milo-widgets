@@ -86,11 +86,26 @@
         width: 100%;
         height: 400px;
     }
-    .mw-body h3 {
-        margin: 15px 0 10px;
-    }
-    .mw-body .list-inline {
-        margin-bottom: 4px;
+    .mw-body {
+        h3 {
+            margin: 10px 0 5px;
+        }
+        .list-inline {
+            margin-bottom: 4px;
+        }
+        .list-unstyled {
+            li {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+        p {
+            margin: 0;
+        }
+        .panel-body {
+            padding: 5px 15px 13px;
+        }
     }
     .input-group-addon {
         border-left: 0;
@@ -118,12 +133,6 @@
         h3.panel-title {
             margin: 0;
             padding: 0;
-        }
-        h3 {
-            margin: 0;
-        }
-        h4 {
-            margin-bottom: 5px;
         }
     }
     .mw-search-widget-enhanced {
