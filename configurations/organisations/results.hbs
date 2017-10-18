@@ -9,5 +9,6 @@
 {{/compare}}
 
 {{#each results}}
-    {{{this.rendered.search_result}}}
+    {{#if this.rendered.search_result}}{{{this.rendered.search_result}}}{{/if}}
+    {{#if this.rendered.search_result_enhanced}}{{{this.rendered.search_result_enhanced}}}{{/if}}
 {{/each}}
