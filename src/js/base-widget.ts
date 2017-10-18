@@ -55,9 +55,9 @@ export class BaseWidget {
 			this.config = new WidgetConfiguration(configuration);
 
             this.config.style = this.scriptTag.data('widget-style') || 'basic';
-            if (this.config.style == 'enhanced') {
-                this.perPage = 5;
-            }
+            // if (this.config.style == 'enhanced') {
+            //     this.perPage = 5;
+            // }
 
             this.hideTitle = this.scriptTag.data('hide-title') || false;
             this.hideMap = this.scriptTag.data('hide-map') || false;
