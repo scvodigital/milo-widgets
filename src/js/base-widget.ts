@@ -574,6 +574,19 @@ export class BaseWidget {
 	protected search(query, page = 1, jump: boolean = false, allowSort: boolean = true) {
 		return new Promise((resolve, reject) => {
 			var from = (page - 1) * 10;
+
+            if (this.config.type == 'goodhq-organisation') {
+                query._source = ['Id', 'rendered.widget_basic'];
+            } else if (this.config.type == 'milo-volunteering-opportunities' || this.config.type == 'milo-organisations') {
+                if (this.config.style && this.config.style == 'enhanced') {
+                    query._source = ['rendered.search_result_enhanced'];
+                } else {
+                    query._source = ['rendered.search_result'];
+                }
+            } else {
+                query._source = ['rendered.search_result_widget'];
+            }
+
 			var payload: any = {
 				"index": this.config.index,
 				"type": this.config.type,
@@ -598,7 +611,8 @@ export class BaseWidget {
 				var resultSet: ResultSet = new ResultSet(
 					response.hits.total,
 					response.hits.hits.map((hit) => hit._source),
-					page);
+					page
+                );
 				this.resultSet = resultSet;
 				this.renderResults(jump);
 				resolve(resultSet);
@@ -733,7 +747,8 @@ export interface IInjectableFilter {
 
 export interface IWidgetConfiguration {
 	index: string;
-	type: string;
+    type: string;
+    style: string;
 	termFields: string[];
 	templateSet: TemplateSet;
 	mapOptions: MapOptions;
@@ -746,7 +761,8 @@ export interface IWidgetConfiguration {
 
 export class WidgetConfiguration implements IWidgetConfiguration {
 	index: string = null;
-	type: string = null;
+    type: string = null;
+    style: string = null;
 	termFields: string[] = null;
 	templateSet: TemplateSet = null;
 	mapOptions: MapOptions = null;
