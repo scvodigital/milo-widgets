@@ -9,7 +9,7 @@ export class BuilderComponent {
     private filter: string = "";
     private style: string = "basic";
     private hideTitle: boolean = false;
-    private hideMap: boolean = true;
+    private hideMap: boolean = false;
 
     constructor() {}
 

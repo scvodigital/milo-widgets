@@ -586,11 +586,13 @@ export class BaseWidget {
 
             if (this.config.type == 'goodhq-organisation') {
                 payload.body._source = ['Id', 'rendered.widget_basic'];
-            } else if (this.config.type == 'milo-volunteering-opportunity' || this.config.type == 'milo-organisation') {
+            } else if (this.config.type == 'milo-volunteering-opportunity') {
+                payload.body._source = ['rendered.search_result', 'rendered.search_result_map', 'coords'];
+            } else if (this.config.type == 'milo-organisation') {
                 if (this.config.style == 'enhanced') {
-                    payload.body._source = ['rendered.search_result_enhanced', 'coords'];
+                    payload.body._source = ['rendered.search_result_enhanced', 'rendered.search_result_map', 'coords'];
                 } else {
-                    payload.body._source = ['rendered.search_result', 'coords'];
+                    payload.body._source = ['rendered.search_result', 'rendered.search_result_map', 'coords'];
                 }
             } else {
                 payload.body._source = ['rendered.search_result_widget'];
