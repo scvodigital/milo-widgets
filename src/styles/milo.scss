@@ -31,13 +31,13 @@
     .mw-search-widget-detail {
         padding: 0;
     }
+    h3.panel-title {
+        margin: 0;
+    }
     .mw-search-widget-enhanced {
         .mw-body {
             width: 50%;
             float: left;
-            h3 {
-                margin-bottom: 0;
-            }
         }
         .mw-map {
             width: 48.75% !important;
