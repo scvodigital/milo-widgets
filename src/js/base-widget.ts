@@ -180,6 +180,7 @@ export class BaseWidget {
     				"type": this.config.type,
     				"body": {
     					"_source": false,
+                        "size": 0,
     					"aggs": {},
                         "query": {}
     				}
@@ -193,7 +194,8 @@ export class BaseWidget {
     						"field": field,
     						"order": {
                                 "_term" : "asc"
-                            }
+                            },
+                            "size": 10000
     					}
     				}
     			});
