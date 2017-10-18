@@ -63,6 +63,18 @@
             </div>
         </div>
 
+        <div class="form-group row" *ngIf="type && type == 'organisations'">
+            <label for="type" class="col-sm-2 control-label">
+                Display style
+            </label>
+            <div class="col-sm-10">
+                <select name="style" [(ngModel)]="style" class="form-control">
+                    <option value="basic" selected="selected">Basic</option>
+                    <option value="enhanced">Enhanced</option>
+                </select>
+            </div>
+        </div>
+
         <div class="form-group row" *ngIf="type">
             <label class="col-sm-2 control-label">
                 Options
@@ -88,9 +100,9 @@
 <div class="body-content" *ngIf="type">
     <h3>How to embed the widget</h3>
     <p>Please use the following code to embed the specified Milo search widget on your own website:</p>
-    <div class="embed copyable" id="embed">&lt;script src="https://milo.scvo.org/{{type}}.bundle.js"<span *ngIf="filter"> data-tsi="{{filter}}"</span> data-hide-title="{{hideTitle}}" data-hide-map="{{hideMap}}"&gt;&lt;/script&gt;</div>
+    <div class="embed copyable" id="embed">&lt;script src="https://milo.scvo.org/{{type}}.bundle.js"<span *ngIf="filter"> data-tsi="{{filter}}"</span> data-style="{{style}}" data-hide-title="{{hideTitle}}" data-hide-map="{{hideMap}}"&gt;&lt;/script&gt;</div>
     <button class="btn btn-sm copy" data-source="embed" unselectable="on"><i class="fa fa-clipboard" aria-hidden="true"></i> Copy</button>
 
     <h3>Preview</h3>
-    <preview [type]="type" [filter]="filter" [hideMap]="hideMap" [hideTitle]="hideTitle"></preview>
+    <preview [type]="type" [filter]="filter" [style]="style" [hideMap]="hideMap" [hideTitle]="hideTitle"></preview>
 </div>

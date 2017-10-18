@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 export class BuilderComponent {
     private type: string = "";
     private filter: string = "";
+    private style: string = "basic";
     private hideTitle: boolean = false;
     private hideMap: boolean = true;
 

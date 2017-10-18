@@ -10,7 +10,6 @@ class GoodHQWidget extends BaseWidget {
         super('');
         this.xid = this.scriptTag.data('xid');
         this.style = this.scriptTag.data('style');
-        this.hideMap = true;
     }
 }
 
