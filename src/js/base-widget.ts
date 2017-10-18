@@ -575,18 +575,6 @@ export class BaseWidget {
 		return new Promise((resolve, reject) => {
 			var from = (page - 1) * 10;
 
-            if (this.config.type == 'goodhq-organisation') {
-                query._source = ['Id', 'rendered.widget_basic'];
-            } else if (this.config.type == 'milo-volunteering-opportunity' || this.config.type == 'milo-organisation') {
-                if (this.config.style && this.config.style == 'enhanced') {
-                    query._source = ['rendered.search_result_enhanced'];
-                } else {
-                    query._source = ['rendered.search_result'];
-                }
-            } else {
-                query._source = ['rendered.search_result_widget'];
-            }
-
 			var payload: any = {
 				"index": this.config.index,
 				"type": this.config.type,
@@ -595,6 +583,18 @@ export class BaseWidget {
 					"from": from
 				}
 			};
+
+            if (this.config.type == 'goodhq-organisation') {
+                payload._source = ['Id', 'rendered.widget_basic'];
+            } else if (this.config.type == 'milo-volunteering-opportunity' || this.config.type == 'milo-organisation') {
+                if (this.config.style && this.config.style == 'enhanced') {
+                    payload._source = ['rendered.search_result_enhanced'];
+                } else {
+                    payload._source = ['rendered.search_result'];
+                }
+            } else {
+                payload._source = ['rendered.search_result_widget'];
+            }
 
 			if (payload.body.query.hasOwnProperty('sort')) {
 				payload.body.sort = payload.body.query.sort;
