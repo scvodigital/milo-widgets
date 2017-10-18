@@ -15,7 +15,9 @@
     				<option value="">All activities</option>
     				{{#each terms.work_type}}
                     {{#if this.term}}
-    				<option value="{{this.slug}}">{{this.term}}</option>
+                    {{#compare this.count '>' 0}}
+                    <option value="{{this.slug}}">{{this.term}} ({{this.count}})</option>
+                    {{/compare}}
                     {{/if}}
     				{{/each}}
     			</select>
