@@ -52,7 +52,7 @@ export class BaseWidget {
 		jq.getJSON('https://scvo-widgets-9d094.firebaseio.com/configurations/' + name + '.json').then((configuration) => {
 			this.config = new WidgetConfiguration(configuration);
 
-            this.config.style = this.scriptTag.data('style') || 'basic';
+            this.config.style = this.scriptTag.data('widget-style') || 'basic';
 
             this.hideTitle = this.scriptTag.data('hide-title') || false;
             this.hideMap = this.scriptTag.data('hide-map') || false;
@@ -589,7 +589,7 @@ export class BaseWidget {
             if (this.config.type == 'goodhq-organisation') {
                 payload._source = ['Id', 'rendered.widget_basic'];
             } else if (this.config.type == 'milo-volunteering-opportunity' || this.config.type == 'milo-organisation') {
-                if (this.config.style && this.config.style == 'enhanced') {
+                if (this.config.style == 'enhanced') {
                     payload._source = ['rendered.search_result_enhanced'];
                 } else {
                     payload._source = ['rendered.search_result'];
