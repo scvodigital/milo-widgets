@@ -577,7 +577,7 @@ export class BaseWidget {
 
             if (this.config.type == 'goodhq-organisation') {
                 query._source = ['Id', 'rendered.widget_basic'];
-            } else if (this.config.type == 'milo-volunteering-opportunities' || this.config.type == 'milo-organisations') {
+            } else if (this.config.type == 'milo-volunteering-opportunity' || this.config.type == 'milo-organisation') {
                 if (this.config.style && this.config.style == 'enhanced') {
                     query._source = ['rendered.search_result_enhanced'];
                 } else {
@@ -603,7 +603,7 @@ export class BaseWidget {
 				payload.body.sort = this.config.sort;
 			}
 
-            if (this.config.type == 'milo-volunteering-opportunities' || this.config.type == 'milo-organisations') {
+            if (this.config.type == 'milo-volunteering-opportunity' || this.config.type == 'milo-organisation') {
                 this.logAnalytics(payload, 'search');
             }
 
