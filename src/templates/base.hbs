@@ -17,16 +17,16 @@
     </div>
 </div>
 
-<div class="mw-search-widget mw-search-widget-detail">
+<div class="mw-search-widget mw-search-widget-detail mw-search-widget-{{config.style}}">
     <a name="mw-{{name}}-top"></a>
 
-    {{> navigation this}}
+    <div class="navigation-top">{{> navigation this}}</div>
 
     <div class="mw-body" id="mw-{{name}}-body"></div>
 
     <div class="mw-map" id="mw-{{name}}-map"></div>
 
-    {{> navigation this}}
+    <div class="navigation-bottom">{{> navigation this}}</div>
 </div>
 
 <div class="clearfix"></div>

@@ -31,6 +31,19 @@
     .mw-search-widget-detail {
         padding: 0;
     }
+    .mw-search-widget-enhanced {
+        .mw-body {
+            width: 50%;
+            float: left;
+        }
+        .mw-map {
+            width: 48.75%;
+            float: right;
+        }
+        .navigation-bottom {
+            display: none;
+        }
+    }
     .btn-primary {
         padding: 6px 24px;
     }
