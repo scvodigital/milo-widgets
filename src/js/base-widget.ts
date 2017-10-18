@@ -52,6 +52,8 @@ export class BaseWidget {
 		jq.getJSON('https://scvo-widgets-9d094.firebaseio.com/configurations/' + name + '.json').then((configuration) => {
 			this.config = new WidgetConfiguration(configuration);
 
+            this.config.style = this.scriptTag.data('style') || 'basic';
+
             this.hideTitle = this.scriptTag.data('hide-title') || false;
             this.hideMap = this.scriptTag.data('hide-map') || false;
 
