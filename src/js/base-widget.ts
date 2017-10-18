@@ -645,7 +645,7 @@ export class BaseWidget {
 	}
 
 	placeMarkers() {
-		if (this.hideMap === false) {
+		if (!this.hideMap) {
 			this.markers.forEach((marker: google.maps.Marker) => {
 				marker.setMap(null);
 			});
@@ -704,7 +704,7 @@ export class BaseWidget {
 
 	setupMap() {
 		return new Promise((resolve, reject) => {
-			if (this.hideMap === false) {
+			if (!this.hideMap) {
 				if (!this.map) {
 					GoogleMapsLoader.load((google) => {
 						var element = this.mapElement[0];
