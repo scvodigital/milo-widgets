@@ -492,13 +492,7 @@ export class BaseWidget {
 			var payload: elasticsearch.GetParams = {
 				"id": id,
 				"index": this.config.index,
-				"type": this.config.type,
-                "body": {
-                    "_source": [
-                        'rendered.full',
-                        'coords'
-                    ]
-                }
+				"type": this.config.type
 			};
 
             if (this.config.type == 'milo-volunteering-opportunities' || this.config.type == 'milo-organisations') {
