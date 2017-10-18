@@ -57,7 +57,7 @@ export class BaseWidget {
             this.hideTitle = this.scriptTag.data('hide-title') || false;
             this.hideMap = this.scriptTag.data('hide-map') || false;
 
-            if (!this.hideMap) {
+            if (this.hideMap === false) {
     			(<any>GoogleMapsLoader)['KEY'] = 'AIzaSyBGANoz_QO2iBbM-j1LIvkdaH6ZKnqgTfA';
     			(<any>GoogleMapsLoader)['LIBRARIES'] = ['geometry', 'places'];
             }
@@ -647,7 +647,7 @@ export class BaseWidget {
 	}
 
 	placeMarkers() {
-		if (!this.hideMap) {
+		if (this.hideMap === false) {
 			this.markers.forEach((marker: google.maps.Marker) => {
 				marker.setMap(null);
 			});
@@ -706,7 +706,7 @@ export class BaseWidget {
 
 	setupMap() {
 		return new Promise((resolve, reject) => {
-			if (!this.hideMap) {
+			if (this.hideMap === false) {
 				if (!this.map) {
 					GoogleMapsLoader.load((google) => {
 						var element = this.mapElement[0];

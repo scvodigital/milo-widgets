@@ -10,7 +10,7 @@ class OpportunitiesOrganisationWidget extends BaseWidget {
     constructor() {
         super('');
         this.org = this.scriptTag.data('org');
-        this.style = this.scriptTag.data('style');
+        this.style = this.scriptTag.data('widget-style');
     }
 }
 
