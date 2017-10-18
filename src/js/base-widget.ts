@@ -57,10 +57,8 @@ export class BaseWidget {
             this.hideTitle = this.scriptTag.data('hide-title') || false;
             this.hideMap = this.scriptTag.data('hide-map') || false;
 
-            if (this.hideMap === false) {
-    			(<any>GoogleMapsLoader)['KEY'] = 'AIzaSyBGANoz_QO2iBbM-j1LIvkdaH6ZKnqgTfA';
-    			(<any>GoogleMapsLoader)['LIBRARIES'] = ['geometry', 'places'];
-            }
+			(<any>GoogleMapsLoader)['KEY'] = 'AIzaSyBGANoz_QO2iBbM-j1LIvkdaH6ZKnqgTfA';
+			(<any>GoogleMapsLoader)['LIBRARIES'] = ['geometry', 'places'];
 
 			this.setupControls();
 
