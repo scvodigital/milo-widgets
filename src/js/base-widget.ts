@@ -23,7 +23,7 @@ export class BaseWidget {
 
 	protected resultSet: any = null;
     private terms: ITermCollection;
-    protected hideMap: boolean = false;
+    protected hideMap: boolean = true;
     protected hideTitle: boolean = false;
 	protected map: google.maps.Map;
 	protected markers: google.maps.Marker[] = [];
@@ -706,6 +706,7 @@ export class BaseWidget {
 		return new Promise((resolve, reject) => {
 			if (!this.hideMap) {
 				if (!this.map) {
+                    console.log("loading map");
 					GoogleMapsLoader.load((google) => {
 						var element = this.mapElement[0];
 						this.map = new google.maps.Map(element, {
@@ -714,6 +715,7 @@ export class BaseWidget {
 							draggable: !("ontouchend" in document),
 							scrollwheel: false
 						});
+                        console.log(this.map);
 						resolve();
 					});
 				}
