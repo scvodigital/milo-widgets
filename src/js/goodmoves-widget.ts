@@ -10,7 +10,6 @@ class GoodmovesWidget extends BaseWidget {
         super('');
         this.number = this.scriptTag.data('number');
         this.style = this.scriptTag.data('style');
-        this.hideMap = true;
     }
 }
 

@@ -35,7 +35,7 @@ export class BaseWidget {
 		if (this._client === null) {
 			this._client = new elasticsearch.Client({
 				host: 'https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io:443',
-				apiVersion: '2.4',
+				apiVersion: '5.5',
 			});
 		}
 		return this._client;
@@ -52,11 +52,13 @@ export class BaseWidget {
 		jq.getJSON('https://scvo-widgets-9d094.firebaseio.com/configurations/' + name + '.json').then((configuration) => {
 			this.config = new WidgetConfiguration(configuration);
 
-            this.hideMap = this.scriptTag.data('hide-map') || false;
             this.hideTitle = this.scriptTag.data('hide-title') || false;
+            this.hideMap = this.scriptTag.data('hide-map') || false;
 
-			(<any>GoogleMapsLoader)['KEY'] = 'AIzaSyBGANoz_QO2iBbM-j1LIvkdaH6ZKnqgTfA';
-			(<any>GoogleMapsLoader)['LIBRARIES'] = ['geometry', 'places'];
+            if (!this.hideMap) {
+    			(<any>GoogleMapsLoader)['KEY'] = 'AIzaSyBGANoz_QO2iBbM-j1LIvkdaH6ZKnqgTfA';
+    			(<any>GoogleMapsLoader)['LIBRARIES'] = ['geometry', 'places'];
+            }
 
 			this.setupControls();
 
@@ -155,7 +157,7 @@ export class BaseWidget {
 
 		this.widgetElement.find('.mw-previous, .mw-next').off('click').on('click', (e) => {
 			var page = jq(e.currentTarget).data('page');
-			this.doSearch(page, true);
+			this.doSearch(page);
 		});
 
 		this.searchElement.find('input').off('keyup').on('keyup', (e) => {
@@ -519,10 +521,10 @@ export class BaseWidget {
 				this.widgetElement.find('.mw-document-nav').hide();
 
 				this.widgetElement.find('.mw-previous')
-					.prop('disabled', this.resultSet.currentPage === 1)
+                    .prop('disabled', this.resultSet.currentPage === 1)
 					.data('page', this.resultSet.currentPage - 1);
 				this.widgetElement.find('.mw-next')
-					.prop('disabled', this.resultSet.currentPage === this.resultSet.totalPages)
+                    .prop('disabled', this.resultSet.currentPage === this.resultSet.totalPages)
 					.data('page', parseInt(this.resultSet.currentPage) + 1);
 			}
 		} else {

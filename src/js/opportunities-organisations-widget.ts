@@ -4,9 +4,11 @@ import '../styles/milo.scss';
 
 class OpportunitiesOrganisationsWidget extends BaseWidget {
     hideMap: boolean = true;
+    style: string = 'basic';
 
     constructor() {
         super('');
+        this.style = this.scriptTag.data('style');
     }
 }
 
