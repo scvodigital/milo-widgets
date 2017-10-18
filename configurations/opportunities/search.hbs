@@ -30,7 +30,9 @@
     				<option value="">All client groups</option>
     				{{#each terms.client_group}}
                     {{#if this.term}}
-    				<option value="{{this.slug}}">{{this.term}}</option>
+                    {{#compare this.count '>' 0}}
+                    <option value="{{this.slug}}">{{this.term}} ({{this.count}})</option>
+                    {{/compare}}
                     {{/if}}
     				{{/each}}
     			</select>
