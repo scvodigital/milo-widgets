@@ -585,15 +585,15 @@ export class BaseWidget {
 			};
 
             if (this.config.type == 'goodhq-organisation') {
-                payload._source = ['Id', 'rendered.widget_basic'];
+                payload.body._source = ['Id', 'rendered.widget_basic'];
             } else if (this.config.type == 'milo-volunteering-opportunity' || this.config.type == 'milo-organisation') {
                 if (this.config.style == 'enhanced') {
-                    payload._source = ['rendered.search_result_enhanced', 'coords'];
+                    payload.body._source = ['rendered.search_result_enhanced', 'coords'];
                 } else {
-                    payload._source = ['rendered.search_result', 'coords'];
+                    payload.body._source = ['rendered.search_result', 'coords'];
                 }
             } else {
-                payload._source = ['rendered.search_result_widget'];
+                payload.body._source = ['rendered.search_result_widget'];
             }
 
 			if (payload.body.query.hasOwnProperty('sort')) {
