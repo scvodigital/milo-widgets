@@ -182,11 +182,16 @@ export class BaseWidget {
     					"_source": false,
                         "size": 0,
     					"aggs": {},
-                        "query": {}
+                        "query": {
+                            "bool": {
+                                "must": []
+                            }
+                        }
     				}
     			};
 
-				payload.body.query = this.getInjectedFilter();
+                var injected: ITermQuery[] = this.getInjected();
+				payload.body.query.bool.must = payload.body.query.bool.must.concat(injected);
 
     			this.config.termFields.forEach((field) => {
     				payload.body.aggs[field] = {
@@ -280,26 +285,6 @@ export class BaseWidget {
 		});
 
 		return must;
-	}
-
-    private getInjectedFilter(): ITermFilter {
-		if (!this.config.injectableFilters) {
-			return;
-		}
-
-		var query: ITermFilter;
-		this.config.injectableFilters.forEach((filter: IInjectableFilter) => {
-			var value: string = this.scriptTag.data(filter.attribute);
-			if (typeof value !== 'undefined' && value !== null) {
-				let query: ITermFilter = {
-					"term": {
-						[filter.field]: value
-					}
-				};
-			}
-		});
-
-		return query;
 	}
 
 	private getQuery(): IQueryQuery {
