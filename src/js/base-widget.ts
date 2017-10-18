@@ -180,16 +180,23 @@ export class BaseWidget {
     				"type": this.config.type,
     				"body": {
     					"_source": false,
-    					"aggs": {}
+    					"aggs": {},
+                        "query": {
+                            "must": []
+                        }
     				}
     			};
+
+                var injected: ITermQuery[] = this.getInjected();
+				payload.body.query.must = payload.body.query.must.concat(injected);
 
     			this.config.termFields.forEach((field) => {
     				payload.body.aggs[field] = {
     					"terms": {
     						"field": field,
-    						"order": { "_term" : "asc" },
-    						"size": 10000
+    						"order": {
+                                "_term" : "asc"
+                            }
     					}
     				}
     			});

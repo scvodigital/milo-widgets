@@ -12,8 +12,8 @@
                 <option value="">All activities</option>
                 {{#each terms.main_activities_global}}
                 {{#if this.term}}
-                {{#compare this.doc_count '>' 0}}
-                <option value="{{this.slug}}">{{this.term}} ({{this.doc_count}})</option>
+                {{#compare this.count '>' 0}}
+                <option value="{{this.slug}}">{{this.term}} ({{this.count}})</option>
                 {{/compare}}
                 {{/if}}
                 {{/each}}
