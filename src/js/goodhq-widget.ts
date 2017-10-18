@@ -9,7 +9,7 @@ class GoodHQWidget extends BaseWidget {
     constructor() {
         super('');
         this.xid = this.scriptTag.data('xid');
-        this.style = this.scriptTag.data('style');
+        this.style = this.scriptTag.data('widget-style');
     }
 }
 

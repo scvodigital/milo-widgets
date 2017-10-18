@@ -9,7 +9,7 @@ class GoodmovesWidget extends BaseWidget {
     constructor() {
         super('');
         this.number = this.scriptTag.data('number');
-        this.style = this.scriptTag.data('style');
+        this.style = this.scriptTag.data('widget-style');
     }
 }
 
