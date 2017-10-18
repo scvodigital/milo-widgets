@@ -14,7 +14,9 @@
     			<select id="mw-opportunities-activity" class="form-control" data-term="work_type-slugs">
     				<option value="">All activities</option>
     				{{#each terms.work_type}}
-    				<option value="{{slug}}">{{term}}</option>
+                    {{#if this.term}}
+    				<option value="{{this.slug}}">{{this.term}}</option>
+                    {{/if}}
     				{{/each}}
     			</select>
             </div>
@@ -25,7 +27,9 @@
     			<select id="mw-opportunities-client-group" class="form-control" data-term="client_group-slugs">
     				<option value="">All client groups</option>
     				{{#each terms.client_group}}
-    				<option value="{{slug}}">{{term}}</option>
+                    {{#if this.term}}
+    				<option value="{{this.slug}}">{{this.term}}</option>
+                    {{/if}}
     				{{/each}}
     			</select>
             </div>

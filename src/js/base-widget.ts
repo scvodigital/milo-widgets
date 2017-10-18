@@ -105,7 +105,7 @@ export class BaseWidget {
 				this.updateBody('');
 				this.hashChange();
 
-				if(this.config.autoSearch){
+				if (this.config.autoSearch) {
 					this.doSearch(1);
 				}
 			});
@@ -588,9 +588,9 @@ export class BaseWidget {
                 payload._source = ['Id', 'rendered.widget_basic'];
             } else if (this.config.type == 'milo-volunteering-opportunity' || this.config.type == 'milo-organisation') {
                 if (this.config.style == 'enhanced') {
-                    payload._source = ['rendered.search_result_enhanced'];
+                    payload._source = ['rendered.search_result_enhanced', 'coords'];
                 } else {
-                    payload._source = ['rendered.search_result'];
+                    payload._source = ['rendered.search_result', 'coords'];
                 }
             } else {
                 payload._source = ['rendered.search_result_widget'];
@@ -706,7 +706,6 @@ export class BaseWidget {
 		return new Promise((resolve, reject) => {
 			if (!this.hideMap) {
 				if (!this.map) {
-                    console.log("loading map");
 					GoogleMapsLoader.load((google) => {
 						var element = this.mapElement[0];
 						this.map = new google.maps.Map(element, {
@@ -715,10 +714,11 @@ export class BaseWidget {
 							draggable: !("ontouchend" in document),
 							scrollwheel: false
 						});
-                        console.log(this.map);
 						resolve();
 					});
-				}
+				} else {
+                    resolve();
+                }
 			} else {
 				this.mapElement.hide();
 				resolve();
