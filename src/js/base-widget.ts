@@ -555,6 +555,10 @@ export class BaseWidget {
 			}
 		}
 
+        if (this.config.style == 'enhanced') {
+            $("#mw-" + this.config.name + "-map").css("margin-top", "0");
+        }
+
 		this.bindControls();
 		this.placeMarkers();
 
@@ -711,17 +715,19 @@ export class BaseWidget {
 
 			} else {
                 this.mapElement.show();
-                
-                var $map = $("#mw-organisations-map");
-                var startPosition = $map[0].offsetTop;
-                $(window).scroll(function(){
-                    var newPosition = $(window).scrollTop() - startPosition + 15;
-                    if (newPosition > 0) {
-                        $map.stop().animate({"marginTop": newPosition + "px"}, "slow");
-                    } else {
-                        $map.stop().animate({"marginTop": "0px"}, "slow");
-                    }
-                });
+
+                if (this.config.style == 'enhanced') {
+                    var $map = $("#mw-" + this.config.name + "-map");
+                    var startPosition = $map[0].offsetTop;
+                    $(window).scroll(function(){
+                        var newPosition = $(window).scrollTop() - startPosition + 15;
+                        if (newPosition > 0) {
+                            $map.stop().animate({"marginTop": newPosition + "px"}, "slow");
+                        } else {
+                            $map.stop().animate({"marginTop": "0px"}, "slow");
+                        }
+                    });
+                }
 
 				google.maps.event.trigger(this.map, 'resize');
 				window.setTimeout(() => {
