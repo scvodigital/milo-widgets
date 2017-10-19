@@ -168,8 +168,8 @@
         }
         .mw-search-widget-enhanced .mw-body,
         .mw-search-widget-enhanced .mw-map {
-            width: 100%;
-            float: none;
+            width: 100% !important;
+            float: none !important;
             margin-top: 0 !important;
         }
         table.table-condensed {
