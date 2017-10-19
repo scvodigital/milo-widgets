@@ -708,8 +708,21 @@ export class BaseWidget {
 				this.mapElement.hide();
 				this.map.setCenter(this.config.mapOptions.initialLocation);
 				this.map.setZoom(this.config.mapOptions.initialZoom);
+
 			} else {
-				this.mapElement.show();
+                this.mapElement.show();
+                
+                var $map = $("#mw-organisations-map");
+                var startPosition = $map[0].offsetTop;
+                $(window).scroll(function(){
+                    var newPosition = $(window).scrollTop() - startPosition + 15;
+                    if (newPosition > 0) {
+                        $map.stop().animate({"marginTop": newPosition + "px"}, "slow");
+                    } else {
+                        $map.stop().animate({"marginTop": "0px"}, "slow");
+                    }
+                });
+
 				google.maps.event.trigger(this.map, 'resize');
 				window.setTimeout(() => {
 					this.map.fitBounds(bounds);
