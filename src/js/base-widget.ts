@@ -556,7 +556,7 @@ export class BaseWidget {
 		}
 
         if (this.config.style == 'enhanced') {
-            $("#mw-" + this.config.name + "-map").css("margin-top", "0");
+            jq("#mw-" + this.config.name + "-map").css("margin-top", "0");
         }
 
 		this.bindControls();
@@ -717,10 +717,10 @@ export class BaseWidget {
                 this.mapElement.show();
 
                 if (this.config.style == 'enhanced') {
-                    var $map = $("#mw-" + this.config.name + "-map");
+                    var $map = jq("#mw-" + this.config.name + "-map");
                     var startPosition = $map[0].offsetTop;
-                    $(window).scroll(function(){
-                        var newPosition = $(window).scrollTop() - startPosition + 15;
+                    jq(window).scroll(function(){
+                        var newPosition = jq(window).scrollTop() - startPosition + 15;
                         if (newPosition > 0) {
                             $map.stop().animate({"marginTop": newPosition + "px"}, "slow");
                         } else {
