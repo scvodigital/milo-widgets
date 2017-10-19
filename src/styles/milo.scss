@@ -145,9 +145,10 @@
             width: 48.75% !important;
             float: right !important;
         }
-        // .navigation-bottom {
+        .navigation-bottom {
+            clear: both;
         //     display: none;
-        // }
+        }
     }
 
     @media screen and (max-width: 767px) {
