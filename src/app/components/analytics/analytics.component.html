@@ -50,16 +50,13 @@
         <ul>
             <li>
                 <strong>All locations*</strong> &ensp;
-                <i class="fa fa-search" aria-hidden="true"></i> {{opportunities_global.searches | number}}
-                &ensp;
-                <!-- <i class="fa fa-file-text-o" aria-hidden="true"></i> {{opportunities_global.documents | number}} -->
+                <i class="fa fa-search" aria-hidden="true"></i> {{opportunities_global.searches | number}} &ensp;
+                <i class="fa fa-file-text-o" aria-hidden="true"></i> {{opportunities_global.documents | number}}
             </li>
             <li *ngFor="let website of opportunities">
-                <a href="http://{{website.address}}">{{website.address}}</a>
-                &ensp;
-                <i class="fa fa-search" aria-hidden="true"></i> {{(website.searches | number) || 0}}
-                &ensp;
-                <!-- <i class="fa fa-file-text-o" aria-hidden="true"></i> {{(website.documents | number) || 0}} -->
+                <a href="http://{{website.address}}">{{website.address}}</a> &ensp;
+                <i class="fa fa-search" aria-hidden="true"></i> {{(website.searches | number) || 0}} &ensp;
+                <i class="fa fa-file-text-o" aria-hidden="true"></i> {{(website.documents | number) || 0}}
             </li>
         </ul>
 
@@ -68,18 +65,14 @@
         </h3>
         <ul>
             <li>
-                <strong>All locations*</strong>
-                &ensp;
-                <i class="fa fa-search" aria-hidden="true"></i> {{organisations_global.searches | number}}
-                &ensp;
-                <!-- <i class="fa fa-file-text-o" aria-hidden="true"></i> {{organisations_global.documents | number}} -->
+                <strong>All locations*</strong> &ensp;
+                <i class="fa fa-search" aria-hidden="true"></i> {{organisations_global.searches | number}} &ensp;
+                <i class="fa fa-file-text-o" aria-hidden="true"></i> {{organisations_global.documents | number}}
             </li>
             <li *ngFor="let website of organisations">
-                <a href="http://{{website.address}}">{{website.address}}</a>
-                &ensp;
-                <i class="fa fa-search" aria-hidden="true"></i> {{(website.searches | number) || 0}}
-                &ensp;
-                <!-- <i class="fa fa-file-text-o" aria-hidden="true"></i> {{(website.documents | number) || 0}} -->
+                <a href="http://{{website.address}}">{{website.address}}</a> &ensp;
+                <i class="fa fa-search" aria-hidden="true"></i> {{(website.searches | number) || 0}} &ensp;
+                <i class="fa fa-file-text-o" aria-hidden="true"></i> {{(website.documents | number) || 0}}
             </li>
         </ul>
 
