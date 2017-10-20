@@ -120,7 +120,8 @@
         box-shadow: none;
     }
 
-    table th {
+    table th,
+    table.table-condensed td {
         text-align: center;
     }
 
