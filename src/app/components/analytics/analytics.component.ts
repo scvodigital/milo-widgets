@@ -1,6 +1,6 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { AuthService } from '../../services/auth.service';
 import * as _ from 'lodash';
 
@@ -25,13 +25,15 @@ export class AnalyticsComponent implements OnInit {
         'engage.projectstatus.in',
         'masoncross.net',
         'r.search.yahoo.com',
+        'translate.googleusercontent.com',
+        'user56117.vs.easily.co.uk',
         'vd.byzen.net'
     ];
 
     constructor(public auth: AuthService, public db: AngularFireDatabase) {}
 
     getAnalytics(): void {
-        this.db.list('/analytics/opportunities').subscribe(dbResults => {
+        this.db.list<Item>('/analytics/opportunities').valueChanges().subscribe(dbResults => {
             this.opportunities = [];
             this.opportunities_global.searches = 0;
             this.opportunities_global.documents = 0;
@@ -41,21 +43,22 @@ export class AnalyticsComponent implements OnInit {
                     if (dbResults[i].hasOwnProperty(property)) {
                         var address = property.replace(/_/g, '.');
                         if (this.suppressionList.indexOf(address) === -1) {
-                            var type = dbResults[i].$key;
+                            // console.log("results for "+address);
+                            // console.log(dbResults[i]);
+                            // var type = dbResults[i].hasOwnProperty(property);
                             var filteredResults = dbResults[i][property];
-
                             var count = _.size(dbResults[i][property]);
                             if (opportunities_results[address] == undefined)
-                                opportunities_results[address] = {};
-                            if (type == 'search') {
+                            opportunities_results[address] = {};
+                            // if (type == 'search') {
                                 opportunities_results[address].address = address;
                                 opportunities_results[address].searches = count;
                                 this.opportunities_global.searches += count;
-                            } else if (type == 'document') {
-                                opportunities_results[address].address = address;
-                                opportunities_results[address].documents = count;
-                                this.opportunities_global.documents += count;
-                            }
+                            // } else if (type == 'document') {
+                            //     opportunities_results[address].address = address;
+                            //     opportunities_results[address].documents = count;
+                            //     this.opportunities_global.documents += count;
+                            // }
                         }
                     }
                 }
@@ -66,7 +69,7 @@ export class AnalyticsComponent implements OnInit {
             this.opportunities.sort(this.dynamicSort("-searches"));
         });
 
-        this.db.list('/analytics/organisations').subscribe(dbResults => {
+        this.db.list<Item>('/analytics/organisations').valueChanges().subscribe(dbResults => {
             this.organisations = [];
             this.organisations_global.searches = 0;
             this.organisations_global.documents = 0;
@@ -76,19 +79,19 @@ export class AnalyticsComponent implements OnInit {
                     if (dbResults[i].hasOwnProperty(property)) {
                         var address = property.replace(/_/g, '.');
                         if (this.suppressionList.indexOf(address) === -1) {
-                            var type = dbResults[i].$key;
+                            // var type = dbResults[i].$key;
                             var count = _.size(dbResults[i][property]);
                             if (organisations_results[address] == undefined)
-                                organisations_results[address] = {};
-                            if (type == 'search') {
+                            organisations_results[address] = {};
+                            // if (type == 'search') {
                                 organisations_results[address].address = address;
                                 organisations_results[address].searches = count;
                                 this.organisations_global.searches += count;
-                            } else if (type == 'document') {
-                                organisations_results[address].address = address;
-                                organisations_results[address].documents = count;
-                                this.organisations_global.documents += count;
-                            }
+                            // } else if (type == 'document') {
+                            //     organisations_results[address].address = address;
+                            //     organisations_results[address].documents = count;
+                            //     this.organisations_global.documents += count;
+                            // }
                         }
                     }
                 }
@@ -115,6 +118,11 @@ export class AnalyticsComponent implements OnInit {
     ngOnInit() {
         this.getAnalytics();
     }
+}
+
+export class Item {
+    type?: string;
+    count?: number;
 }
 
 export class GlobalUsage {
