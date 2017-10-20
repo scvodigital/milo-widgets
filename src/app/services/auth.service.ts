@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabaseModule, AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from "@angular/router";
 import * as firebase from 'firebase';
@@ -43,17 +43,17 @@ export class AuthService {
     //// Social Auth ////
 
     githubLogin() {
-        const provider = new firebase.auth.GithubAuthProvider()
+        const provider = new firebase.auth.GithubAuthProvider();
         return this.socialSignIn(provider);
     }
 
     private socialSignIn(provider) {
         return this.afAuth.auth.signInWithPopup(provider)
-        .then((credential) =>  {
-            this.authState = credential.user
-            this.updateUserData()
-        })
-        .catch(error => console.log(error));
+            .then((credential) =>  {
+                this.authState = credential.user
+                this.updateUserData()
+            })
+            .catch(error => console.log(error));
     }
 
     //// Sign Out ////
