@@ -622,8 +622,14 @@ export class BaseWidget {
 			if (payload.body.query.hasOwnProperty('sort')) {
 				payload.body.sort = payload.body.query.sort;
 				delete payload.body.query.sort;
-			} else if(allowSort) {
-				payload.body.sort = this.config.sort;
+			} else if (allowSort) {
+                if (this.config.type == 'milo-volunteering-opportunity') {
+                    payload.body.sort = {
+                        "publish_start": "desc"
+                    };
+                } else {
+	                payload.body.sort = this.config.sort;
+                }
 			}
 
             if (this.config.type == 'milo-volunteering-opportunity' || this.config.type == 'milo-organisation') {
