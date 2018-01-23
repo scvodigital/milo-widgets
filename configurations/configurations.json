@@ -36,7 +36,7 @@
     },
     "goodmoves": {
         "index": "web-content-production",
-        "type": "goodmoves-legacy",
+        "type": "goodmoves-job",
         "termFields": [
             "sectors",
             "roles",
