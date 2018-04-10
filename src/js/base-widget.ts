@@ -36,7 +36,7 @@ export class BaseWidget {
 	protected get client(): elasticsearch.Client {
 		if (this._client === null) {
 			this._client = new elasticsearch.Client({
-				host: 'https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io:443',
+				host: 'https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:443',
 				apiVersion: '5.x',
 			});
 		}

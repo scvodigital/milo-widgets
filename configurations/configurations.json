@@ -5,7 +5,7 @@
         "termFields": [],
         "templateSet": {
             "searchFormTemplate": "",
-            "resultsTemplate": "{{#each results}}\n    {{#compare this.style '==' 'basic'}}\n    {{#if this.rendered.widget_basic}}{{{this.rendered.widget_basic}}}{{/if}}\n    {{else}}\n    {{#if this.rendered.widget_advanced}}{{{this.rendered.widget_advanced}}}{{/if}}\n    {{/compare}}\n{{/each}}\n",
+            "resultsTemplate": "{{#if this.results.0.rendered.widget_basic ~}}{{{this.results.0.rendered.widget_basic}}}{{/if ~}}",
             "viewTemplate": "",
             "infoWindowTemplate": ""
         },
@@ -36,7 +36,7 @@
     },
     "goodmoves": {
         "index": "web-content-production",
-        "type": "goodmoves-legacy",
+        "type": "goodmoves-job",
         "termFields": [
             "sectors",
             "roles",
