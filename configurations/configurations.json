@@ -36,12 +36,11 @@
     },
     "goodmoves": {
         "index": "web-content-production",
-        "type": "goodmoves-job",
+        "type": "goodmoves-vacancy",
         "termFields": [
             "sectors",
             "roles",
-            "status",
-            "region"
+            "role_status"
         ],
         "templateSet": {
             "searchFormTemplate": "",
@@ -63,8 +62,22 @@
         },
         "name": "goodmoves",
         "title": "",
+        "query": {
+            "must": [
+                {
+                    "term": {
+                        "country_iso3": "GBR"
+                    }
+                },
+                {
+                    "term": {
+                        "vacancy_status": "vacancy-open"
+                    }
+                }
+            ]
+        },
         "sort": {
-            "Id": "desc"
+            "start_at": "desc"
         },
         "injectableFilters": [],
         "autoSearch": true
