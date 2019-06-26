@@ -63,18 +63,49 @@
         "name": "goodmoves",
         "title": "",
         "query": {
-            "must": [
-                {
-                    "term": {
-                        "country_iso3": "GBR"
+            "bool": {
+                "filter": [
+                    {
+                        "term": {
+                            "active": true
+                        }
+                    },
+                    {
+                        "terms": {
+                            "country": [
+                                "Scotland",
+                                "England",
+                                "Wales",
+                                "Northern Ireland"
+                            ]
+                        }
+                    },
+                    {
+                        "range": {
+                            "closing_date": {
+                                "gt": "now",
+                                "boost": 1
+                            }
+                        }
+                    },
+                    {
+                        "range": {
+                            "start_at": {
+                                "lt": "now",
+                                "boost": 1
+                            }
+                        }
+                    },
+                    {
+                        "range": {
+                            "end_at": {
+                                "gt": "now",
+                                "boost": 1
+                            }
+                        }
                     }
-                },
-                {
-                    "term": {
-                        "vacancy_status": "vacancy-open"
-                    }
-                }
-            ]
+                ]
+            }
         },
         "sort": {
             "start_at": "desc"
