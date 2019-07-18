@@ -36,16 +36,15 @@
     },
     "goodmoves": {
         "index": "web-content-production",
-        "type": "goodmoves-job",
+        "type": "goodmoves-vacancy",
         "termFields": [
             "sectors",
             "roles",
-            "status",
-            "region"
+            "role_status"
         ],
         "templateSet": {
             "searchFormTemplate": "",
-            "resultsTemplate": "<div class=\"panel-goodmoves\">\n    <a href=\"https://goodmoves.com\">\n        <img src=\"https://widgets.goodmoves.com/app/assets/images/logos/goodmoves-logo.png\" alt=\"Goodmoves - charity and voluntary sector recruitment\" />\n    </a>\n    <form action=\"https://goodmoves.com/search\" method=\"get\">\n        <input type=\"text\" name=\"query\" placeholder=\"Keywords\" style=\"width: 53%;\" />\n        <input type=\"submit\" value=\"Job Search\" style=\"width: 35%;\" />\n    </form>\n    {{#compare total '==' 0}}\n    <div class=\"alert alert-warning\">\n        <p>Couldn't find any jobs currently posted on <strong>good</strong>moves</p>\n    </div>\n    {{/compare}}\n    <ul>\n        {{#each results}}\n            {{#compare @index '<' 3}}\n            <li class=\"mw-goodmoves-result mw-goodmoves-result-{{Id}} click-node item item-{{add @index 1}}{{#compare @index '==' 2}} last{{/compare}} click-node-active\">\n                {{#if this.rendered.search_result_widget}}{{{this.rendered.search_result_widget}}}{{/if}}\n            </li>\n            {{/compare}}\n        {{/each}}\n    </ul>\n</div>\n",
+            "resultsTemplate": "<div class=\"panel-goodmoves\">\n  <a href=\"https://goodmoves.com\">\n    <img src=\"https://widgets.goodmoves.com/app/assets/images/logos/goodmoves-logo.png\" alt=\"Goodmoves - charity and voluntary sector recruitment\" />\n  </a>\n  <form action=\"https://goodmoves.com/search\" method=\"get\">\n    <input type=\"text\" name=\"query\" placeholder=\"Keywords\" style=\"width: 53%;\" />\n    <input type=\"submit\" value=\"Job Search\" style=\"width: 35%;\" />\n  </form>\n  {{#compare total '==' 0}}\n  <div class=\"alert alert-warning\">\n    <p>Couldn't find any jobs currently posted on <strong>good</strong>moves</p>\n  </div>\n  {{/compare}}\n  <ul>\n    {{#each results}}\n    {{#compare @index '<' 3}}\n    <li class=\"mw-goodmoves-result mw-goodmoves-result-{{Id}} click-node item item-{{add @index 1}}{{#compare @index '==' 2}} last{{/compare}} click-node-active\">\n      {{#if this.rendered.search_result_widget}}{{{this.rendered.search_result_widget}}}{{/if}}\n    </li>\n    {{/compare}}\n    {{/each}}\n  </ul>\n</div>\n",
             "viewTemplate": "",
             "infoWindowTemplate": ""
         },
@@ -63,8 +62,40 @@
         },
         "name": "goodmoves",
         "title": "",
+        "query": {
+            "bool": {
+                "filter": [
+                    {
+                        "range": {
+                            "closing_date": {
+                                "gt": "now"
+                            }
+                        }
+                    },
+                    {
+                        "range": {
+                            "start_at": {
+                                "lt": "now"
+                            }
+                        }
+                    },
+                    {
+                        "range": {
+                            "end_at": {
+                                "gt": "now"
+                            }
+                        }
+                    },
+                    {
+                        "term": {
+                            "active": true
+                        }
+                    }
+                ]
+            }
+        },
         "sort": {
-            "Id": "desc"
+            "start_at": "desc"
         },
         "injectableFilters": [],
         "autoSearch": true

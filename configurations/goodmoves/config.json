@@ -1,11 +1,10 @@
 {
     "index": "web-content-production",
-    "type": "goodmoves-job",
+    "type": "goodmoves-vacancy",
     "termFields": [
         "sectors",
         "roles",
-        "status",
-        "region"
+        "role_status"
     ],
     "templateSet": {
         "searchFormTemplate": "",
@@ -27,8 +26,40 @@
     },
     "name": "goodmoves",
     "title": "",
+    "query": {
+      "bool": {
+        "filter": [
+          {
+            "range": {
+              "closing_date": {
+                "gt": "now"
+              }
+            }
+          },
+          {
+            "range": {
+              "start_at": {
+                "lt": "now"
+              }
+            }
+          },
+          {
+            "range": {
+              "end_at": {
+                "gt": "now"
+              }
+            }
+          },
+          {
+            "term": {
+              "active": true
+            }
+          }
+        ]
+      }
+    },
     "sort": {
-        "Id": "desc"
+      "start_at": "desc"
     },
     "injectableFilters": [],
     "autoSearch": true
