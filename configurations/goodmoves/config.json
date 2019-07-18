@@ -27,37 +27,39 @@
     "name": "goodmoves",
     "title": "",
     "query": {
-      "filter": [
-        {
-          "range": {
-            "closing_date": {
-              "gt": "now"
+      "bool": {
+        "filter": [
+          {
+            "range": {
+              "closing_date": {
+                "gt": "now"
+              }
+            }
+          },
+          {
+            "range": {
+              "start_at": {
+                "lt": "now"
+              }
+            }
+          },
+          {
+            "range": {
+              "end_at": {
+                "gt": "now"
+              }
+            }
+          },
+          {
+            "term": {
+              "active": true
             }
           }
-        },
-        {
-          "range": {
-            "start_at": {
-              "lt": "now"
-            }
-          }
-        },
-        {
-          "range": {
-            "end_at": {
-              "gt": "now"
-            }
-          }
-        },
-        {
-          "term": {
-            "active": true
-          }
-        }
-      ]
+        ]
+      }
     },
     "sort": {
-        "start_at": "desc"
+      "start_at": "desc"
     },
     "injectableFilters": [],
     "autoSearch": true
