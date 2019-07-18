@@ -65,8 +65,24 @@
         "query": {
             "must": [
                 {
-                    "term": {
-                        "country_iso3": "GBR"
+                    "range": {
+                        "closing_date": {
+                            "gt": "now"
+                        }
+                    }
+                },
+                {
+                    "range": {
+                        "start_at": {
+                            "lt": "now"
+                        }
+                    }
+                },
+                {
+                    "range": {
+                        "end_at": {
+                            "gt": "now"
+                        }
                     }
                 },
                 {
