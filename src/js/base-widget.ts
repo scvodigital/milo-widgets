@@ -625,7 +625,7 @@ export class BaseWidget {
       } else if (allowSort) {
         if (this.config.type == 'milo-volunteering-opportunity') {
           payload.body.sort = {
-            "publish_start": "desc"
+            "publish_start_date": "desc"
           };
         } else {
           payload.body.sort = this.config.sort;
