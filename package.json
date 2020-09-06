@@ -67,7 +67,7 @@
         "elasticsearch": "git+https://git@github.com/scvodigital/elasticsearch-js.git",
         "extract-text-webpack-plugin": "2.0.0",
         "google-maps": "^3.2.1",
-        "handlebars": "4.0.6",
+        "handlebars": "4.5.3",
         "handlebars-helpers": "0.8.2",
         "handlebars-loader": "1.4.0",
         "sass-loader": "^6.0.6",
